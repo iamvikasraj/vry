@@ -178,7 +178,7 @@ hr.solid {
 
 .row:hover {
     border: 0.4px solid #3d9800;
-    transform: scale(1.1);
+    transform: scale(1.125);
 }
 
 
@@ -199,7 +199,7 @@ hr.solid {
 
 .column:hover {
     border: 0.4px solid #3d9800;
-    transform: scale(1.1);
+    transform: scale(1.125);
 }
 
 .project {
