@@ -1,6 +1,18 @@
 window.onload = function () {
   // Initiate digital rain
   var rain = new DigitalRain("#DigitalRain");
+
+  // Toggle button functionality
+  var toggleButton = document.getElementById("toggleButton");
+  toggleButton.addEventListener("click", function () {
+      if (rain.running) {
+          rain.stop();
+          toggleIcon.src = "assets/play.svg";
+      } else {
+          rain.start();
+          toggleIcon.src = "assets/pause.svg";
+      }
+  });
 };
 
 // Digital Rain constructor
@@ -8,10 +20,11 @@ function DigitalRain(selector) {
   var self = this;
 
   // Some helper variables
-  this.bgColor = "black";
-  this.rainColor = "#3d3d3d";
+  this.bgColor = "#000";
+  this.rainColor = "#1F1F1F";
   this.baseFontSize = 16;
-  this.fps = 12;
+  this.fps = 24;
+  this.running = true;
 
   // Layer factors (for scaling + opacity)
   this.layers = [0.25, 0.5, 1];
@@ -36,7 +49,9 @@ function DigitalRain(selector) {
 
   // Wrap draw function as "render" to retain access to object
   this.render = function () {
-      self.draw();
+      if (self.running) {
+          self.draw();
+      }
   };
 
   // Start the animation
@@ -141,3 +156,15 @@ function DigitalRainStream(Rain) {
   this.x = Math.round(Math.random() * (Rain.columns / this.z)) * this.size;
   this.y = 0;
 }
+
+// Add methods to start and stop the rain
+DigitalRain.prototype.start = function () {
+  if (!this.running) {
+      this.running = true;
+      requestAnimationFrame(this.render);
+  }
+};
+
+DigitalRain.prototype.stop = function () {
+  this.running = false;
+};

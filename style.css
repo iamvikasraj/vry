@@ -41,8 +41,11 @@
 
 @import url("https://use.typekit.net/cfg3eky.css");
 
-/* border: background: rgba(0, 0, 0, 0.147);
-backdrop-filter: blur(4px); */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
     background: #000;
@@ -55,7 +58,6 @@ body {
     /* background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, .05) 25%, rgba(255, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, .05) 25%, rgba(255, 255, 255, .05) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .05) 75%, rgba(255, 255, 255, .05) 76%, transparent 77%, transparent);
     height: 100%;
     background-size: 32px 32px; */
-    */
 }
 
 canvas {
@@ -67,9 +69,10 @@ canvas {
     z-index: -1;
 }
 
-.main {
+.main-container {
     position: relative;
     z-index: 1;
+    background-color: #111010;
 }
 
 
@@ -124,7 +127,7 @@ canvas {
 .top-nav {
     display: flex;
     flex-direction: row;
-    padding: 48px 48px;
+    padding: 32px 48px;
     width: 800px;
     gap: 16px;
     flex-shrink: 0;
@@ -148,16 +151,28 @@ canvas {
 
 .sub {
     /* pointer-events: none; */
-    color: var(--gray-59);
+    /* color: var(--gray-59);
     font-family: var(--text-font);
     font-weight: 300;
     font-style: normal;
-    text-align: center;
+    text-align: Left;
     font-size: 16px;
     font-weight: 400;
     line-height: 120%;
+    text-decoration: none; */
+
+    color: var(--gray-22);
+    font-family: var(--text-font);
+    font-weight: 300;
+    font-style: normal;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 400;
+    line-height: 140%;
     text-decoration: none;
 }
+
+
 
 .prj-title {
     /* pointer-events: none; */
@@ -166,14 +181,15 @@ canvas {
     font-weight: 300;
     font-style: normal;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 16px;
+    text-transform: uppercase;
     font-weight: 200;
     line-height: 100%;
     transition: cubic-bezier(0.075, 0.82, 0.165, 0.34s);
 }
 
 .prj-title:hover {
-    text-decoration: underline;
+    /* text-decoration: underline; */
     transition: cubic-bezier(0.075, 0.82, 0.165, 0.34s);
 }
 
@@ -233,10 +249,17 @@ canvas {
     width: 800px;
     gap: 0;
     flex-shrink: 0;
-    background-color: var(--bg);
+    background-color: #030303;
     border: 1px solid #141414;
     align-items: center;
     transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.34s;
+}
+
+.hero-right {
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
+    align-items: center;
 }
 
 .main {
@@ -254,7 +277,6 @@ canvas {
     flex-shrink: 0;
     background-color: #00000097;
     border: 1px solid #141414;
-    background-image: linear-gradient(180deg, rgba(255, 0, 0, 0), rgb(20, 20, 20, 0.5));
     justify-content: space-around;
     align-items: center;
     transition: 0.3s cubic-bezier(.68, .09, .03, .99);
@@ -306,11 +328,11 @@ canvas {
 .column-sml {
     display: flex;
     flex-direction: row;
-    padding: 24px 48px;
+    padding: 32px 48px;
     width: 800px;
     gap: 0;
     flex-shrink: 0;
-    border: 1px solid #141414;
+    border: 0.5px solid #141414;
     background: rgba(0, 0, 0, 0.147);
     backdrop-filter: blur(4px);
     justify-content: space-between;
@@ -319,8 +341,7 @@ canvas {
 }
 
 .column-sml:hover {
-    border: 1px solid #353535;
-    padding: 24px 48px;
+    border: 0.5px solid #353535;
 }
 
 
@@ -330,13 +351,17 @@ canvas {
     font-family: var(--text-font);
     font-weight: 400;
     font-style: normal;
-    font-size: 20px;
-    line-height: 140%;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 100%;
+    /* filter: drop-shadow(2px 2px 0.25px #2e2e2e); */
 }
 
 
-
-
+.social-icons {
+    width="16px";
+    height="16px";
+}
 
 .project {
     width: 100%;
@@ -358,21 +383,78 @@ canvas {
     justify-content: space-between;
 }
 
-.social {
-    /* margin-top: var(--spacer-2xl);
-    margin-bottom: var(--spacer-2xl); */
+
+.work {
+    /* margin-top: var(--spacer-xl);
+    margin-bottom: var(--spacer-xl); */
+}
+
+
+/* .toggleButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1;
+
+}
+
+.toggleIcon {
+    width: 40px;
+    height: 40px;
+} */
+
+.neo {
+    color: #373737;
+    font-family: var(--text-font);
+    font-weight: 300;
+    font-style: normal;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 140%;
+    /* text-decoration: underline; */
+}
+
+
+
+.toggleIcon {
+    background-color: #040404;
+}
+
+.mantra {
+    /* margin-top: var(--spacer-xl); */
+    /* margin-bottom: var(--spacer-xl); */
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     justify-items: center;
     justify-content: space-between;
-    padding: 24px 48px;
+    padding: 60px 48px;
     width: 800px;
     gap: 24px;
     flex-shrink: 0;
     background-color: var(--bg);
     border: 1px solid #141414;
 }
+
+.stop {
+    /* margin-top: var(--spacer-xl); */
+    /* margin-bottom: var(--spacer-xl); */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+    justify-content: space-between;
+    padding: 32px 48px;
+    width: 800px;
+    gap: 24px;
+    flex-shrink: 0;
+    background-color: var(--bg);
+    border: 1px solid #141414;
+}
+
 
 .social-left {
     display: flex;
@@ -388,6 +470,7 @@ canvas {
     font-family: var(--text-font);
     font-weight: 300;
     font-style: normal;
+    margin-top: 2%;
     font-size: 16px;
     font-weight: 400;
     line-height: 100%;
@@ -412,7 +495,7 @@ canvas {
     font-style: normal;
     font-size: 16px;
     font-weight: 400;
-    line-height: 100%;
+    line-height: 140%;
     text-decoration: none;
 }
 
