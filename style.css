@@ -76,6 +76,7 @@ canvas {
 }
 
 
+
 .heading {
     pointer-events: none;
     color: var(--color-green);
@@ -374,19 +375,24 @@ canvas {
 
 
 .link {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    /* height: 100%; */
-    gap: 0;
-    /* padding: 8px; */
-    justify-content: space-between;
+    color: var(--gray-22);
+    font-family: var(--text-font);
+    font-weight: 300;
+    font-style: normal;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 140%;
+    text-decoration: underline;
 }
 
 
 .work {
     /* margin-top: var(--spacer-xl);
     margin-bottom: var(--spacer-xl); */
+}
+
+.lottie {
+    display: flex;
 }
 
 
@@ -512,6 +518,16 @@ canvas {
     text-decoration: none;
 }
 
+.f4 {
+    color: var(--gray-22);
+    font-family: var(--text-font);
+    font-weight: 300;
+    font-style: normal;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 140%;
+    text-decoration: none;
+}
 
 
 
