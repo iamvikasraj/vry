@@ -359,10 +359,10 @@ canvas {
 }
 
 
-.social-icons {
+/* .social-icons {
     width="16px";
     height="16px";
-}
+} */
 
 .project {
     width: 100%;
@@ -386,10 +386,7 @@ canvas {
 }
 
 
-.work {
-    /* margin-top: var(--spacer-xl);
-    margin-bottom: var(--spacer-xl); */
-}
+
 
 .lottie {
     display: flex;
