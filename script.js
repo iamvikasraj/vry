@@ -7,10 +7,10 @@ window.onload = function () {
   toggleButton.addEventListener("click", function () {
       if (rain.running) {
           rain.stop();
-          toggleIcon.src = "assets/play.svg";
+          toggleIcon.src = "assets/stop.svg";
       } else {
           rain.start();
-          toggleIcon.src = "assets/pause.svg";
+          toggleIcon.src = "assets/stop.svg";
       }
   });
 };
@@ -21,7 +21,7 @@ function DigitalRain(selector) {
 
   // Some helper variables
   this.bgColor = "#000";
-  this.rainColor = "#1F1F1F";
+  this.rainColor = "#101010";
   this.baseFontSize = 16;
   this.fps = 24;
   this.running = true;
