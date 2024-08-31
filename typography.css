@@ -1,0 +1,43 @@
+@import url("https://use.typekit.net/cfg3eky.css");
+
+:root {
+  --text-font: "IBM Plex Mono", monospace;
+  --font-size-base: 16px;
+  --font-size-small: 14px;
+  --font-size-large: 24px;
+  --font-size-xlarge: 32px;
+}
+
+body {
+  font-family: var(--text-font);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+}
+
+.title {
+  font-size: var(--font-size-xlarge);
+  font-weight: 600;
+  margin-bottom: var(--spacer-s);
+}
+
+.sub {
+  font-size: var(--font-size-base);
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.sub2 {
+  font-size: var(--font-size-small);
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: var(--font-size-large);
+  }
+
+  .sub {
+    font-size: var(--font-size-small);
+  }
+}

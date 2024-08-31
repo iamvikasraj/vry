@@ -1,146 +1,60 @@
-:root {
-    --bg: #040404;
-    --card-border: var(--gray-11);
-    --card-bg: rgba(0, 0, 0, 0.147);
-    --white: #f1f1f1;
-    --border: #rgba(20, 20, 20, 1);
-
-    --gray-84: #D6D6D6;
-    --gray-59: #979797;
-    --gray-22: #373737;
-    --gray-11: #1A1919;
-    --gray-7: #111010;
-
-    --primary: #FA4F01;
-    --padding: 48px;
-    --width: 100%;
-
-    --spacer-xs: 8px;
-    --spacer-s: 16px;
-    --spacer-m: 24px;
-    --spacer-l: 32px;
-    --spacer-xl: 48px;
-    --spacer-2xl: 60px;
-
-    --t1: 60px;
-    --t2: 48px;
-    --t3: 32px;
-    --t4: 24px;
-    --t5: 20px;
-    --t6: 16px;
-    --t7: 12px;
-    --t8: 10px;
-    --t9: 8px;
-    --t10: 4px;
-
-    --text-font: "IBM Plex Mono", monospace;
-    ;
-}
-
-@import url("https://use.typekit.net/cfg3eky.css");
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    background: #000;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    background-color: #111010; /* Dark background color */
+    margin: 0 0; /* No margin */
+    font-family: 'Inter', sans-serif; /* Font family set to Inter with a fallback to sans-serif */
+    font-size: 16px; /* Font size of 16 pixels */
+    line-height: 1.5; /* Line height of 1.5 times the font size */
+    color: #333; /* Dark gray text color */
+    padding: 0 0!; /* No padding */
+    display: flex; /* Enable flexbox layout for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: flex-start; /* Center vertically */
+    min-height: 100vh; /* Full viewport height */
+    overflow: hidden;
+
 }
 
-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* z-index: -1; */
+
+
+h1.nav {
+    color: #D7D7D7; /* Light gray text color */
+    font-family: 'Inter', sans-serif; /* Font family set to Inter, with a fallback to sans-serif */
+    font-size: 14px; /* Font size of 16 pixels */
+    font-style: normal; /* Normal font style (not italic) */
+    font-weight: 400; /* Bold font weight */
+    line-height: normal; /* Default line height */
+    text-transform: uppercase; /* Uppercase text transformation */
 }
 
-.heading {
-    pointer-events: none;
-    color: var(--color-green);
-    font-family: var(--text-font);
-    font-weight: 300;
-    text-transform: uppercase;
-    font-style: normal;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 100%;
+.main-container {
+    display: flex; /* Enable flexbox layout */
+    width: 600px; /* Fixed width */
+    height: 100vh; /* Fixed height */
+    flex-direction: column; /* Arrange children in a column */
+    align-items: center; /* Center items horizontally */
+    border: 1px solid #313131;
 }
 
-.num {
-    pointer-events: none;
-    color: var(--primary);
-    font-family: var(--text-font);
-    font-weight: 300;
-    text-transform: uppercase;
-    font-style: normal;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 100%;
+.top-nav {
+    display: flex; /* Enable flexbox layout */
+    height: 80px; /* Fixed height */
+    padding: 0 20px;
+    justify-content: space-between; /* Space items evenly with space between them */
+    align-items: center; /* Center items vertically */
+    flex-shrink: 0; /* Prevent shrinking of the flex container */
+    align-self: stretch; /* Stretch to fill the available space in the cross-axis */
+    border-bottom: 1px solid #313131;
 }
 
-.prj-head {
-    pointer-events: none;
-    color: var(--gray-22);
-    font-family: var(--text-font);
-    font-weight: 300;
-    text-transform: uppercase;
-    font-style: normal;
-    font-size: 24px;
-    font-weight: 400;
-    line-height: 100%;
-}
-
-.prj-body {
-    pointer-events: none;
-    color: var(--gray-84);
-    font-family: var(--text-font);
-    font-style: normal;
-    font-size: 20px;
-    font-weight: 200;
-    line-height: 120%;
-}
 
 .sub {
-    color: var(--gray-22);
-    font-family: var(--text-font);
-    font-weight: 300;
-    font-style: normal;
-    font-size: 16px;
-    text-align: center;
-    font-weight: 400;
-    line-height: 140%;
-    text-decoration: none;
+    font-weight: 400; /* Bold font weight */
+    line-height: 1.4; /* Line height of 1.4 times the font size */
+    margin-bottom: 20px;
+    padding: 20px 20px;
 }
 
-.prj-title {
-    /* pointer-events: none; */
-    color: var(--gray-59);
-    font-family: var(--text-font);
-    font-weight: 300;
-    font-style: normal;
-    text-decoration: none;
-    font-size: 16px;
-    text-transform: uppercase;
-    font-weight: 200;
-    line-height: 100%;
-    transition: cubic-bezier(0.075, 0.82, 0.165, 0.34s);
-}
-
-.prj-title:hover {
-    /* text-decoration: underline; */
-    transition: cubic-bezier(0.075, 0.82, 0.165, 0.34s);
-}
-
-.sub2 {
-    /* pointer-events: none; */
+.sub-2 {
     color: var(--gray-59);
     font-family: var(--text-font);
     font-weight: 300;
@@ -150,179 +64,53 @@ canvas {
     font-size: 14px;
     font-weight: 200;
     line-height: 100%;
-    transition: cubic-bezier(0.075, 0.82, 0.165, 0.34s);
 }
 
-.sub2:hover {
-    color: var(--primary);
-    transition: cubic-bezier(0.075, 0.82, 0.165, 0.34s);
+.sub-text {
+   font-size: 24px;
 }
 
-.sub2-active {
-    /* pointer-events: none; */
-    color: var(--primary);
-    font-family: var(--text-font);
-    font-weight: 300;
-    font-style: normal;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 14px;
-    font-weight: 200;
-    line-height: 100%;
-    transition: cubic-bezier(0.075, 0.82, 0.165, 0.34s);
-}
-
-.title {
-    pointer-events: none;
-    color: #9D9D9D;
-    font-family: var(--text-font);
-    font-weight: 600;
-    font-style: normal;
-    font-size: 24px;
-    line-height: 140%;
-}
-
-.prj-year {
-    pointer-events: none;
-    color: #9D9D9D;
-    font-family: var(--text-font);
-    font-weight: 400;
-    font-style: normal;
-    font-size: 16px;
-    font-style: normal;
-    line-height: 100%;
-}
-
-.project {
-    width: 100%;
-}
-
-.spacer-sm {
-    width: 100%;
-    height: 24px;
-}
-
-.link {
-    color: var(--gray-22);
-    font-family: var(--text-font);
-    font-weight: 300;
-    font-style: normal;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 140%;
-    text-decoration: underline;
-}
-
-.lottie {
-    display: flex;
-}
-
-.neo {
-    color: #373737;
-    font-family: var(--text-font);
-    font-weight: 300;
-    font-style: normal;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 140%;
-    /* text-decoration: underline; */
-}
-
-.toggleIcon {
-    background-color: #040404;
-}
-
-.mantra {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-items: center;
-    justify-content: space-between;
-    padding: 60px 48px;
-    width: 100%;
-    gap: 24px;
-    flex-shrink: 0;
-    background-color: var(--bg);
-    border: 1px solid #141414;
-}
-
-.stop {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-items: center;
-    justify-content: space-between;
-    padding: 32px 48px;
-    width: 100%;
-    gap: 24px;
-    flex-shrink: 0;
-    background-color: var(--bg);
-    border: 1px solid #141414;
+.hero-container {
+    position: relative; /* Create a positioning context for absolute children */
+    display: flex; /* Enable flexbox layout */
+    flex-direction: column; /* Arrange children in a column */
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    overflow: hidden;    
+    height: fit-content;
 }
 
 .social-left {
     display: flex;
     flex-direction: row;
-    align-items: end;
-    justify-items: flex-end;
-    gap: 24px;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 20px;
     flex-shrink: 0;
 }
 
-.footer {
-    color: var(--gray-22);
-    font-family: var(--text-font);
-    font-weight: 300;
-    font-style: normal;
-    margin-top: 2%;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 100%;
-    text-decoration: none;
+
+
+.hero-container img {
+    position: relative; /* Position the image absolutely */
+    top: 0; /* Align to the top of the container */
+    left: 0; /* Align to the left of the container */
+    width: 300px;
+    height: 100%;/* Maintain aspect ratio */
+    object-fit: fill; /* Ensure the image covers the container area */
+    z-index: 1; /* Ensure the image is below the text */
 }
 
-.f1 {
-    color: var(--gray-22);
-    font-family: var(--text-font);
-    font-weight: 300;
-    font-style: normal;
-    font-size: 42px;
-    font-weight: 400;
-    line-height: 110%;
-    text-decoration: none;
-}
-
-.f2 {
-    color: var(--gray-22);
-    font-family: var(--text-font);
-    font-weight: 300;
-    font-style: normal;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 140%;
-    text-decoration: none;
-}
-
-
-.f3 {
-    color: var(--gray-11);
-    font-family: var(--text-font);
-    font-weight: 300;
-    font-style: normal;
-    font-size: 100px;
-    text-decoration: underline;
-    font-weight: 400;
-    line-height: 80%;
-    text-decoration: none;
-}
-
-.f4 {
-    color: var(--gray-22);
-    font-family: var(--text-font);
-    font-weight: 300;
-    font-style: normal;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 140%;
-    text-decoration: none;
+.hero-text {
+    
+    color: var(--Accent-Color, #FA4F01); /* Accent color with fallback */
+    text-align: center; /* Center text horizontally */
+    font-family: "Neue Haas Grotesk Display Pro", sans-serif; /* Font family with fallback */
+    font-size: 120px;
+    width: 100%; /* Font size */
+    font-style: normal; /* Normal font style (not italic) */
+    font-weight: 700; /* Bold font weight */
+    line-height: 89px; /* Line height */
+    text-transform: uppercase; /* Uppercase text transformation */
+    z-index: 2; /* Ensure the text is above the image */
 }
