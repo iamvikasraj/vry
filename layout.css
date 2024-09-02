@@ -69,6 +69,27 @@
 }
 
 
+.video {
+    border: 2px solid #141414;
+}
+
+
+.twitter-tweet {
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .twitter-tweet .e-entry-title,
+  .twitter-tweet .e-entry-content {
+    display: none !important;
+  }
+  
+  /* Hide Twitter branding */
+  .twitter-tweet .twitter-tweet-renderer {
+    display: none !important;
+  }
 
 .prj {
     display: flex;
