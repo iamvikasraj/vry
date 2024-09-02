@@ -2,16 +2,26 @@ window.onload = function () {
   // Initiate digital rain
   var rain = new DigitalRain("#DigitalRain");
 
-  // Toggle button functionality
-  var toggleButton = document.getElementById("toggleButton");
-  toggleButton.addEventListener("click", function () {
-      if (rain.running) {
-          rain.stop();
-          toggleIcon.src = "assets/stop.svg";
-      } else {
-          rain.start();
-          toggleIcon.src = "assets/stop.svg";
-      }
+  // Get the stop and play buttons
+  var stopButton = document.getElementById("stopButton");
+  var playButton = document.getElementById("playButton");
+
+  // Stop button functionality
+  stopButton.addEventListener("click", function () {
+    if (rain.running) {
+      rain.stop();
+      stopButton.style.display = "none";
+      playButton.style.display = "inline-block";
+    }
+  });
+
+  // Play button functionality
+  playButton.addEventListener("click", function () {
+    if (!rain.running) {
+      rain.start();
+      playButton.style.display = "none";
+      stopButton.style.display = "inline-block";
+    }
   });
 };
 
@@ -21,8 +31,8 @@ function DigitalRain(selector) {
 
   // Some helper variables
   this.bgColor = "#000";
-  this.rainColor = "#101010";
-  this.baseFontSize = 16;
+  this.rainColor = "#444";
+  this.baseFontSize = 12;
   this.fps = 24;
   this.running = true;
 
@@ -31,7 +41,7 @@ function DigitalRain(selector) {
 
   // Detect high-dpi displays
   this.retina = Boolean(
-      "devicePixelRatio" in window && window.devicePixelRatio > 1
+    "devicePixelRatio" in window && window.devicePixelRatio > 1
   );
 
   // Array for holding stream positions
@@ -43,15 +53,15 @@ function DigitalRain(selector) {
 
   // Adjust after resizing window
   window.addEventListener("resize", function () {
-      self.size();
+    self.size();
   });
   this.size();
 
   // Wrap draw function as "render" to retain access to object
   this.render = function () {
-      if (self.running) {
-          self.draw();
-      }
+    if (self.running) {
+      self.draw();
+    }
   };
 
   // Start the animation
@@ -62,16 +72,16 @@ function DigitalRain(selector) {
 DigitalRain.prototype.size = function () {
   // Save contents before resizing canvas
   if (this.canvas.width) {
-      var buffer = this.ctx.getImageData(
-          0,
-          0,
-          this.canvas.width,
-          this.canvas.height
-      );
+    var buffer = this.ctx.getImageData(
+      0,
+      0,
+      this.canvas.width,
+      this.canvas.height
+    );
   }
 
   var ww = window.innerWidth,
-      wh = window.innerHeight;
+    wh = window.innerHeight;
 
   // Resize canvas to fill window
   this.canvas.width = this.retina ? ww * 1.5 : ww;
@@ -85,7 +95,7 @@ DigitalRain.prototype.size = function () {
 
   // Redraw (canvas clears on resize)
   if (buffer) {
-      this.ctx.putImageData(buffer, 0, 0);
+    this.ctx.putImageData(buffer, 0, 0);
   }
 };
 
@@ -94,11 +104,11 @@ DigitalRain.prototype.draw = function () {
 
   // Call rAF after timeout to maintain framerate
   setTimeout(function () {
-      requestAnimationFrame(self.render);
+    requestAnimationFrame(self.render);
   }, 1000 / this.fps);
 
   // Add a variable number of streams per frame
-  this.addStream(Math.round((Math.random() * this.columns * 2) / 3));
+  this.addStream(Math.round((Math.random() * this.columns * 1) / 3));
 
   // Draw overlay to fade out existing characters
   this.ctx.globalAlpha = 0.2;
@@ -115,25 +125,25 @@ DigitalRain.prototype.draw = function () {
 
   // Draw bottom character for each stream
   for (var i = this.streams.length - 1; i >= 0; i--) {
-      var stream = this.streams[i];
+    var stream = this.streams[i];
 
-      if (stream.y <= this.canvas.height + stream.size) {
-          // '0' or '1'
-          var char = String(Math.round(Math.random()));
+    if (stream.y <= this.canvas.height + stream.size) {
+      // '0' or '1'
+      var char = String(Math.round(Math.random()));
 
-          // Adjust based on layer
-          this.ctx.globalAlpha = stream.z;
-          this.ctx.font = stream.size + "px Courier New, Courier";
+      // Adjust based on layer
+      this.ctx.globalAlpha = stream.z;
+      this.ctx.font = stream.size + "px Courier New, Courier";
 
-          // Draw character
-          this.ctx.fillText(char, stream.x, stream.y);
+      // Draw character
+      this.ctx.fillText(char, stream.x, stream.y);
 
-          // Update y-position
-          stream.y += stream.size;
-      } else {
-          // Remove stream if offscreen
-          this.streams.splice(i, 1);
-      }
+      // Update y-position
+      stream.y += stream.size;
+    } else {
+      // Remove stream if offscreen
+      this.streams.splice(i, 1);
+    }
   }
 };
 
@@ -142,7 +152,7 @@ DigitalRain.prototype.addStream = function (n) {
   n = n || 1;
 
   for (var i = 0; i < n; i++) {
-      this.streams.push(new DigitalRainStream(this));
+    this.streams.push(new DigitalRainStream(this));
   }
 };
 
@@ -160,8 +170,8 @@ function DigitalRainStream(Rain) {
 // Add methods to start and stop the rain
 DigitalRain.prototype.start = function () {
   if (!this.running) {
-      this.running = true;
-      requestAnimationFrame(this.render);
+    this.running = true;
+    requestAnimationFrame(this.render);
   }
 };
 

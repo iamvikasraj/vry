@@ -33,7 +33,9 @@
     --t9: 8px;
     --t10: 4px;
 
-    --text-font: "IBM Plex Mono", monospace;
+
+    --text-font: ligurino, sans-serif;
+    --title-font: mongoose, sans-serif;
     ;
 }
 
@@ -62,10 +64,28 @@ canvas {
     /* z-index: -1; */
 }
 
+.controls {
+    position: relative;
+    align-items: center;
+    /* top: 20px;
+    right: 20px; */
+    /* z-index: 1000; */
+  }
+  
+  .control-button {
+    background-color: #00000000;
+    color: #333;
+    border: none !important;
+    width: 80px;
+    padding: 10px 10px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
 .heading {
     pointer-events: none;
     color: var(--color-green);
-    font-family: var(--text-font);
+    font-family: var(--body-font);
     font-weight: 300;
     text-transform: uppercase;
     font-style: normal;
@@ -232,19 +252,7 @@ canvas {
     background-color: #040404;
 }
 
-.mantra {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-items: center;
-    justify-content: space-between;
-    padding: 60px 48px;
-    width: 100%;
-    gap: 24px;
-    flex-shrink: 0;
-    background-color: var(--bg);
-    border: 1px solid #141414;
-}
+
 
 .stop {
     display: flex;
@@ -269,10 +277,15 @@ canvas {
     flex-shrink: 0;
 }
 
+.first{
+    display: flex;
+    flex-direction: row;
+}
+
 .footer {
     color: var(--gray-22);
     font-family: var(--text-font);
-    font-weight: 300;
+    font-weight: 500;
     font-style: normal;
     margin-top: 2%;
     font-size: 16px;
@@ -282,22 +295,22 @@ canvas {
 }
 
 .f1 {
-    color: var(--gray-22);
-    font-family: var(--text-font);
-    font-weight: 300;
+    color: var(--white);
+    font-family: var(--title-font);
+    font-weight: 800;
     font-style: normal;
-    font-size: 42px;
+    font-size: 80px;
     font-weight: 400;
     line-height: 110%;
     text-decoration: none;
 }
 
 .f2 {
-    color: var(--gray-22);
+    color: #959595;
     font-family: var(--text-font);
     font-weight: 300;
     font-style: normal;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 400;
     line-height: 140%;
     text-decoration: none;
