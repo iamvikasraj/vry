@@ -56,7 +56,7 @@ function DigitalRain(selector) {
 
   // Some helper variables
   this.bgColor = "#000";
-  this.rainColor = "#444";
+  this.rainColor = "#888";
   this.baseFontSize = 14;
   this.fps = 24;
   this.running = true;
