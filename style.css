@@ -23,6 +23,10 @@
     align-items: center;
     min-height: 100vh;
   }
+
+  iframe {
+    border: none;
+  }
   
   .vrydesign {
     width: 460px;
