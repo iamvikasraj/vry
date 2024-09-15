@@ -14,242 +14,135 @@
   }
   
   body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Roboto Mono', monospace;
     background-color: var(--bg-color);
     color: var(--text-color);
-    line-height: normal;
-  }
-  
-  .flex-column {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-  
-  .flex-row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-  
-  .relative {
-    position: relative;
-  }
-  
-  .inline-block {
-    display: inline-block;
-  }
-  
-  .underline {
-    text-decoration: underline;
-  }
-  
-  .home {
-    width: 100%;
+    line-height: 1.6;
     display: flex;
     justify-content: center;
-    padding: 0 20px 0 21px;
-    font-size: 16px;
-    color: #848381;
+    align-items: center;
+    min-height: 100vh;
   }
   
   .vrydesign {
-    width: 375px;
+    width: 460px;
     background-color: #090909;
-    /* border-right: 1px solid var(--border-color);
-    border-left: 1px solid var(--border-color); */
-    padding-bottom: 24px;
-    max-width: 100%;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 38px;
   }
   
-
-  a {
-    color: #0077cc;
-    text-decoration: none;
-    transition: color 0.3s ease, text-decoration 0.3s ease;
-  }
-  
-  a:hover {
-    color: #005fa3;
-    text-decoration: underline;
-  }
-  
-  a:active {
-    color: #004080;
-  }
-  
-  a:visited {
-    color: var(--text-color);
-  }
-
-
   .top-nav {
+    display: flex;
     justify-content: space-between;
-    padding: 40px 16px 24px;
+    align-items: center;
     font-size: 16px;
     color: var(--text-color);
   }
   
-  a.say-hello {
-    /* font-size: 14px; */
-    color: var(--secondary-color);
-    min-width: 52px;
-    text-decoration: none;
-  }
-  
-  .hero-text {
-    padding: 60px 16px;
-  }
-  
   .multi-disciplinary-designer-w-container {
+    padding: 60px 0;
     font-weight: 700;
-    font-size: 34px;
-    color: var(--white-text);
+    font-size: 28px;
+    line-height: 1.3;
+    color: var(--text-color);
   }
   
-  .work, .projects, .experiments, .resources, .socials {
-    font-weight: 900;
-    min-width: 44px;
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
   }
   
-  .product-design-design {
+  .work-showcase, .projects, .experiments, .resources, .socials {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 16px;
+  }
+  
+  p {
     font-size: 14px;
-    line-height: 140%;
+    margin-bottom: 16px;
+  }
+  
+  ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  a:hover {
+    color: var(--accent-color);
+  }
+  
+  .job-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .job-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .job-title {
     font-weight: 500;
   }
   
-  .image-2-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 7px;
-    object-fit: cover;
-  }
-  
-  .job {
-    flex: 1;
-    padding-right: 20px;
-    gap: 2px;
-    min-width: 190px;
-  }
-  
-  .work-showcase, .vrydesign-inner, .vrydesign-child {
-    padding: 0 16px 48px;
-  }
-  
-  .social-links-child {
-    height: 1px;
-    background-color: var(--card-bg);
-  }
-  
-  .dribbble-2-icon {
-    width: 267px;
-    max-height: 100%;
-    object-fit: cover;
-  }
-  
-  .image {
-    height: 200px;
-    background-color: #fff;
-    cursor: pointer;
-  }
-  
-  .material-icon {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover;
-    cursor: pointer;
-  }
-  
-  .image1 {
-    background-color: var(--card-bg);
-  }
-  
-  .figma-file {
-    font-size: 14px;
+  .job-period {
     color: var(--secondary-color);
-    min-width: 68px;
+    font-size: 14px;
   }
   
-  .vrydesign-inner1 {
-    height: 278px;
-    padding: 0 16px 24px;
+  .project-list li, .experiment-list li, .resource-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
   
-  .frame-inner {
-    background-color: #0f0f0f;
+  .project-list span, .experiment-list span, .resource-list span {
+    color: var(--secondary-color);
+    font-size: 14px;
   }
   
-  .vrydesign-inner3 {
-    height: 49px;
-    padding: 0 16px 48px;
+  footer {
+    font-size: 12px;
+    color: var(--secondary-color);
+    padding-top: 40px;
+    border-top: 1px solid var(--border-color);
+    margin-top: auto;
+  }
+  
+  footer p {
+    margin-bottom: 24px;
   }
   
   .copyright-notice {
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  
-  .work-section {
     display: flex;
-    flex-direction: column;
-    border-radius: 7px;
-    gap: 24px;
-    padding-top: 24px;
-    padding-bottom: 24px;
-  }
-
-  .work-parent {
-    display: flex;
-    flex-direction: column;
-    border-radius: 7px;
-    gap: 12px;
-    padding-top: 24px;
-  }
-
-  .job {
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    border-radius: 7px;
-    gap: 4px;
-    padding-top: 24px;
-  }
-
-  .a.link {
-    font-size: 14px;
-    line-height: 140%;
-    font-weight: 500;
-  }
-
-
-
-  .work-section-wrapper {
-    padding: 0 16px;
-    font-size: 12px;
-    color: var(--secondary-color);
+    flex-wrap: wrap;
+    gap: 16px;
   }
   
-  @media screen and (max-width: 800px) {
-    .multi-disciplinary-designer-w-container {
-      font-size: 27px;
-    }
-    .vrydesign-child, .vrydesign-inner {
-      padding-bottom: 31px;
-    }
-  }
-  
-  @media screen and (max-width: 450px) {
-    .multi-disciplinary-designer-w-container {
-      font-size: 20px;
-    }
-    .hero-text {
-      padding: 39px 16px;
-    }
-    .vrydesign-child {
-      padding-bottom: 20px;
-    }
-    .work-section1 {
-      gap: 20px;
-    }
+  img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 16px;
   }
