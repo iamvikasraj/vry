@@ -1,4 +1,4 @@
-@import url("https://use.typekit.net/yzs4uxz.css");
+
 
 :root {
   --bg-color: #000000;
@@ -7,8 +7,8 @@
   --secondary-color: #848484;
   --border-color: #282828;
   --card-bg: #1c1c1c;
-  --font-title: "ocr-a-std", monospace;
-  --primary:"lorimer-no-2", sans-serif;
+  --font-title: 'Roboto', monospace;
+  --primary:'Roboto', monospace;
 }
 
 * {
