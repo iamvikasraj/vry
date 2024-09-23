@@ -48,6 +48,26 @@ iframe {
   gap: 38px;
 }
 
+
+.anc {
+  border: #c2c2c22e 0.5px solid;
+  border-radius: 8px;
+}
+
+.riveting {
+  width: 100%;
+  max-width: 460px;
+  background-color: #090909;
+  padding: 24px;
+  display: flex;
+  border-right: 1px solid #101010;
+  border-left: 1px solid #101010;
+  flex-direction: column;
+  gap: 38px;
+}
+
+
+
 .top-nav {
   display: flex;
   justify-content: space-between;
@@ -76,6 +96,12 @@ main {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.form {
+  border: #fa50014e 1px solid;
+  border-radius: 8px ;
+  scroll-behavior: smooth;
 }
 
 h2 {
