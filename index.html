@@ -1,106 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Vikas Raj Yadav - Product Designer with 8+ years of experience in design systems and interaction design">
-    <title>Vikas Raj Yadav - Product Designer</title>
-    <link rel="stylesheet" href="https://use.typekit.net/wjs0dtk.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vikas Raj Yadav - Staff Product Designer</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        list-style-type: none;
+      }
+
+      :root {
+        --background-color: #fff;
+        --color: #111;
+        --border: rgba(0, 0, 0, 0.1);
+        --padding: min(6vw, 48px);
+        --type-size: max(0.74vw, 16px);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --background-color: #000;
+          --color: #eee;
+          --border: rgba(255, 255, 255, 0.15);
+        }
+      }
+
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        font-size: var(--type-size);
+        line-height: 1.6;
+        background-color: var(--background-color);
+        color: var(--color);
+        -webkit-font-smoothing: antialiased;
+        text-size-adjust: none;
+      }
+
+      .container {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        margin: 0 auto;
+        column-gap: var(--padding);
+      }
+
+      .header {
+        height: fit-content;
+        min-height: 100dvh;
+        padding: var(--padding);
+        padding-right: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        width: 25%;
+        min-width: 400px;
+        flex-shrink: 0;
+      }
+
+      .header h1 {
+        font-weight: 500;
+        font-size: var(--type-size);
+      }
+
+      .header p {
+        margin-bottom: calc((var(--type-size) * 1.6) / 1);
+      }
+
+      .links {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .header a {
+        color: inherit;
+        text-decoration: none;
+        width: fit-content;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .header a:hover {
+        border-bottom: 1px solid;
+      }
+
+      .projects {
+        width: 75%;
+        display: flex;
+        flex-direction: column;
+        row-gap: min(6vw, 48px);
+        padding: var(--padding);
+        padding-left: 0;
+        flex-grow: 1;
+      }
+
+      .media {
+        width: 100%;
+        position: relative;
+        display: block;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .media::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border: 1px solid var(--border);
+        pointer-events: none;
+        z-index: 1;
+        border-radius: inherit;
+      }
+
+      .media img,
+      .media video {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+      }
+
+      [role="grid"] {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(466px, 1fr));
+        gap: 24px;
+      }
+
+      @media (max-width: 900px) {
+        .container {
+          flex-direction: column;
+          row-gap: var(--padding);
+        }
+
+        .header {
+          width: 100%;
+          padding-right: var(--padding);
+          padding-bottom: 0;
+          position: relative;
+          top: unset !important;
+          min-width: unset;
+          min-height: unset;
+        }
+
+        .projects {
+          width: 100%;
+          padding-left: var(--padding);
+          padding-top: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
     <div class="container">
-        <nav class="top-nav">
-            <div class="logo">Vikas Raj Yadav</div>
-            <div class="nav-links">
-                <a href="#work">Work</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
-            </div>
-        </nav>
+      <div class="header">
+        <div class="identity">
+          <h1>Vikas Raj Yadav</h1>
+          <p>Principal Product Designer in Gurgaon, India, They/Them</p>
+          <p>
+            Principal Product Designer @ETMoney ∘ Dreamer ∘ Hanging out between
+            Design and Engineering ∘ I don't like to write about my exes
+          </p>
+        </div>
+        <div class="links">
+          <div>
+            <a href="https://twitter.com/Vraj247" target="_blank">Twitter</a>
+          </div>
+          <div>
+            <a href="https://github.com/vraj247" target="_blank">GitHub</a>
+          </div>
+          <div>
+            <a href="https://linkedin.com/in/vraj247" target="_blank"
+              >LinkedIn</a
+            >
+          </div>
+          <div>
+            <a href="https://figma.com/@vraj247" target="_blank">Figma</a>
+          </div>
+          <div>
+            <a href="https://dribbble.com/Vraj247" target="_blank">Dribbble</a>
+          </div>
+          <div>
+            <a href="https://read.cv/vraj247" target="_blank">Read.cv</a>
+          </div>
+        </div>
+      </div>
 
-        <header>
-            <h1 class="multi-disciplinary-designer-w-container">
-                Non-Award Winning Designer ∘ Non-Creative Engineer ∘ Jack of All
-            </h1>
-            <p class="work-description">
-                Product Designer with 8+ years of experience, bridging the gap between design and technology to create impactful user experiences with efficiency.
-            </p>
-        </header>
-
-        <main>
-            <section class="content-grid">
-                <h2 class="section-title">Selected Projects</h2>
-                <div class="project-card">
-                    <video autoplay muted loop playsinline>
-                        <source src="./assets/video/1.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="project-card">
-                    <video autoplay muted loop playsinline>
-                        <source src="./assets/video/2.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="project-card">
-                    <video autoplay muted loop playsinline>
-                        <source src="./assets/video/3.mp4" type="video/mp4">
-                    </video>
-                </div>
-            </section>
-
-            <section class="content-grid">
-                <h2 class="section-title">Expertise</h2>
-                <div class="job-list">
-                    <div class="job-item">
-                        <div class="job-title">Product Design</div>
-                        <div class="job-period">8+ years</div>
-                    </div>
-                    <div class="job-item">
-                        <div class="job-title">Design Systems</div>
-                        <div class="job-period">4+ years</div>
-                    </div>
-                    <div class="job-item">
-                        <div class="job-title">Interaction Design</div>
-                        <div class="job-period">10+ years</div>
-                    </div>
-                    <div class="job-item">
-                        <div class="job-title">Prototyping</div>
-                        <div class="job-period">8+ years</div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="content-grid">
-                <h2 class="section-title">Career Highlights</h2>
-                <div class="job-list">
-                    <div class="job-item">
-                        <div class="job-title">Paytm Postpaid</div>
-                        <div class="job-period">Scaled to 6 million users and 15 million merchants</div>
-                    </div>
-                    <div class="job-item">
-                        <div class="job-title">Paytm Design System</div>
-                        <div class="job-period">First official design system (PODS 1.0)</div>
-                    </div>
-                    <div class="job-item">
-                        <div class="job-title">Paytm Travel</div>
-                        <div class="job-period">38 million tickets sold in 2018-19</div>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer class="footer">
-            <div class="socials">
-                <a href="https://twitter.com/Vraj247" target="_blank">Twitter</a>
-                <a href="https://www.linkedin.com/in/vraj247/" target="_blank">LinkedIn</a>
-                <a href="https://github.com/Vraj247" target="_blank">Github</a>
-                <a href="mailto:vraj247@icloud.com">Email</a>
-            </div>
-            <div class="copyright-notice">
-                <span>Vikas Raj Yadav</span>
-                <span>Copyright @2014 - 2024</span>
-            </div>
-        </footer>
+      <div class="projects">
+        <div role="grid">
+          <!-- Replace these with your actual project images/videos -->
+          <div role="gridcell">
+            <a
+              href="#"
+              target="_blank"
+              class="media"
+              style="aspect-ratio: 1.77778 / 1"
+            >
+              <img src="/api/placeholder/466/262" alt="Project 1" />
+            </a>
+          </div>
+          <div role="gridcell">
+            <a
+              href="#"
+              target="_blank"
+              class="media"
+              style="aspect-ratio: 1.77778 / 1"
+            >
+              <img src="/api/placeholder/466/262" alt="Project 2" />
+            </a>
+          </div>
+          <div role="gridcell">
+            <a
+              href="#"
+              target="_blank"
+              class="media"
+              style="aspect-ratio: 1.77778 / 1"
+            >
+              <img src="/api/placeholder/466/262" alt="Project 3" />
+            </a>
+          </div>
+          <div role="gridcell">
+            <a
+              href="#"
+              target="_blank"
+              class="media"
+              style="aspect-ratio: 1.77778 / 1"
+            >
+              <img src="/api/placeholder/466/262" alt="Project 4" />
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
