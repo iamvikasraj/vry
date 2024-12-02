@@ -4,6 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Vikas Raj Yadav - Staff Product Designer</title>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-450653963"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-450653963");
+    </script>
     <style>
       * {
         margin: 0;
@@ -17,7 +30,7 @@
         --color: #111;
         --border: rgba(0, 0, 0, 0.1);
         --padding: min(6vw, 48px);
-        --type-size: max(1vw, 20px);
+        --type-size: max(0.75vw, 16px);
       }
 
       @media (prefers-color-scheme: dark) {
@@ -62,11 +75,12 @@
       }
 
       .header h1 {
-        font-weight: 500;
-        font-size: var(--type-size);
+        font-weight: 800;
+        font-size: 20px;
       }
 
       .header p {
+        font-size: 16px;
         margin-bottom: calc((var(--type-size) * 1.6) / 1);
       }
 
@@ -157,11 +171,12 @@
     <div class="container">
       <div class="header">
         <div class="identity">
-          <h1>Vikas Raj Yadav</h1>
+          <h1 class="heading">Vikas Raj Yadav</h1>
           <p>Principal Product Designer in Gurgaon, India, They/Them</p>
           <p>
             Principal Product Designer @ETMoney ∘ Dreamer ∘ Hanging out between
-            Design and Engineering ∘ I don't like to write about my exes
+            Design and Engineering ∘ <br />
+            I don't like to write about my exes
           </p>
         </div>
         <div class="links">
