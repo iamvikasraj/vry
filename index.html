@@ -11,13 +11,13 @@
       rel="icon"
       type="image/png"
       sizes="32x32"
-      href="./assets/Profile.jpg"
+      href="./assets/fav.jpeg"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="./assets/Profile.jpg"
+      href="./assets/fav.jpeg"
     />
 
     <!-- Google tag (gtag.js) -->
@@ -34,52 +34,57 @@
 
       gtag("config", "G-SYDGLK4LKX");
     </script>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        list-style-type: none;
-      }
-
-      :root {
+   <style>
+    :root {
         --background-color: #fff;
         --color: #111;
         --border: rgba(0, 0, 0, 0.1);
         --padding: min(6vw, 48px);
         --type-size: max(0.75vw, 16px);
-      }
+    }
 
-      @media (prefers-color-scheme: dark) {
+    @media (prefers-color-scheme: dark) {
         :root {
-          --background-color: #000;
-          --color: #eee;
-          --border: rgba(255, 255, 255, 0.15);
+            --background-color: #000;
+            --color: #eee;
+            --border: rgba(255, 255, 255, 0.15);
         }
-      }
+    }
 
-      body {
+    body {
         font-family: system-ui, -apple-system, sans-serif;
         font-size: var(--type-size);
         line-height: 1.6;
         background-color: var(--background-color);
         color: var(--color);
         -webkit-font-smoothing: antialiased;
-        text-size-adjust: none;
+        *margin: 0 0;
+        *padding: 0 0;
+        box-sizing: border-box;
         height: 100vh;
         overflow: hidden;
-      }
+    }
 
-      .container {
+    p{
+      margin: 0 0 0 0 ;
+      padding: 0 0 0 0 ;
+    }
+  
+    a{
+      margin: 0 0;
+      font-size: 1rem;
+      padding: 0 0 ;
+    }
+
+    .container {
         width: 100%;
         display: flex;
         flex-direction: row;
-        margin: 0 auto;
-        column-gap: var(--padding);
+        gap: var(--padding);
         height: 100%;
-      }
+    }
 
-      .header {
+    .header {
         height: 100vh;
         padding: var(--padding);
         padding-right: 0;
@@ -90,73 +95,66 @@
         top: 0;
         width: 25%;
         min-width: 400px;
-        flex-shrink: 0;
-      }
+    }
 
-      .header h1 {
+    .header h1 {
         font-weight: 800;
         font-size: 20px;
-      }
+    }
 
-      .header p {
+    .header p {
         font-size: 16px;
         margin-bottom: calc((var(--type-size) * 1.6) / 1);
-      }
+    }
 
-      .links {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .header a {
+    .header a {
         color: inherit;
         text-decoration: none;
         width: fit-content;
         border-bottom: 1px solid var(--border);
-      }
+    }
 
-      .header a:hover {
+    .header a:hover {
         border-bottom: 1px solid;
-      }
+    }
 
-      .projects {
+    .projects {
         width: 75%;
         padding: var(--padding);
         padding-left: 0;
         height: 100vh;
         overflow-y: auto;
-        scrollbar-width: thin;
-        scrollbar-color: var(--border) transparent;
-      }
+    }
 
-      .projects::-webkit-scrollbar {
-        width: 6px;
-      }
+    [role="project-grid"] {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        padding-bottom: 24px;
+    }
 
-      .projects::-webkit-scrollbar-track {
-        background: transparent;
-      }
+    [role="project-one"] {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 24px;
+        padding-bottom: 24px;
+    }
 
-      .projects::-webkit-scrollbar-thumb {
-        background-color: var(--border);
-        border-radius: 3px;
-      }
-
-      .media {
+    .media {
+        aspect-ratio: 16 / 9;
         width: 100%;
         position: relative;
         display: block;
         border-radius: 8px;
         overflow: hidden;
-        margin-bottom: 24px;
         transition: transform 0.2s ease-in-out;
-      }
+    }
 
-      .media:hover {
+    .media:hover {
         transform: translateY(-4px);
-      }
+    }
 
-      .media::after {
+    .media::after {
         content: "";
         position: absolute;
         inset: 0;
@@ -164,225 +162,418 @@
         pointer-events: none;
         z-index: 1;
         border-radius: inherit;
-      }
+    }
 
-      .media img,
-      .media video {
-        position: relative;
+    .media video {
         width: 100%;
         height: 100%;
         display: block;
         object-fit: cover;
-      }
+    }
 
-      /* [role="grid"] {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 24px;
-      } */
-
-      @media (max-width: 900px) {
+    @media (max-width: 900px) {
         body {
-          overflow: auto;
+            overflow: auto;
         }
 
         .container {
-          flex-direction: column;
-          row-gap: var(--padding);
-          height: auto;
+            flex-direction: column;
+            height: auto;
         }
 
         .header {
-          width: 100%;
-          padding-right: var(--padding);
-          padding-bottom: 0;
-          position: relative;
-          top: unset !important;
-          min-width: unset;
-          height: auto;
+            width: 100%;
+            padding-right: var(--padding);
+            padding-bottom: 0;
+            position: relative;
+            top: unset;
+            min-width: unset;
+            height: auto;
         }
 
         .projects {
-          width: 100%;
-          padding-left: var(--padding);
-          padding-top: 0;
-          height: auto;
-          overflow: visible;
+            width: 100%;
+            padding-left: var(--padding);
+            padding-top: 0;
+            height: auto;
+            overflow: visible;
         }
 
-        [role="grid"] {
-          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        [role="project-grid"] {
+            grid-template-columns: repeat(2, 1fr);
         }
-      }
-    </style>
+    }
+
+    @media (max-width: 600px) {
+        [role="project-grid"] {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .section {
+      margin-bottom: 2rem;
+      margin-top: 4rem;
+    }
+
+    .section-header {
+      font-size: 14px;
+      color: gray;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .section-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+    }
+
+    .section-item-left-link {
+      color: #c3c3c3;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .section-item-left-link:hover {
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .section-item-right {
+      color: gray;
+    }
+
+
+</style>
   </head>
   <body>
     <div class="container">
+      
       <div class="header">
         <div class="identity">
           <h1 class="heading">Vikas Raj Yadav</h1>
-          <p>Principal Product Designer and Design Engineer</p>
+          <p>
+            Principal Product Designer @ETMoney <br />
+            Dreamer ∘ Designer ∘ Engineer
+          </p>
+          
+          <p>
+            I'm passionate about interaction design, motion systems, and prototyping with SwiftUI & Three.js. When I'm not designing, I experiment with side projects, micro-interactions, and AI-powered tools to push digital experiences forward.
+          </p>
+
+         <section class="section section-work">
+           <h2 class="section-header">Work</h2>
+           
+             <li class="section-item">
+               <a class="section-item-left section-item-left-link" href="https://www.etmoney.com/" target="_blank">ETMoney</a>
+               <span class="section-item-right">2024-current</span>
+             </li>
+
+             <li class="section-item">
+               <a class="section-item-left section-item-left-link" href="https://www.timesbridge.com/" target="_blank">Times Bridge</a>
+               <span class="section-item-right">2022-2024</span>
+             </li>
+
+             <li class="section-item">
+               <a class="section-item-left section-item-left-link" href="https://www.hdfcbank.com/" target="_blank">HDFC Bank</a>
+               <span class="section-item-right">2021-2022</span>
+             </li>
+
+             <li class="section-item">
+               <a class="section-item-left section-item-left-link" href="https://www.paytm.com/" target="_blank">Paytm</a>
+               <span class="section-item-right">2018-2021</span>
+             </li>
+
+             <li class="section-item">
+               <a class="section-item-left section-item-left-link" href="https://www.paytm.com/" target="_blank">Grappus</a>
+               <span class="section-item-right">2017-2018</span>
+             </li>
+
+             <li class="section-item">
+              <a class="section-item-left section-item-left-link" href="https://www.proprofs.com/" target="_blank">ProProfs</a>
+              <span class="section-item-right">2016-2017</span>
+            </li>
+             
+             
+        </section>
+
+        <!-- <section class="section section-work">
+          <h2 class="section-header">Certifications</h2>
+          
+            <li class="section-item">
+              <a class="section-item-left section-item-left-link" href="https://www.linkedin.com/learning/certificates/e093c49044ac410c580207dcb1479af5bcd6d24b720493f19b3b26a1fed7a91a?trk=share_certificate&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3BPkthfnQgRxWLxv2IgEDG4g%3D%3D" target="_blank">Swift 5 Essential Training</a>
+              <span class="section-item-right">Nov, 2024</span>
+            </li>
+
+            <li class="section-item">
+              <a class="section-item-left section-item-left-link" href="https://www.linkedin.com/learning/certificates/5c84ec5d1a40a250b4f23a25d25b4f631d0da1d6c936127a6244b16853b4f420?trk=share_certificate&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3BPkthfnQgRxWLxv2IgEDG4g%3D%3D" target="_blank">SwiftUI Essentials Training</a>
+              <span class="section-item-right">Aug, 2024</span>
+            </li>
+
+            <li class="section-item">
+              <a class="section-item-left section-item-left-link" href="https://threejs-journey.com/certificate/view/1737" target="_blank">Three js</a>
+              <span class="section-item-right">Jan, 2024</span>
+            </li>
+
+            <li class="section-item">
+              <a class="section-item-left section-item-left-link" href="https://www.awwwards.com/academy/certification/course/vraj247/advanced-motion-techniques-mixing-2d-3d" target="_blank">Mixing 2D & 3D</a>
+              <span class="section-item-right">Oct, 2023</span>
+            </li>
+
+            <li class="section-item">
+              <a class="section-item-left section-item-left-link" href="https://designcode.io/react-for-designers" target="_blank">React for Designer</a>
+              <span class="section-item-right">Dec, 2019</span>
+            </li>
+
+            <li class="section-item">
+             <a class="section-item-left section-item-left-link" href="https://www.udacity.com/enrollment/ud849" target="_blank">UX Design for Mobile Developers</a>
+             <span class="section-item-right">Jun, 2015</span>
+           </li>
+           
+            
+            
+       </section> -->
+
+       <!-- <section class="section section-work">
+        <h2 class="section-header">Education</h2>
+        
+          <li class="section-item">
+            <a class="section-item-left section-item-left-link" href="https://www.etmoney.com/" target="_blank">Computer Science</a>
+            <span class="section-item-right">2011-15</span>
+          </li>
+        </section> -->
+       
+
+        <div class="links" style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; max-width: 100px;">
+          <a href="https://twitter.com/Vraj247" target="_blank"><img src="./assets/twitter.svg" alt="Twitter" width="16" height="16" /></a>
+          <a href="https://github.com/vraj247" target="_blank"><img src="./assets/github.svg" alt="GitHub" width="16" height="16" /></a>
+          <a href="https://linkedin.com/in/vraj247" target="_blank"><img src="./assets/linkedin.svg" alt="LinkedIn" width="16" height="16" /></a>
+          <a href="https://dribbble.com/Vraj247" target="_blank"><img src="./assets/dribbble.svg" alt="Dribbble" width="16" height="16" /></a>
         </div>
-        <div class="links">
-          <div>
-            <a href="https://twitter.com/Vraj247" target="_blank">Twitter</a>
-          </div>
-          <div>
-            <a href="https://github.com/vraj247" target="_blank">GitHub</a>
-          </div>
-          <div>
-            <a href="https://linkedin.com/in/vraj247" target="_blank"
-              >LinkedIn</a
-            >
-          </div>
-          <div>
-            <a href="https://figma.com/@vraj247" target="_blank">Figma</a>
-          </div>
-          <div>
-            <a href="https://dribbble.com/Vraj247" target="_blank">Dribbble</a>
-          </div>
-        </div>
+          
+       </div>
+
       </div>
 
       <div class="projects">
-        <div role="grid">
-          <div role="gridcell">
-            <a
-              href="https://www.linkedin.com/posts/vraj247_rive-swiftui-ios18-activity-7270034353248698369-nAE8?utm_source=share&utm_medium=member_desktop"
-              target="_blank"
-              class="media"
-              style="aspect-ratio: 1.77778 / 1"
-            >
-              <video
-                src="./assets/video/et_onboarding.mp4"
-                autoplay
-                muted
-                loop
-                playsinline
-              ></video>
-            </a>
-          </div>
 
-          <div role="gridcell">
-            <a
-              href="https://x.com/Vraj247/status/1839581632426074315"
-              target="_blank"
-              class="media"
-              style="aspect-ratio: 1.77778 / 1"
-            >
-              <video
-                src="./assets/video/notion_ai.mp4"
-                autoplay
-                muted
-                loop
-                playsinline
-              ></video>
-            </a>
-          </div>
 
-          <div role="gridcell">
-            <a
-              href="https://www.linkedin.com/posts/vraj247_riveapp-microinteraction-header-activity-7275415432264630274-6Jja?utm_source=share&utm_medium=member_desktop"
-              target="_blank"
-              class="media"
-              style="aspect-ratio: 1.77778 / 1"
-            >
-              <video
-                src="./assets/video/header.mp4"
-                autoplay
-                muted
-                loop
-                playsinline
-              ></video>
-            </a>
-          </div>
-
-          <div role="gridcell">
-            <a
-              href="https://x.com/Vraj247/status/1826600022844256451"
-              target="_blank"
-              class="media"
-              style="aspect-ratio: 1.77778 / 1"
-            >
-              <video
-                src="./assets/video/cred_garage.mp4"
-                autoplay
-                muted
-                loop
-                playsinline
-              ></video>
-            </a>
-          </div>
-          <div role="gridcell">
-            <a
-              href="https://x.com/Vraj247/status/1828705148161429543"
-              target="_blank"
-              class="media"
-              style="aspect-ratio: 1.77778 / 1"
-            >
-              <video
-                src="./assets/video/insider_app.mp4"
-                autoplay
-                muted
-                loop
-                playsinline
-              ></video>
-            </a>
-          </div>
-
-          <div role="gridcell">
-            <a
-              href="https://x.com/Vraj247/status/1825810461616423004"
-              target="_blank"
-              class="media"
-              style="aspect-ratio: 1.77778 / 1"
-            >
-              <video
-                src="./assets/video/Rive_ipad.mp4"
-                autoplay
-                muted
-                loop
-                playsinline
-              ></video>
-            </a>
-          </div>
-          <div role="gridcell">
-            <a
-              href="https://x.com/Vraj247/status/1823802636002562495"
-              target="_blank"
-              class="media"
-              style="aspect-ratio: 1.77778 / 1"
-            >
-              <video
-                src="./assets/video/rive_sound.mp4"
-                autoplay
-                muted
-                loop
-                playsinline
-              ></video>
-            </a>
-          </div>
-        </div>
-        <div role="grid">
+        <div role="project-one">
           <div>
             <a
-              href="#"
-              href="#"
-              target="_blank"
-              class="media"
-              style="aspect-ratio: 1.77778 / 1"
-            >
-              <video
-                src="./assets/video/zomato_weather.mp4"
-                autoplay
-                muted
-                loop
-                playsinline
-              ></video
-            ></a>
+            href="https://www.linkedin.com/posts/vraj247_rive-swiftui-ios18-activity-7270034353248698369-nAE8/?utm_source=share&utm_medium=member_desktop"
+            target="_blank"
+            class="media"
+            style="aspect-ratio: 1.77778 / 1"
+          >
+            <video
+              src="./assets/video/et_onboarding.mp4"
+              autoplay
+              muted
+              loop
+              playsinline
+            ></video>
+          </a>
+  
           </div>
         </div>
+
+        <div role="project-grid">
+
+          <div>
+             <a
+          href="https://x.com/Vraj247/status/1825810461616423004"
+          target="_blank"
+          class="media"
+          style="aspect-ratio: 1.77778 / 1"
+        >
+          <video
+            src="./assets/video/Rive_ipad.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+          ></video>
+        </a>
+          </div>
+
+          <div>
+           <a
+        href="https://x.com/Vraj247/status/1823802636002562495"
+        target="_blank"
+        class="media"
+        style="aspect-ratio: 1.77778 / 1"
+      >
+        <video
+          src="./assets/video/rive_sound.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+        ></video>
+        </a>
+        </div>
+
+        </div>
+
+      
+        <div role="project-one">
+          <div>
+            <a
+            href="https://x.com/Vraj247/status/1893961291221393550"
+            target="_blank"
+            class="media"
+            style="aspect-ratio: 1.77778 / 1"
+          >
+            <video
+              src="./assets/video/Perplexity.mp4"
+              autoplay
+              muted
+              loop
+              playsinline
+            ></video>
+          </a>
+  
+          </div>
+        </div>
+
+        <div role="project-grid">
+          <div>
+           <a
+           href="https://www.linkedin.com/posts/vraj247_rive-swiftui-ios18-activity-7270034353248698369-nAE8?utm_source=share&utm_medium=member_desktop"
+           target="_blank"
+           class="media"
+           style="aspect-ratio: 1.77778 / 1"
+         >
+           <video
+             src="./assets/video/dream.mp4"
+             autoplay
+             muted
+             loop
+             playsinline
+           ></video>
+         </a>
+          </div>
+ 
+          <div>
+           <a
+           href="https://x.com/Vraj247/status/1826600022844256451"
+           target="_blank"
+           class="media"
+           style="aspect-ratio: 1.77778 / 1"
+         >
+           <video
+             src="./assets/video/cred_garage.mp4"
+             autoplay
+             muted
+             loop
+             playsinline
+           ></video>
+         </a>
+ 
+         </div>
+         
+         </div>
+       
+         <div role="project-grid">
+
+          <div>
+             <a
+          href="https://x.com/Vraj247/status/1839581632426074315"
+          target="_blank"
+          class="media"
+          style="aspect-ratio: 1.77778 / 1"
+        >
+          <video
+            src="./assets/video/notion_ai.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+          ></video>
+        </a>
+          </div>
+
+          <div>
+           <a
+        href="https://www.linkedin.com/posts/vraj247_riveapp-microinteraction-header-activity-7275415432264630274-6Jja?utm_source=share&utm_medium=member_desktop"
+        target="_blank"
+        class="media"
+        style="aspect-ratio: 1.77778 / 1"
+      >
+        <video
+          src="./assets/video/header.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+        ></video>
+        </a>
+        </div>
+
+        </div>
+
+        <div role="project-one">
+          <div>
+            <a
+            href="https://x.com/Vraj247/status/1893961291221393550"
+            target="_blank"
+            class="media"
+            style="aspect-ratio: 1.77778 / 1"
+          >
+            <video
+              src="./assets/video/tubelottie.mp4"
+              autoplay
+              muted
+              loop
+              playsinline
+            ></video>
+          </a>
+  
+          </div>
+        </div>
+
+        <div role="project-grid">
+
+          <div>
+             <a
+          href="https://x.com/Vraj247/status/1825810461616423004"
+          target="_blank"
+          class="media"
+          style="aspect-ratio: 1.77778 / 1"
+        >
+          <video
+            src="./assets/video/insider_app.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+          ></video>
+        </a>
+          </div>
+
+          <div>
+           <a
+        href="https://x.com/Vraj247/status/1823802636002562495"
+        target="_blank"
+        class="media"
+        style="aspect-ratio: 1.77778 / 1"
+      >
+        <video
+          src="./assets/video/zomato_weather.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+        ></video>
+        </a>
+        </div>
+
+        </div>
+    
       </div>
+
     </div>
   </body>
 </html>
