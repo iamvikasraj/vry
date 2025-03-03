@@ -43,6 +43,10 @@
         --type-size: max(0.75vw, 16px);
     }
 
+    html {
+        scroll-behavior: smooth;
+    }
+
     @media (prefers-color-scheme: dark) {
         :root {
             --background-color: #000;
@@ -125,6 +129,7 @@
         height: 100vh;
         overflow-y: auto;
         box-sizing: border-box;
+        scroll-behavior: smooth;
     }
 
     [role="project-grid"] {
