@@ -1,6 +1,14 @@
 /* styles.css */
 @import url("https://use.typekit.net/wjs0dtk.css");
 
+* {
+    margin: 0 0;
+    padding: 0 0;
+    box-sizing: border-box;
+    font-kerning: normal;
+    text-rendering: optimizeLegibility;
+}
+
 :root {
     --bg-color: #000000;
     --text-color: #e0e0e0;
@@ -15,17 +23,13 @@
     --content-width: 1400px;
 }
 
-* {
-    margin: 0 0;
-    padding: 0 0;
-    box-sizing: border-box;
-}
-
 body {
     font-family: var(--secondary);
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
+    font-kerning: normal;
+    text-rendering: optimizeLegibility;
 }
 
 .container {
@@ -238,7 +242,12 @@ body {
 
 .header p {
     font-size: 16px;
-    margin-bottom: calc((var(--type-size) * 1.6) / 1);
+    margin-bottom: 0.5em;
+    line-height: 1.4;
+}
+
+.header p + p {
+    margin-top: 0.5em;
 }
 
 .links {
@@ -281,15 +290,80 @@ body {
 }
 
 .media {
-    width: 100%;
     position: relative;
+    width: 100%;
     display: block;
     border-radius: 8px;
     overflow: hidden;
     margin-bottom: 24px;
     transition: transform 0.2s ease-in-out;
+    border: 2px solid red; /* Temporary debug border */
 }
 
 .media:hover {
     transform: translateY(-4px);
+}
+
+.media video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    position: relative;
+    z-index: 1;
+}
+
+.media::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(to top, rgba(255,0,0,0.8) 0%, rgba(255,0,0,0) 100%); /* Red gradient for visibility */
+    z-index: 1;
+}
+
+.video-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    z-index: 2;
+    padding: 12px 20px;
+    width: calc(100% - 40px);
+    background: blue; /* Temporary solid background */
+    border: 2px solid yellow; /* Temporary debug border */
+}
+
+.video-caption h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: white;
+}
+
+.video-caption p {
+    margin: 0;
+    font-size: 0.9em;
+    opacity: 0.9;
+    line-height: 1.4;
+    color: white;
+}
+
+.section-item-right {
+    color: gray;
+    letter-spacing: 0.05em; /* Increased kerning */
+}
+
+/* For headings and other text elements */
+h1, h2, h3, h4, h5, h6 {
+    font-kerning: normal;
+    text-rendering: optimizeLegibility;
+}
+
+/* For paragraphs and other body text */
+p {
+    font-kerning: normal;
+    text-rendering: optimizeLegibility;
 }

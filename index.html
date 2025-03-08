@@ -21,10 +21,7 @@
     />
 
     <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-SYDGLK4LKX"
-    ></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YOUR_MEASUREMENT_ID"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -367,20 +364,43 @@
         <div role="project-one">
           <div>
             <a
-            href="https://www.linkedin.com/posts/vraj247_rive-swiftui-ios18-activity-7270034353248698369-nAE8/?utm_source=share&utm_medium=member_desktop"
-            target="_blank"
-            class="media"
-            style="aspect-ratio: 1.77778 / 1"
-          >
-            <video
-              src="./assets/video/et_onboarding.mp4"
-              autoplay
-              muted
-              loop
-              playsinline
-            ></video>
-          </a>
-  
+              href="https://www.linkedin.com/posts/vraj247_rive-swiftui-ios18-activity-7270034353248698369-nAE8/?utm_source=share&utm_medium=member_desktop"
+              target="_blank"
+              class="media"
+              style="aspect-ratio: 1.77778 / 1"
+            >
+              <video
+                src="./assets/video/et_onboarding.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+              ></video>
+              <div class="video-caption" style="
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                padding: 20px;
+                background: rgba(0, 0, 0, 0.8);
+                color: white;
+                z-index: 2;
+              ">
+                <h3 style="
+                  margin: 0 0 8px 0;
+                  font-size: 1em;
+                  font-weight: 600;
+                ">ET Money Onboarding</h3>
+                <p style="
+                  margin: 0;
+                  font-size: 0.875em;
+                  line-height: 1.4;
+                  opacity: 0.9;
+                  font-family: 'ITC Garamond', Garamond, serif;
+                  font-style: italic;
+                ">Redesigned the onboarding experience for ET Money's mobile app</p>
+              </div>
+            </a>
           </div>
         </div>
 
@@ -580,5 +600,73 @@
       </div>
 
     </div>
+
+    <script>
+        // Track all link clicks
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                gtag('event', 'link_click', {
+                    'link_url': link.href,
+                    'link_text': link.innerText.trim(),
+                    'link_location': link.closest('[role]')?.getAttribute('role') || 'unknown',
+                    'outbound': link.hostname !== window.location.hostname
+                });
+            });
+        });
+
+        // Track video interactions
+        document.querySelectorAll('video').forEach(video => {
+            // Track play events
+            video.addEventListener('play', () => {
+                gtag('event', 'video_play', {
+                    'video_title': video.parentElement.querySelector('h3')?.innerText || 'Untitled',
+                    'video_url': video.src,
+                    'video_location': video.closest('[role]')?.getAttribute('role') || 'unknown'
+                });
+            });
+
+            // Track pause events
+            video.addEventListener('pause', () => {
+                gtag('event', 'video_pause', {
+                    'video_title': video.parentElement.querySelector('h3')?.innerText || 'Untitled',
+                    'video_url': video.src,
+                    'video_location': video.closest('[role]')?.getAttribute('role') || 'unknown',
+                    'current_time': video.currentTime
+                });
+            });
+
+            // Track ended events
+            video.addEventListener('ended', () => {
+                gtag('event', 'video_ended', {
+                    'video_title': video.parentElement.querySelector('h3')?.innerText || 'Untitled',
+                    'video_url': video.src,
+                    'video_location': video.closest('[role]')?.getAttribute('role') || 'unknown'
+                });
+            });
+        });
+
+        // Track social media icon clicks
+        document.querySelectorAll('.links a').forEach(link => {
+            link.addEventListener('click', () => {
+                gtag('event', 'social_click', {
+                    'platform': link.querySelector('img')?.alt || 'unknown',
+                    'link_url': link.href
+                });
+            });
+        });
+
+        // Add this temporary debug code to your site
+        document.querySelectorAll('video').forEach(video => {
+            video.addEventListener('play', () => {
+                console.log('Video play tracked:', video.src.split('/').pop());
+            });
+        });
+
+        document.querySelectorAll('.links a').forEach(link => {
+            link.addEventListener('click', () => {
+                console.log('Social click tracked:', link.querySelector('img')?.alt);
+            });
+        });
+    </script>
   </body>
 </html>
