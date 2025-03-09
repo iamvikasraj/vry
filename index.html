@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Vikas Raj Yadav - Principal Product Designer | Interaction & Motion Specialist</title>
+    <title>Vikas Raj Yadav - Design Director from New Delhi, India</title>
     
     <meta name="description" content="Principal Product Designer specializing in interaction design, motion systems, and prototyping with SwiftUI & Three.js. Previously at ETMoney, HDFC, Paytm." />
     <meta name="keywords" content="Product Design, Interaction Design, Motion Design, SwiftUI, Three.js, UI Animation, Rive, ETMoney, Principal Designer" />
@@ -11,21 +11,24 @@
     <!-- Open Graph -->
     <meta property="og:title" content="Vikas Raj Yadav - Principal Product Designer" />
     <meta property="og:description" content="Interaction & motion specialist crafting delightful digital experiences with SwiftUI & Three.js" />
-    <meta property="og:image" content="./assets/Profile.jpg" />
-    <meta property="og:url" content="https://vikasrajyadav.com" />
+    <meta property="og:image" content="https://vry.works/assets/Preview.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://vry.works" />
     <meta property="og:type" content="website" />
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:creator" content="@Vraj247" />
-    <meta name="twitter:title" content="Vikas Raj Yadav - Principal Product Designer" />
+    <meta name="twitter:title" content="Vikas Raj Yadav - Design Director from New Delhi, India" />
     <meta name="twitter:description" content="Interaction & motion specialist crafting delightful digital experiences" />
-    <meta name="twitter:image" content="./assets/Profile.jpg" />
+    <meta name="twitter:image" content="https://vry.works/assets/preview.jpg" />
+    <meta name="twitter:image:alt" content="Vikas Raj Yadav's Portfolio Preview" />
     
     <!-- Additional SEO -->
     <meta name="author" content="Vikas Raj Yadav" />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://vikasrajyadav.com" />
+    <link rel="canonical" href="https://vry.works" />
     <link rel="stylesheet" href="https://use.typekit.net/wjs0dtk.css">
 
     <script>
@@ -66,6 +69,7 @@
         --background-color: #fff;
         --color: #111;
         --border: rgba(0, 0, 0, 0.1);
+        --border-light: rgba(255, 255, 255, 0.05);
         --padding: min(6vw, 48px);
         --type-size: max(0.75vw, 16px);
     }
@@ -79,6 +83,7 @@
             --background-color: #000;
             --color: #eee;
             --border: rgba(255, 255, 255, 0.15);
+            --border-light: rgba(255, 255, 255, 0.05);
         }
     }
 
@@ -128,7 +133,6 @@
         padding-right: 0;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
         position: sticky;
         top: 0;
         width: 25%;
@@ -139,7 +143,9 @@
     .header h1 {
         font-family: aktiv-grotesk, system-ui, -apple-system, sans-serif;
         font-weight: 700;
-        font-size: 20px;
+        font-size: 28px;
+        line-height: 1.2;
+        margin: 0;
     }
 
     .header p {
@@ -151,11 +157,10 @@
         color: inherit;
         text-decoration: none;
         width: fit-content;
-        border-bottom: 1px solid var(--border);
     }
 
     .header a:hover {
-        border-bottom: 1px solid;
+        border-bottom: none;
     }
 
     .projects {
@@ -217,7 +222,7 @@
         content: "";
         position: absolute;
         inset: 0;
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border-light);
         pointer-events: none;
         z-index: 1;
         border-radius: inherit;
@@ -251,6 +256,7 @@
         padding: 12px;
         background: transparent;
         text-align: left;
+        visibility: visible;
     }
 
     .video-caption h3 {
@@ -445,45 +451,98 @@
         font-weight: 500;
         color: gray;
         text-transform: uppercase;
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
         letter-spacing: 0.05em;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+    }
+
+    .section-header .toggle-icon {
+        width: 16px;
+        height: 16px;
+        transition: transform 0.3s ease;
+    }
+
+    .work.expanded .toggle-icon {
+        transform: rotate(180deg);
+    }
+
+    .work {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        visibility: hidden;
+    }
+
+    .work-items {
+        position: relative;
+        transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .work-items-inner {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
     }
 
     .section-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.75rem 0;
-      gap: 16px;
-    }
-
-    .section-item-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex: 1;
+        background: transparent;
+        border: none;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+        position: relative;
+        text-decoration: none;
+        display: block;
     }
 
     .company-logo {
-      width: 24px;
-      height: 24px;
-      border-radius: 4px;
-      object-fit: cover;
-      background: rgba(255, 255, 255, 0.1);
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        object-fit: cover;
+        background: rgba(255, 255, 255, 0.1);
+        transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        opacity: 0.7;
+        filter: grayscale(0.2);
     }
 
-    .section-item-left-link {
-        font-family: aktiv-grotesk, system-ui, -apple-system, sans-serif;
-        color: var(--color);
-        text-decoration: none;
-        font-weight: 500;
+    .section-item:hover .company-logo {
+        transform: translateY(-4px);
+        opacity: 1;
+        filter: grayscale(0);
     }
 
-    .section-item-right {
-        font-family: aktiv-grotesk, system-ui, -apple-system, sans-serif;
-        color: gray;
-        font-size: 0.875em;
-        font-weight: 400;
+    .section-item-left {
+        display: contents;
+    }
+
+    .section-item-left-link, .section-item-right {
+        display: none;
+    }
+
+    .section-header {
+        margin-bottom: 1rem;
+    }
+
+    .section-header .toggle-icon {
+        display: none;
+    }
+
+    .work.expanded .section-item {
+        transform: translateY(0) !important;
+        margin-top: 0.5rem !important;
+        opacity: 1 !important;
+    }
+
+    .section-item:hover {
+        transform: translateY(-4px) !important;
+        border-color: var(--border);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        z-index: 5;
+        opacity: 1;
     }
 
     .tags, .tag {
@@ -491,7 +550,48 @@
     }
 
     .identity {
-        margin-bottom: 2rem;
+        height: calc(100vh - 2 * var(--padding));
+        display: flex;
+        flex-direction: column;
+    }
+
+    .intro {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .content {
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .heading {
+        font-family: aktiv-grotesk, system-ui, -apple-system, sans-serif;
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 1.2;
+        margin: 0;
+    }
+
+    .role {
+        font-size: 16px;
+        color: var(--color);
+        opacity: 0.9;
+        margin: 0;
+    }
+
+    .subtitle {
+        font-size: 14px;
+        color: gray;
+        margin: 0;
+    }
+
+    .bio {
+        margin-top: 0.25rem;
+        color: rgb(122, 122, 122);
     }
 
     .greeting {
@@ -561,119 +661,96 @@
     .loading-screen.hidden .loading-greeting {
         opacity: 0;
     }
+
+    /* Add specific styles for bio links only */
+    .bio a {
+        border-bottom: 1px solid var(--border);
+    }
+
+    .bio a:hover {
+        border-bottom: 1px solid;
+    }
+
+    /* Remove border from work and social links */
+    .work a, .links a {
+        border-bottom: none !important;
+    }
+
+    .work a:hover, .links a:hover {
+        border-bottom: none !important;
+    }
 </style>
   </head>
   <body>
-    <div class="loading-screen">
-      <span class="loading-greeting">Hello Internet</span>
-    </div>
-
     <div class="container">
-      
       <div class="header">
         <div class="identity">
-          <h1 class="heading">Vikas Raj Yadav</h1>
-          <p>
-            Design Director @Beem <br />
-            Dreamer ∘ Designer ∘ Engineer
-          </p>
-          
-          <p>
-            I'm passionate about interaction design, motion systems, and prototyping with SwiftUI & Three.js. With experience leading design at fintech companies, I focus on creating delightful digital experiences that merge creativity with business impact.
-          </p>
+          <!-- Intro content -->
+          <div class="intro">
+            <h1 class="heading">Vikas Raj Yadav</h1>
+            <p class="role">Design Director @Beem</p>
+            <p class="bio">I love crafting delightful digital experiences through interaction design, motion systems, and prototyping with SwiftUI & Three.js. Having led design at fintech companies, I blend creativity with business impact to create products people love.</p>
+          </div>
 
-         <section class="section section-work">
-           <h2 class="section-header">Work</h2>
-           
-             <li class="section-item">
-               <div class="section-item-left">
-                 <img src="https://media.licdn.com/dms/image/v2/D560BAQGLWDA76nuPeQ/company-logo_200_200/company-logo_200_200/0/1729984506574/trybeemapp_logo?e=2147483647&v=beta&t=H8mA4DR_yTlPe2-i6_z4Qxuww6p1tnV29XhqMNaT9QI" alt="Beem" class="company-logo" />
-                 <a class="section-item-left-link" href="https://www.beem.io/" target="_blank">Beem</a>
-               </div>
-               <span class="section-item-right">Design Director</span>
-             </li>
+          <!-- Work and Social combined -->
+          <div class="content">
+            <section class="work">
+              <h2 class="section-header">
+                Work
+                <svg class="toggle-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </h2>
+              <div class="work-items">
+                <div class="work-items-inner">
+                  <a href="https://www.linkedin.com/company/trybeemapp/posts/?feedView=all" 
+                     target="_blank" 
+                     class="section-item">
+                    <div class="section-item-left">
+                      <img src="https://media.licdn.com/dms/image/v2/D560BAQGLWDA76nuPeQ/company-logo_200_200/company-logo_200_200/0/1729984506574/trybeemapp_logo?e=2147483647&v=beta&t=H8mA4DR_yTlPe2-i6_z4Qxuww6p1tnV29XhqMNaT9QI" 
+                           alt="Beem" 
+                           class="company-logo" />
+                    </div>
+                  </a>
+                  <a href="https://www.linkedin.com/company/etmoney/" 
+                     target="_blank" 
+                     class="section-item">
+                    <div class="section-item-left">
+                      <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEA9JuQJuUGjg/company-logo_100_100/company-logo_100_100/0/1667555085204/et_money_logo?e=1749686400&v=beta&t=3iWaTduCbYcIjucNCcjxVph_3UYxLEPJDDrulk7h7Aw" 
+                           alt="ETMoney" 
+                           class="company-logo" />
+                    </div>
+                  </a>
+                  <a href="https://www.linkedin.com/company/hdfc-bank/" 
+                     target="_blank" 
+                     class="section-item">
+                    <div class="section-item-left">
+                      <img src="https://media.licdn.com/dms/image/v2/C510BAQEDdokJytotRA/company-logo_100_100/company-logo_100_100/0/1630606521766/timesbridge_logo?e=1749686400&v=beta&t=BD9VWndCPCdC3SEk-OuWMwrliaBvmvZI591z_tl1Rr8" 
+                           alt="HDFC Bank" 
+                           class="company-logo" />
+                    </div>
+                  </a>
+                  <a href="https://www.linkedin.com/company/paytm/" 
+                     target="_blank" 
+                     class="section-item">
+                    <div class="section-item-left">
+                      <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHjRyMZ-FVJhg/company-logo_100_100/company-logo_100_100/0/1692711640651/paytm_logo?e=1749686400&v=beta&t=W0FRzVLPNq8aiCFEW-xJfEtHF_yw8LkDADrUztMeo3E" 
+                           alt="Paytm" 
+                           class="company-logo" />
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </section>
 
-             <li class="section-item">
-               <div class="section-item-left">
-                 <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEA9JuQJuUGjg/company-logo_100_100/company-logo_100_100/0/1667555085204/et_money_logo?e=1749686400&v=beta&t=3iWaTduCbYcIjucNCcjxVph_3UYxLEPJDDrulk7h7Aw" alt="ETMoney" class="company-logo" />
-                 <a class="section-item-left-link" href="https://www.etmoney.com/" target="_blank">ETMoney</a>
-               </div>
-               <span class="section-item-right">Principal Designer</span>
-             </li>
-
-             <li class="section-item">
-               <div class="section-item-left">
-                 <img src="https://media.licdn.com/dms/image/v2/C510BAQEDdokJytotRA/company-logo_100_100/company-logo_100_100/0/1630606521766/timesbridge_logo?e=1749686400&v=beta&t=BD9VWndCPCdC3SEk-OuWMwrliaBvmvZI591z_tl1Rr8" alt="HDFC Bank" class="company-logo" />
-                 <a class="section-item-left-link" href="https://www.hdfcbank.com/" target="_blank">HDFC Bank</a>
-               </div>
-               <span class="section-item-right">Lead Designer</span>
-             </li>
-
-             <li class="section-item">
-               <div class="section-item-left">
-                 <img src="./assets/companies/paytm.png" alt="Paytm" class="company-logo" />
-                 <a class="section-item-left-link" href="https://www.paytm.com/" target="_blank">Paytm</a>
-               </div>
-               <span class="section-item-right">Senior Designer</span>
-             </li>
-        </section>
-
-       <!-- <section class="section section-work">
-        <h2 class="section-header">Certifications</h2>
-        
-          <li class="section-item">
-            <a class="section-item-left section-item-left-link" href="https://www.linkedin.com/learning/certificates/e093c49044ac410c580207dcb1479af5bcd6d24b720493f19b3b26a1fed7a91a?trk=share_certificate&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3BPkthfnQgRxWLxv2IgEDG4g%3D%3D" target="_blank">Swift 5 Essential Training</a>
-            <span class="section-item-right">Nov, 2024</span>
-          </li>
-
-          <li class="section-item">
-            <a class="section-item-left section-item-left-link" href="https://www.linkedin.com/learning/certificates/5c84ec5d1a40a250b4f23a25d25b4f631d0da1d6c936127a6244b16853b4f420?trk=share_certificate&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3BPkthfnQgRxWLxv2IgEDG4g%3D%3D" target="_blank">SwiftUI Essentials Training</a>
-            <span class="section-item-right">Aug, 2024</span>
-          </li>
-
-          <li class="section-item">
-            <a class="section-item-left section-item-left-link" href="https://threejs-journey.com/certificate/view/1737" target="_blank">Three js</a>
-            <span class="section-item-right">Jan, 2024</span>
-          </li>
-
-          <li class="section-item">
-            <a class="section-item-left section-item-left-link" href="https://www.awwwards.com/academy/certification/course/vraj247/advanced-motion-techniques-mixing-2d-3d" target="_blank">Mixing 2D & 3D</a>
-            <span class="section-item-right">Oct, 2023</span>
-          </li>
-
-          <li class="section-item">
-            <a class="section-item-left section-item-left-link" href="https://designcode.io/react-for-designers" target="_blank">React for Designer</a>
-            <span class="section-item-right">Dec, 2019</span>
-          </li>
-
-          <li class="section-item">
-           <a class="section-item-left section-item-left-link" href="https://www.udacity.com/enrollment/ud849" target="_blank">UX Design for Mobile Developers</a>
-           <span class="section-item-right">Jun, 2015</span>
-         </li>
-           
-            
-            
-       </section> -->
-
-       <!-- <section class="section section-work">
-        <h2 class="section-header">Education</h2>
-        
-          <li class="section-item">
-            <a class="section-item-left section-item-left-link" href="https://www.etmoney.com/" target="_blank">Computer Science</a>
-            <span class="section-item-right">2011-15</span>
-          </li>
-        </section> -->
-       
-
-        <div class="links" style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; max-width: 100px;">
-          <a href="https://twitter.com/Vraj247" target="_blank"><img src="./assets/twitter.svg" alt="Twitter" width="16" height="16" /></a>
-          <a href="https://github.com/vraj247" target="_blank"><img src="./assets/github.svg" alt="GitHub" width="16" height="16" /></a>
-          <a href="https://linkedin.com/in/vraj247" target="_blank"><img src="./assets/linkedin.svg" alt="LinkedIn" width="16" height="16" /></a>
-          <a href="https://dribbble.com/Vraj247" target="_blank"><img src="./assets/dribbble.svg" alt="Dribbble" width="16" height="16" /></a>
+            <div class="links" style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; max-width: 100px;">
+              <a href="https://twitter.com/Vraj247" target="_blank"><img src="./assets/twitter.svg" alt="Twitter" width="16" height="16" /></a>
+              <a href="https://github.com/vraj247" target="_blank"><img src="./assets/github.svg" alt="GitHub" width="16" height="16" /></a>
+              <a href="https://linkedin.com/in/vraj247" target="_blank"><img src="./assets/linkedin.svg" alt="LinkedIn" width="16" height="16" /></a>
+              <a href="https://dribbble.com/Vraj247" target="_blank"><img src="./assets/dribbble.svg" alt="Dribbble" width="16" height="16" /></a>
+            </div>
+          </div>
         </div>
-          
-       </div>
-
       </div>
 
       <div class="projects">
@@ -869,6 +946,16 @@
 
         // Fallback in case videos take too long
         setTimeout(hideLoadingScreen, 5000);
+    </script>
+
+    <script>
+        // Toggle expand/collapse for work section
+        const workSection = document.querySelector('.work');
+        const sectionHeader = document.querySelector('.section-header');
+        
+        sectionHeader.addEventListener('click', () => {
+            workSection.classList.toggle('expanded');
+        });
     </script>
   </body>
 </html>
