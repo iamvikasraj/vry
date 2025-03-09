@@ -72,6 +72,12 @@
         --border-light: rgba(255, 255, 255, 0.05);
         --padding: min(6vw, 48px);
         --type-size: max(0.75vw, 16px);
+        
+        /* Animation timing variables */
+        --timing-short: 0.2s;
+        --timing-base: 0.3s;
+        --timing-long: 0.5s;
+        --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
     }
 
     html {
@@ -99,7 +105,7 @@
         padding: 0;
         box-sizing: border-box;
         min-height: 100vh;
-        overflow: hidden;
+        overflow: auto !important;
     }
 
     p{
@@ -208,24 +214,63 @@
         display: block;
         border-radius: 8px;
         overflow: hidden;
-        transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-        transform: scale(1);
         will-change: transform;
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        transition: transform 0.3s ease-out;
+        opacity: 1;
+        transform: none;
     }
 
-    .media:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    .media video {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        opacity: 0.8;
+        transition: all var(--timing-base) var(--ease);
+        transform: scale(1);
     }
 
-    .media::after {
-        content: "";
+    .video-caption {
         position: absolute;
-        inset: 0;
-        border: 1px solid var(--border-light);
-        pointer-events: none;
+        bottom: 20px;
+        left: 16px;
+        right: 16px;
+        color: white;
+        z-index: 2;
+        padding: 12px;
+        background: transparent;
+        text-align: left;
+        transform: translateY(0);
+        transition: opacity 0.3s ease-out;
+    }
+
+    .video-caption h3,
+    .video-caption p {
+        margin: 0;
+        position: relative;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.3s ease-out;
+    }
+
+    .video-caption h3 {
+        font-size: 0.875em;
+        font-weight: 500;
+        margin-bottom: 4px;
+        z-index: 2;
+    }
+
+    .video-caption p {
+        font-size: 0.75em;
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: 0.02em;
+        color: rgba(255, 255, 255, 0.7);
         z-index: 1;
-        border-radius: inherit;
     }
 
     .media::before {
@@ -243,76 +288,27 @@
         );
         z-index: 1;
         pointer-events: none;
-        opacity: 1;
-    }
-
-    .video-caption {
-        position: absolute;
-        bottom: 20px;
-        left: 16px;
-        right: 16px;
-        color: white;
-        z-index: 2;
-        padding: 12px;
-        background: transparent;
-        text-align: left;
-        visibility: visible;
-    }
-
-    .video-caption h3 {
-        font-family: aktiv-grotesk, system-ui, -apple-system, sans-serif;
-        margin: 0 0 4px 0;
-        font-size: 0.875em;
-        font-weight: 500;
-        text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-        transform: translateY(24px);
-        transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-        position: relative;
-        z-index: 2;
-        opacity: 0.5;
-    }
-
-    .video-caption p {
-        font-family: aktiv-grotesk, system-ui, -apple-system, sans-serif;
-        margin: 0;
-        font-size: 0.75em;
-        font-weight: 400;
-        line-height: 1.2;
-        letter-spacing: 0.02em;
-        color: rgba(255, 255, 255, 0.7);
-        text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         opacity: 0;
-        transform: translateY(24px);
-        transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-        text-align: left;
-        position: relative;
-        z-index: 1;
+        transition: opacity var(--timing-base) var(--ease);
     }
 
-    .media:hover .video-caption h3 {
-        transform: translateY(0);
-        opacity: 1;
-    }
-
-    .media:hover .video-caption p {
-        transform: translateY(0);
-        opacity: 0.95;
-        transition-delay: 0.05s;
-    }
-
-    .media video {
-        width: 100%;
-        height: 100%;
-        display: block;
-        object-fit: cover;
-        opacity: 0.8;
-        transform: scale(1);
-        transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    .media:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
     }
 
     .media:hover video {
-        opacity: 1;
         transform: scale(1.05);
+        opacity: 1;
+    }
+
+    .media:hover::before {
+        opacity: 1;
+    }
+
+    .media:hover .video-caption h3,
+    .media:hover .video-caption p {
+        opacity: 1;
     }
 
     .media video.loaded {
@@ -446,103 +442,35 @@
     }
 
     .section-header {
-        font-family: aktiv-grotesk, system-ui, -apple-system, sans-serif;
-        font-size: 14px;
-        font-weight: 500;
-        color: gray;
-        text-transform: uppercase;
-        margin-bottom: 1.5rem;
-        letter-spacing: 0.05em;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        cursor: pointer;
-    }
-
-    .section-header .toggle-icon {
-        width: 16px;
-        height: 16px;
-        transition: transform 0.3s ease;
-    }
-
-    .work.expanded .toggle-icon {
-        transform: rotate(180deg);
+        display: none;
     }
 
     .work {
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        visibility: hidden;
+        display: none;
     }
 
     .work-items {
-        position: relative;
-        transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        display: none;
     }
 
     .work-items-inner {
-        display: flex;
-        gap: 0.75rem;
-        align-items: center;
+        display: none;
     }
 
     .section-item {
-        background: transparent;
-        border: none;
-        padding: 0;
-        margin: 0;
-        cursor: pointer;
-        position: relative;
-        text-decoration: none;
-        display: block;
+        display: none;
     }
 
     .company-logo {
-        width: 28px;
-        height: 28px;
-        border-radius: 6px;
-        object-fit: cover;
-        background: rgba(255, 255, 255, 0.1);
-        transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-        opacity: 0.7;
-        filter: grayscale(0.2);
-    }
-
-    .section-item:hover .company-logo {
-        transform: translateY(-4px);
-        opacity: 1;
-        filter: grayscale(0);
+        display: none;
     }
 
     .section-item-left {
-        display: contents;
-    }
-
-    .section-item-left-link, .section-item-right {
         display: none;
-    }
-
-    .section-header {
-        margin-bottom: 1rem;
-    }
-
-    .section-header .toggle-icon {
-        display: none;
-    }
-
-    .work.expanded .section-item {
-        transform: translateY(0) !important;
-        margin-top: 0.5rem !important;
-        opacity: 1 !important;
     }
 
     .section-item:hover {
-        transform: translateY(-4px) !important;
-        border-color: var(--border);
-        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-        z-index: 5;
-        opacity: 1;
+        display: none;
     }
 
     .tags, .tag {
@@ -550,7 +478,7 @@
     }
 
     .identity {
-        height: calc(100vh - 2 * var(--padding));
+        min-height: 100%;
         display: flex;
         flex-direction: column;
     }
@@ -562,7 +490,6 @@
     }
 
     .content {
-        margin-top: auto;
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
@@ -605,61 +532,10 @@
         font-family: aktiv-grotesk, system-ui, -apple-system, sans-serif;
     }
 
-    .loading-screen {
-        position: fixed;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000;
-        pointer-events: none;
-    }
-
+    .loading-screen,
     .loading-screen::before,
     .loading-screen::after {
-        content: '';
-        position: fixed;
-        width: 100%;
-        height: 50%;
-        background: var(--background-color);
-        transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 1000;
-    }
-
-    .loading-screen::before {
-        top: 0;
-        transform-origin: center bottom;
-    }
-
-    .loading-screen::after {
-        bottom: 0;
-        transform-origin: center top;
-    }
-
-    .loading-screen.hidden::before {
-        transform: translateY(-100%);
-    }
-
-    .loading-screen.hidden::after {
-        transform: translateY(100%);
-    }
-
-    .loading-greeting {
-        position: fixed;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 24px;
-        font-weight: 700;
-        color: var(--color);
-        font-family: aktiv-grotesk, system-ui, -apple-system, sans-serif;
-        opacity: 0.9;
-        z-index: 1001;
-        transition: opacity 0.4s ease;
-    }
-
-    .loading-screen.hidden .loading-greeting {
-        opacity: 0;
+        display: none;
     }
 
     /* Add specific styles for bio links only */
@@ -679,6 +555,62 @@
     .work a:hover, .links a:hover {
         border-bottom: none !important;
     }
+
+    /* Remove all animation delays */
+    .intro > *:nth-child(1),
+    .intro > *:nth-child(2),
+    .intro > *:nth-child(3) {
+        animation-delay: 0s;
+    }
+
+    .media {
+        opacity: 1;
+        transform: none;
+        transition: transform 0.3s ease-out;
+    }
+
+    .media:hover {
+        transform: translateY(-8px);
+    }
+
+    .video-caption h3,
+    .video-caption p {
+        opacity: 0;
+        transition: opacity 0.3s ease-out;
+    }
+
+    .media:hover .video-caption h3,
+    .media:hover .video-caption p {
+        opacity: 1;
+    }
+
+    /* Add these styles */
+    .video-tag {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        padding: 6px 10px;
+        border-radius: 6px;
+        color: white;
+        font-size: 0.75em;
+        font-weight: 500;
+        z-index: 3;
+        opacity: 1;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .media:hover .video-tag {
+        opacity: 1;
+    }
+
+    /* Update media hover styles */
+    .media:hover video {
+        transform: scale(1.05);
+        opacity: 1;
+    }
 </style>
   </head>
   <body>
@@ -694,55 +626,6 @@
 
           <!-- Work and Social combined -->
           <div class="content">
-            <section class="work">
-              <h2 class="section-header">
-                Work
-                <svg class="toggle-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </h2>
-              <div class="work-items">
-                <div class="work-items-inner">
-                  <a href="https://www.linkedin.com/company/trybeemapp/posts/?feedView=all" 
-                     target="_blank" 
-                     class="section-item">
-                    <div class="section-item-left">
-                      <img src="https://media.licdn.com/dms/image/v2/D560BAQGLWDA76nuPeQ/company-logo_200_200/company-logo_200_200/0/1729984506574/trybeemapp_logo?e=2147483647&v=beta&t=H8mA4DR_yTlPe2-i6_z4Qxuww6p1tnV29XhqMNaT9QI" 
-                           alt="Beem" 
-                           class="company-logo" />
-                    </div>
-                  </a>
-                  <a href="https://www.linkedin.com/company/etmoney/" 
-                     target="_blank" 
-                     class="section-item">
-                    <div class="section-item-left">
-                      <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEA9JuQJuUGjg/company-logo_100_100/company-logo_100_100/0/1667555085204/et_money_logo?e=1749686400&v=beta&t=3iWaTduCbYcIjucNCcjxVph_3UYxLEPJDDrulk7h7Aw" 
-                           alt="ETMoney" 
-                           class="company-logo" />
-                    </div>
-                  </a>
-                  <a href="https://www.linkedin.com/company/hdfc-bank/" 
-                     target="_blank" 
-                     class="section-item">
-                    <div class="section-item-left">
-                      <img src="https://media.licdn.com/dms/image/v2/C510BAQEDdokJytotRA/company-logo_100_100/company-logo_100_100/0/1630606521766/timesbridge_logo?e=1749686400&v=beta&t=BD9VWndCPCdC3SEk-OuWMwrliaBvmvZI591z_tl1Rr8" 
-                           alt="HDFC Bank" 
-                           class="company-logo" />
-                    </div>
-                  </a>
-                  <a href="https://www.linkedin.com/company/paytm/" 
-                     target="_blank" 
-                     class="section-item">
-                    <div class="section-item-left">
-                      <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHjRyMZ-FVJhg/company-logo_100_100/company-logo_100_100/0/1692711640651/paytm_logo?e=1749686400&v=beta&t=W0FRzVLPNq8aiCFEW-xJfEtHF_yw8LkDADrUztMeo3E" 
-                           alt="Paytm" 
-                           class="company-logo" />
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </section>
-
             <div class="links" style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; max-width: 100px;">
               <a href="https://twitter.com/Vraj247" target="_blank"><img src="./assets/twitter.svg" alt="Twitter" width="16" height="16" /></a>
               <a href="https://github.com/vraj247" target="_blank"><img src="./assets/github.svg" alt="GitHub" width="16" height="16" /></a>
@@ -761,7 +644,8 @@
               target="_blank"
               class="media"
               style="aspect-ratio: 1.77778 / 1">
-              <video src="./assets/video/et_onboarding.mp4" autoplay muted loop playsinline></video>
+              <div class="video-tag">Project</div>
+              <video src="./assets/video/1.mp4" autoplay muted loop playsinline></video>
               <div class="video-caption">
                 <h3>ET Money Onboarding Experience</h3>
                 <p>SwiftUI • Animations • User Onboarding</p>
@@ -777,7 +661,8 @@
               target="_blank"
               class="media"
               style="aspect-ratio: 1.77778 / 1">
-              <video src="./assets/video/Perplexity.mp4" autoplay muted loop playsinline></video>
+              <div class="video-tag">Project</div>
+              <video src="./assets/video/3.mp4" autoplay muted loop playsinline></video>
               <div class="video-caption">
                 <h3>Perplexity AI Search Experience</h3>
                 <p>AI • Search • Motion Design</p>
@@ -790,7 +675,8 @@
               target="_blank"
               class="media"
               style="aspect-ratio: 1.77778 / 1">
-              <video src="./assets/video/cred_garage.mp4" autoplay muted loop playsinline></video>
+              <div class="video-tag">Project</div>
+              <video src="./assets/video/2.mp4" autoplay muted loop playsinline></video>
               <div class="video-caption">
                 <h3>CRED Car Customization</h3>
                 <p>3D • Interactive • Product Design</p>
@@ -806,7 +692,8 @@
               target="_blank"
               class="media"
               style="aspect-ratio: 1.77778 / 1">
-              <video src="./assets/video/insider_app.mp4" autoplay muted loop playsinline></video>
+              <div class="video-tag">Concept</div>
+              <video src="./assets/video/zomato_weather.mp4" autoplay muted loop playsinline></video>
               <div class="video-caption">
                 <h3>CRED Insider App</h3>
                 <p>Mobile • Micro-interactions • UI Animation</p>
@@ -822,7 +709,8 @@
               target="_blank"
               class="media"
               style="aspect-ratio: 1.77778 / 1">
-              <video src="./assets/video/Rive_ipad.mp4" autoplay muted loop playsinline></video>
+              <div class="video-tag">Tutorial</div>
+              <video src="./assets/video/5.mp4" autoplay muted loop playsinline></video>
               <div class="video-caption">
                 <h3>iPad Animation with Rive</h3>
                 <p>Rive • iPad • State Machine</p>
@@ -835,7 +723,8 @@
               target="_blank"
               class="media"
               style="aspect-ratio: 1.77778 / 1">
-              <video src="./assets/video/rive_sound.mp4" autoplay muted loop playsinline></video>
+              <div class="video-tag">Interactive</div>
+              <video src="./assets/video/6.mp4" autoplay muted loop playsinline></video>
               <div class="video-caption">
                 <h3>Rive Button with Clock Sound</h3>
                 <p>Rive • Sound • Interactive</p>
@@ -843,12 +732,110 @@
             </a>
           </div>
         </div>
+
+        <!-- Fifth row: 2 projects -->
+        <div class="project-grid" role="list" aria-label="Project Grid">
+          <div role="listitem">
+            <a href="#"
+              target="_blank"
+              class="media"
+              style="aspect-ratio: 1.77778 / 1">
+              <div class="video-tag">Showcase</div>
+              <video src="./assets/video/7.mp4" autoplay muted loop playsinline></video>
+              <div class="video-caption">
+                <h3>HDFC Bank Onboarding</h3>
+                <p>Banking • UX • Motion Design</p>
+              </div>
+            </a>
+          </div>
+
+          <div role="listitem">
+            <a href="#"
+              target="_blank"
+              class="media"
+              style="aspect-ratio: 1.77778 / 1">
+              <div class="video-tag">Showcase</div>
+              <video src="./assets/video/9.mp4" autoplay muted loop playsinline></video>
+              <div class="video-caption">
+                <h3>Paytm Wallet Experience</h3>
+                <p>Fintech • Payments • UX Design</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="project-single" role="region" aria-label="Featured Project">
+            <div>
+                <a href="#"
+                target="_blank"
+                class="media"
+                style="aspect-ratio: 1.77778 / 1">
+                <div class="video-tag">Tutorial</div>
+                <video src="./assets/video/perplexity_play.mp4" autoplay muted loop playsinline></video>
+                <div class="video-caption">
+                    <h3>Beem Design System</h3>
+                    <p>Design System • Components • Documentation</p>
+                </div>     
+            </a>
+        </div>
+
+        <!-- Sixth row: 2 projects -->
+        <div class="project-grid" role="list" aria-label="Project Grid">
+          <div role="listitem">
+            <a href="#"
+              target="_blank"
+              class="media"
+              style="aspect-ratio: 1.77778 / 1">
+              <div class="video-tag">Tutorial</div>
+              <video src="./assets/video/8.mp4" autoplay muted loop playsinline></video>
+              <div class="video-caption">
+                <h3>Beem Design System</h3>
+                <p>Design System • Components • Documentation</p>
+              </div>
+            </a>
+          </div>
+
+          <div role="listitem">
+            <a href="#"
+              target="_blank"
+              class="media"
+              style="aspect-ratio: 1.77778 / 1">
+              <div class="video-tag">Tutorial</div>
+              <video src="./assets/video/10.mp4" autoplay muted loop playsinline></video>
+              <div class="video-caption">
+                <h3>Portfolio Interactions</h3>
+                <p>Web • Animation • Interactive</p>
+              </div>
+            </a>
+          </div>
+
+          
+        </div>
+
+        <div class="project-single" role="region" aria-label="Featured Project">
+            <div>
+              <a href="https://www.linkedin.com/posts/vraj247_rive-code-html-activity-7292849184557121536-A8h0?utm_source=share&utm_medium=member_desktop&rcm=ACoAAA-be60BVAFm7HRMbKKG-IaPcMhIpG9zenk"
+                target="_blank"
+                class="media"
+                style="aspect-ratio: 1.77778 / 1">
+                <div class="video-tag">Rive</div>
+                <video src="./assets/video/clock.mp4" autoplay muted loop playsinline></video>
+                <div class="video-caption">
+                  <h3>Zomato Weather Integration</h3>
+                  <p>UX Research • Product Strategy • Weather API</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+        <!-- Final single project -->
+      
       </div>
 
     </div>
 
     <script>
-        // Track all link clicks
+        // Only keep analytics
         document.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 gtag('event', 'link_click', {
@@ -860,43 +847,6 @@
             });
         });
 
-        // Track video interactions
-        document.querySelectorAll('video').forEach(video => {
-            // Track play events
-            video.addEventListener('play', () => {
-                gtag('event', 'video_play', {
-                    'video_title': video.parentElement.querySelector('h3')?.innerText || 'Untitled',
-                    'video_url': video.src,
-                    'video_location': video.closest('[role]')?.getAttribute('role') || 'unknown'
-                });
-            });
-
-            // Track pause events
-            video.addEventListener('pause', () => {
-                gtag('event', 'video_pause', {
-                    'video_title': video.parentElement.querySelector('h3')?.innerText || 'Untitled',
-                    'video_url': video.src,
-                    'video_location': video.closest('[role]')?.getAttribute('role') || 'unknown',
-                    'current_time': video.currentTime
-                });
-            });
-
-            // Track ended events
-            video.addEventListener('ended', () => {
-                gtag('event', 'video_ended', {
-                    'video_title': video.parentElement.querySelector('h3')?.innerText || 'Untitled',
-                    'video_url': video.src,
-                    'video_location': video.closest('[role]')?.getAttribute('role') || 'unknown'
-                });
-            });
-
-            // Track loaded data
-            video.addEventListener('loadeddata', () => {
-                video.classList.add('loaded');
-            });
-        });
-
-        // Track social media icon clicks
         document.querySelectorAll('.links a').forEach(link => {
             link.addEventListener('click', () => {
                 gtag('event', 'social_click', {
@@ -904,57 +854,6 @@
                     'link_url': link.href
                 });
             });
-        });
-
-        // Add this temporary debug code to your site
-        document.querySelectorAll('video').forEach(video => {
-            video.addEventListener('play', () => {
-                console.log('Video play tracked:', video.src.split('/').pop());
-            });
-        });
-
-        document.querySelectorAll('.links a').forEach(link => {
-            link.addEventListener('click', () => {
-                console.log('Social click tracked:', link.querySelector('img')?.alt);
-            });
-        });
-    </script>
-
-    <script>
-        // Handle loading screen
-        const loadingScreen = document.querySelector('.loading-screen');
-        const videos = document.querySelectorAll('video');
-        let loadedVideos = 0;
-
-        function hideLoadingScreen() {
-            loadingScreen.classList.add('hidden');
-        }
-
-        videos.forEach(video => {
-            if (video.readyState >= 3) {
-                loadedVideos++;
-            } else {
-                video.addEventListener('loadeddata', () => {
-                    loadedVideos++;
-                    if (loadedVideos === videos.length) {
-                        // Add a small delay for smoother transition
-                        setTimeout(hideLoadingScreen, 800);
-                    }
-                });
-            }
-        });
-
-        // Fallback in case videos take too long
-        setTimeout(hideLoadingScreen, 5000);
-    </script>
-
-    <script>
-        // Toggle expand/collapse for work section
-        const workSection = document.querySelector('.work');
-        const sectionHeader = document.querySelector('.section-header');
-        
-        sectionHeader.addEventListener('click', () => {
-            workSection.classList.toggle('expanded');
         });
     </script>
   </body>
