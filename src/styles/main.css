@@ -324,43 +324,12 @@ hr {
   background-color: var(--border);
 }
 
-.social-links {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-}
-
-.social-links a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border);
-  transition: all 0.3s ease;
-  border-bottom: none;
-}
-
-.social-links a:hover {
-  transform: translateY(-3px);
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.social-links svg {
-  width: 20px;
-  height: 20px;
-  fill: var(--color);
-}
-
 .status {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   padding: var(--padding) 0;
+  margin-top: 2rem;
 }
 
 .status-wrapper {
