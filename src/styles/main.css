@@ -541,7 +541,7 @@ hr {
 
 .work-experience .experience-item .experience-title {
   font-size: var(--type-size);
-  margin-bottom: 1.25rem;
+  margin-bottom: -10px;
   color: var(--secondary-color);
   font-weight: 500;
 }
