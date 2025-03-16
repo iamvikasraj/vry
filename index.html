@@ -1,545 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vikas Raj Yadav | Portfolio</title>
-    
-    <!-- Primary Meta Tags -->
-    <meta name="title" content="Vikas Raj Yadav - Design Director | UI/UX, Motion Design &amp; Interactive Experiences">
-    <meta name="description" content="Design Director specializing in interaction design, motion systems, and prototyping. Expert in SwiftUI, Three.js, and Rive animations. Previously led design at ETMoney, HDFC, Paytm.">
-
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="./assets/Profile.jpg">
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/Profile.jpg">
-    <link rel="icon" type="image/png" sizes="16x16" href="./assets/Profile.jpg">
-    <link rel="manifest" href="./assets/Profile.jpg">
-    <link rel="shortcut icon" href="./assets/Profile.jpg">
-    <meta name="theme-color" content="#000000">
-
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="/src/styles/main.css">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vikas Raj Yadav - Product Designer</title>
+  <meta name="description" content="Product Designer with 8+ years of experience, bridging the gap between design and technology to create impactful user experiences with efficiency.">
+  <link rel="stylesheet" href="https://use.typekit.net/wjs0dtk.css">
+  <link rel="stylesheet" href="./src/styles/scss/style.scss">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="identity">
-                <div class="profile-img">
-                    <img src="./assets/Profile.jpg " alt="Vikas Raj Yadav">
-                </div>
-                <div class="name-container">
-                    <h1>Vikas Raj Yadav</h1>
-                    <h2>
-                      Design Director at Beem (US) | Jack of All, Master of IxD | Paytm | HDFC | ET Money | Grappus in Gurgaon, India, They/Them</h2>
-                </div>
-                <p>Dreamer ∘ Hanging out between Design and Engineering ∘ Sharing efficient workflows around designing and developing good apps</p>
-            </div>
-        </div>
+  <div class="container">
+    <!-- Header Section -->
+    <header class="header">
+      <nav class="social-links">
+        <a href="https://twitter.com/vikasrajyadav" target="_blank" rel="noopener">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/vikasrajyadav" target="_blank" rel="noopener">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z" fill="currentColor"/>
+          </svg>
+        </a>
+        <a href="mailto:hello@vikasrajyadav.com">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" fill="currentColor"/>
+            <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" fill="currentColor"/>
+          </svg>
+        </a>
+      </nav>
+    </header>
 
-        <div class="toggle-container">
-            <div class="toggle-pill">
-                <div class="pill" id="toggle-pill-indicator"></div>
-                <button id="projects-tab" class="active">Projects</button>
-                <button id="experience-tab">Experience</button>
-                <button id="about-tab">About</button>
-            </div>
-        </div>
+    <main class="content">
+      <!-- Intro Section -->
+      <section class="intro">
+        <h1>Vikas Raj Yadav</h1>
+        <p class="role">
+            Design Director at Beem (US) | Jack of All, Master of IxD | Paytm | HDFC | ET Money | Grappus in Gurgaon, India, They/Them
+        </p>
+      </section>
 
-        <div class="content">
-            <div class="projects" id="projects-content">
-                <h2>Projects</h2>
-                <!-- Project 1 - ET Money -->
-                <div class="project">
-                    <div class="attachments">
-                        <div class="attachment">
-                            <div class="media" style="aspect-ratio: 1.77778 / 1;">
-                                <video autoplay loop muted playsinline>
-                                    <source src="./assets/video/1.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="projectInfo">
-                        <div class="project-header">
-                            <h2 class="project-title">
-                                <a href="https://etmoney.com" target="_blank" rel="noopener noreferrer">
-                                    ET Money Onboarding Experience
-                                    <span class="link-arrow">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#a1a1aa" viewBox="0 0 256 256">
-                                            <path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"></path>
-                                        </svg>
-                                    </span>
-                                </a>
-                            </h2>
-                            <span class="project-year">2024</span>
-                        </div>
-                    </div>
-                </div>
+      <div class="columns">
 
-                <!-- Project 2 - Perplexity -->
-                <div class="project">
-                    <div class="attachments">
-                        <div class="attachment">
-                            <div class="media" style="aspect-ratio: 1.77778 / 1;">
-                                <video autoplay loop muted playsinline>
-                                    <source src="./assets/video/2.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="projectInfo">
-                        <div class="project-header">
-                            <h2 class="project-title">
-                                <a href="https://perplexity.ai" target="_blank" rel="noopener noreferrer">
-                                    Perplexity AI Search Experience
-                                    <span class="link-arrow">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#a1a1aa" viewBox="0 0 256 256">
-                                            <path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"></path>
-                                        </svg>
-                                    </span>
-                                </a>
-                            </h2>
-                            <span class="project-year">2024</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 3 - HDFC Bank -->
-                <div class="project">
-                    <div class="attachments">
-                        <div class="attachment">
-                            <div class="media" style="aspect-ratio: 1.77778 / 1;">
-                                <video autoplay loop muted playsinline>
-                                    <source src="./assets/video/3.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="projectInfo">
-                        <div class="project-header">
-                            <h2 class="project-title">
-                                <a href="#" target="_blank" rel="noopener noreferrer">
-                                    HDFC Bank Mobile App Redesign
-                                    <span class="link-arrow">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#a1a1aa" viewBox="0 0 256 256">
-                                            <path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"></path>
-                                        </svg>
-                                    </span>
-                                </a>
-                            </h2>
-                            <span class="project-year">2023</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 4 - Paytm -->
-                <div class="project">
-                    <div class="attachments">
-                        <div class="attachment">
-                            <div class="media" style="aspect-ratio: 1.77778 / 1;">
-                                <video autoplay loop muted playsinline>
-                                    <source src="./assets/video/4.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="projectInfo">
-                        <div class="project-header">
-                            <h2 class="project-title">
-                                <a href="#" target="_blank" rel="noopener noreferrer">
-                                    Paytm Payment Flow
-                                    <span class="link-arrow">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#a1a1aa" viewBox="0 0 256 256">
-                                            <path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"></path>
-                                        </svg>
-                                    </span>
-                                </a>
-                            </h2>
-                            <span class="project-year">2023</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 5 - Investment Dashboard -->
-                <div class="project">
-                    <div class="attachments">
-                        <div class="attachment">
-                            <div class="media" style="aspect-ratio: 1.77778 / 1;">
-                                <video autoplay loop muted playsinline>
-                                    <source src="./assets/video/5.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="projectInfo">
-                        <div class="project-header">
-                            <h2 class="project-title">
-                                <a href="#" target="_blank" rel="noopener noreferrer">
-                                    Investment Dashboard
-                                    <span class="link-arrow">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#a1a1aa" viewBox="0 0 256 256">
-                                            <path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"></path>
-                                        </svg>
-                                    </span>
-                                </a>
-                            </h2>
-                            <span class="project-year">2023</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 6 - Analytics Platform -->
-                <div class="project">
-                    <div class="attachments">
-                        <div class="attachment">
-                            <div class="media" style="aspect-ratio: 1.77778 / 1;">
-                                <video autoplay loop muted playsinline>
-                                    <source src="./assets/video/6.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="projectInfo">
-                        <div class="project-header">
-                            <h2 class="project-title">
-                                <a href="#" target="_blank" rel="noopener noreferrer">
-                                    Analytics Platform
-                                    <span class="link-arrow">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#a1a1aa" viewBox="0 0 256 256">
-                                            <path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"></path>
-                                        </svg>
-                                    </span>
-                                </a>
-                            </h2>
-                            <span class="project-year">2023</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 7 - Mobile Banking -->
-                <div class="project">
-                    <div class="attachments">
-                        <div class="attachment">
-                            <div class="media" style="aspect-ratio: 1.77778 / 1;">
-                                <video autoplay loop muted playsinline>
-                                    <source src="./assets/video/7.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="projectInfo">
-                        <div class="project-header">
-                            <h2 class="project-title">
-                                <a href="#" target="_blank" rel="noopener noreferrer">
-                                    Mobile Banking Experience
-                                    <span class="link-arrow">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#a1a1aa" viewBox="0 0 256 256">
-                                            <path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"></path>
-                                        </svg>
-                                    </span>
-                                </a>
-                            </h2>
-                            <span class="project-year">2022</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 8 - Wealth Management -->
-                <div class="project">
-                    <div class="attachments">
-                        <div class="attachment">
-                            <div class="media" style="aspect-ratio: 1.77778 / 1;">
-                                <video autoplay loop muted playsinline>
-                                    <source src="./assets/video/8.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="projectInfo">
-                        <div class="project-header">
-                            <h2 class="project-title">
-                                <a href="#" target="_blank" rel="noopener noreferrer">
-                                    Wealth Management Platform
-                                    <span class="link-arrow">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#a1a1aa" viewBox="0 0 256 256">
-                                            <path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"></path>
-                                        </svg>
-                                    </span>
-                                </a>
-                            </h2>
-                            <span class="project-year">2022</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 9 - Trading Platform -->
-                <div class="project">
-                    <div class="attachments">
-                        <div class="attachment">
-                            <div class="media" style="aspect-ratio: 1.77778 / 1;">
-                                <video autoplay loop muted playsinline>
-                                    <source src="./assets/video/9.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="projectInfo">
-                        <div class="project-header">
-                            <h2 class="project-title">
-                                <a href="#" target="_blank" rel="noopener noreferrer">
-                                    Trading Platform UI
-                                    <span class="link-arrow">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#a1a1aa" viewBox="0 0 256 256">
-                                            <path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"></path>
-                                        </svg>
-                                    </span>
-                                </a>
-                            </h2>
-                            <span class="project-year">2022</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 10 - Portfolio Analytics -->
-                <div class="project">
-                    <div class="attachments">
-                        <div class="attachment">
-                            <div class="media" style="aspect-ratio: 1.77778 / 1;">
-                                <video autoplay loop muted playsinline>
-                                    <source src="./assets/video/10.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="projectInfo">
-                        <div class="project-header">
-                            <h2 class="project-title">
-                                <a href="#" target="_blank" rel="noopener noreferrer">
-                                    Portfolio Analytics Dashboard
-                                    <span class="link-arrow">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#a1a1aa" viewBox="0 0 256 256">
-                                            <path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"></path>
-                                        </svg>
-                                    </span>
-                                </a>
-                            </h2>
-                            <span class="project-year">2022</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="information-content" style="display: none;">
-            <div class="content">
-                <div class="information">
-                    <!-- Work Experience -->
-                    <div class="work-experience">
-                        <h2>Work Experience</h2>
-                        <ul>
-                            <li class="experience-item">
-                                <div class="experience-logo">
-                                    <img src="https://media.licdn.com/dms/image/v2/D560BAQGLWDA76nuPeQ/company-logo_200_200/company-logo_200_200/0/1729984506574/trybeemapp_logo?e=1750291200&v=beta&t=hek0kIpsx8kgZGPIe4HY5FNh-RVJI95mvnOD5wer4AA" alt="Beem logo">
-                                </div>
-                                <div class="experience-content">
-                                    <h3 class="experience-title">Design Director</h3>
-                                    <p class="experience-company">Beem</p>
-                                </div>
-                            </li>
-
-                            <li class="experience-item">
-                                <div class="experience-logo">
-                                    <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEA9JuQJuUGjg/company-logo_200_200/company-logo_200_200/0/1667555085204/et_money_logo?e=1750291200&v=beta&t=uDWXmmmh5-SiHrD61NhrR-FFK7JdvdexIkt4XfP41xc" alt="ET Money logo">
-                                </div>
-                                <div class="experience-content">
-                                    <h3 class="experience-title">Principal Product Designer</h3>
-                                    <p class="experience-company">ET Money</p>
-                                </div>
-                            </li>
-
-                            <li class="experience-item">
-                                <div class="experience-logo">
-                                    <img src="https://media.licdn.com/dms/image/v2/C510BAQGqZH7vVbVzWw/company-logo_100_100/company-logo_100_100/0/1630606529683/hdfc_bank_logo?e=1750291200&v=beta&t=lIiWqbYC0Pkzh-ZdYClZ5vIRCEvWHRTmNs6jPh4FPJU" alt="HDFC Bank logo">
-                                </div>
-                                <div class="experience-content">
-                                    <h3 class="experience-title">Product Design Manager</h3>
-                                    <p class="experience-company">HDFC Bank</p>
-                                </div>
-                            </li>
-
-                            <li class="experience-item">
-                                <div class="experience-logo">
-                                    <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHjRyMZ-FVJhg/company-logo_100_100/company-logo_100_100/0/1692711640651/paytm_logo?e=1750291200&v=beta&t=XN089h6etJludbn8-3dkQdwlBkWwcnvJhgxGxvCpDrY" alt="Paytm logo">
-                                </div>
-                                <div class="experience-content">
-                                    <h3 class="experience-title">Senior Product Designer</h3>
-                                    <p class="experience-company">Paytm</p>
-                                </div>
-                            </li>
-
-                            <li class="experience-item">
-                                <div class="experience-logo">
-                                    <img src="https://media.licdn.com/dms/image/v2/D4D0BAQGMsM4fKnjBVw/company-logo_100_100/company-logo_100_100/0/1694697778000?e=1750291200&v=beta&t=mqE52xqu54NtFBvCP-tNZ_Q07E5LKqWWwdP19ZQlgPY" alt="Grappus Studios logo">
-                                </div>
-                                <div class="experience-content">
-                                    <h3 class="experience-title">Senior Product Designer</h3>
-                                    <p class="experience-company">Grappus Studios</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Tools & Skills -->
-                    <div class="work-experience">
-                        <h2>Tools & Skills</h2>
-                        <ul>
-                            <li class="experience-item">
-                                <h3 class="experience-title">Design</h3>
-                                <div class="tools-grid">
-                                    <div class="tool-logo">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma logo">
-                                    </div>
-                                    <div class="tool-logo">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/Adobe_XD_CC_icon.svg" alt="Adobe XD logo">
-                                    </div>
-                                    <div class="tool-logo">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Adobe_Illustrator_CC_icon.svg" alt="Adobe Illustrator logo">
-                                    </div>
-                                    <div class="tool-logo">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.svg" alt="Adobe After Effects logo">
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="experience-item">
-                                <h3 class="experience-title">Prototyping</h3>
-                                <div class="tools-grid">
-                                    <div class="tool-logo">
-                                        <img src="https://cdn.sanity.io/images/599r6htc/localized/46a76c802176eb17b04e12108de7e7e0f3736dc6-1024x1024.png?w=804&h=804&q=75&fit=max&auto=format" alt="Rive logo">
-                                    </div>
-                                    <div class="tool-logo">
-                                        <img src="https://developer.android.com/static/images/brand/Android_Robot.png" alt="Create with Play logo">
-                                    </div>
-                                    <div class="tool-logo">
-                                        <img src="https://github.com/airbnb/lottie/raw/master/images/Introduction_00_sm.gif" alt="Lottie logo">
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="experience-item">
-                                <h3 class="experience-title">Development</h3>
-                                <div class="tools-grid">
-                                    <div class="tool-logo">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" alt="HTML5 logo">
-                                    </div>
-                                    <div class="tool-logo">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" alt="CSS3 logo">
-                                    </div>
-                                    <div class="tool-logo">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg" alt="JavaScript logo">
-                                    </div>
-                                    <div class="tool-logo">
-                                        <img src="https://developer.apple.com/assets/elements/icons/swiftui/swiftui-96x96_2x.png" alt="SwiftUI logo">
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="about-content" style="display: none;">
-            <div class="content">
-                <div class="information">
-                    <div class="about-section">
-                        <h2>About Me</h2>
-                        <div class="about-content">
-                            <p>As a Principal Product Designer with over 8 years of experience, I specialize in creating impactful user experiences at the intersection of design and technology.</p>
-                            <p>My approach combines strong design principles with technical knowledge, allowing me to bridge the gap between creative concepts and practical implementation.</p>
-                            <p>I'm passionate about motion design, interaction patterns, and building systems that scale. My work spans from financial applications to AI-powered interfaces, always with a focus on user-centered solutions.</p>
-                        </div>
-                        
-                        <!-- Contact -->
-                        <!-- <h2>Contact</h2>
-                        <ul>
-                            <li class="experience-item">
-                                <a href="mailto:vraj247@icloud.com">vraj247@icloud.com</a>
-                            </li>
-                            <li class="experience-item">
-                                <a href="https://twitter.com/Vraj247">Twitter</a>
-                            </li>
-                            <li class="experience-item">
-                                <a href="https://www.linkedin.com/in/vraj247/">LinkedIn</a>
-                            </li>
-                        </ul> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-image">
-            <img src="./assets/footer.jpeg" alt="Think Different - Steve Jobs" />
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const projectsTab = document.getElementById('projects-tab');
-            const experienceTab = document.getElementById('experience-tab');
-            const aboutTab = document.getElementById('about-tab');
-            const pillIndicator = document.getElementById('toggle-pill-indicator');
-            const projectsContent = document.getElementById('projects-content');
-            const informationContent = document.getElementById('information-content');
-            const aboutContent = document.getElementById('about-content');
+        <section class="thoughts column">
+            <h2 class="margin-b-4"><a href="/thoughts">Rive Experiments</a></h2>
             
-            projectsTab.addEventListener('click', function() {
-                pillIndicator.classList.remove('center', 'right');
-                projectsTab.classList.add('active');
-                experienceTab.classList.remove('active');
-                aboutTab.classList.remove('active');
-                projectsContent.parentElement.style.display = 'block';
-                informationContent.style.display = 'none';
-                aboutContent.style.display = 'none';
-            });
+            <h3><a href="https://nothingnew.vercel.app/" class="post-excerpt">Nothing New Clock</a></h3>
             
-            experienceTab.addEventListener('click', function() {
-                pillIndicator.classList.remove('right');
-                pillIndicator.classList.add('center');
-                experienceTab.classList.add('active');
-                projectsTab.classList.remove('active');
-                aboutTab.classList.remove('active');
-                projectsContent.parentElement.style.display = 'none';
-                informationContent.style.display = 'block';
-                aboutContent.style.display = 'none';
-            });
-            
-            aboutTab.addEventListener('click', function() {
-                pillIndicator.classList.remove('center');
-                pillIndicator.classList.add('right');
-                aboutTab.classList.add('active');
-                projectsTab.classList.remove('active');
-                experienceTab.classList.remove('active');
-                projectsContent.parentElement.style.display = 'none';
-                informationContent.style.display = 'none';
-                aboutContent.style.display = 'block';
-        });
-      });
-    </script>
-  </body>
+            <div class="iframe-container">
+                <iframe 
+                    class="responsive-iframe"
+                    src="https://nothingnew.vercel.app/" 
+                    title="Vintage Clock"
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen
+                ></iframe>
+            </div>
+  
+            <h3><a href="/thoughts/ux-patterns" class="post-excerpt">UX Patterns in FinTech</a></h3>
+            <p>
+              Exploring effective user experience patterns in financial technology applications
+              <time datetime="2023-11">Nov 2023</time>
+            </p>
+  
+            <h3><a href="/thoughts/mobile-first" class="post-excerpt">Mobile-First Design Philosophy</a></h3>
+            <p>
+              Why starting with mobile continues to be crucial for modern web applications
+              <time datetime="2023-09">Sep 2023</time>
+            </p>
+  
+            <h3><a href="/thoughts" class="dimmed">Browse all articles →</a></h3>
+          </section>
+        <!-- Projects Section -->
+        <section class="projects column">
+          <h2 class="margin-b-4"><a href="/projects">Projects</a></h2>
+          
+          <h3><a href="/projects/et-money">ET Money Onboarding</a></h3>
+          <p>Redesigning the onboarding experience for India's largest wealth management app</p>
+          
+          <h3><a href="/projects/paytm">Paytm Payment Flow</a></h3>
+          <p>Streamlining the payment experience for millions of users</p>
+          
+          <h3><a href="/projects/hdfc">HDFC Bank App Redesign</a></h3>
+          <p>Modernizing the mobile banking experience for one of India's largest banks</p>
+
+          <h3><a href="/projects" class="dimmed">See all projects →</a></h3>
+        </section>
+
+        <!-- Thoughts Section -->
+        <section class="thoughts column">
+          <h2 class="margin-b-4"><a href="/thoughts">Thoughts & ideas</a></h2>
+          
+          <h3><a href="/thoughts/design-systems" class="post-excerpt">Building Design Systems at Scale</a></h3>
+          <p>
+            Lessons learned from implementing design systems across large organizations
+            <time datetime="2024-01">Jan 2024</time>
+          </p>
+
+          <h3><a href="/thoughts/ux-patterns" class="post-excerpt">UX Patterns in FinTech</a></h3>
+          <p>
+            Exploring effective user experience patterns in financial technology applications
+            <time datetime="2023-11">Nov 2023</time>
+          </p>
+
+          <h3><a href="/thoughts/mobile-first" class="post-excerpt">Mobile-First Design Philosophy</a></h3>
+          <p>
+            Why starting with mobile continues to be crucial for modern web applications
+            <time datetime="2023-09">Sep 2023</time>
+          </p>
+
+          <h3><a href="/thoughts" class="dimmed">Browse all articles →</a></h3>
+        </section>
+
+
+
+      
+
+        
+      </div>
+    </main>
+  </div>
+</body>
 </html>

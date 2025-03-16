@@ -9,5 +9,12 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: true
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "./src/styles/scss/_variables.scss";`
+      }
+    }
   }
 }); 

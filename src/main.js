@@ -1,72 +1,161 @@
-import * as THREE from 'three';
-import { gsap } from 'gsap';
+import { projectsData } from './data/projects.js';
 
-// Initialize Three.js scene
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ alpha: true });
+// Initialize page when DOM is ready
+document.addEventListener('DOMContentLoaded', initializePage);
 
-// Setup renderer
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setClearColor(0x000000, 0);
-document.getElementById('app').prepend(renderer.domElement);
-
-// Add ambient light
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-scene.add(ambientLight);
-
-// Add point light
-const pointLight = new THREE.PointLight(0xffffff, 1);
-pointLight.position.set(5, 5, 5);
-scene.add(pointLight);
-
-// Create animated geometry
-const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
-const material = new THREE.MeshStandardMaterial({
-  color: 0x3b82f6,
-  wireframe: true,
-  transparent: true,
-  opacity: 0.3
-});
-const torusKnot = new THREE.Mesh(geometry, material);
-scene.add(torusKnot);
-
-// Position camera
-camera.position.z = 50;
-
-// Animation loop
-function animate() {
-  requestAnimationFrame(animate);
-  torusKnot.rotation.x += 0.01;
-  torusKnot.rotation.y += 0.01;
-  renderer.render(scene, camera);
+function initializePage() {
+  loadProjects();
+  setupTabNavigation();
 }
 
-// Handle window resize
-window.addEventListener('resize', () => {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-  camera.aspect = width / height;
-  camera.updateProjectionMatrix();
-  renderer.setSize(width, height);
-});
+/**
+ * Load projects using template
+ */
+function loadProjects() {
+  const projectsContainer = document.getElementById('projects-container');
+  const template = document.getElementById('project-template');
+  
+  if (!projectsContainer || !template) {
+    console.error('Required elements for projects not found');
+    return;
+  }
+  
+  // Clear loading state
+  projectsContainer.innerHTML = '';
+  
+  projectsData.forEach((project, index) => {
+    const projectElement = template.content.cloneNode(true);
+    const projectDiv = projectElement.querySelector('.project');
+    
+    // Assign grid spans based on index for visual interest
+    if (index === 0) {
+      projectDiv.classList.add('span-8', 'tall'); // Featured project
+    } else if (index === 1) {
+      projectDiv.classList.add('span-4', 'tall'); // Tall side project
+    } else if (index % 3 === 0) {
+      projectDiv.classList.add('span-6'); // Medium project
+    } else if (index % 4 === 0) {
+      projectDiv.classList.add('span-12'); // Full width project
+    } else {
+      projectDiv.classList.add('span-4'); // Standard project
+    }
+    
+    // Set video source
+    const video = projectElement.querySelector('video');
+    const source = projectElement.querySelector('source');
+    if (video && source) {
+      source.src = project.videoSrc;
+      video.load(); // Force video to load
+    }
+    
+    // Set project title
+    const titleText = projectElement.querySelector('.title-text');
+    if (titleText) {
+      titleText.textContent = project.title;
+    }
+    
+    // Set project link to detail page
+    const projectLink = projectElement.querySelector('a');
+    if (projectLink) {
+      projectLink.href = `./projects/${project.slug}/index.html`;
+    }
+    
+    // Set project year
+    const yearElement = projectElement.querySelector('.project-year');
+    if (yearElement) {
+      yearElement.textContent = project.year;
+    }
+    
+    // Add to container
+    projectsContainer.appendChild(projectElement);
+  });
+}
 
-// Start animation
-animate();
+/**
+ * Set up tab navigation
+ */
+function setupTabNavigation() {
+  const tabContainer = document.querySelector('.toggle-pill');
+  const contentSections = document.querySelectorAll('.content');
+  
+  if (!tabContainer || !contentSections.length) {
+    console.error('Required elements for navigation not found');
+    return;
+  }
+  
+  // Set initial state
+  const initialActiveTab = tabContainer.querySelector('button.active');
+  if (initialActiveTab) {
+    updatePillIndicator(initialActiveTab);
+    showContent(initialActiveTab.dataset.content);
+  }
+  
+  // Use event delegation for tab navigation
+  tabContainer.addEventListener('click', (e) => {
+    const targetButton = e.target.closest('button');
+    if (!targetButton) return;
+    
+    e.preventDefault();
+    
+    // Get the content ID from the data attribute
+    const targetContentId = targetButton.dataset.content;
+    if (!targetContentId) return;
+    
+    // Update UI
+    updateActiveTab(targetButton);
+    showContent(targetContentId);
+    updatePillIndicator(targetButton);
+  });
+}
 
-// GSAP Animations
-gsap.from('.heading', {
-  duration: 1,
-  y: 30,
-  opacity: 0,
-  ease: 'power3.out'
-});
+/**
+ * Update active tab
+ */
+function updateActiveTab(activeTab) {
+  const allTabs = activeTab.parentNode.querySelectorAll('button');
+  allTabs.forEach(tab => tab.classList.remove('active'));
+  activeTab.classList.add('active');
+}
 
-gsap.from('.social-links a', {
-  duration: 0.8,
-  y: 20,
-  opacity: 0,
-  stagger: 0.1,
-  ease: 'power2.out',
-  delay: 0.5
-}); 
+/**
+ * Show content section
+ */
+function showContent(contentId) {
+  const contentSections = document.querySelectorAll('.content');
+  contentSections.forEach(section => {
+    if (section.id === contentId) {
+      section.classList.remove('hidden');
+      section.classList.add('active');
+    } else {
+      section.classList.remove('active');
+      section.classList.add('hidden');
+    }
+  });
+}
+
+/**
+ * Update pill indicator position
+ */
+function updatePillIndicator(activeTab) {
+  const pillIndicator = document.getElementById('toggle-pill-indicator');
+  if (!pillIndicator || !activeTab) return;
+  
+  // Remove all position classes first
+  pillIndicator.classList.remove('center', 'right');
+  
+  // Get position information
+  const buttons = Array.from(activeTab.parentNode.children).filter(child => 
+    child.tagName === 'BUTTON'
+  );
+  const tabIndex = buttons.indexOf(activeTab);
+  
+  // Add appropriate class based on index
+  if (tabIndex === 1) {
+    pillIndicator.classList.add('center');
+  } else if (tabIndex === 2) {
+    pillIndicator.classList.add('right');
+  }
+}
+
+// Export project data for use in detail pages
+export { projectsData };

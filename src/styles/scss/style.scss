@@ -1,0 +1,394 @@
+// Import external fonts
+@import url("https://use.typekit.net/wjs0dtk.css");
+
+// Font Variables
+$primary-font: "gravita-geo-variable", -apple-system, BlinkMacSystemFont, sans-serif;
+$secondary-font: "gravita-geo-variable", -apple-system, BlinkMacSystemFont, sans-serif;
+
+// Variables
+:root {
+  --text-color: #e0e0e0;
+  --bg-color: #1c1c1c;
+  --accent-color: #fa4f01;
+  --link-color: #848484;
+  --border-color: #282828;
+  --container-width: 1200px;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 3rem;
+}
+
+// Base Styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $secondary-font;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  padding: var(--spacing-md);
+  
+  @media (max-width: 768px) {
+    padding: var(--spacing-sm);
+  }
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+// Header Styles
+.header {
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--spacing-md) 0;
+  
+  @media (max-width: 768px) {
+    padding-top: var(--spacing-sm);
+  }
+}
+
+.menu {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
+  
+  a {
+    color: var(--link-color);
+    text-decoration: none;
+    font-size: 0.875rem;
+    padding: 0.25rem 0;
+    transition: color 0.2s ease;
+    
+    &:hover {
+      color: var(--text-color);
+    }
+    
+    &.active {
+      color: var(--text-color);
+    }
+  }
+}
+
+// Content Layout
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.columns {
+  display: flex;
+  gap: var(--spacing-lg);
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+}
+
+.column {
+  flex: 1;
+  min-width: 0; // Prevents overflow
+}
+
+// Typography
+h1 {
+  font-family: $primary-font;
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: clamp(1.125rem, 4vw, 1.25rem);
+  font-weight: 500;
+  margin-bottom: var(--spacing-md);
+  
+  a {
+    color: var(--text-color);
+    text-decoration: none;
+    
+    &:hover {
+      color: var(--accent-color);
+    }
+  }
+}
+
+h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  
+  a {
+    color: var(--text-color);
+    text-decoration: none;
+    
+    &:hover {
+      color: var(--accent-color);
+    }
+  }
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+}
+
+p {
+  color: var(--link-color);
+  margin-bottom: var(--spacing-md);
+  font-size: 0.9rem;
+  
+  time {
+    display: block;
+    margin-top: 0.5rem;
+    color: var(--link-color);
+    font-size: 0.8rem;
+  }
+}
+
+// Intro Section
+.intro {
+  max-width: 780px;
+  margin-bottom: var(--spacing-lg);
+  
+  h1 {
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    font-weight: 500;
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.2;
+  }
+  
+  .role {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    color: var(--link-color);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.5;
+  }
+  
+  .bio {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    color: var(--text-color);
+    line-height: 1.5;
+    margin-bottom: 0;
+  }
+}
+
+// Quick Links
+.quick-links {
+  display: flex;
+  flex-direction: column;
+  width: 440px;
+  gap: var(--spacing-md);
+  
+  @media (max-width: 480px) {
+    width: 100%;
+  }
+  
+  a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1rem;
+    line-height: 1.4;
+    transition: color 0.2s ease;
+    
+    &:hover {
+      color: var(--accent-color);
+    }
+    
+    br {
+      margin-bottom: 0.25rem;
+    }
+  }
+}
+
+// Utility Classes
+.margin-b-4 {
+  margin-bottom: var(--spacing-md);
+}
+
+.dimmed {
+  color: var(--link-color) !important;
+  font-size: 0.9rem;
+  
+  &:hover {
+    color: var(--text-color) !important;
+  }
+}
+
+// Mobile Optimizations
+@media (max-width: 768px) {
+  .intro {
+    margin-bottom: var(--spacing-md);
+  }
+  
+  h3 {
+    margin-top: var(--spacing-md);
+  }
+  
+  p {
+    margin-bottom: var(--spacing-sm);
+  }
+}
+
+// Header
+header {
+  margin-bottom: 3rem;
+  
+  .intro {
+    font-size: 1.2rem;
+    color: $secondary-color;
+    margin: 1rem 0 2rem;
+  }
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  
+  a {
+    color: var(--link-color);
+    line-height: 0;
+    transition: color 0.2s ease;
+    
+    &:hover {
+      color: var(--text-color);
+    }
+    
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+// Sections
+section {
+  margin-bottom: 3rem;
+  
+  ul {
+    list-style: none;
+    
+    li {
+      margin-bottom: 1.5rem;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// Experience
+.experience {
+  .period {
+    color: $secondary-color;
+    font-size: 0.9rem;
+  }
+}
+
+// Tools
+.tools {
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    
+    li {
+      margin-bottom: 0;
+      color: $secondary-color;
+    }
+  }
+}
+
+// Projects
+.projects {
+  a {
+    display: inline-block;
+    line-height: 1.6;
+  }
+}
+
+// Footer
+footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid $border-color;
+  text-align: center;
+  color: $secondary-color;
+  font-size: 0.9rem;
+}
+
+// Iframe styles
+.iframe-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; // 16:9 aspect ratio
+  height: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--bg-color);
+  margin-bottom: var(--spacing-sm);
+  border: 1px solid var(--border-color);
+  transition: border-color 0.2s ease;
+  
+  &:hover {
+    border-color: var(--accent-color);
+  }
+  
+  // Loading shimmer effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      var(--bg-color) 0%,
+      lighten($color: #1c1c1c, $amount: 5%) 50%,
+      var(--bg-color) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+.responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
