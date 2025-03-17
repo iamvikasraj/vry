@@ -1,11 +1,21 @@
-// Variables
-$bg-color: #000000;
-$text-color: #e0e0e0;
-$accent-color: #fa4f01;
-$secondary-color: #848484;
-$border-color: #282828;
-$card-bg: #1c1c1c;
-$card-hover: #242424;
-$secondary-font: "gravita-geo-variable", sans-serif;
-$rotunda-font: "rotunda-variable", sans-serif;
-$primary-font: 'Roboto', monospace; 
+// Font Variables
+$primary-font: "gravita-geo-variable", -apple-system, BlinkMacSystemFont, sans-serif;
+$secondary-font: "gravita-geo-variable", -apple-system, BlinkMacSystemFont, sans-serif;
+
+// CSS Custom Properties
+:root {
+  // Colors
+  --text-color: #e0e0e0;
+  --bg-color: #1c1c1c;
+  --accent-color: #fa4f01;
+  --link-color: #848484;
+  --border-color: #282828;
+  
+  // Layout
+  --container-width: 1200px;
+  
+  // Spacing
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 3rem;
+} 

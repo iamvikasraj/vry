@@ -1,24 +1,64 @@
-// Import external fonts
+/*
+ * Style.scss
+ * Main stylesheet for the portfolio website
+ * Author: Vikas Raj Yadav
+ */
+
+// =========================================
+// Imports
+// =========================================
+
+// Font Import
 @import url("https://use.typekit.net/wjs0dtk.css");
 
-// Font Variables
-$primary-font: "gravita-geo-variable", -apple-system, BlinkMacSystemFont, sans-serif;
-$secondary-font: "gravita-geo-variable", -apple-system, BlinkMacSystemFont, sans-serif;
-
-// Variables
+// CSS Custom Properties
 :root {
+  // Colors
   --text-color: #e0e0e0;
   --bg-color: #1c1c1c;
   --accent-color: #fa4f01;
   --link-color: #848484;
   --border-color: #282828;
+  
+  // Layout
   --container-width: 1200px;
+  
+  // Spacing
   --spacing-sm: 1rem;
   --spacing-md: 2rem;
   --spacing-lg: 3rem;
 }
 
+// =========================================
+// Mixins
+// =========================================
+
+// Responsive breakpoints
+@mixin for-tablet {
+  @media (min-width: 768px) and (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin for-mobile {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+// Hover transition
+@mixin hover-transition {
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: var(--text-color);
+  }
+}
+
+// =========================================
 // Base Styles
+// =========================================
+
 * {
   margin: 0;
   padding: 0;
@@ -37,13 +77,11 @@ body {
   }
 }
 
-// Tablet (iPad) Breakpoint
-@mixin for-tablet {
-  @media (min-width: 768px) and (max-width: 1024px) {
-    @content;
-  }
-}
+// =========================================
+// Layout Components
+// =========================================
 
+// Container
 .container {
   max-width: var(--container-width);
   margin: 0 auto;
@@ -56,23 +94,30 @@ body {
   }
 }
 
-// Header Styles
+// Header
 .header {
   display: flex;
   justify-content: flex-end;
   padding: var(--spacing-md) 0;
+  margin-bottom: 3rem;
   
-  @media (max-width: 768px) {
+  @include for-mobile {
     padding-top: var(--spacing-sm);
+  }
+  
+  .intro {
+    font-size: 1.2rem;
+    margin: 1rem 0 2rem;
   }
 }
 
+// Navigation Menu
 .menu {
   display: flex;
   gap: 1.5rem;
   align-items: center;
   
-  @media (max-width: 768px) {
+  @include for-mobile {
     gap: 1rem;
   }
   
@@ -81,11 +126,7 @@ body {
     text-decoration: none;
     font-size: 0.875rem;
     padding: 0.25rem 0;
-    transition: color 0.2s ease;
-    
-    &:hover {
-      color: var(--text-color);
-    }
+    @include hover-transition;
     
     &.active {
       color: var(--text-color);
@@ -93,18 +134,22 @@ body {
   }
 }
 
+// =========================================
 // Content Layout
+// =========================================
+
 .content {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
 }
 
+// Two-column Layout
 .columns {
   display: flex;
   gap: var(--spacing-lg);
   
-  @media (max-width: 768px) {
+  @include for-mobile {
     flex-direction: column;
     gap: var(--spacing-md);
   }
@@ -124,7 +169,11 @@ body {
   }
 }
 
+// =========================================
 // Typography
+// =========================================
+
+// Headings
 h1 {
   font-family: $primary-font;
   font-size: clamp(2rem, 5vw, 2.5rem);
@@ -153,6 +202,10 @@ h3 {
   margin-top: var(--spacing-md);
   margin-bottom: var(--spacing-sm);
   
+  &:first-of-type {
+    margin-top: 0;
+  }
+  
   a {
     color: var(--text-color);
     text-decoration: none;
@@ -161,12 +214,9 @@ h3 {
       color: var(--accent-color);
     }
   }
-
-  &:first-of-type {
-    margin-top: 0;
-  }
 }
 
+// Paragraphs
 p {
   color: var(--link-color);
   margin-bottom: var(--spacing-md);
@@ -179,6 +229,10 @@ p {
     font-size: 0.8rem;
   }
 }
+
+// =========================================
+// Components
+// =========================================
 
 // Intro Section
 .intro {
@@ -245,46 +299,7 @@ p {
   }
 }
 
-// Utility Classes
-.margin-b-4 {
-  margin-bottom: var(--spacing-md);
-}
-
-.dimmed {
-  color: var(--link-color) !important;
-  font-size: 0.9rem;
-  
-  &:hover {
-    color: var(--text-color) !important;
-  }
-}
-
-// Mobile Optimizations
-@media (max-width: 768px) {
-  .intro {
-    margin-bottom: var(--spacing-md);
-  }
-  
-  h3 {
-    margin-top: var(--spacing-md);
-  }
-  
-  p {
-    margin-bottom: var(--spacing-sm);
-  }
-}
-
-// Header
-header {
-  margin-bottom: 3rem;
-  
-  .intro {
-    font-size: 1.2rem;
-    color: $secondary-color;
-    margin: 1rem 0 2rem;
-  }
-}
-
+// Social Links
 .social-links {
   display: flex;
   gap: 1rem;
@@ -293,11 +308,7 @@ header {
   a {
     color: var(--link-color);
     line-height: 0;
-    transition: color 0.2s ease;
-    
-    &:hover {
-      color: var(--text-color);
-    }
+    @include hover-transition;
     
     svg {
       width: 20px;
@@ -305,52 +316,13 @@ header {
     }
   }
   
-  @media (max-width: 768px) {
+  @include for-mobile {
     width: 100%;
     justify-content: flex-start;
   }
 }
 
-// Sections
-section {
-  margin-bottom: 3rem;
-  
-  ul {
-    list-style: none;
-    
-    li {
-      margin-bottom: 1.5rem;
-      
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-  }
-}
-
-// Experience
-.experience {
-  .period {
-    color: $secondary-color;
-    font-size: 0.9rem;
-  }
-}
-
-// Tools
-.tools {
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    
-    li {
-      margin-bottom: 0;
-      color: $secondary-color;
-    }
-  }
-}
-
-// Projects
+// Projects Section
 .projects {
   a {
     display: inline-block;
@@ -358,17 +330,10 @@ section {
   }
 }
 
-// Footer
-footer {
-  margin-top: 4rem;
-  padding-top: 2rem;
-  border-top: 1px solid $border-color;
-  text-align: center;
-  color: $secondary-color;
-  font-size: 0.9rem;
-}
+// =========================================
+// Iframe & Video Components
+// =========================================
 
-// Iframe styles
 .iframe-container {
   position: relative;
   width: 100%;
@@ -382,13 +347,14 @@ footer {
 
   @include for-tablet {
     max-width: 100%;
-    padding-bottom: 56.25%;
+    padding-bottom: 56.25%; // 16:9 aspect ratio
   }
 
   &:hover {
     border-color: var(--accent-color);
   }
 
+  // Loading shimmer effect
   &::before {
     content: '';
     position: absolute;
@@ -421,6 +387,10 @@ footer {
   }
 }
 
+// =========================================
+// Animations
+// =========================================
+
 @keyframes shimmer {
   0% {
     background-position: 200% 0;
@@ -429,3 +399,33 @@ footer {
     background-position: -200% 0;
   }
 }
+
+// =========================================
+// Utility Classes
+// =========================================
+
+.margin-b-4 {
+  margin-bottom: var(--spacing-md);
+}
+
+.dimmed {
+  color: var(--link-color) !important;
+  font-size: 0.9rem;
+  
+  &:hover {
+    color: var(--text-color) !important;
+  }
+}
+
+// =========================================
+// Footer
+// =========================================
+
+footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+  color: var(--link-color);
+  font-size: 0.9rem;
+} 
