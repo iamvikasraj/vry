@@ -37,12 +37,23 @@ body {
   }
 }
 
+// Tablet (iPad) Breakpoint
+@mixin for-tablet {
+  @media (min-width: 768px) and (max-width: 1024px) {
+    @content;
+  }
+}
+
 .container {
   max-width: var(--container-width);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
+
+  @include for-tablet {
+    padding: 0 var(--spacing-md);
+  }
 }
 
 // Header Styles
@@ -97,11 +108,20 @@ body {
     flex-direction: column;
     gap: var(--spacing-md);
   }
+
+  @include for-tablet {
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+  }
 }
 
 .column {
   flex: 1;
-  min-width: 0; // Prevents overflow
+  min-width: 0;
+
+  @include for-tablet {
+    flex: 0 0 calc(50% - var(--spacing-md));
+  }
 }
 
 // Typography
@@ -165,18 +185,23 @@ p {
   max-width: 780px;
   margin-bottom: var(--spacing-lg);
   
+  @include for-tablet {
+    max-width: 100%;
+    padding: 0 var(--spacing-sm);
+  }
+  
   h1 {
     font-size: clamp(2rem, 5vw, 2.5rem);
-    font-weight: 500;
-    margin-bottom: var(--spacing-sm);
-    line-height: 1.2;
+    
+    @include for-tablet {
+      font-size: 2.25rem;
+    }
   }
   
   .role {
-    font-size: clamp(1rem, 2vw, 1.125rem);
-    color: var(--link-color);
-    margin-bottom: var(--spacing-md);
-    line-height: 1.5;
+    @include for-tablet {
+      font-size: 1.1rem;
+    }
   }
   
   .bio {
@@ -196,6 +221,11 @@ p {
   
   @media (max-width: 480px) {
     width: 100%;
+  }
+  
+  @include for-tablet {
+    width: 100%;
+    max-width: none;
   }
   
   a {
@@ -342,46 +372,53 @@ footer {
 .iframe-container {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; // 16:9 aspect ratio
-  height: 0;
-  overflow: hidden;
-  border-radius: 8px;
-  background: var(--bg-color);
-  margin-bottom: var(--spacing-sm);
+  max-width: 360px;
+  padding-bottom: 45%;
+  margin: 0 auto var(--spacing-sm) auto;
   border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
   transition: border-color 0.2s ease;
-  
+
+  @include for-tablet {
+    max-width: 100%;
+    padding-bottom: 56.25%;
+  }
+
   &:hover {
     border-color: var(--accent-color);
   }
-  
-  // Loading shimmer effect
+
   &::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
+    left: -100%;
+    width: 200%;
     height: 100%;
     background: linear-gradient(
       90deg,
-      var(--bg-color) 0%,
+      transparent 0%,
       lighten($color: #1c1c1c, $amount: 5%) 50%,
-      var(--bg-color) 100%
+      transparent 100%
     );
-    background-size: 200% 100%;
     animation: shimmer 1.5s infinite;
   }
 }
 
 .responsive-iframe {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 90%;
   border: none;
-  background: transparent;
+
+  @include for-tablet {
+    width: 95%;
+    height: 95%;
+  }
 }
 
 @keyframes shimmer {
