@@ -3,12 +3,275 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vikas Raj Yadav - Product Designer</title>
+  <title>Vikas Raj Yadav - Director of Product Design</title>
   <meta name="description" content="Product Designer with 8+ years of experience, bridging the gap between design and technology to create impactful user experiences with efficiency.">
   <link rel="stylesheet" href="https://use.typekit.net/wjs0dtk.css">
-  <script type="module">
-    import './src/styles/main.scss'
-  </script>
+  <style>
+    /* Variables */
+    :root {
+      /* Colors */
+      --text-color: #d5d5d5;
+      --bg-color: #1c1c1c;
+      --accent-color: #fa4f01;
+      --link-color: #848484;
+      --border-color: #282828;
+      --dark-gray: #555555;
+      
+      /* Layout */
+      --container-width: 1024px;
+      
+      /* Spacing */
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2.5rem;
+    }
+
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "gravita-geo-variable", -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      padding: var(--spacing-md);
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: var(--spacing-sm);
+      }
+    }
+
+    /* Container */
+    .container {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-md);
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+      .container {
+        padding: 0 var(--spacing-md);
+      }
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: flex-end;
+      padding: var(--spacing-sm) 0;
+      margin-bottom: var(--spacing-md);
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding-top: var(--spacing-xs);
+      }
+    }
+
+    /* Social Links */
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .social-links {
+        gap: 0.75rem;
+      }
+    }
+
+    .social-links a {
+      color: var(--link-color);
+      transition: color 0.2s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--text-color);
+    }
+
+    /* Content */
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-md);
+    }
+
+    /* Columns */
+    .columns {
+      display: flex;
+      gap: var(--spacing-lg);
+    }
+
+    @media (max-width: 768px) {
+      .columns {
+        flex-direction: column;
+        gap: var(--spacing-md);
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+      .columns {
+        flex-wrap: wrap;
+        gap: var(--spacing-md);
+      }
+    }
+
+    .column {
+      flex: 1;
+      min-width: 0;
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+      .column {
+        flex: 0 0 calc(50% - var(--spacing-md));
+      }
+    }
+
+    /* Typography */
+    h1 {
+      font-family: "gravita-geo-variable", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: clamp(2rem, 5vw, 2.5rem);
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    h2 {
+      font-size: clamp(1.125rem, 4vw, 1.25rem);
+      font-weight: 500;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    h2 a {
+      color: var(--text-color);
+      text-decoration: none;
+    }
+
+    h2 a:hover {
+      color: var(--accent-color);
+    }
+
+    h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-top: var(--spacing-md);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    h3:first-of-type {
+      margin-top: var(--spacing-sm);
+    }
+
+    h3 a {
+      color: var(--text-color);
+      text-decoration: none;
+    }
+
+    h3 a:hover {
+      color: var(--accent-color);
+    }
+
+    p {
+      color: var(--link-color);
+      margin-bottom: var(--spacing-md);
+      font-size: 0.9rem;
+    }
+
+    p time {
+      display: block;
+      margin-top: 0.25rem;
+      color: var(--link-color);
+      font-size: 0.8rem;
+    }
+
+    /* Intro */
+    .intro {
+      max-width: 780px;
+      margin-bottom: var(--spacing-md);
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+      .intro {
+        max-width: 100%;
+        padding: 0 var(--spacing-sm);
+      }
+    }
+
+    .role {
+      color: var(--link-color);
+      margin-top: var(--spacing-sm);
+      font-size: 1rem;
+    }
+
+    /* Helper Classes */
+    .margin-b-4 {
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .dimmed {
+      color: var(--link-color) !important;
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+
+    .dimmed:hover {
+      color: var(--text-color) !important;
+    }
+
+    /* Projects */
+    .iframe-container {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 Aspect Ratio */
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .responsive-iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      background-color: var(--border-color);
+    }
+
+    /* Section heading styles */
+    .projects h2 a, .thoughts h2 a {
+      color: var(--dark-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.7em;
+    }
+    
+    .projects h2 a:hover, .thoughts h2 a:hover {
+      color: var(--dark-gray);
+    }
+    
+    /* Project spacing */
+    .projects p, .thoughts p {
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .projects h3:last-of-type, .thoughts h3:last-of-type {
+      margin-top: var(--spacing-md);
+    }
+  </style>
+  <!-- <script type="module">
+    import './src/styles/scss/styles.scss'
+  </script> -->
 </head>
 <body>
   <div class="container">
@@ -45,12 +308,38 @@
 
       <div class="columns">
 
+
+         <!-- Projects Section -->
+         <section class="projects column">
+          <h2 class="margin-b-4"><a>Featured  Projects</a></h2>
+          
+
+
+          <div class="iframe-container">
+            <video class="responsive-iframe" autoplay loop muted playsinline>
+              <source src="assets/video/1.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <h3><a href="/projects/et-money">ET Money Onboarding</a></h3>
+          <p>Created a new onboarding experience for ET Money, a leading wealth management app in India.</p>
+         
+          
+          <h3><a href="/projects/paytm">Paytm Payment Flow</a></h3>
+          <p>Streamlining the payment experience for millions of users</p>
+          
+          <h3><a href="/projects/hdfc">HDFC Bank App Redesign</a></h3>
+          <p>Modernizing the mobile banking experience for one of India's largest banks</p>
+
+          <h3><a href="/projects" class="dimmed">View all →</a></h3>
+        </section>
+
         <section class="thoughts column">
-            <h2 class="margin-b-4"><a href="/thoughts">Rive Experiments</a></h2>
+            <h2 class="margin-b-4"><a >Interactions & Concepts</a></h2>
             <div class="iframe-container">
                 <iframe 
                     class="responsive-iframe"
-                    src="https://nothingnew.vercel.app/" 
+                    src="https://vintageclock.netlify.app/" 
                     title="Vintage Clock"
                     loading="lazy"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -72,34 +361,13 @@
               <time datetime="2023-09">Sep 2023</time>
             </p>
   
-            <h3><a href="/thoughts" class="dimmed">Browse all articles →</a></h3>
+            <h3><a href="/thoughts" class="dimmed">View all →</a></h3>
           </section>
-        <!-- Projects Section -->
-        <section class="projects column">
-          <h2 class="margin-b-4"><a href="/projects">Projects</a></h2>
-          
-          
-          <h3><a href="/projects/et-money">ET Money Onboarding</a></h3>
-          <p>Redesigning the onboarding experience for India's largest wealth management app</p>
-          <div class="iframe-container">
-            <video class="responsive-iframe" autoplay loop muted playsinline>
-              <source src="assets/video/1.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-          </div>
-          
-          <h3><a href="/projects/paytm">Paytm Payment Flow</a></h3>
-          <p>Streamlining the payment experience for millions of users</p>
-          
-          <h3><a href="/projects/hdfc">HDFC Bank App Redesign</a></h3>
-          <p>Modernizing the mobile banking experience for one of India's largest banks</p>
-
-          <h3><a href="/projects" class="dimmed">See all projects →</a></h3>
-        </section>
+       
 
         <!-- Thoughts Section -->
         <section class="thoughts column">
-          <h2 class="margin-b-4"><a href="/thoughts">Thoughts & ideas</a></h2>
+          <h2 class="margin-b-4"><a>Workshops & Talks</a></h2>
           
           <h3><a href="/thoughts/design-systems" class="post-excerpt">Building Design Systems at Scale</a></h3>
           <p>
@@ -119,7 +387,7 @@
             <time datetime="2023-09">Sep 2023</time>
           </p>
 
-          <h3><a href="/thoughts" class="dimmed">Browse all articles →</a></h3>
+          <h3><a href="/thoughts" class="dimmed">View all →</a></h3>
         </section>
 
 
