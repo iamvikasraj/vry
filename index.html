@@ -136,16 +136,18 @@
 
   <body>
     <div class="container">
+      <!-- Header -->
       <header class="masthead">
-        <div class="masthead-inner">
-          <div class="publication-date">March 18, 2025</div>
+        <div class="masthead-inner flex justify-between items-center">
+          <div class="publication-date font-serif italic text-sm">March 18, 2025</div>
           <nav class="masthead-nav">
-            <div class="social-links">
+            <div class="social-links flex items-center gap-md">
               <a
                 href="https://www.linkedin.com/in/vraj247"
                 target="_blank"
                 rel="noopener"
                 aria-label="LinkedIn Profile"
+                class="text-lg transition-colors hover-accent"
                 ><i class="fab fa-linkedin"></i
               ></a>
               <a
@@ -153,6 +155,7 @@
                 target="_blank"
                 rel="noopener"
                 aria-label="Twitter Profile"
+                class="text-lg transition-colors hover-accent"
                 ><i class="fab fa-twitter"></i
               ></a>
               <a
@@ -160,9 +163,13 @@
                 target="_blank"
                 rel="noopener"
                 aria-label="Contra Profile"
+                class="text-lg transition-colors hover-accent"
                 ><i class="fas fa-briefcase"></i
               ></a>
-              <a href="mailto:hello@vikasrajyadav.com" aria-label="Email Me"
+              <a 
+                href="mailto:hello@vikasrajyadav.com" 
+                aria-label="Email Me"
+                class="text-lg transition-colors hover-accent"
                 ><i class="fas fa-envelope"></i
               ></a>
             </div>
@@ -170,339 +177,404 @@
         </div>
       </header>
 
-      <section class="title-banner">
-        <h1>Vikas Raj Yadav</h1>
-        <p class="tagline">Design & Interaction Journal</p>
+      <!-- Title Banner -->
+      <section class="title-banner text-center p-md">
+        <h1 class="font-serif text-3xl font-bold mb-xs">Vikas Raj Yadav</h1>
+        <p class="tagline font-serif italic text-accent">Design & Interaction Journal</p>
       </section>
 
-      <div class="issue-details">
+      <!-- Issue Details -->
+      <div class="issue-details flex justify-between text-xs text-gray uppercase tracking-wide mb-lg">
         <div>Volume 03 • Issue 25</div>
         <div>Design Director • Interaction Design • Motion Systems</div>
       </div>
 
-      <main class="main-content">
-        <section id="about" class="about-section">
-          <h2>About me</h2>
-
-          <div class="about-image">
-            <img
-              src="assets/Front.png"
-              alt="Vikas Raj Yadav - Design Director"
-            />
-          </div>
-
-          <div class="about-content">
-            <p>
-              <strong>Vikas Raj Yadav</strong> is a Design Director at Beem
-              (US), specializing in creating intuitive digital experiences. With
-              expertise in interaction design, motion systems, and prototyping,
-              Vikas has previously led design teams at ETMoney, HDFC Bank, and
-              Paytm.
-            </p>
-            <p>
-              Focused on the intersection of usability and aesthetics, his work
-              spans FinTech interfaces, design systems, and cross-platform
-              experiences, with particular attention to detail in motion and
-              interaction.
-            </p>
-            <p>
-              Based in Gurgaon, India, Vikas is passionate about pushing the
-              boundaries of digital design while ensuring experiences remain
-              intuitive and accessible to users.
-            </p>
-          </div>
-        </section>
-
-        <section id="featured" class="featured-section">
-          <h2>Featured Work</h2>
-          <div class="featured-content">
-            <div class="featured-item">
-              <div class="featured-image">
-                <video
-                  autoplay
-                  loop
-                  muted
-                  playsinline
-                  poster="assets/video/1-poster.jpg"
-                >
-                  <source src="assets/video/1.mp4" type="video/mp4" />
-                </video>
+      <!-- Main Content -->
+      <main class="main-content flex gap-lg mb-xl">
+        
+        <!-- Left Content -->
+        <div class="left-content flex-1">
+          
+          <!-- Featured Work Section -->
+          <section id="featured" class="content-section">
+            <div class="section-header">
+              <h2 class="section-title font-serif text-2xl font-bold">Featured Work</h2>
+            </div>
+            
+            <div class="featured-content">
+              <!-- Main Featured Item -->
+              <div class="featured-item mb-lg">
+                <div class="card hover-lift">
+                  <div class="card-media large">
+                    <video
+                      autoplay
+                      loop
+                      muted
+                      playsinline
+                      poster="assets/video/1-poster.jpg"
+                    >
+                      <source src="assets/video/1.mp4" type="video/mp4" />
+                    </video>
+                  </div>
+                  <div class="card-content">
+                    <h3 class="card-title">
+                      <a href="/projects/etmoney" class="transition-colors hover-accent">
+                        ET Money Onboarding Experience
+                      </a>
+                    </h3>
+                    <div class="card-meta">FinTech • Mobile App • 2024</div>
+                    <p class="card-description">
+                      Redesigned the onboarding experience to improve user
+                      engagement and reduce drop-off rates. The new flow increased
+                      completion rates by 47%.
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div class="featured-content-info">
-                <h3 class="featured-title">ET Money Onboarding Experience</h3>
-                <div class="featured-meta">FinTech • Mobile App • 2024</div>
-                <p class="featured-excerpt">
-                  Redesigned the onboarding experience to improve user
-                  engagement and reduce drop-off rates. The new flow increased
-                  completion rates by 47%.
-                </p>
+
+              <!-- Secondary Featured Items -->
+              <div class="featured-grid flex gap-md">
+                <div class="card hover-lift flex-1">
+                  <div class="card-media">
+                    <video autoplay loop muted playsinline>
+                      <source src="assets/video/clock.mp4" type="video/mp4" />
+                    </video>
+                  </div>
+                  <div class="card-content">
+                    <h3 class="card-title">
+                      <a href="/projects/clock" class="transition-colors hover-accent">
+                        Vintage Clock Concept
+                      </a>
+                    </h3>
+                    <div class="card-meta">Interaction • Motion • 2023</div>
+                  </div>
+                </div>
+
+                <div class="card hover-lift flex-1">
+                  <div class="card-media">
+                    <video autoplay loop muted playsinline>
+                      <source src="assets/video/2.mp4" type="video/mp4" />
+                    </video>
+                  </div>
+                  <div class="card-content">
+                    <h3 class="card-title">
+                      <a href="/projects/business-insider" class="transition-colors hover-accent">
+                        Business Insider App
+                      </a>
+                    </h3>
+                    <div class="card-meta">Media • SwiftUI • 2022-2023</div>
+                  </div>
+                </div>
               </div>
             </div>
+          </section>
 
-            <div class="featured-right">
-              <div class="featured-item">
-                <div class="featured-image">
+          <!-- Selected Works Section -->
+          <section id="projects" class="content-section">
+            <div class="section-header">
+              <h2 class="section-title font-serif text-2xl font-bold">Selected Works</h2>
+            </div>
+
+            <!-- Lead Project -->
+            <article class="card hover-lift mb-lg">
+              <div class="card-media large relative">
+                <video autoplay loop muted playsinline>
+                  <source src="assets/video/4.mp4" type="video/mp4" />
+                </video>
+                <div class="project-overlay absolute bottom-0 left-0 w-full p-md text-white">
+                  <h3 class="text-2xl font-serif font-bold mb-xs">
+                    <a href="/projects/hdfc" class="transition-colors">HDFC Bank App Redesign</a>
+                  </h3>
+                  <div class="text-xs uppercase tracking-wide opacity-90">FinTech • Banking • 2021-2022</div>
+                </div>
+              </div>
+              <div class="card-content">
+                <p class="card-description">
+                  Modernizing the mobile banking experience for one of India's
+                  largest banks with a focus on accessibility and enhanced user
+                  experience. The redesign improves navigation patterns and
+                  introduces a more intuitive information architecture.
+                </p>
+              </div>
+            </article>
+
+            <!-- Three Column Projects -->
+            <div class="projects-grid flex gap-md mb-lg">
+              <article class="card hover-lift flex-1">
+                <div class="card-media">
                   <video autoplay loop muted playsinline>
-                    <source src="assets/video/clock.mp4" type="video/mp4" />
+                    <source src="assets/video/5.mp4" type="video/mp4" />
                   </video>
                 </div>
-                <div class="featured-content-info">
-                  <h3 class="featured-title">Vintage Clock Concept</h3>
-                  <div class="featured-meta">Interaction • Motion • 2023</div>
+                <div class="card-content">
+                  <h3 class="card-title">
+                    <a href="/projects/rive-tutorial" class="transition-colors hover-accent">
+                      Teaching Rive on iPad
+                    </a>
+                  </h3>
+                  <div class="card-meta">Tutorial • Animation • 2023</div>
+                  <p class="card-description">
+                    A tutorial series showing how to create responsive animations
+                    that feel native to iPad using Rive.
+                  </p>
                 </div>
-              </div>
+              </article>
 
-              <div class="featured-item">
-                <div class="featured-image">
+              <article class="card hover-lift flex-1">
+                <div class="card-media">
                   <video autoplay loop muted playsinline>
-                    <source src="assets/video/2.mp4" type="video/mp4" />
+                    <source src="assets/video/6.mp4" type="video/mp4" />
                   </video>
                 </div>
-                <div class="featured-content-info">
-                  <h3 class="featured-title">Business Insider App</h3>
-                  <div class="featured-meta">Media • SwiftUI • 2022-2023</div>
+                <div class="card-content">
+                  <h3 class="card-title">
+                    <a href="/projects/motion-experiments" class="transition-colors hover-accent">
+                      Motion Experiments
+                    </a>
+                  </h3>
+                  <div class="card-meta">Animation • Research • 2023</div>
+                  <p class="card-description">
+                    Exploring micro-interactions and transitions that enhance user
+                    engagement with digital interfaces.
+                  </p>
+                </div>
+              </article>
+
+              <article class="card hover-lift flex-1">
+                <div class="card-media">
+                  <video autoplay loop muted playsinline>
+                    <source src="assets/video/7.mp4" type="video/mp4" />
+                  </video>
+                </div>
+                <div class="card-content">
+                  <h3 class="card-title">
+                    <a href="/projects/hdfc-onboarding" class="transition-colors hover-accent">
+                      HDFC Bank Onboarding
+                    </a>
+                  </h3>
+                  <div class="card-meta">Banking • UX • Motion • 2022</div>
+                  <p class="card-description">
+                    Streamlined customer onboarding flow with engaging animations
+                    that simplify complex banking concepts.
+                  </p>
+                </div>
+              </article>
+            </div>
+
+            <!-- Feature Project -->
+            <article class="flex gap-lg items-center bg-white rounded-lg shadow p-lg mb-lg hover-lift transition">
+              <div class="flex-1">
+                <h3 class="text-2xl font-serif font-bold mb-sm">
+                  <a href="/projects/paytm-wallet" class="transition-colors hover-accent">
+                    Paytm Wallet Experience
+                  </a>
+                </h3>
+                <div class="text-xs text-gray uppercase tracking-wide mb-md">FinTech • Payments • 2020</div>
+                <p class="text-base">
+                  Redesigned payment flows and wallet management interface for
+                  improved user experience and conversion. The project increased
+                  user engagement with the wallet feature by 32% and streamlined
+                  the transaction completion process.
+                </p>
+              </div>
+              <div class="flex-1">
+                <div class="card-media rounded overflow-hidden">
+                  <video autoplay loop muted playsinline>
+                    <source src="assets/video/9.mp4" type="video/mp4" />
+                  </video>
                 </div>
               </div>
+            </article>
+
+            <!-- Four Column Projects -->
+            <div class="projects-grid-small flex gap-sm">
+              <article class="card hover-lift flex-1">
+                <div class="card-media" style="height: 150px;">
+                  <video autoplay loop muted playsinline>
+                    <source src="assets/video/8.mp4" type="video/mp4" />
+                  </video>
+                </div>
+                <div class="card-content">
+                  <h3 class="text-base font-semibold mb-xs">
+                    <a href="/projects/interactive-data" class="transition-colors hover-accent">
+                      Financial Data Viz
+                    </a>
+                  </h3>
+                  <div class="card-meta">Data Viz • FinTech • 2022</div>
+                </div>
+              </article>
+
+              <article class="card hover-lift flex-1">
+                <div class="card-media" style="height: 150px;">
+                  <video autoplay loop muted playsinline>
+                    <source src="assets/video/10.mp4" type="video/mp4" />
+                  </video>
+                </div>
+                <div class="card-content">
+                  <h3 class="text-base font-semibold mb-xs">
+                    <a href="/projects/portfolio-interactions" class="transition-colors hover-accent">
+                      Portfolio Interactions
+                    </a>
+                  </h3>
+                  <div class="card-meta">Web • Animation • 2023</div>
+                </div>
+              </article>
+
+              <article class="card hover-lift flex-1">
+                <div class="card-media" style="height: 150px;">
+                  <video autoplay loop muted playsinline>
+                    <source src="assets/video/perplexity_play.mp4" type="video/mp4" />
+                  </video>
+                </div>
+                <div class="card-content">
+                  <h3 class="text-base font-semibold mb-xs">
+                    <a href="/projects/perplexity" class="transition-colors hover-accent">
+                      Perplexity AI Concept
+                    </a>
+                  </h3>
+                  <div class="card-meta">AI • Search Interface • 2023</div>
+                </div>
+              </article>
+
+              <article class="card hover-lift flex-1">
+                <div class="card-media" style="height: 150px;">
+                  <video autoplay loop muted playsinline>
+                    <source src="assets/video/zomato_weather.mp4" type="video/mp4" />
+                  </video>
+                </div>
+                <div class="card-content">
+                  <h3 class="text-base font-semibold mb-xs">
+                    <a href="/projects/zomato" class="transition-colors hover-accent">
+                      Zomato Weather Integration
+                    </a>
+                  </h3>
+                  <div class="card-meta">Food Tech • UX • 2022</div>
+                </div>
+              </article>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
 
-        <section id="thoughts" class="thoughts-section">
-          <h2>Thoughts & Ideas</h2>
-          <article class="thought-item">
-            <h3 class="thought-title">
-              <a href="/thoughts/design-systems"
-                >Building Design Systems at Scale</a
-              >
-            </h3>
-            <div class="thought-meta">January 2024</div>
-            <p class="thought-excerpt">
-              Lessons learned from implementing design systems across large
-              organizations with diverse product offerings.
-            </p>
-          </article>
-          <article class="thought-item">
-            <h3 class="thought-title">
-              <a href="/thoughts/ux-patterns">UX Patterns in FinTech</a>
-            </h3>
-            <div class="thought-meta">November 2023</div>
-            <p class="thought-excerpt">
-              Exploring effective user experience patterns in financial
-              technology applications.
-            </p>
-          </article>
-          <article class="thought-item">
-            <h3 class="thought-title">
-              <a href="/thoughts/mobile-first"
-                >Mobile-First Design Philosophy</a
-              >
-            </h3>
-            <div class="thought-meta">September 2023</div>
-            <p class="thought-excerpt">
-              Why starting with mobile continues to be crucial for modern web
-              applications.
-            </p>
-          </article>
-          <article class="thought-item">
-            <h3 class="thought-title">
-              <a href="/thoughts/motion-design"
-                >The Role of Motion in Modern Interfaces</a
-              >
-            </h3>
-            <div class="thought-meta">August 2023</div>
-            <p class="thought-excerpt">
-              How thoughtful animation enhances user experience and provides
-              meaningful feedback in digital products.
-            </p>
-          </article>
-          <article class="thought-item">
-            <h3 class="thought-title">
-              <a href="/thoughts/accessibility"
-                >Accessibility in Banking Apps</a
-              >
-            </h3>
-            <div class="thought-meta">June 2023</div>
-            <p class="thought-excerpt">
-              Creating inclusive financial experiences that work for users of
-              all abilities.
-            </p>
-          </article>
-        </section>
+        <!-- Right Sidebar -->
+        <div class="right-sidebar flex-col gap-lg" style="flex: 0 0 300px;">
+          
+          <!-- About Section -->
+          <section id="about" class="sidebar-section">
+            <h2 class="sidebar-title font-serif text-xl font-bold mb-md">About me</h2>
 
-        <section id="projects" class="projects-grid-section">
-          <div class="projects-header">
-            <h2>Selected Works</h2>
-          </div>
-
-          <!-- Lead Project - Full Width Feature -->
-          <article class="project-lead">
-            <div class="project-lead-image">
-              <video autoplay loop muted playsinline>
-                <source src="assets/video/4.mp4" type="video/mp4" />
-              </video>
-              <div class="project-overlay">
-                <h3 class="project-title">
-                  <a href="/projects/hdfc">HDFC Bank App Redesign</a>
-                </h3>
-                <div class="project-meta">FinTech • Banking • 2021-2022</div>
-              </div>
+            <div class="about-image mb-md border rounded bg-white shadow">
+              <img
+                src="assets/profile.jpeg"
+                alt="Vikas Raj Yadav - Design Director"
+                class="w-full h-auto"
+              />
             </div>
-            <div class="project-lead-content">
-              <p class="project-description">
-                Modernizing the mobile banking experience for one of India's
-                largest banks with a focus on accessibility and enhanced user
-                experience. The redesign improves navigation patterns and
-                introduces a more intuitive information architecture.
+
+            <div class="about-content">
+              <p class="mb-md text-base">
+                <strong>Vikas Raj Yadav</strong> is a Design Director at Beem
+                (US), specializing in creating intuitive digital experiences. With
+                expertise in interaction design, motion systems, and prototyping,
+                Vikas has previously led design teams at ETMoney, HDFC Bank, and
+                Paytm.
+              </p>
+              <p class="mb-md text-base">
+                Focused on the intersection of usability and aesthetics, his work
+                spans FinTech interfaces, design systems, and cross-platform
+                experiences, with particular attention to detail in motion and
+                interaction.
+              </p>
+              <p class="text-base">
+                Based in Gurgaon, India, Vikas is passionate about pushing the
+                boundaries of digital design while ensuring experiences remain
+                intuitive and accessible to users.
               </p>
             </div>
-          </article>
+          </section>
 
-          <!-- Three Column Row -->
-          <div class="projects-row three-columns">
-            <article class="project-column">
-              <div class="project-image">
-                <video autoplay loop muted playsinline>
-                  <source src="assets/video/5.mp4" type="video/mp4" />
-                </video>
-              </div>
-              <div class="project-content">
-                <h3 class="project-title">
-                  <a href="/projects/rive-tutorial">Teaching Rive on iPad</a>
+          <!-- Thoughts Section -->
+          <section id="thoughts" class="sidebar-section">
+            <h2 class="sidebar-title font-serif text-xl font-bold mb-md">Thoughts & Ideas</h2>
+            
+            <div class="flex flex-col gap-sm">
+              <article class="thought-item border-b pb-sm">
+                <h3 class="text-base font-semibold mb-xs">
+                  <a href="/thoughts/design-systems" class="transition-colors hover-accent">
+                    Building Design Systems at Scale
+                  </a>
                 </h3>
-                <div class="project-meta">Tutorial • Animation • 2023</div>
-                <p class="project-excerpt">
-                  A tutorial series showing how to create responsive animations
-                  that feel native to iPad using Rive.
+                <div class="text-xs text-gray uppercase tracking-wide mb-xs">January 2024</div>
+                <p class="text-sm text-gray">
+                  Lessons learned from implementing design systems across large
+                  organizations with diverse product offerings.
                 </p>
-              </div>
-            </article>
-
-            <article class="project-column">
-              <div class="project-image">
-                <video autoplay loop muted playsinline>
-                  <source src="assets/video/6.mp4" type="video/mp4" />
-                </video>
-              </div>
-              <div class="project-content">
-                <h3 class="project-title">
-                  <a href="/projects/motion-experiments">Motion Experiments</a>
+              </article>
+              
+              <article class="thought-item border-b pb-sm">
+                <h3 class="text-base font-semibold mb-xs">
+                  <a href="/thoughts/ux-patterns" class="transition-colors hover-accent">
+                    UX Patterns in FinTech
+                  </a>
                 </h3>
-                <div class="project-meta">Animation • Research • 2023</div>
-                <p class="project-excerpt">
-                  Exploring micro-interactions and transitions that enhance user
-                  engagement with digital interfaces.
+                <div class="text-xs text-gray uppercase tracking-wide mb-xs">November 2023</div>
+                <p class="text-sm text-gray">
+                  Exploring effective user experience patterns in financial
+                  technology applications.
                 </p>
-              </div>
-            </article>
-
-            <article class="project-column">
-              <div class="project-image">
-                <video autoplay loop muted playsinline>
-                  <source src="assets/video/7.mp4" type="video/mp4" />
-                </video>
-              </div>
-              <div class="project-content">
-                <h3 class="project-title">
-                  <a href="/projects/hdfc-onboarding">HDFC Bank Onboarding</a>
+              </article>
+              
+              <article class="thought-item border-b pb-sm">
+                <h3 class="text-base font-semibold mb-xs">
+                  <a href="/thoughts/mobile-first" class="transition-colors hover-accent">
+                    Mobile-First Design Philosophy
+                  </a>
                 </h3>
-                <div class="project-meta">Banking • UX • Motion • 2022</div>
-                <p class="project-excerpt">
-                  Streamlined customer onboarding flow with engaging animations
-                  that simplify complex banking concepts.
+                <div class="text-xs text-gray uppercase tracking-wide mb-xs">September 2023</div>
+                <p class="text-sm text-gray">
+                  Why starting with mobile continues to be crucial for modern web
+                  applications.
                 </p>
-              </div>
-            </article>
-          </div>
-
-          <!-- Single Column Feature -->
-          <article class="project-feature">
-            <div class="project-feature-content">
-              <h3 class="project-title">
-                <a href="/projects/paytm-wallet">Paytm Wallet Experience</a>
-              </h3>
-              <div class="project-meta">FinTech • Payments • 2020</div>
-              <p class="project-description">
-                Redesigned payment flows and wallet management interface for
-                improved user experience and conversion. The project increased
-                user engagement with the wallet feature by 32% and streamlined
-                the transaction completion process.
-              </p>
+              </article>
+              
+              <article class="thought-item border-b pb-sm">
+                <h3 class="text-base font-semibold mb-xs">
+                  <a href="/thoughts/motion-design" class="transition-colors hover-accent">
+                    The Role of Motion in Modern Interfaces
+                  </a>
+                </h3>
+                <div class="text-xs text-gray uppercase tracking-wide mb-xs">August 2023</div>
+                <p class="text-sm text-gray">
+                  How thoughtful animation enhances user experience and provides
+                  meaningful feedback in digital products.
+                </p>
+              </article>
+              
+              <article class="thought-item">
+                <h3 class="text-base font-semibold mb-xs">
+                  <a href="/thoughts/accessibility" class="transition-colors hover-accent">
+                    Accessibility in Banking Apps
+                  </a>
+                </h3>
+                <div class="text-xs text-gray uppercase tracking-wide mb-xs">June 2023</div>
+                <p class="text-sm text-gray">
+                  Creating inclusive financial experiences that work for users of
+                  all abilities.
+                </p>
+              </article>
             </div>
-            <div class="project-feature-image">
-              <video autoplay loop muted playsinline>
-                <source src="assets/video/9.mp4" type="video/mp4" />
-              </video>
-            </div>
-          </article>
+          </section>
 
-          <!-- Four Column Row -->
-          <div class="projects-row four-columns">
-            <article class="project-small">
-              <div class="project-small-image">
-                <video autoplay loop muted playsinline>
-                  <source src="assets/video/8.mp4" type="video/mp4" />
-                </video>
-              </div>
-              <h3 class="project-small-title">
-                <a href="/projects/interactive-data">Financial Data Viz</a>
-              </h3>
-              <div class="project-meta">Data Viz • FinTech • 2022</div>
-            </article>
-
-            <article class="project-small">
-              <div class="project-small-image">
-                <video autoplay loop muted playsinline>
-                  <source src="assets/video/10.mp4" type="video/mp4" />
-                </video>
-              </div>
-              <h3 class="project-small-title">
-                <a href="/projects/portfolio-interactions"
-                  >Portfolio Interactions</a
-                >
-              </h3>
-              <div class="project-meta">Web • Animation • 2023</div>
-            </article>
-
-            <article class="project-small">
-              <div class="project-small-image">
-                <video autoplay loop muted playsinline>
-                  <source
-                    src="assets/video/perplexity_play.mp4"
-                    type="video/mp4"
-                  />
-                </video>
-              </div>
-              <h3 class="project-small-title">
-                <a href="/projects/perplexity">Perplexity AI Concept</a>
-              </h3>
-              <div class="project-meta">AI • Search Interface • 2023</div>
-            </article>
-
-            <article class="project-small">
-              <div class="project-small-image">
-                <video autoplay loop muted playsinline>
-                  <source
-                    src="assets/video/zomato_weather.mp4"
-                    type="video/mp4"
-                  />
-                </video>
-              </div>
-              <h3 class="project-small-title">
-                <a href="/projects/zomato">Zomato Weather Integration</a>
-              </h3>
-              <div class="project-meta">Food Tech • UX • 2022</div>
-            </article>
-          </div>
-        </section>
+        </div>
       </main>
 
-      <footer class="colophon">
-        <div class="colophon-content">
+      <!-- Footer -->
+      <footer class="colophon border-t mt-xl">
+        <div class="colophon-content flex justify-between items-center text-xs text-gray tracking-wide p-sm">
           <div>© 2025 Vikas Raj Yadav. All rights reserved.</div>
-          <div class="colophon-links">
-            <a href="/privacy">Privacy</a>
-            <a href="/terms">Terms</a>
-            <a href="/contact">Contact</a>
+          <div class="colophon-links flex gap-md">
+            <a href="/privacy" class="transition-colors hover-accent">Privacy</a>
+            <a href="/terms" class="transition-colors hover-accent">Terms</a>
+            <a href="/contact" class="transition-colors hover-accent">Contact</a>
           </div>
         </div>
       </footer>
