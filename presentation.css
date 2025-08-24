@@ -1,0 +1,318 @@
+/* ========================================
+   CSS CUSTOM PROPERTIES
+   ======================================== */
+:root {
+  /* Colors */
+  --text-color: #111111;
+  --bg-color: #f5f5f5;
+  --accent: #980000;
+  --accent-light: #b91c1c;
+  --gray-light: #e1e1e1;
+  --gray-med: #a0a0a0;
+  --white: #ffffff;
+  
+  /* Typography */
+  --sans-font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --serif-font: 'Playfair Display', Georgia, serif;
+  
+  /* Spacing */
+  --space-sm: 1.5rem;
+  --space-md: 2rem;
+  --space-lg: 3rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  
+  /* Transitions */
+  --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================
+   RESET & BASE STYLES
+   ======================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow: hidden;
+  height: 100%;
+  font-family: var(--sans-font);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* ========================================
+   PRESENTATION CONTAINER
+   ======================================== */
+.presentation-container {
+  display: flex;
+  width: 700vw; /* 7 slides */
+  height: 100vh;
+  transition: var(--transition);
+  transform: translateX(0);
+}
+
+.slide {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xl);
+  position: relative;
+}
+
+.slide-content {
+  max-width: 1200px;
+  width: 100%;
+  text-align: center;
+}
+
+/* ========================================
+   SLIDE TYPOGRAPHY
+   ======================================== */
+.slide-title {
+  font-family: var(--serif-font);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 900;
+  margin-bottom: var(--space-lg);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--text-color);
+}
+
+.slide-subtitle {
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: var(--space-2xl);
+  line-height: 1.4;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.slide-placeholder {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--gray-med);
+  font-style: italic;
+}
+
+.slide-placeholder p {
+  margin-bottom: var(--space-md);
+}
+
+/* ========================================
+   SLIDE BACKGROUNDS
+   ======================================== */
+.slide-1 {
+  background: linear-gradient(135deg, var(--bg-color) 0%, #e8e8e8 100%);
+}
+
+.slide-2 {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.slide-3 {
+  background: linear-gradient(135deg, #f1f3f4 0%, #e8eaed 100%);
+}
+
+.slide-4 {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.slide-5 {
+  background: linear-gradient(135deg, #f1f3f4 0%, #e8eaed 100%);
+}
+
+.slide-6 {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.slide-7 {
+  background: linear-gradient(135deg, var(--bg-color) 0%, #e8e8e8 100%);
+}
+
+/* ========================================
+   BOTTOM NAVIGATION
+   ======================================== */
+.bottom-navigation {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg);
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  padding: var(--space-sm) var(--space-lg);
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.nav-arrow {
+  width: 40px;
+  height: 40px;
+  background: var(--white);
+  border: 1.5px solid var(--gray-light);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  color: var(--text-color);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.nav-arrow:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(152, 0, 0, 0.2);
+}
+
+.nav-arrow:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: var(--gray-light);
+  border-color: var(--gray-light);
+  color: var(--gray-med);
+  transform: none;
+  box-shadow: none;
+}
+
+.nav-arrow i {
+  font-size: 1rem;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.slide-counter {
+  font-family: var(--serif-font);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  min-width: 120px;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.slide-counter span {
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.slide-counter span.changing {
+  animation: numberChange 0.3s ease-in-out;
+}
+
+@keyframes numberChange {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 768px) {
+  .slide {
+    padding: var(--space-lg);
+  }
+  
+  .slide-title {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+  }
+  
+  .slide-subtitle {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+  }
+  
+  .bottom-navigation {
+    gap: var(--space-md);
+    padding: var(--space-xs) var(--space-md);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+  
+  .nav-arrow {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .slide-counter {
+    font-size: 1rem;
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .slide {
+    padding: var(--space-md);
+  }
+  
+  .slide-title {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+  
+  .slide-subtitle {
+    font-size: clamp(0.9rem, 3vw, 1.25rem);
+  }
+  
+  .bottom-navigation {
+    gap: var(--space-sm);
+    padding: var(--space-xs) var(--space-sm);
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+  
+  .nav-arrow {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .nav-arrow i {
+    font-size: 0.9rem;
+  }
+  
+  .slide-counter {
+    font-size: 0.9rem;
+    min-width: 90px;
+  }
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
