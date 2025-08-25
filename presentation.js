@@ -29,8 +29,24 @@ class PresentationController {
         // Keyboard navigation
         document.addEventListener('keydown', (e) => this.handleKeyPress(e));
         
+        // Section links in index slide
+        this.bindSectionLinks();
+        
         // Touch/swipe support for mobile
         this.initTouchSupport();
+    }
+    
+    bindSectionLinks() {
+        const sectionLinks = document.querySelectorAll('.section-link');
+        sectionLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const slideIndex = parseInt(link.getAttribute('data-slide'));
+                if (!isNaN(slideIndex)) {
+                    this.goToSlide(slideIndex);
+                }
+            });
+        });
     }
     
     handleKeyPress(e) {
