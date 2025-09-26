@@ -1,12 +1,10 @@
-import React, { useState, useMemo, useRef } from 'react'
-import { useFrame } from '@react-three/fiber'
+import React, { useState, useMemo } from 'react'
 import { Box } from '@react-three/drei'
 import * as THREE from 'three'
 
-// Video Card Component
-function VideoCard({ videoSrc, position, index, isActive, onClick }) {
-  const meshRef = useRef()
-  const [videoDimensions, setVideoDimensions] = useState({ width: 2.4, height: 1.8 }) // 4:3 aspect ratio
+// Simple Video Card Component
+function VideoCard({ videoSrc, position, onClick }) {
+  const [videoDimensions, setVideoDimensions] = useState({ width: 1.6, height: 1.2 }) // 4:3 aspect ratio
   
   const video = useMemo(() => {
     const vid = document.createElement('video')
@@ -18,7 +16,7 @@ function VideoCard({ videoSrc, position, index, isActive, onClick }) {
     
     vid.addEventListener('loadedmetadata', () => {
       const aspectRatio = vid.videoWidth / vid.videoHeight
-      const baseHeight = 1.8
+      const baseHeight = 1.2
       const width = baseHeight * aspectRatio
       setVideoDimensions({ width, height: baseHeight })
     })
@@ -38,20 +36,10 @@ function VideoCard({ videoSrc, position, index, isActive, onClick }) {
     return tex
   }, [video])
 
-  useFrame(() => {
-    if (meshRef.current) {
-      // Subtle floating animation for active card
-      if (isActive) {
-        meshRef.current.position.y = position[1] + Math.sin(Date.now() * 0.002) * 0.05
-      }
-    }
-  })
-
   return (
     <Box
-      ref={meshRef}
       position={position}
-      args={[videoDimensions.width, videoDimensions.height, 0.02]}
+      args={[videoDimensions.width, videoDimensions.height, 0.01]}
       onClick={onClick}
     >
       <meshBasicMaterial 
@@ -65,7 +53,6 @@ function VideoCard({ videoSrc, position, index, isActive, onClick }) {
 
 function Scene() {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [isAnimating, setIsAnimating] = useState(false)
   
   // All 12 videos
   const videos = [
@@ -83,55 +70,30 @@ function Scene() {
     '/assets/video/zomato_weather.mp4'
   ]
 
-  const handleStackClick = () => {
-    if (isAnimating) return
-    
-    setIsAnimating(true)
+  const handleClick = () => {
     setCurrentIndex((prev) => (prev + 1) % videos.length)
-    
-    // Reset animation state after transition
-    setTimeout(() => setIsAnimating(false), 500)
   }
 
-  // Calculate positions for stacked cards (showing 3 at once)
+  // Horizontal layout - all videos in a row
   const getCardPosition = (index) => {
-    const relativeIndex = (index - currentIndex + videos.length) % videos.length
-    const stackOffset = 0.1 // Distance between cards
-    const horizontalOffset = 0.3 // Side offset for depth
+    const spacing = 2.2 // Distance between videos
+    const startX = -(videos.length - 1) * spacing / 2 // Center the row
     
-    if (relativeIndex === 0) {
-      // Front card (active)
-      return [0, 0, 0]
-    } else if (relativeIndex === 1) {
-      // Second card (behind and slightly offset)
-      return [-horizontalOffset, 0, -stackOffset]
-    } else if (relativeIndex === 2) {
-      // Third card (furthest back)
-      return [-horizontalOffset * 1.5, 0, -stackOffset * 2]
-    } else {
-      // Hidden cards
-      return [0, 0, -stackOffset * 3]
-    }
+    return [startX + index * spacing, 0, 0]
   }
 
   return (
     <>
-      {/* Stack of Video Cards */}
+      {/* Horizontal row of all videos */}
       {videos.map((videoSrc, index) => {
         const position = getCardPosition(index)
-        const isActive = index === currentIndex
-        const isVisible = (index - currentIndex + videos.length) % videos.length < 3
-        
-        if (!isVisible) return null
         
         return (
           <VideoCard
             key={index}
             videoSrc={videoSrc}
             position={position}
-            index={index}
-            isActive={isActive}
-            onClick={handleStackClick}
+            onClick={handleClick}
           />
         )
       })}
