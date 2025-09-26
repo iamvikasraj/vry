@@ -32,6 +32,9 @@ function VideoCard({ videoSrc, position, index, isActive, onClick }) {
     tex.minFilter = THREE.LinearFilter
     tex.magFilter = THREE.LinearFilter
     tex.generateMipmaps = false
+    tex.wrapS = THREE.ClampToEdgeWrapping
+    tex.wrapT = THREE.ClampToEdgeWrapping
+    tex.format = THREE.RGBAFormat
     return tex
   }, [video])
 
@@ -51,14 +54,10 @@ function VideoCard({ videoSrc, position, index, isActive, onClick }) {
       args={[videoDimensions.width, videoDimensions.height, 0.02]}
       onClick={onClick}
     >
-      <meshStandardMaterial 
+      <meshBasicMaterial 
         map={texture}
-        emissive={isActive ? '#ffffff' : '#000000'}
-        emissiveIntensity={isActive ? 0.05 : 0}
         transparent={false}
         side={THREE.DoubleSide}
-        metalness={0}
-        roughness={1}
       />
     </Box>
   )
