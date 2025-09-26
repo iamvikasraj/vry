@@ -2,12 +2,11 @@ import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 
 function UI() {
-  const [activeSection, setActiveSection] = useState('home')
+  const [activeSection, setActiveSection] = useState('gallery')
 
   const sections = [
-    { id: 'home', label: 'Home' },
+    { id: 'gallery', label: 'Gallery' },
     { id: 'about', label: 'About' },
-    { id: 'projects', label: 'Projects' },
     { id: 'contact', label: 'Contact' }
   ]
 
@@ -34,6 +33,24 @@ function UI() {
         </ul>
       </nav>
 
+      {/* Gallery Info */}
+      <div className="gallery-info">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="info-card"
+        >
+          <h3>🎨 Interactive Art Gallery</h3>
+          <p>Click on any video installation to play • Hover to preview</p>
+          <div className="stats">
+            <span>📹 12 Video Installations</span>
+            <span>🎯 Click to Play</span>
+            <span>🖱️ Drag to Explore</span>
+          </div>
+        </motion.div>
+      </div>
+
       {/* Main Content */}
       <main className="main-content">
         <motion.div
@@ -43,31 +60,49 @@ function UI() {
           transition={{ duration: 0.5 }}
           className="content-section"
         >
-          {activeSection === 'home' && (
+          {activeSection === 'gallery' && (
             <div className="hero">
-              <h2>Welcome to My 3D Portfolio</h2>
-              <p>Explore my work through an interactive 3D experience</p>
+              <h2>Digital Art Exhibition</h2>
+              <p>Explore my creative work through interactive video installations</p>
+              <div className="gallery-features">
+                <div className="feature">
+                  <span className="icon">🎬</span>
+                  <span>Video Installations</span>
+                </div>
+                <div className="feature">
+                  <span className="icon">🎮</span>
+                  <span>Interactive Controls</span>
+                </div>
+                <div className="feature">
+                  <span className="icon">🌟</span>
+                  <span>Immersive Experience</span>
+                </div>
+              </div>
             </div>
           )}
           
           {activeSection === 'about' && (
             <div className="about">
-              <h2>About Me</h2>
-              <p>Creative technologist passionate about immersive experiences</p>
-            </div>
-          )}
-          
-          {activeSection === 'projects' && (
-            <div className="projects">
-              <h2>Featured Projects</h2>
-              <p>Interactive 3D experiences and creative solutions</p>
+              <h2>About the Artist</h2>
+              <p>Creative technologist passionate about immersive experiences and digital art</p>
+              <div className="skills">
+                <span>Design Direction</span>
+                <span>Creative Technology</span>
+                <span>Interactive Media</span>
+                <span>Visual Storytelling</span>
+              </div>
             </div>
           )}
           
           {activeSection === 'contact' && (
             <div className="contact">
-              <h2>Get In Touch</h2>
-              <p>Let's create something amazing together</p>
+              <h2>Let's Create Together</h2>
+              <p>Ready to bring your vision to life with cutting-edge design and technology</p>
+              <div className="contact-methods">
+                <a href="mailto:vikas@example.com">📧 Email</a>
+                <a href="https://linkedin.com/in/vikasraj">💼 LinkedIn</a>
+                <a href="https://github.com/vikasraj">💻 GitHub</a>
+              </div>
             </div>
           )}
         </motion.div>
@@ -75,7 +110,7 @@ function UI() {
 
       {/* Controls Info */}
       <div className="controls-info">
-        <p>🖱️ Click and drag to rotate • Scroll to zoom</p>
+        <p>🖱️ Click and drag to explore • Scroll to zoom • Click videos to play</p>
       </div>
     </div>
   )
