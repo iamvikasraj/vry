@@ -1,10 +1,10 @@
 import React, { useRef, useState, useMemo } from 'react'
-import { useFrame, useThree } from '@react-three/fiber'
-import { Box, Text, Environment } from '@react-three/drei'
+import { useFrame } from '@react-three/fiber'
+import { Box, Text } from '@react-three/drei'
 import * as THREE from 'three'
 
-// Video Installation Component
-function VideoInstallation({ position, videoSrc, title, description, index }) {
+// Wall-mounted Video Installation Component
+function WallVideoInstallation({ wall, position, videoSrc, title, index }) {
   const meshRef = useRef()
   const [isPlaying, setIsPlaying] = useState(false)
   const [hovered, setHovered] = useState(false)
@@ -38,25 +38,39 @@ function VideoInstallation({ position, videoSrc, title, description, index }) {
   }
 
   useFrame(() => {
-    if (meshRef.current) {
-      // Subtle floating animation
-      meshRef.current.position.y = position[1] + Math.sin(Date.now() * 0.001 + index) * 0.1
-      
-      // Hover effect
-      if (hovered) {
-        meshRef.current.scale.setScalar(1.1)
-      } else {
-        meshRef.current.scale.setScalar(1)
-      }
+    if (meshRef.current && hovered) {
+      // Subtle hover animation
+      meshRef.current.scale.setScalar(1.05)
+    } else if (meshRef.current) {
+      meshRef.current.scale.setScalar(1)
     }
   })
 
+  // Position the video on the wall
+  const wallPosition = useMemo(() => {
+    const [x, y, z] = position
+    const offset = 0.01 // Slightly in front of wall
+    
+    switch (wall) {
+      case 'front':
+        return [x, y, 10 + offset]
+      case 'back':
+        return [x, y, -10 - offset]
+      case 'left':
+        return [-10 - offset, y, z]
+      case 'right':
+        return [10 + offset, y, z]
+      default:
+        return position
+    }
+  }, [wall, position])
+
   return (
-    <group position={position}>
+    <group position={wallPosition}>
       {/* Video Screen */}
       <Box
         ref={meshRef}
-        args={[2.5, 1.5, 0.1]}
+        args={[2, 1.2, 0.05]}
         onClick={handleClick}
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
@@ -64,20 +78,20 @@ function VideoInstallation({ position, videoSrc, title, description, index }) {
         <meshStandardMaterial 
           map={texture}
           emissive={isPlaying ? '#ffffff' : '#000000'}
-          emissiveIntensity={isPlaying ? 0.2 : 0}
+          emissiveIntensity={isPlaying ? 0.1 : 0}
         />
       </Box>
       
       {/* Frame */}
-      <Box position={[0, 0, -0.06]} args={[2.7, 1.7, 0.05]}>
-        <meshStandardMaterial color="#2a2a2a" />
+      <Box position={[0, 0, -0.03]} args={[2.1, 1.3, 0.02]}>
+        <meshStandardMaterial color="#1a1a1a" />
       </Box>
       
       {/* Title */}
       <Text
-        position={[0, -1.2, 0.1]}
-        fontSize={0.2}
-        color={hovered ? '#ffffff' : '#888888'}
+        position={[0, -0.8, 0.06]}
+        fontSize={0.15}
+        color={hovered ? '#ffffff' : '#666666'}
         anchorX="center"
         anchorY="middle"
       >
@@ -86,8 +100,8 @@ function VideoInstallation({ position, videoSrc, title, description, index }) {
       
       {/* Play/Pause Indicator */}
       <Text
-        position={[0, 0, 0.2]}
-        fontSize={0.3}
+        position={[0, 0, 0.08]}
+        fontSize={0.2}
         color={isPlaying ? '#ff6b6b' : '#4ecdc4'}
         anchorX="center"
         anchorY="middle"
@@ -99,42 +113,43 @@ function VideoInstallation({ position, videoSrc, title, description, index }) {
 }
 
 function Scene() {
-  const { camera } = useThree()
-  
-  // Gallery layout - videos arranged in a grid
+  // Reduced number of videos for better performance
   const installations = [
-    { video: '/assets/video/1.mp4', title: 'Project 1', description: 'Interactive Design' },
-    { video: '/assets/video/2.mp4', title: 'Project 2', description: 'UI/UX Innovation' },
-    { video: '/assets/video/3.mp4', title: 'Project 3', description: 'Creative Technology' },
-    { video: '/assets/video/4.mp4', title: 'Project 4', description: 'Digital Experience' },
-    { video: '/assets/video/5.mp4', title: 'Project 5', description: 'Visual Storytelling' },
-    { video: '/assets/video/6.mp4', title: 'Project 6', description: 'Brand Identity' },
-    { video: '/assets/video/7.mp4', title: 'Project 7', description: 'Motion Graphics' },
-    { video: '/assets/video/8.mp4', title: 'Project 8', description: 'Web Development' },
-    { video: '/assets/video/9.mp4', title: 'Project 9', description: 'App Design' },
-    { video: '/assets/video/10.mp4', title: 'Project 10', description: 'Creative Direction' },
-    { video: '/assets/video/perplexity_play.mp4', title: 'Perplexity', description: 'AI Integration' },
-    { video: '/assets/video/zomato_weather.mp4', title: 'Zomato Weather', description: 'Data Visualization' },
+    { video: '/assets/video/1.mp4', title: 'Project 1' },
+    { video: '/assets/video/2.mp4', title: 'Project 2' },
+    { video: '/assets/video/3.mp4', title: 'Project 3' },
+    { video: '/assets/video/4.mp4', title: 'Project 4' },
+    { video: '/assets/video/5.mp4', title: 'Project 5' },
+    { video: '/assets/video/perplexity_play.mp4', title: 'Perplexity' },
+    { video: '/assets/video/zomato_weather.mp4', title: 'Zomato Weather' },
+    { video: '/assets/video/clock.mp4', title: 'Clock Animation' },
   ]
 
-  // Calculate grid positions
-  const getGridPosition = (index) => {
-    const cols = 4
-    const spacing = 4
-    const row = Math.floor(index / cols)
-    const col = index % cols
-    return [
-      (col - (cols - 1) / 2) * spacing,
-      0,
-      (row - (installations.length / cols - 1) / 2) * spacing
-    ]
+  // Wall positions for videos
+  const getWallPosition = (index) => {
+    const videosPerWall = 2
+    const wallIndex = Math.floor(index / videosPerWall)
+    const videoIndex = index % videosPerWall
+    
+    const walls = ['front', 'right', 'back', 'left']
+    const wall = walls[wallIndex % walls.length]
+    
+    switch (wall) {
+      case 'front':
+        return [videoIndex * 4 - 2, 0, 0]
+      case 'right':
+        return [0, 0, videoIndex * 4 - 2]
+      case 'back':
+        return [videoIndex * 4 - 2, 0, 0]
+      case 'left':
+        return [0, 0, videoIndex * 4 - 2]
+      default:
+        return [0, 0, 0]
+    }
   }
 
   return (
     <>
-      {/* Gallery Environment */}
-      <Environment preset="warehouse" />
-      
       {/* Gallery Floor */}
       <Box position={[0, -2, 0]} args={[20, 0.1, 20]}>
         <meshStandardMaterial color="#1a1a1a" />
@@ -159,38 +174,29 @@ function Scene() {
         <meshStandardMaterial color="#2a2a2a" />
       </Box>
       
-      {/* Video Installations */}
-      {installations.map((installation, index) => (
-        <VideoInstallation
-          key={index}
-          position={getGridPosition(index)}
-          videoSrc={installation.video}
-          title={installation.title}
-          description={installation.description}
-          index={index}
-        />
-      ))}
-      
-      {/* Gallery Lighting */}
-      <ambientLight intensity={0.3} />
-      <directionalLight position={[0, 10, 0]} intensity={0.8} />
-      <pointLight position={[0, 3, 0]} intensity={0.5} color="#ffffff" />
-      
-      {/* Spotlights for each installation */}
-      {installations.map((_, index) => {
-        const pos = getGridPosition(index)
+      {/* Wall-mounted Video Installations */}
+      {installations.map((installation, index) => {
+        const wallIndex = Math.floor(index / 2)
+        const walls = ['front', 'right', 'back', 'left']
+        const wall = walls[wallIndex % walls.length]
+        const position = getWallPosition(index)
+        
         return (
-          <spotLight
-            key={`light-${index}`}
-            position={[pos[0], 3, pos[2]]}
-            angle={0.3}
-            penumbra={0.5}
-            intensity={0.4}
-            color="#ffffff"
-            target-position={[pos[0], 0, pos[2]]}
+          <WallVideoInstallation
+            key={index}
+            wall={wall}
+            position={position}
+            videoSrc={installation.video}
+            title={installation.title}
+            index={index}
           />
         )
       })}
+      
+      {/* Gallery Lighting */}
+      <ambientLight intensity={0.4} />
+      <directionalLight position={[0, 10, 0]} intensity={0.6} />
+      <pointLight position={[0, 2, 0]} intensity={0.3} color="#ffffff" />
     </>
   )
 }

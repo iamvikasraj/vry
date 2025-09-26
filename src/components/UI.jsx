@@ -44,7 +44,7 @@ function UI() {
           <h3>🎨 Interactive Art Gallery</h3>
           <p>Click on any video installation to play • Hover to preview</p>
           <div className="stats">
-            <span>📹 12 Video Installations</span>
+            <span>📹 8 Wall-mounted Videos</span>
             <span>🎯 Click to Play</span>
             <span>🖱️ Drag to Explore</span>
           </div>
@@ -66,16 +66,16 @@ function UI() {
               <p>Explore my creative work through interactive video installations</p>
               <div className="gallery-features">
                 <div className="feature">
-                  <span className="icon">🎬</span>
-                  <span>Video Installations</span>
+                  <span className="icon">🖼️</span>
+                  <span>Wall-mounted Videos</span>
                 </div>
                 <div className="feature">
                   <span className="icon">🎮</span>
-                  <span>Interactive Controls</span>
+                  <span>Click to Play</span>
                 </div>
                 <div className="feature">
-                  <span className="icon">🌟</span>
-                  <span>Immersive Experience</span>
+                  <span className="icon">🏛️</span>
+                  <span>Gallery Experience</span>
                 </div>
               </div>
             </div>
