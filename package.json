@@ -1,13 +1,19 @@
 {
   "name": "vry-portfolio",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "node src/scripts/generate-projects.js && vite build",
     "preview": "vite preview",
-    "generate-projects": "node src/scripts/generate-projects.js"
+    "generate-projects": "node src/scripts/generate-projects.js",
+    "version:create": "node scripts/version.js create",
+    "version:list": "node scripts/version.js list",
+    "version:checkout": "node scripts/version.js checkout",
+    "version:current": "node scripts/version.js current",
+    "deploy": "node scripts/deploy.js deploy",
+    "release": "npm run version:create && npm run deploy"
   },
   "dependencies": {
     "gsap": "^3.12.7",
