@@ -41,12 +41,12 @@ function UI() {
           transition={{ duration: 0.5 }}
           className="info-card"
         >
-          <h3>🎨 Interactive Art Gallery</h3>
-          <p>Click on any video installation to play • Hover to preview</p>
+          <h3>✨ Rotating Video Surface</h3>
+          <p>Click the video to play • Watch it rotate and reflect</p>
           <div className="stats">
-            <span>📹 8 Wall-mounted Videos</span>
-            <span>🎯 Click to Play</span>
-            <span>🖱️ Drag to Explore</span>
+            <span>🎬 Single Video Display</span>
+            <span>🔄 Continuous Rotation</span>
+            <span>✨ Reflective Surface</span>
           </div>
         </motion.div>
       </div>
@@ -62,20 +62,20 @@ function UI() {
         >
           {activeSection === 'gallery' && (
             <div className="hero">
-              <h2>Digital Art Exhibition</h2>
-              <p>Explore my creative work through interactive video installations</p>
+              <h2>Immersive Video Experience</h2>
+              <p>Watch my work come to life on a rotating reflective surface</p>
               <div className="gallery-features">
                 <div className="feature">
-                  <span className="icon">🖼️</span>
-                  <span>Wall-mounted Videos</span>
+                  <span className="icon">🔄</span>
+                  <span>Rotating Display</span>
                 </div>
                 <div className="feature">
-                  <span className="icon">🎮</span>
-                  <span>Click to Play</span>
+                  <span className="icon">✨</span>
+                  <span>Reflective Surface</span>
                 </div>
                 <div className="feature">
-                  <span className="icon">🏛️</span>
-                  <span>Gallery Experience</span>
+                  <span className="icon">🎬</span>
+                  <span>Interactive Video</span>
                 </div>
               </div>
             </div>

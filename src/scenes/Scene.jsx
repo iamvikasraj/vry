@@ -1,10 +1,10 @@
 import React, { useRef, useState, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { Box, Text } from '@react-three/drei'
+import { Box, Text, Environment } from '@react-three/drei'
 import * as THREE from 'three'
 
-// Wall-mounted Video Installation Component
-function WallVideoInstallation({ wall, position, videoSrc, title, index }) {
+// Rotating Video Surface Component
+function RotatingVideoSurface() {
   const meshRef = useRef()
   const [isPlaying, setIsPlaying] = useState(false)
   const [hovered, setHovered] = useState(false)
@@ -12,13 +12,13 @@ function WallVideoInstallation({ wall, position, videoSrc, title, index }) {
   // Create video element
   const video = useMemo(() => {
     const vid = document.createElement('video')
-    vid.src = videoSrc
+    vid.src = '/assets/video/perplexity_play.mp4' // Using your best video
     vid.crossOrigin = 'anonymous'
     vid.loop = true
     vid.muted = true
     vid.playsInline = true
     return vid
-  }, [videoSrc])
+  }, [])
 
   // Create video texture
   const texture = useMemo(() => {
@@ -37,40 +37,29 @@ function WallVideoInstallation({ wall, position, videoSrc, title, index }) {
     }
   }
 
-  useFrame(() => {
-    if (meshRef.current && hovered) {
-      // Subtle hover animation
-      meshRef.current.scale.setScalar(1.05)
-    } else if (meshRef.current) {
-      meshRef.current.scale.setScalar(1)
+  useFrame((state) => {
+    if (meshRef.current) {
+      // Continuous rotation
+      meshRef.current.rotation.y = state.clock.elapsedTime * 0.5
+      
+      // Subtle floating motion
+      meshRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.8) * 0.2
+      
+      // Hover effect
+      if (hovered) {
+        meshRef.current.scale.setScalar(1.1)
+      } else {
+        meshRef.current.scale.setScalar(1)
+      }
     }
   })
 
-  // Position the video on the wall
-  const wallPosition = useMemo(() => {
-    const [x, y, z] = position
-    const offset = 0.01 // Slightly in front of wall
-    
-    switch (wall) {
-      case 'front':
-        return [x, y, 10 + offset]
-      case 'back':
-        return [x, y, -10 - offset]
-      case 'left':
-        return [-10 - offset, y, z]
-      case 'right':
-        return [10 + offset, y, z]
-      default:
-        return position
-    }
-  }, [wall, position])
-
   return (
-    <group position={wallPosition}>
-      {/* Video Screen */}
+    <group position={[0, 0, 0]}>
+      {/* Main Video Surface */}
       <Box
         ref={meshRef}
-        args={[2, 1.2, 0.05]}
+        args={[3, 2, 0.1]}
         onClick={handleClick}
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
@@ -78,125 +67,76 @@ function WallVideoInstallation({ wall, position, videoSrc, title, index }) {
         <meshStandardMaterial 
           map={texture}
           emissive={isPlaying ? '#ffffff' : '#000000'}
-          emissiveIntensity={isPlaying ? 0.1 : 0}
+          emissiveIntensity={isPlaying ? 0.3 : 0}
+          metalness={0.8}
+          roughness={0.2}
         />
       </Box>
       
-      {/* Frame */}
-      <Box position={[0, 0, -0.03]} args={[2.1, 1.3, 0.02]}>
-        <meshStandardMaterial color="#1a1a1a" />
+      {/* Reflective Base */}
+      <Box position={[0, -1.5, 0]} args={[4, 0.1, 4]}>
+        <meshStandardMaterial 
+          color="#1a1a1a"
+          metalness={0.9}
+          roughness={0.1}
+        />
       </Box>
-      
-      {/* Title */}
-      <Text
-        position={[0, -0.8, 0.06]}
-        fontSize={0.15}
-        color={hovered ? '#ffffff' : '#666666'}
-        anchorX="center"
-        anchorY="middle"
-      >
-        {title}
-      </Text>
       
       {/* Play/Pause Indicator */}
       <Text
-        position={[0, 0, 0.08]}
-        fontSize={0.2}
+        position={[0, 0, 0.2]}
+        fontSize={0.4}
         color={isPlaying ? '#ff6b6b' : '#4ecdc4'}
         anchorX="center"
         anchorY="middle"
       >
         {isPlaying ? '⏸️' : '▶️'}
       </Text>
+      
+      {/* Title */}
+      <Text
+        position={[0, -2.5, 0]}
+        fontSize={0.2}
+        color={hovered ? '#ffffff' : '#888888'}
+        anchorX="center"
+        anchorY="middle"
+      >
+        Perplexity AI Project
+      </Text>
     </group>
   )
 }
 
 function Scene() {
-  // Reduced number of videos for better performance
-  const installations = [
-    { video: '/assets/video/1.mp4', title: 'Project 1' },
-    { video: '/assets/video/2.mp4', title: 'Project 2' },
-    { video: '/assets/video/3.mp4', title: 'Project 3' },
-    { video: '/assets/video/4.mp4', title: 'Project 4' },
-    { video: '/assets/video/5.mp4', title: 'Project 5' },
-    { video: '/assets/video/perplexity_play.mp4', title: 'Perplexity' },
-    { video: '/assets/video/zomato_weather.mp4', title: 'Zomato Weather' },
-    { video: '/assets/video/clock.mp4', title: 'Clock Animation' },
-  ]
-
-  // Wall positions for videos
-  const getWallPosition = (index) => {
-    const videosPerWall = 2
-    const wallIndex = Math.floor(index / videosPerWall)
-    const videoIndex = index % videosPerWall
-    
-    const walls = ['front', 'right', 'back', 'left']
-    const wall = walls[wallIndex % walls.length]
-    
-    switch (wall) {
-      case 'front':
-        return [videoIndex * 4 - 2, 0, 0]
-      case 'right':
-        return [0, 0, videoIndex * 4 - 2]
-      case 'back':
-        return [videoIndex * 4 - 2, 0, 0]
-      case 'left':
-        return [0, 0, videoIndex * 4 - 2]
-      default:
-        return [0, 0, 0]
-    }
-  }
-
   return (
     <>
-      {/* Gallery Floor */}
-      <Box position={[0, -2, 0]} args={[20, 0.1, 20]}>
-        <meshStandardMaterial color="#1a1a1a" />
+      {/* Environment for reflections */}
+      <Environment preset="studio" />
+      
+      {/* Reflective Floor */}
+      <Box position={[0, -3, 0]} args={[20, 0.1, 20]}>
+        <meshStandardMaterial 
+          color="#0a0a0a"
+          metalness={0.8}
+          roughness={0.1}
+        />
       </Box>
       
-      {/* Gallery Ceiling */}
-      <Box position={[0, 4, 0]} args={[20, 0.1, 20]}>
-        <meshStandardMaterial color="#0a0a0a" />
-      </Box>
+      {/* Rotating Video Surface */}
+      <RotatingVideoSurface />
       
-      {/* Gallery Walls */}
-      <Box position={[10, 1, 0]} args={[0.1, 6, 20]}>
-        <meshStandardMaterial color="#2a2a2a" />
-      </Box>
-      <Box position={[-10, 1, 0]} args={[0.1, 6, 20]}>
-        <meshStandardMaterial color="#2a2a2a" />
-      </Box>
-      <Box position={[0, 1, 10]} args={[20, 6, 0.1]}>
-        <meshStandardMaterial color="#2a2a2a" />
-      </Box>
-      <Box position={[0, 1, -10]} args={[20, 6, 0.1]}>
-        <meshStandardMaterial color="#2a2a2a" />
-      </Box>
-      
-      {/* Wall-mounted Video Installations */}
-      {installations.map((installation, index) => {
-        const wallIndex = Math.floor(index / 2)
-        const walls = ['front', 'right', 'back', 'left']
-        const wall = walls[wallIndex % walls.length]
-        const position = getWallPosition(index)
-        
-        return (
-          <WallVideoInstallation
-            key={index}
-            wall={wall}
-            position={position}
-            videoSrc={installation.video}
-            title={installation.title}
-            index={index}
-          />
-        )
-      })}
-      
-      {/* Gallery Lighting */}
-      <ambientLight intensity={0.4} />
-      <directionalLight position={[0, 10, 0]} intensity={0.6} />
-      <pointLight position={[0, 2, 0]} intensity={0.3} color="#ffffff" />
+      {/* Dramatic Lighting */}
+      <ambientLight intensity={0.2} />
+      <directionalLight position={[5, 5, 5]} intensity={1} color="#ffffff" />
+      <pointLight position={[0, 3, 0]} intensity={0.5} color="#4ecdc4" />
+      <spotLight 
+        position={[0, 8, 0]} 
+        angle={0.3} 
+        penumbra={0.5} 
+        intensity={0.8} 
+        color="#ffffff"
+        target-position={[0, 0, 0]}
+      />
     </>
   )
 }
