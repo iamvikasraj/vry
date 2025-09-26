@@ -1,10 +1,8 @@
-import React, { useRef, useState, useMemo } from 'react'
-import { useFrame } from '@react-three/fiber'
+import React, { useState, useMemo } from 'react'
 import { Box } from '@react-three/drei'
 import * as THREE from 'three'
 
-function RotatingVideoSurface() {
-  const meshRef = useRef()
+function VideoSurface() {
   const [isPlaying, setIsPlaying] = useState(false)
   
   const video = useMemo(() => {
@@ -19,7 +17,7 @@ function RotatingVideoSurface() {
 
   const texture = useMemo(() => {
     const tex = new THREE.VideoTexture(video)
-    tex.flipY = true // Fix upside-down video
+    tex.flipY = true
     return tex
   }, [video])
 
@@ -33,15 +31,8 @@ function RotatingVideoSurface() {
     }
   }
 
-  useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y = state.clock.elapsedTime * 0.3
-    }
-  })
-
   return (
     <Box
-      ref={meshRef}
       args={[2, 1.5, 0.05]}
       onClick={handleClick}
     >
@@ -57,8 +48,8 @@ function RotatingVideoSurface() {
 function Scene() {
   return (
     <>
-      <RotatingVideoSurface />
-      <ambientLight intensity={0.6} />
+      <VideoSurface />
+      <ambientLight intensity={0.8} color="#ffffff" />
     </>
   )
 }
