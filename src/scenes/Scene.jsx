@@ -57,6 +57,8 @@ function VideoCard({ videoSrc, position, index, isActive, onClick }) {
         emissiveIntensity={isActive ? 0.05 : 0}
         transparent={false}
         side={THREE.DoubleSide}
+        metalness={0}
+        roughness={1}
       />
     </Box>
   )
