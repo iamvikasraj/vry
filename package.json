@@ -5,9 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node src/scripts/generate-projects.js && vite build",
+    "build": "vite build",
     "preview": "vite preview",
-    "generate-projects": "node src/scripts/generate-projects.js",
     "version:create": "node scripts/version.js create",
     "version:list": "node scripts/version.js list",
     "version:checkout": "node scripts/version.js checkout",
@@ -16,11 +15,20 @@
     "release": "npm run version:create && npm run deploy"
   },
   "dependencies": {
-    "gsap": "^3.12.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@react-three/fiber": "^8.15.12",
+    "@react-three/drei": "^9.88.13",
+    "@react-three/postprocessing": "^2.15.11",
     "three": "^0.174.0",
-    "water.css": "^2.1.1"
+    "gsap": "^3.12.7",
+    "framer-motion": "^10.16.16",
+    "leva": "^0.9.35"
   },
   "devDependencies": {
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.1",
     "sass": "^1.85.1",
     "vite": "^5.1.4"
   },
