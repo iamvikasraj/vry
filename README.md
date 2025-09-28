@@ -1,43 +1,30 @@
-# Vikas Raj Yadav - Portfolio
+# Vikas Raj - Portfolio
 
-A modern, interactive portfolio website showcasing my work as a Design Director. Built with Vite, Three.js, and GSAP.
+A clean, simple portfolio website built with vanilla HTML, CSS, and JavaScript.
+
+## Getting Started
+
+1. Clone the repository
+2. Run the development server:
+   ```bash
+   npm run dev
+   ```
+3. Open your browser and go to `http://localhost:8000`
 
 ## Features
 
-- Modern, responsive design with Tailwind CSS
-- Interactive 3D background with Three.js
-- Smooth animations with GSAP
-- Optimized for performance and SEO
-- Mobile-friendly layout
+- Clean, minimal design
+- Responsive layout
+- Simple and fast loading
+- Easy to customize
 
-## Setup
+## Tech Stack
 
-1. Install dependencies:
-```bash
-npm install
-```
+- HTML5
+- CSS3
+- Vanilla JavaScript
+- Python HTTP Server (for development)
 
-2. Start development server:
-```bash
-npm run dev
-```
+## License
 
-3. Build for production:
-```bash
-npm run build
-```
-
-## Technologies Used
-
-- Vite
-- Three.js
-- GSAP
-- Tailwind CSS
-- PostCSS
-
-## Contact
-
-- LinkedIn: [linkedin.com/in/vraj247](https://linkedin.com/in/vraj247)
-- Twitter: [@Vraj247](https://twitter.com/Vraj247)
-- GitHub: [github.com/vraj247](https://github.com/vraj247)
-- Dribbble: [dribbble.com/Vraj247](https://dribbble.com/Vraj247) 
+MIT License
