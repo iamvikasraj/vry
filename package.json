@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "live-server --port=8000 --open=/",
     "start": "live-server --port=8000 --open=/",
-    "python": "python3 -m http.server 8000"
+    "build": "echo 'Static site - no build needed'",
+    "deploy": "echo 'Deploy static files to Netlify'"
   },
   "keywords": [
     "portfolio",
