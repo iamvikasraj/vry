@@ -1,0 +1,512 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #fff;
+    background: #020404;
+    font-display: swap;
+}
+
+.container {
+    display: flex;
+    width: 638px;
+    height: 1673px;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    border-left: 0.5px solid #202020;
+    border-right: 0.5px solid #202020;
+    background: #020404;
+    margin: 0 auto;
+}
+
+/* Header */
+.header {
+    display: flex;
+    height: 99px;
+    padding: 0 40px;
+    align-items: center;
+    flex-shrink: 0;
+    align-self: stretch;
+}
+
+.name {
+    color: #D7D7D7;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+/* Multi-disciplinary Container */
+.headline {
+    display: flex;
+    padding: 40px 41px;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+}
+
+.highlight {
+    color: #FA4F01;
+    font-family: 'Inter';
+    font-size: 34px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.headline-text {
+    color: #FEF7F1;
+    font-family: 'Inter';
+    font-size: 34px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+/* Description */
+.description {
+    padding: 0 41px 40px;
+    align-self: stretch;
+}
+
+.description p {
+    color: #ccc;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 500px;
+}
+
+/* Main Content */
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: stretch;
+    width: 100%;
+}
+
+/* Work Section */
+.section {
+    display: flex;
+    padding: 40px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    align-self: stretch;
+}
+
+.section-work {
+    gap: 24px;
+}
+
+.section-header {
+    color: #848381;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    margin: 0;
+}
+
+.section-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.see-all-link {
+    color: #FA4F01;
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.see-all-link:hover {
+    color: #fff;
+}
+
+.section ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.section-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #333;
+    transition: border-color 0.3s ease;
+}
+
+.section-item:last-child {
+    border-bottom: none;
+}
+
+.section-item:hover {
+    border-color: #555;
+}
+
+.section-item-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.section-item-left-link {
+    color: #fff;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.section-item-left-link:hover {
+    color: #FA4F01;
+}
+
+.section-item-title {
+    color: #848484;
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.section-item-right {
+    color: #848484;
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.section-title {
+    color: #848381;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+}
+
+.section-tags {
+    color: #848484;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 22.4px */
+}
+
+.work-summary {
+    color: #ccc;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+    margin-top: 24px;
+    max-width: 600px;
+}
+
+/* Work Experience */
+.work-experience {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-top: 24px;
+}
+
+.work-item {
+    padding: 24px;
+    background: #1a1a1a;
+    border-radius: 8px;
+    border: 1px solid #333;
+    transition: border-color 0.3s ease;
+}
+
+.work-item:hover {
+    border-color: #555;
+}
+
+.work-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.work-company {
+    color: #fff;
+    font-family: 'Inter';
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    text-decoration: underline;
+    text-decoration-color: #FA4F01;
+    text-underline-offset: 4px;
+}
+
+.work-duration {
+    color: #848484;
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.work-title {
+    color: #FA4F01;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+    text-decoration: underline;
+    text-decoration-color: #FA4F01;
+    text-underline-offset: 4px;
+}
+
+.work-description {
+    color: #ccc;
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.work-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    padding: 32px 40px;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    align-self: stretch;
+}
+
+.work-placeholder {
+    width: 350px;
+    height: 197px;
+    background: #2a2a2a;
+    border-radius: 4px;
+    flex-shrink: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.work-placeholder img,
+.work-placeholder video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+/* Experiments Section */
+.experiments-section {
+    display: flex;
+    padding: 40px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    align-self: stretch;
+}
+
+.experiments-description {
+    color: #848484;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 22.4px */
+}
+
+.experiments-video-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.experiment-video {
+    background: #2a2a2a00;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.experiment-video video {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.experiments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    margin-top: 24px;
+}
+
+.experiment-item {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+    padding: 24px 0;
+    border-bottom: 1px solid #333;
+}
+
+.experiment-item:last-child {
+    border-bottom: none;
+}
+
+.experiment-video-container {
+    width: 300px;
+    height: 200px;
+    background: #2a2a2a00;
+    border-radius: 4px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.experiment-video-container video {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.experiment-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.experiment-title {
+    color: #fff;
+    font-family: 'Inter';
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.experiment-subtitle {
+    color: #ccc;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.experiment-link {
+    color: #FA4F01;
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    align-self: flex-start;
+}
+
+.experiment-link:hover {
+    color: #fff;
+}
+
+.experiments-video-grid-full {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 48px;
+    margin-top: 24px;
+}
+
+.experiment-item {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.experiment-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 40px;
+}
+
+.experiment-title {
+    color: #fff;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.experiment-description {
+    color: #848484;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 140%;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        height: auto;
+        padding: 0 20px;
+    }
+    
+    .headline {
+        padding: 20px;
+    }
+    
+    .highlight,
+    .headline-text {
+        font-size: 24px;
+    }
+    
+    .work-section,
+    .experiments-section {
+        padding: 20px;
+    }
+    
+    .work-grid {
+        padding: 20px;
+        gap: 20px;
+    }
+    
+    .work-placeholder {
+        width: 100px;
+        height: 60px;
+    }
+}
