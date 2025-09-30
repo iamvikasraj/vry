@@ -5,12 +5,7 @@
   "main": "index.html",
   "scripts": {
     "dev": "npx live-server --port=3000 --host=0.0.0.0 --open=/",
-    "start": "npx live-server --port=3000 --host=0.0.0.0 --open=/",
-    "build": "echo 'Static site - no build needed'",
-    "deploy": "node scripts/deploy.js deploy",
-    "version:create": "node scripts/version.js create",
-    "version:list": "node scripts/version.js list",
-    "version:current": "node scripts/version.js current"
+    "start": "npx live-server --port=3000 --host=0.0.0.0 --open=/"
   },
   "keywords": [
     "portfolio",
