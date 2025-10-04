@@ -202,16 +202,17 @@
           <!-- Featured Work Section -->
           <section id="featured" class="content-section">
             <div class="section-header">
-              <h2 class="section-title font-serif text-2xl font-bold">
+              <h2 class="section-title">
                 Featured Work
               </h2>
             </div>
 
             <div class="featured-content">
-              <!-- Main Featured Item -->
-              <div class="featured-item mb-lg">
-                <div class="card hover-lift">
-                  <div class="card-media large">
+              <!-- Featured Projects Grid -->
+              <div class="featured-projects-grid">
+                <!-- Main Featured Project -->
+                <article class="featured-main">
+                  <div class="card-media">
                     <video
                       autoplay
                       loop
@@ -222,8 +223,8 @@
                       <source src="assets/video/1.mp4" type="video/mp4" />
                     </video>
                   </div>
-                  <div class="card-content">
-                    <h3 class="card-title">
+                  <div class="project-content">
+                    <h3 class="project-title">
                       <a
                         href="/projects/etmoney"
                         class="transition-colors hover-accent"
@@ -231,26 +232,24 @@
                         ET Money Onboarding Experience
                       </a>
                     </h3>
-                    <div class="card-meta">FinTech • Mobile App • 2024</div>
-                    <p class="card-description">
+                    <div class="project-meta">FinTech • Mobile App • 2024</div>
+                    <p class="project-description">
                       Redesigned the onboarding experience to improve user
                       engagement and reduce drop-off rates. The new flow
                       increased completion rates by 47%.
                     </p>
                   </div>
-                </div>
-              </div>
+                </article>
 
-              <!-- Secondary Featured Items -->
-              <div class="featured-grid flex gap-md">
-                <div class="card hover-lift flex-1">
+                <!-- Secondary Projects -->
+                <article class="featured-secondary">
                   <div class="card-media">
                     <video autoplay loop muted playsinline>
                       <source src="assets/video/clock.mp4" type="video/mp4" />
                     </video>
                   </div>
-                  <div class="card-content">
-                    <h3 class="card-title">
+                  <div class="project-content">
+                    <h3 class="project-title">
                       <a
                         href="/projects/clock"
                         class="transition-colors hover-accent"
@@ -258,18 +257,18 @@
                         Vintage Clock Concept
                       </a>
                     </h3>
-                    <div class="card-meta">Interaction • Motion • 2023</div>
+                    <div class="project-meta">Interaction • Motion • 2023</div>
                   </div>
-                </div>
+                </article>
 
-                <div class="card hover-lift flex-1">
+                <article class="featured-secondary">
                   <div class="card-media">
                     <video autoplay loop muted playsinline>
                       <source src="assets/video/2.mp4" type="video/mp4" />
                     </video>
                   </div>
-                  <div class="card-content">
-                    <h3 class="card-title">
+                  <div class="project-content">
+                    <h3 class="project-title">
                       <a
                         href="/projects/business-insider"
                         class="transition-colors hover-accent"
@@ -277,9 +276,9 @@
                         Business Insider App
                       </a>
                     </h3>
-                    <div class="card-meta">Media • SwiftUI • 2022-2023</div>
+                    <div class="project-meta">Media • SwiftUI • 2022-2023</div>
                   </div>
-                </div>
+                </article>
               </div>
             </div>
           </section>
@@ -394,11 +393,9 @@
             </div>
 
             <!-- Feature Project -->
-            <article
-              class="flex gap-lg items-center bg-white rounded-lg shadow p-lg mb-lg hover-lift transition"
-            >
-              <div class="flex-1">
-                <h3 class="text-2xl font-serif font-bold mb-sm">
+            <article class="featured-horizontal">
+              <div class="project-content">
+                <h3 class="project-title">
                   <a
                     href="/projects/paytm-wallet"
                     class="transition-colors hover-accent"
@@ -406,35 +403,33 @@
                     Paytm Wallet Experience
                   </a>
                 </h3>
-                <div class="text-xs text-gray uppercase tracking-wide mb-md">
+                <div class="project-meta">
                   FinTech • Payments • 2020
                 </div>
-                <p class="text-base">
+                <p class="project-description">
                   Redesigned payment flows and wallet management interface for
                   improved user experience and conversion. The project increased
                   user engagement with the wallet feature by 32% and streamlined
                   the transaction completion process.
                 </p>
               </div>
-              <div class="flex-1">
-                <div class="card-media rounded overflow-hidden">
-                  <video autoplay loop muted playsinline>
-                    <source src="assets/video/9.mp4" type="video/mp4" />
-                  </video>
-                </div>
+              <div class="card-media">
+                <video autoplay loop muted playsinline>
+                  <source src="assets/video/9.mp4" type="video/mp4" />
+                </video>
               </div>
             </article>
 
             <!-- Four Column Projects -->
-            <div class="projects-grid-small flex gap-sm">
-              <article class="card hover-lift flex-1">
-                <div class="card-media" style="height: 150px">
+            <div class="projects-grid-small">
+              <article class="project-small">
+                <div class="card-media">
                   <video autoplay loop muted playsinline>
                     <source src="assets/video/8.mp4" type="video/mp4" />
                   </video>
                 </div>
-                <div class="card-content">
-                  <h3 class="text-base font-semibold mb-xs">
+                <div class="project-content">
+                  <h3 class="project-title">
                     <a
                       href="/projects/interactive-data"
                       class="transition-colors hover-accent"
@@ -442,18 +437,18 @@
                       Financial Data Viz
                     </a>
                   </h3>
-                  <div class="card-meta">Data Viz • FinTech • 2022</div>
+                  <div class="project-meta">Data Viz • FinTech • 2022</div>
                 </div>
               </article>
 
-              <article class="card hover-lift flex-1">
-                <div class="card-media" style="height: 150px">
+              <article class="project-small">
+                <div class="card-media">
                   <video autoplay loop muted playsinline>
                     <source src="assets/video/10.mp4" type="video/mp4" />
                   </video>
                 </div>
-                <div class="card-content">
-                  <h3 class="text-base font-semibold mb-xs">
+                <div class="project-content">
+                  <h3 class="project-title">
                     <a
                       href="/projects/portfolio-interactions"
                       class="transition-colors hover-accent"
@@ -461,12 +456,12 @@
                       Portfolio Interactions
                     </a>
                   </h3>
-                  <div class="card-meta">Web • Animation • 2023</div>
+                  <div class="project-meta">Web • Animation • 2023</div>
                 </div>
               </article>
 
-              <article class="card hover-lift flex-1">
-                <div class="card-media" style="height: 150px">
+              <article class="project-small">
+                <div class="card-media">
                   <video autoplay loop muted playsinline>
                     <source
                       src="assets/video/perplexity_play.mp4"
@@ -474,8 +469,8 @@
                     />
                   </video>
                 </div>
-                <div class="card-content">
-                  <h3 class="text-base font-semibold mb-xs">
+                <div class="project-content">
+                  <h3 class="project-title">
                     <a
                       href="/projects/perplexity"
                       class="transition-colors hover-accent"
@@ -483,12 +478,12 @@
                       Perplexity AI Concept
                     </a>
                   </h3>
-                  <div class="card-meta">AI • Search Interface • 2023</div>
+                  <div class="project-meta">AI • Search Interface • 2023</div>
                 </div>
               </article>
 
-              <article class="card hover-lift flex-1">
-                <div class="card-media" style="height: 150px">
+              <article class="project-small">
+                <div class="card-media">
                   <video autoplay loop muted playsinline>
                     <source
                       src="assets/video/zomato_weather.mp4"
@@ -496,8 +491,8 @@
                     />
                   </video>
                 </div>
-                <div class="card-content">
-                  <h3 class="text-base font-semibold mb-xs">
+                <div class="project-content">
+                  <h3 class="project-title">
                     <a
                       href="/projects/zomato"
                       class="transition-colors hover-accent"
@@ -505,9 +500,52 @@
                       Zomato Weather Integration
                     </a>
                   </h3>
-                  <div class="card-meta">Food Tech • UX • 2022</div>
+                  <div class="project-meta">Food Tech • UX • 2022</div>
                 </div>
               </article>
+            </div>
+          </section>
+
+          <!-- About Me Section -->
+          <section id="about" class="content-section">
+            <div class="section-header">
+              <h2 class="section-title">
+                About Me
+              </h2>
+            </div>
+            <div class="about-content">
+              <div class="about-text">
+                <p>
+                  <strong>Vikas Raj Yadav</strong> is a Staff Product Designer at 
+                  <strong>Loop Health in Bengaluru</strong>, where he crafts intuitive and 
+                  impactful digital health experiences. With expertise in interaction design, 
+                  motion systems, and prototyping, Vikas brings ideas to life through 
+                  detail-driven and human-centered design.
+                </p>
+                <p>
+                  Previously, he led design teams at <strong>ETMoney, HDFC Bank, and Paytm</strong>, 
+                  shaping products used by millions. His work spans FinTech interfaces, scalable 
+                  design systems, and cross-platform experiences, with particular focus on motion 
+                  and interaction detail.
+                </p>
+                <p>
+                  As one of the <strong>Rive and Play ambassadors from India</strong>, Vikas 
+                  champions the future of interactive design. He is currently exploring 
+                  designing and prototyping through code—especially with 
+                  <strong>SwiftUI for mobile</strong>—pushing his craft beyond traditional 
+                  design tools.
+                </p>
+                <p>
+                  Passionate about expanding the boundaries of digital design, Vikas ensures 
+                  accessibility and intuitiveness always remain at the core of his work.
+                </p>
+              </div>
+              <div class="about-image">
+                <img
+                  src="assets/profile.jpeg"
+                  alt="Vikas Raj Yadav - Staff Product Designer"
+                />
+              </div>
             </div>
           </section>
         </div>
@@ -521,132 +559,90 @@
             </h2>
 
             <div class="flex flex-col gap-sm">
-              <article class="thought-item border-b pb-sm">
-                <h3 class="text-base font-semibold mb-xs">
-                  <a
-                    href="/workshops/design-systems"
-                    class="transition-colors hover-accent"
-                  >
-                    Design Systems Workshop
-                  </a>
-                </h3>
-                <div class="text-xs text-gray uppercase tracking-wide mb-xs">
-                  March 2025 • Bangalore
-                </div>
-                <p class="text-sm text-gray">
-                  Hands-on workshop on building scalable design systems for enterprise applications.
-                </p>
-              </article>
-
-              <article class="thought-item border-b pb-sm">
-                <h3 class="text-base font-semibold mb-xs">
-                  <a
-                    href="/talks/fintech-ux"
-                    class="transition-colors hover-accent"
-                  >
-                    FinTech UX Conference
-                  </a>
-                </h3>
-                <div class="text-xs text-gray uppercase tracking-wide mb-xs">
-                  February 2025 • Mumbai
-                </div>
-                <p class="text-sm text-gray">
-                  Keynote on "The Future of Banking Interfaces" at India's premier FinTech design event.
-                </p>
-              </article>
-
-              <article class="thought-item border-b pb-sm">
-                <h3 class="text-base font-semibold mb-xs">
-                  <a
-                    href="/workshops/motion-design"
-                    class="transition-colors hover-accent"
-                  >
-                    Motion Design Masterclass
-                  </a>
-                </h3>
-                <div class="text-xs text-gray uppercase tracking-wide mb-xs">
-                  January 2025 • Online
-                </div>
-                <p class="text-sm text-gray">
-                  Advanced workshop on creating meaningful animations that enhance user experience.
-                </p>
-              </article>
-
-              <article class="thought-item border-b pb-sm">
-                <h3 class="text-base font-semibold mb-xs">
-                  <a
-                    href="/talks/design-leadership"
-                    class="transition-colors hover-accent"
-                  >
-                    Design Leadership Summit
-                  </a>
-                </h3>
-                <div class="text-xs text-gray uppercase tracking-wide mb-xs">
-                  December 2024 • Delhi
-                </div>
-                <p class="text-sm text-gray">
-                  Panel discussion on "Leading Design Teams in the Digital Age" with industry leaders.
-                </p>
-              </article>
-
-              <article class="thought-item">
-                <h3 class="text-base font-semibold mb-xs">
-                  <a
-                    href="/workshops/prototyping"
-                    class="transition-colors hover-accent"
-                  >
-                    Rapid Prototyping Workshop
-                  </a>
-                </h3>
-                <div class="text-xs text-gray uppercase tracking-wide mb-xs">
-                  November 2024 • Hyderabad
-                </div>
-                <p class="text-sm text-gray">
-                  Learn to prototype complex interactions quickly using modern tools and techniques.
-                </p>
-              </article>
-            </div>
-          </section>
-
-          <!-- About Section -->
-          <section id="about" class="sidebar-section">
-            <h2 class="sidebar-title">
-              About me
-            </h2>
-          
-            <div class="about-image mb-md border rounded bg-white shadow">
-              <img
-                src="assets/profile.jpeg"
-                alt="Vikas Raj Yadav - Staff Product Designer"
-                class="w-full h-auto"
-              />
-            </div>
-          
-            <div class="about-content">
-              <p class="mb-md text-base">
-                <strong>Vikas Raj Yadav</strong> is a Staff Product Designer at 
-                <strong>Loop Health in Bengaluru</strong>, where he crafts intuitive and 
-                impactful digital health experiences. With expertise in interaction design, 
-                motion systems, and prototyping, Vikas brings ideas to life through 
-                detail-driven and human-centered design.
+            <article class="thought-item border-b pb-sm">
+              <h3 class="text-base font-semibold mb-xs">
+                <a
+                  href="/workshops/design-systems"
+                  class="transition-colors hover-accent"
+                >
+                  Design Systems Workshop
+                </a>
+              </h3>
+              <div class="text-xs text-gray uppercase tracking-wide mb-xs">
+                March 2025 • Bangalore
+              </div>
+              <p class="text-sm text-gray">
+                Hands-on workshop on building scalable design systems for enterprise applications.
               </p>
-              <p class="mb-md text-base">
-                Previously, he led design teams at <strong>ETMoney, HDFC Bank, and Paytm</strong>, 
-                shaping products used by millions. His work spans FinTech interfaces, scalable 
-                design systems, and cross-platform experiences, with particular focus on motion 
-                and interaction detail.
+            </article>
+
+            <article class="thought-item border-b pb-sm">
+              <h3 class="text-base font-semibold mb-xs">
+                <a
+                  href="/talks/fintech-ux"
+                  class="transition-colors hover-accent"
+                >
+                  FinTech UX Conference
+                </a>
+              </h3>
+              <div class="text-xs text-gray uppercase tracking-wide mb-xs">
+                February 2025 • Mumbai
+              </div>
+              <p class="text-sm text-gray">
+                Keynote on "The Future of Banking Interfaces" at India's premier FinTech design event.
               </p>
-              <p class="mb-md text-base">
-                As one of the <strong>Rive and Play ambassadors from India</strong>, Vikas 
-                champions the future of interactive design. He is currently exploring 
-                designing and prototyping through code—especially with 
-                <strong>SwiftUI for mobile</strong>—pushing his craft beyond traditional 
-                design tools.
+            </article>
+
+            <article class="thought-item border-b pb-sm">
+              <h3 class="text-base font-semibold mb-xs">
+                <a
+                  href="/workshops/motion-design"
+                  class="transition-colors hover-accent"
+                >
+                  Motion Design Masterclass
+                </a>
+              </h3>
+              <div class="text-xs text-gray uppercase tracking-wide mb-xs">
+                January 2025 • Online
+              </div>
+              <p class="text-sm text-gray">
+                Advanced workshop on creating meaningful animations that enhance user experience.
               </p>
-              <p class="text-base">
-                Passionate about expanding the boundaries of digital design, Vikas ensures 
-                accessibility and intuitiveness always remain at the core of his work.
+            </article>
+
+            <article class="thought-item border-b pb-sm">
+              <h3 class="text-base font-semibold mb-xs">
+                <a
+                  href="/talks/design-leadership"
+                  class="transition-colors hover-accent"
+                >
+                  Design Leadership Summit
+                </a>
+              </h3>
+              <div class="text-xs text-gray uppercase tracking-wide mb-xs">
+                December 2024 • Delhi
+              </div>
+              <p class="text-sm text-gray">
+                Panel discussion on "Leading Design Teams in the Digital Age" with industry leaders.
               </p>
+            </article>
+
+            <article class="thought-item">
+              <h3 class="text-base font-semibold mb-xs">
+                <a
+                  href="/workshops/prototyping"
+                  class="transition-colors hover-accent"
+                >
+                  Rapid Prototyping Workshop
+                </a>
+              </h3>
+              <div class="text-xs text-gray uppercase tracking-wide mb-xs">
+                November 2024 • Hyderabad
+              </div>
+              <p class="text-sm text-gray">
+                Learn to prototype complex interactions quickly using modern tools and techniques.
+              </p>
+            </article>
             </div>
           </section>
         </div>
