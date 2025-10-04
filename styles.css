@@ -148,8 +148,7 @@ body {
    ======================================== */
 
 .container {
-  max-width: var(--container-width);
-  margin: 0 auto;
+  width: 100%;
   padding: 0 var(--space-md);
 }
 
@@ -258,49 +257,90 @@ body {
    ======================================== */
 
 .main-content {
-  display: flex;
-  gap: var(--space-md);
+  display: grid;
+  grid-column-gap: calc(1rem * 2 + 1px); /* Specific gap calculation */
+  grid-template-columns: repeat(20, 1fr); /* 20 column grid system */
   margin-bottom: var(--space-md);
+  align-items: start; /* Align content areas to top */
 }
 
 .left-content {
-  flex: 2;
+  grid-column: span 14; /* Left content takes 14 of 20 columns (70%) */
+  max-width: none; /* Remove width constraint for natural flow */
+  font-family: var(--serif-font); /* Use serif for reading experience */
+  line-height: 1.6; /* Improved readability */
+  color: var(--text-color);
+}
+
+/* NY Times-style Article Headlines */
+.left-content h3 {
+  font-family: var(--serif-font);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: var(--space-sm);
+  color: var(--text-color);
+}
+
+/* Newspaper-style Meta Information */
+.left-content .text-xs.text-gray {
+  font-family: var(--sans-font);
+  font-size: 11px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  color: var(--gray-med);
+  margin-bottom: var(--space-md);
+}
+
+/* Article Content */
+.left-content article p {
+  font-family: var(--serif-font);
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--text-color);
+  margin-bottom: var(--space-md);
 }
 
 .right-sidebar {
-  flex: 1;
-  min-width: 300px;
+  min-width: 0;
+  position: relative;
+  grid-column: span 6; /* Right sidebar takes 6 of 20 columns (30%) */
+  font-family: var(--sans-font); /* Keep sans-serif for sidebar */
 }
 
 /* ========================================
    REUSABLE SECTION COMPONENTS - NEWSPAPER STYLE
    ======================================== */
 
-.content-section,
-.sidebar-section {
-  margin-bottom: var(--space-md);
+.content-section {
+  margin-bottom: var(--space-xl);
   border-bottom: 1px solid var(--border-light);
-  padding-bottom: var(--space-md);
+  padding-bottom: var(--space-lg);
 }
 
 .sidebar-section {
-  border-left: 2px solid var(--accent);
-  padding-left: var(--space-md);
-  border-bottom: 1px solid var(--border-light);
-}
-
-.section-header {
   margin-bottom: var(--space-md);
   border-bottom: 2px solid var(--accent);
   padding-bottom: var(--space-sm);
 }
 
+.section-header {
+  margin-bottom: var(--space-md);
+  border-bottom: 2px solid var(--accent);
+}
+
 .section-title,
-.sidebar-title {
+.sidebar-title,
+.section-header h2,
+.sidebar-section h2,
+.left-content h2 {
   font-family: var(--serif-font);
   font-size: var(--text-2xl);
   font-weight: 700;
-  margin: 0;
+  margin: 0 0 var(--space-lg) 0;
+  color: var(--text-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .section-subtitle {
@@ -330,7 +370,7 @@ body {
 
 .card-media {
   width: 100%;
-  height: 200px;
+  aspect-ratio: 16/9; /* Standard video aspect ratio */
   overflow: hidden;
   position: relative;
   border: 1px solid var(--border-light);
@@ -338,20 +378,17 @@ body {
 }
 
 .card-media.large {
-  height: 300px;
+  aspect-ratio: 16/9; /* Same 16:9 ratio for all cards */
 }
 
 .card-media video,
 .card-media img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain; /* Maintain aspect ratio, fit within container */
   transition: none;
 }
 
-.card-content {
-  /* Removed padding as it's now inline content */
-}
 
 .card-title {
   font-family: var(--serif-font);
@@ -711,7 +748,7 @@ body {
 
 @media (max-width: 992px) {
   .main-content {
-    flex-direction: column;
+    grid-template-columns: 1fr; /* Single column on mobile */
     gap: var(--space-xl);
   }
 
@@ -755,7 +792,7 @@ body {
   }
 
   .sidebar-section {
-    padding-left: var(--space-md);
+    margin-bottom: var(--space-md);
   }
 
   .experiments-filter {
@@ -826,6 +863,39 @@ body {
 /* ========================================
    UTILITY CLASSES
    ======================================== */
+
+/* ========================================
+   LARGE SCREEN LAYOUT (Publication Style)
+   ======================================== */
+
+@media (min-width: 1150px) {
+  .container {
+    margin: auto;
+    padding: 0 3%;
+    max-width: 1200px;
+  }
+  
+  .main-content {
+    grid-column-gap: calc(1rem * 3 + 1px); /* Larger gap on desktop */
+  }
+  
+  .left-content {
+    grid-column: span 14; /* Left content takes 14 of 20 columns on desktop (70%) */
+  }
+  
+  .right-sidebar {
+    grid-column: span 6; /* Right sidebar takes 6 of 20 columns on desktop (30%) */
+  }
+}
+
+/* Forced Colors Mode Support (Accessibility) */
+@media (forced-colors: none) {
+  .left-content * {
+    outline: 0.125rem solid var(--accent);
+    outline-offset: 0.125rem;
+    outline-color: transparent;
+  }
+}
 
 .sr-only {
   position: absolute;
