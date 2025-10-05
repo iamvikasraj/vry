@@ -157,7 +157,7 @@
       <header class="masthead">
         <div class="masthead-inner flex justify-between items-center">
           <div class="publication-date font-serif italic text-sm">
-            March 18, 2025
+            <span id="last-modified"></span> • Bengaluru
           </div>
           <nav class="masthead-nav">
             <div class="social-links flex items-center gap-md">
@@ -510,14 +510,10 @@
                   <strong>SwiftUI for mobile</strong>—pushing his craft beyond traditional 
                   design tools.
                 </p>
-                <p>
-                  Passionate about expanding the boundaries of digital design, Vikas ensures 
-                  accessibility and intuitiveness always remain at the core of his work.
-                </p>
               </div>
               <div class="about-image">
                 <img
-                  src="assets/images/vry.png"
+                  src="assets/images/vry.jpg"
                   alt="Vikas Raj Yadav - Staff Product Designer"
                 />
               </div>
@@ -648,5 +644,19 @@
         </div>
       </footer>
     </div>
+    
+    <script>
+      // Set last modified date
+      document.addEventListener('DOMContentLoaded', function() {
+        const lastModified = document.lastModified;
+        const date = new Date(lastModified);
+        const formattedDate = date.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+        document.getElementById('last-modified').textContent = formattedDate;
+      });
+    </script>
   </body>
 </html>

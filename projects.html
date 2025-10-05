@@ -1066,7 +1066,7 @@
       <header class="masthead">
         <div class="masthead-inner">
           <div class="publication-date">
-            <span id="dynamic-date">March 18, 2025</span>
+            <span id="dynamic-date"></span> • Bengaluru
             <div class="live-indicator">
               <span class="live-dot"></span>
               <span id="live-time">12:00 PM IST</span>
@@ -1194,7 +1194,7 @@
 
           <div class="about-image">
             <img
-              src="assets/images/vry.png"
+              src="assets/images/vry.jpg"
               alt="Vikas Raj Yadav - Director of Product Design"
             />
           </div>
@@ -1308,6 +1308,16 @@
       
       // Update every minute
       setInterval(updateDateTime, 60000);
+      
+      // Set last modified date
+      const lastModified = document.lastModified;
+      const date = new Date(lastModified);
+      const formattedDate = date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      document.getElementById('dynamic-date').textContent = formattedDate;
       
       // Update every second for the live time (optional - for more real-time feel)
       setInterval(() => {
