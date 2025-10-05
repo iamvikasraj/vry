@@ -10,7 +10,7 @@
   --link-color: #454545;
   --hover-color: #000000;
   --gray-light: #e1e1e1;
-  --gray-med: #a0a0a0;
+  --gray-med: #383838;
   --accent: #980000;
 
   /* Typography */
@@ -173,7 +173,7 @@ body {
   left: 0;
   width: 100%;
   height: 1px;
-  background-color: var(--text-color);
+  background-color: var(--accent);
 }
 
 .header-content {
@@ -204,11 +204,24 @@ body {
 .social-icons a {
   text-decoration: none;
   color: var(--text-color);
-  font-size: var(--txt-18);
+  font-size: var(--txt-14);
   transition: color 0.2s ease;
 }
 
 .social-icons a:hover {
+  color: var(--accent);
+}
+
+.social-text-link {
+  font-family: var(--sans-font);
+  font-size: var(--txt-14);
+  font-weight: 400;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.social-text-link:hover {
   color: var(--accent);
 }
 
@@ -219,17 +232,18 @@ body {
 /* Improved Page Title */
 .page-title {
   text-align: center;
-  padding: var(--sp-48) 0 var(--sp-32);
   margin-bottom: var(--sp-24);
 }
 
 .page-title h1 {
-  margin-bottom: var(--sp-24); /* Increased spacing */
+  margin-bottom: var(--sp-24);
+  font-weight: 600;; /* Increased spacing */
 }
 
 .page-title .subtitle1 {
-  color: var(--gray-med);
+  color: var(--accent);
   font-style: italic;
+  font-weight: 500;
 }
 
 
@@ -1370,6 +1384,92 @@ body {
 .workshop-featured .text-xs {
   color: var(--gray-600);
   font-weight: 500;
+}
+
+/* Rive Projects Styling */
+.rive-content {
+  margin-top: var(--sp-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-24);
+}
+
+.rive-featured {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.rive-image {
+  margin-bottom: var(--sp-12);
+  aspect-ratio: 16/9; /* Consistent aspect ratio */
+  overflow: hidden;
+  border-radius: var(--sp-8);
+}
+
+.rive-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure proper fitting */
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+}
+
+.rive-image video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure proper fitting */
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+}
+
+.rive-featured h3 a {
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.rive-featured h3 a:hover {
+  color: var(--accent);
+}
+
+/* Freebies Styling */
+.freebies-content {
+  margin-top: var(--sp-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-24);
+}
+
+.freebie-featured {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.freebie-image {
+  margin-bottom: var(--sp-12);
+  aspect-ratio: 16/9; /* Consistent aspect ratio */
+  overflow: hidden;
+  border-radius: var(--sp-8);
+}
+
+.freebie-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure proper fitting */
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+}
+
+.freebie-featured h3 a {
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.freebie-featured h3 a:hover {
+  color: var(--accent);
 }
 
 
