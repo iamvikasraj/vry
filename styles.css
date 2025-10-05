@@ -397,6 +397,19 @@ body {
   font-family: var(--sans-font); /* Keep sans-serif for sidebar */
 }
 
+/* Workshop Featured Spacing */
+.workshop-featured h3 {
+  margin-bottom: var(--space-xs);
+}
+
+.workshop-featured .text-xs {
+  margin-bottom: var(--space-sm);
+}
+
+.workshop-featured p {
+  margin-bottom: 0;
+}
+
 /* Rive Carousel Animation */
 .rive-carousel {
   position: relative;
