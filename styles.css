@@ -858,7 +858,7 @@ body {
 
   .about-image {
     flex: none;
-    max-width: 150px;
+    max-width: 200px;
     margin: 0 auto;
   }
 
@@ -1006,7 +1006,7 @@ body {
 }
 
 .about-image {
-  flex: 0 0 200px;
+  flex: 0 0 300px;
 }
 
 .about-image img {
