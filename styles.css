@@ -302,11 +302,23 @@ body {
 }
 
 /* Featured Work Layout */
-.featured-single {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-  margin-bottom: var(--space-md);
+/* Unified Card/Container Spacing */
+.featured-single,
+.workshop-featured.thought-item,
+.card.hover-lift,
+.thought-item {
+  padding-bottom: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.featured-single:last-child,
+.workshop-featured.thought-item:last-child,
+.card.hover-lift:last-child,
+.thought-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 /* Project Content Styling */
@@ -790,18 +802,6 @@ body {
   line-height: 0.8;
   margin-right: var(--space-xs);
   color: var(--accent);
-}
-
-.thought-item {
-  padding-bottom: var(--space-md);
-  margin-bottom: var(--space-md);
-  border-bottom: 1px solid var(--border-light);
-}
-
-.thought-item:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
-  padding-bottom: 0;
 }
 
 .thought-title {
