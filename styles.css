@@ -851,9 +851,9 @@ body {
   }
 
   .about-content {
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: var(--space-md);
-    text-align: center;
+    text-align: flex-start;
   }
 
   .about-image {
@@ -1000,8 +1000,9 @@ body {
 /* About Me Section */
 .about-content {
   display: flex;
+  flex-direction: row-reverse;
   gap: var(--space-lg);
-  align-items: center;
+  align-items: flex-start;
 }
 
 .about-image {
