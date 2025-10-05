@@ -302,20 +302,15 @@ body {
 }
 
 /* Featured Work Layout */
-/* Unified Card/Container Spacing */
-.featured-single,
-.workshop-featured.thought-item,
-.card.hover-lift,
-.thought-item {
+
+/* Workshop Featured Items - Consistent Spacing */
+.workshop-featured.thought-item {
   padding-bottom: var(--space-sm);
   margin-bottom: var(--space-sm);
   border-bottom: 1px solid var(--border-light);
 }
 
-.featured-single:last-child,
-.workshop-featured.thought-item:last-child,
-.card.hover-lift:last-child,
-.thought-item:last-child {
+.workshop-featured.thought-item:last-child {
   border-bottom: none;
   margin-bottom: 0;
   padding-bottom: 0;
