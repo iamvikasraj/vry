@@ -496,7 +496,7 @@ body {
   overflow: hidden;
   position: relative;
   border: 1px solid var(--border-light);
-  margin-bottom: var(--space-sm);
+  margin-bottom: 4px;
 }
 
 .card-media.large {
