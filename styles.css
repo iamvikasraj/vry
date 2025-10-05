@@ -414,8 +414,7 @@ body {
 }
 
 .section-header {
-  margin-bottom: var(--space-sm);
-  border-bottom: 2px solid var(--accent);
+  margin-bottom: var(--space-lg);
 }
 
 .section-title,
@@ -856,10 +855,8 @@ body {
     text-align: flex-start;
   }
 
-  .about-image {
-    flex: none;
-    max-width: 200px;
-    margin: 0 auto;
+  .section-header {
+    margin-bottom: var(--space-md);
   }
 
   .threejs-grid {
