@@ -97,6 +97,8 @@ body {
 .gap-lg { gap: var(--sp-24); }
 .gap-xl { gap: var(--sp-32); }
 
+.flex-1 { flex: 1; }
+
 .p-xs { padding: var(--sp-8); }
 .p-sm { padding: var(--sp-12); }
 .p-md { padding: var(--sp-16); }
@@ -337,8 +339,8 @@ body {
 .projects-grid-small {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: var(--sp-48);
-  margin-bottom: 0; /* No bottom margin - part of unified section */
+  gap: var(--sp-16); /* Match projects-grid gap */
+  margin-bottom: var(--sp-24); /* Match projects-grid margin */
 }
 
 .project-small {
@@ -660,7 +662,8 @@ body {
 
 .projects-grid {
   display: flex;
-  gap: var(--sp-32);
+  gap: var(--sp-16); /* Match gap-md utility class */
+  margin-bottom: var(--sp-24); /* Match mb-lg utility class */
 }
 
 /* About Content Spacing */
@@ -1074,7 +1077,7 @@ body {
 
   .projects-grid-small {
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--sp-48);
+    gap: var(--sp-16); /* Match consistent gap */
   }
 
   .about-content {
@@ -1134,7 +1137,7 @@ body {
 
   .projects-grid-small {
     grid-template-columns: 1fr;
-    gap: var(--sp-32);
+    gap: var(--sp-16); /* Match consistent gap */
   }
 
   .card-image {
@@ -1679,7 +1682,7 @@ body {
   
   .projects-grid-small {
     grid-template-columns: 1fr;
-    gap: var(--sp-12);
+    gap: var(--sp-16); /* Match consistent gap */
   }
   
   .about-image {
