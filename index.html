@@ -289,11 +289,10 @@
               <article class="featured-single">
                 <div class="card-image">
                   <video
-                    autoplay
                     loop
                     muted
                     playsinline
-                    poster="assets/video/1-poster.jpg"
+                    
                   >
                     <source src="assets/video/1.mp4" type="video/mp4" />
                   </video>
@@ -328,7 +327,7 @@
             <!-- Lead Project -->
             <article class="card hover-lift mb-lg">
               <div class="card-image large relative">
-                <video autoplay loop muted playsinline>
+                <video loop muted playsinline>
                   <source src="assets/video/4.mp4" type="video/mp4" />
                 </video>
                 <div
@@ -366,7 +365,7 @@
             <div class="projects-grid flex gap-md mb-lg">
               <article class="card hover-lift flex-1">
                 <div class="card-image">
-                  <video autoplay loop muted playsinline>
+                  <video loop muted playsinline>
                     <source src="assets/video/5.mp4" type="video/mp4" />
                   </video>
                 </div>
@@ -390,7 +389,7 @@
 
               <article class="card hover-lift flex-1">
                 <div class="card-image">
-                  <video autoplay loop muted playsinline>
+                  <video loop muted playsinline>
                     <source src="assets/video/6.mp4" type="video/mp4" />
                   </video>
                 </div>
@@ -414,7 +413,7 @@
 
               <article class="card hover-lift flex-1">
                 <div class="card-image">
-                  <video autoplay loop muted playsinline>
+                  <video loop muted playsinline>
                     <source src="assets/video/7.mp4" type="video/mp4" />
                   </video>
                 </div>
@@ -461,7 +460,7 @@
                 </p>
               </div>
               <div class="card-image">
-                <video autoplay loop muted playsinline>
+                <video loop muted playsinline>
                   <source src="assets/video/9.mp4" type="video/mp4" />
                 </video>
               </div>
@@ -471,7 +470,7 @@
             <div class="projects-grid-small">
               <article class="project-small">
                 <div class="card-image">
-                  <video autoplay loop muted playsinline>
+                  <video loop muted playsinline>
                     <source src="assets/video/8.mp4" type="video/mp4" />
                   </video>
                 </div>
@@ -490,7 +489,7 @@
 
               <article class="project-small">
                 <div class="card-image">
-                  <video autoplay loop muted playsinline>
+                  <video loop muted playsinline>
                     <source src="assets/video/10.mp4" type="video/mp4" />
                   </video>
                 </div>
@@ -509,7 +508,7 @@
 
               <article class="project-small">
                 <div class="card-image">
-                  <video autoplay loop muted playsinline>
+                  <video loop muted playsinline>
                     <source
                       src="assets/video/perplexity_play.mp4"
                       type="video/mp4"
@@ -531,7 +530,7 @@
 
               <article class="project-small">
                 <div class="card-image">
-                  <video autoplay loop muted playsinline>
+                  <video loop muted playsinline>
                     <source
                       src="assets/video/zomato_weather.mp4"
                       type="video/mp4"
@@ -678,11 +677,10 @@
               <article class="rive-featured thought-item">
                 <div class="rive-image">
                   <video
-                    autoplay
                     loop
                     muted
                     playsinline
-                    poster="assets/images/Rive-1.jpg"
+                    
                   >
                     <source src="assets/video/rive-project.mp4" type="video/mp4" />
                   </video>
@@ -700,11 +698,10 @@
               <article class="rive-featured thought-item">
                 <div class="rive-image">
                   <video
-                    autoplay
                     loop
                     muted
                     playsinline
-                    poster="assets/images/Rive-2.jpg"
+                    
                   >
                     <source src="assets/video/rive-2.mp4" type="video/mp4" />
                   </video>
@@ -779,6 +776,28 @@
           day: 'numeric'
         });
         document.getElementById('last-modified').textContent = formattedDate;
+
+        // Video hover play functionality
+        const videos = document.querySelectorAll('video');
+        console.log('Found videos:', videos.length); // Debug log
+        
+        videos.forEach((video, index) => {
+          const cardImage = video.closest('.card-image, .rive-image'); // Include rive-image
+          console.log(`Video ${index}:`, video, 'Parent:', cardImage); // Debug log
+          
+          if (cardImage) {
+            cardImage.addEventListener('mouseenter', () => {
+              console.log('Playing video:', video); // Debug log
+              video.play().catch(e => console.log('Video play failed:', e));
+            });
+            
+            cardImage.addEventListener('mouseleave', () => {
+              console.log('Pausing video:', video); // Debug log
+              video.pause();
+              video.currentTime = 0; // Reset to beginning
+            });
+          }
+        });
 
         // Rive Carousel Animation
         const images = document.querySelectorAll('.carousel-img');

@@ -4,6 +4,8 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-21N5FSST5Y"></script>
     <script>
+        });
+
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
@@ -223,11 +225,11 @@
           <div class="project-showcase">
             <div class="showcase-video">
               <video
-                autoplay
+                
                 loop
                 muted
                 playsinline
-                poster="../assets/video/10-poster.jpg"
+                
               >
                 <source src="../assets/video/10.mp4" type="video/mp4" />
               </video>
@@ -313,6 +315,8 @@
     </div>
     
     <script>
+        });
+
       // Set last modified date
       document.addEventListener('DOMContentLoaded', function() {
         const lastModified = document.lastModified;
@@ -323,6 +327,24 @@
           day: 'numeric'
         });
         document.getElementById('last-modified').textContent = formattedDate;
+        
+        // Video hover play functionality
+        const videos = document.querySelectorAll('video');
+        
+        videos.forEach(video => {
+          const cardImage = video.closest('.card-image');
+          
+          if (cardImage) {
+            cardImage.addEventListener('mouseenter', () => {
+              video.play().catch(e => console.log('Video play failed:', e));
+            });
+            
+            cardImage.addEventListener('mouseleave', () => {
+              video.pause();
+              video.currentTime = 0; // Reset to beginning
+            });
+          }
+        });
       });
     </script>
   </body>
