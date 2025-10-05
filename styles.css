@@ -397,15 +397,28 @@ body {
   font-family: var(--sans-font); /* Keep sans-serif for sidebar */
 }
 
-/* Workshop Featured Spacing */
+/* Consistent Content Spacing */
+.project-title,
+.featured-title,
+.section-title,
+.sidebar-title,
+.left-content h2,
 .workshop-featured h3 {
   margin-bottom: var(--space-xs);
 }
 
+.project-meta,
+.featured-meta,
+.text-xs,
+.workshop-meta,
 .workshop-featured .text-xs {
   margin-bottom: var(--space-sm);
 }
 
+.project-description,
+.featured-description,
+.about-content p,
+.thought-item p,
 .workshop-featured p {
   margin-bottom: 0;
 }
