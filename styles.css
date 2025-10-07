@@ -54,6 +54,7 @@ html {
   --txt-32: 32px;
   --txt-40: 40px;
   --txt-48: 48px;
+  --txt-60: 60px;
   --txt-72: 72px;
 }
 
@@ -517,6 +518,16 @@ body {
   letter-spacing: 0.03em;
   margin-bottom: var(--sp-16);
   color: var(--gray-med); /* Gray color for all body text */
+}
+
+.body1 a {
+  color: var(--gray-med);
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.body1 a:hover {
+  color: var(--text-color);
 }
 
 .body2 {
