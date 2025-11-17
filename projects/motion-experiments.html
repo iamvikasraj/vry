@@ -228,13 +228,15 @@
           <div class="project-showcase">
             <div class="showcase-video">
               <video
+                preload="none"
+                class="lazy-video"
                 
                 loop
                 muted
                 playsinline
                 
               >
-                <source src="../assets/video/6.mp4" type="video/mp4" />
+                <source data-src="../assets/video/6.mp4" type="video/mp4" />
               </video>
             </div>
             <div class="showcase-caption">
@@ -331,23 +333,31 @@
         });
         document.getElementById('last-modified').textContent = formattedDate;
         
-        // Video hover play functionality
-        const videos = document.querySelectorAll('video');
-        
-        videos.forEach(video => {
-          const cardImage = video.closest('.card-image');
-          
-          if (cardImage) {
-            cardImage.addEventListener('mouseenter', () => {
-              video.play().catch(e => console.log('Video play failed:', e));
-            });
-            
-            cardImage.addEventListener('mouseleave', () => {
-              video.pause();
-              video.currentTime = 0; // Reset to beginning
-            });
+        // Lazy-load project videos
+        const lazyVideos = document.querySelectorAll('.lazy-video');
+
+        const loadVideoSource = (video) => {
+          const source = video.querySelector('source[data-src]');
+          if (source && !source.src) {
+            source.src = source.dataset.src;
+            video.load();
           }
-        });
+        };
+
+        if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                loadVideoSource(entry.target);
+                obs.unobserve(entry.target);
+              }
+            });
+          }, { rootMargin: '200px 0px' });
+
+          lazyVideos.forEach(video => observer.observe(video));
+        } else {
+          lazyVideos.forEach(loadVideoSource);
+        }
       });
     </script>
   </body>

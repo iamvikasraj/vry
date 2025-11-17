@@ -624,24 +624,19 @@ body {
 
 /* Balanced Section Spacing */
 .section {
-  margin-bottom: var(--sp-48); /* Reduced from 64px */
-  padding-bottom: var(--sp-24); /* Reduced from 32px */
-  border-bottom: 1px solid var(--border-light);
+  margin-bottom: var(--sp-48);
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 .section:last-child {
-  border-bottom: none;
   margin-bottom: 0;
 }
 
 .sidebar {
-  margin-bottom: 0; /* Remove individual margins */
-  border-bottom: 1px solid var(--border-light);
-  padding-bottom: var(--sp-24);
-}
-
-.sidebar:last-child {
+  margin-bottom: 0;
   border-bottom: none;
+  padding-bottom: var(--sp-24);
 }
 
 
