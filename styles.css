@@ -644,6 +644,9 @@ body {
 /* Featured Content Spacing */
 .featured-content {
   margin-top: var(--sp-16); /* Reduced from 24px */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-24);
 }
 
 .featured-single {
@@ -1163,6 +1166,11 @@ body {
   .projects-grid-small {
     grid-template-columns: 1fr;
     gap: var(--sp-16); /* Match consistent gap */
+  }
+
+  .featured-content {
+    grid-template-columns: 1fr;
+    gap: var(--sp-24);
   }
 
   .card-image {
