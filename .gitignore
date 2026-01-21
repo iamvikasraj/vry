@@ -101,3 +101,9 @@ logs
 # Temporary files
 tmp/
 temp/
+
+# Xcode
+xcuserdata/
+*.xcuserstate
+# macOS
+.DS_Store
