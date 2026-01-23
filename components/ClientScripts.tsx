@@ -45,19 +45,25 @@ export default function ClientScripts() {
       const videoObserver = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            loadVideo(entry.target as HTMLVideoElement)
+            const video = entry.target as HTMLVideoElement
+            loadVideo(video)
+            // Preload video metadata for faster display
+            video.load()
             obs.unobserve(entry.target)
           }
         })
       }, { 
-        rootMargin: '200px 0px',
+        rootMargin: '400px 0px',
         threshold: 0.01
       })
 
       lazyVideos.forEach(video => videoObserver.observe(video))
     } else {
       // Fallback: load all videos immediately if IntersectionObserver not supported
-      lazyVideos.forEach(video => loadVideo(video as HTMLVideoElement))
+      lazyVideos.forEach(video => {
+        loadVideo(video as HTMLVideoElement)
+        ;(video as HTMLVideoElement).load()
+      })
     }
 
     // Video hover play for work items

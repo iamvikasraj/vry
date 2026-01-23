@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 
 interface Project {
@@ -45,16 +45,36 @@ export default function WorkGrid({ projects, gridSize = '2x2' }: WorkGridProps) 
 function VideoPlayer({ src }: { src: string }) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
     const video = videoRef.current
     const container = containerRef.current?.closest('.work-item')
     if (!video || !container) return
 
+    // Load video metadata immediately for faster first frame display
+    const loadVideoMetadata = () => {
+      if (video.readyState === 0) {
+        video.load()
+      }
+    }
+
+    // Load immediately when component mounts
+    loadVideoMetadata()
+
     const handleMouseEnter = () => {
-      video.play().catch(() => {
-        // Silently fail if autoplay is blocked
-      })
+      if (video.readyState >= 2) {
+        // Video metadata is loaded, can play
+        video.play().catch(() => {
+          // Silently fail if autoplay is blocked
+        })
+      } else {
+        // Load and then play
+        video.load()
+        video.addEventListener('loadeddata', () => {
+          video.play().catch(() => {})
+        }, { once: true })
+      }
     }
 
     const handleMouseLeave = () => {
@@ -63,34 +83,44 @@ function VideoPlayer({ src }: { src: string }) {
     }
 
     const handleLoadedMetadata = () => {
-      video.currentTime = 0.1
+      // Set to first frame for immediate display
+      if (video.readyState >= 1) {
+        video.currentTime = 0.1
+        setIsLoaded(true)
+      }
+    }
+
+    const handleCanPlay = () => {
+      setIsLoaded(true)
     }
 
     video.addEventListener('loadedmetadata', handleLoadedMetadata)
+    video.addEventListener('canplay', handleCanPlay)
     container.addEventListener('mouseenter', handleMouseEnter)
     container.addEventListener('mouseleave', handleMouseLeave)
-    video.load()
 
     return () => {
       video.removeEventListener('loadedmetadata', handleLoadedMetadata)
+      video.removeEventListener('canplay', handleCanPlay)
       container.removeEventListener('mouseenter', handleMouseEnter)
       container.removeEventListener('mouseleave', handleMouseLeave)
     }
   }, [src])
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className="video-container">
       <video
         ref={videoRef}
         loop
         muted
         playsInline
         preload="metadata"
-        className="lazy-video"
+        className={`lazy-video ${isLoaded ? 'loaded' : ''}`}
         src={src}
       >
         <source src={src} type="video/mp4" />
       </video>
+      {!isLoaded && <div className="video-placeholder" />}
     </div>
   )
 }
