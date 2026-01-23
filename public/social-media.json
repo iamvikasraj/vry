@@ -1,0 +1,47 @@
+{
+  "twitter": [
+    {
+      "id": "example-1",
+      "url": "https://twitter.com/vraj247/status/1234567890",
+      "image": "/assets/social/twitter-1.jpg",
+      "title": "Example Twitter Post",
+      "description": "A brief description of the post",
+      "date": "2025-01-23T00:00:00.000Z",
+      "platform": "twitter"
+    }
+  ],
+  "instagram": [
+    {
+      "id": "example-2",
+      "url": "https://instagram.com/p/example",
+      "image": "/assets/social/instagram-1.jpg",
+      "title": "Example Instagram Post",
+      "description": "A brief description of the post",
+      "date": "2025-01-23T00:00:00.000Z",
+      "platform": "instagram"
+    }
+  ],
+  "dribbble": [
+    {
+      "id": "example-3",
+      "url": "https://dribbble.com/shots/example",
+      "image": "/assets/social/dribbble-1.jpg",
+      "title": "Example Dribbble Shot",
+      "description": "A brief description of the shot",
+      "date": "2025-01-23T00:00:00.000Z",
+      "platform": "dribbble"
+    }
+  ],
+  "behance": [
+    {
+      "id": "example-4",
+      "url": "https://behance.net/gallery/example",
+      "image": "/assets/social/behance-1.jpg",
+      "title": "Example Behance Project",
+      "description": "A brief description of the project",
+      "date": "2025-01-23T00:00:00.000Z",
+      "platform": "behance"
+    }
+  ],
+  "lastUpdated": "2025-01-23T00:00:00.000Z"
+}
