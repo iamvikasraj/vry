@@ -30,7 +30,6 @@ export default function FeaturedWork({ projects }: FeaturedWorkProps) {
                 playsInline
                 preload="none"
                 className="lazy-video"
-                loading="lazy"
               >
                 <source data-src={project.video} type="video/mp4" />
               </video>

@@ -34,7 +34,6 @@ export default function FeaturedProject({
               playsInline
               preload="none"
               className="lazy-video featured-video"
-              loading="lazy"
             >
               <source data-src={video} type="video/mp4" />
             </video>

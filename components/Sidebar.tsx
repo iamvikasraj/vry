@@ -151,7 +151,6 @@ export default function Sidebar() {
                   playsInline
                   preload="none"
                   className="lazy-video"
-                  loading="lazy"
                 >
                   <source data-src={project.video} type="video/mp4" />
                 </video>

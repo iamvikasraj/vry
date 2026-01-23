@@ -35,7 +35,6 @@ export default function ProjectCard({
             playsInline
             preload="none"
             className="lazy-video"
-            loading="lazy"
           >
             <source data-src={video} type="video/mp4" />
           </video>
