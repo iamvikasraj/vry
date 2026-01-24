@@ -7,33 +7,56 @@ declare global {
       targetId: string | object,
       config?: object
     ) => void
+    dataLayer: any[]
   }
 }
 
 // GA4 Event Types
+// Following GA4 best practices: https://support.google.com/analytics/answer/9355848
 export const trackEvent = (
   eventName: string,
   eventParams?: {
     [key: string]: string | number | boolean | undefined
   }
 ) => {
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', eventName, {
-      ...eventParams,
-      event_category: eventParams?.event_category || 'engagement',
-    })
+  if (typeof window !== 'undefined') {
+    // Check if gtag is available
+    if (window.gtag) {
+      // GA4 doesn't use event_category - use custom parameters instead
+      window.gtag('event', eventName, {
+        ...eventParams,
+      })
+      // Debug logging (remove in production if needed)
+      if (process.env.NODE_ENV === 'development') {
+        console.log('GA4 Event:', eventName, eventParams)
+      }
+    } else {
+      // Fallback: try to use dataLayer directly
+      if (window.dataLayer) {
+        window.dataLayer.push({
+          event: eventName,
+          ...eventParams,
+        })
+        if (process.env.NODE_ENV === 'development') {
+          console.log('GA4 Event (dataLayer):', eventName, eventParams)
+        }
+      } else {
+        console.warn('GA4 not initialized. gtag and dataLayer not found.')
+      }
+    }
   }
 }
 
 // Specific event tracking functions
 export const analytics = {
   // Project interactions
+  // These are key events for portfolio - track important user actions
   trackProjectClick: (projectTitle: string, projectSlug: string, projectTags?: string[]) => {
     trackEvent('project_click', {
       project_title: projectTitle,
       project_slug: projectSlug,
       project_tags: projectTags?.join(', ') || '',
-      event_category: 'project_interaction',
+      interaction_type: 'project_interaction',
     })
   },
 
@@ -41,7 +64,7 @@ export const analytics = {
     trackEvent('project_view', {
       project_title: projectTitle,
       project_slug: projectSlug,
-      event_category: 'project_interaction',
+      interaction_type: 'project_interaction',
     })
   },
 
@@ -55,7 +78,7 @@ export const analytics = {
       project_slug: projectSlug,
       time_spent_seconds: Math.round(timeSpentSeconds),
       time_spent_minutes: Math.round(timeSpentSeconds / 60 * 10) / 10, // Round to 1 decimal
-      event_category: 'project_interaction',
+      interaction_type: 'project_interaction',
     })
   },
 
@@ -68,7 +91,7 @@ export const analytics = {
       project_title: projectTitle,
       project_slug: projectSlug,
       section_name: sectionName,
-      event_category: 'project_interaction',
+      interaction_type: 'project_interaction',
     })
   },
 
@@ -76,7 +99,7 @@ export const analytics = {
   trackFilterChange: (filterName: string) => {
     trackEvent('filter_change', {
       filter_name: filterName,
-      event_category: 'navigation',
+      interaction_type: 'navigation',
     })
   },
 
@@ -84,7 +107,7 @@ export const analytics = {
   trackGridToggle: (gridSize: '1x1' | '2x2') => {
     trackEvent('grid_toggle', {
       grid_size: gridSize,
-      event_category: 'navigation',
+      interaction_type: 'navigation',
     })
   },
 
@@ -93,7 +116,7 @@ export const analytics = {
     trackEvent('navigation_click', {
       page_name: pageName,
       link_text: linkText,
-      event_category: 'navigation',
+      interaction_type: 'navigation',
     })
   },
 
@@ -102,14 +125,23 @@ export const analytics = {
     trackEvent('video_play', {
       video_title: videoTitle,
       video_src: videoSrc,
-      event_category: 'media_interaction',
+      interaction_type: 'media_interaction',
     })
   },
 
   trackVideoHover: (videoTitle: string) => {
     trackEvent('video_hover', {
       video_title: videoTitle,
-      event_category: 'media_interaction',
+      interaction_type: 'media_interaction',
     })
+  },
+
+  // Test function to verify GA4 is working
+  testTracking: () => {
+    trackEvent('test_event', {
+      test_param: 'tracking_test',
+      interaction_type: 'debug',
+    })
+    console.log('Test event sent to GA4. Check Realtime reports in GA4 dashboard.')
   },
 }
