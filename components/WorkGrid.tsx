@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import { analytics } from '@/lib/analytics'
 
 interface Project {
   video?: string
@@ -20,29 +21,39 @@ interface WorkGridProps {
 export default function WorkGrid({ projects, gridSize = '2x2' }: WorkGridProps) {
   return (
     <div className={`work-grid work-grid-${gridSize}`}>
-      {projects.map((project, index) => (
-        <Link
-          key={`${project.title}-${project.video || project.image}-${index}`}
-          href={project.link}
-          className="work-item scroll-reveal"
-        >
-          <div className="work-item-media">
-            {project.video ? (
-              <VideoPlayer key={`video-${project.video}-${index}`} src={project.video} />
-            ) : project.image ? (
-              <img key={`img-${project.image}-${index}`} src={project.image} alt={project.title} />
-            ) : null}
-            <div className="work-item-overlay">
-              <h2 className="work-item-title">{project.title}</h2>
+      {projects.map((project, index) => {
+        const slug = project.link.replace('/projects/', '')
+        return (
+          <Link
+            key={`${project.title}-${project.video || project.image}-${index}`}
+            href={project.link}
+            className="work-item scroll-reveal"
+            onClick={() => {
+              analytics.trackProjectClick(project.title, slug, project.tags)
+            }}
+          >
+            <div className="work-item-media">
+              {project.video ? (
+                <VideoPlayer 
+                  key={`video-${project.video}-${index}`} 
+                  src={project.video}
+                  projectTitle={project.title}
+                />
+              ) : project.image ? (
+                <img key={`img-${project.image}-${index}`} src={project.image} alt={project.title} />
+              ) : null}
+              <div className="work-item-overlay">
+                <h2 className="work-item-title">{project.title}</h2>
+              </div>
             </div>
-          </div>
-        </Link>
-      ))}
+          </Link>
+        )
+      })}
     </div>
   )
 }
 
-function VideoPlayer({ src }: { src: string }) {
+function VideoPlayer({ src, projectTitle }: { src: string; projectTitle: string }) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const [isLoaded, setIsLoaded] = useState(false)
@@ -77,16 +88,23 @@ function VideoPlayer({ src }: { src: string }) {
     }, 100)
 
     const handleMouseEnter = () => {
+      // Track video hover
+      analytics.trackVideoHover(projectTitle)
+      
       if (video.readyState >= 2) {
         // Video metadata is loaded, can play
         video.play().catch(() => {
           // Silently fail if autoplay is blocked
         })
+        // Track video play
+        analytics.trackVideoPlay(projectTitle, src)
       } else {
         // Load and then play
         video.load()
         video.addEventListener('loadeddata', () => {
           video.play().catch(() => {})
+          // Track video play
+          analytics.trackVideoPlay(projectTitle, src)
         }, { once: true })
       }
     }
@@ -120,7 +138,7 @@ function VideoPlayer({ src }: { src: string }) {
       container.removeEventListener('mouseenter', handleMouseEnter)
       container.removeEventListener('mouseleave', handleMouseLeave)
     }
-  }, [src])
+  }, [src, projectTitle])
 
   return (
     <div ref={containerRef} className="video-container">

@@ -1,5 +1,7 @@
 'use client'
 
+import { analytics } from '@/lib/analytics'
+
 interface WorkFiltersProps {
   activeFilter: string
   onFilterChange: (filter: string) => void
@@ -19,7 +21,10 @@ export default function WorkFilters({ activeFilter, onFilterChange }: WorkFilter
           <button
             key={filter}
             type="button"
-            onClick={() => onFilterChange(filter)}
+            onClick={() => {
+              onFilterChange(filter)
+              analytics.trackFilterChange(filter)
+            }}
             className={`filter-link ${activeFilter === filter ? 'active' : ''}`}
           >
             {filter}

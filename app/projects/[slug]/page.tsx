@@ -2,6 +2,8 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Footer from '@/components/Footer'
 import ClientScripts from '@/components/ClientScripts'
+import ProjectViewTracker from '@/components/ProjectViewTracker'
+import ProjectSectionTracker from '@/components/ProjectSectionTracker'
 import { projects, getProjectBySlug } from '@/data/projects'
 
 export async function generateStaticParams() {
@@ -20,6 +22,8 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
 
   return (
     <div className="page-container">
+      <ProjectViewTracker projectTitle={project.title} projectSlug={project.slug} />
+      <ProjectSectionTracker projectTitle={project.title} projectSlug={project.slug} />
       <section className="project-detail">
         <Link href="/" className="project-back-link">
           Back
@@ -50,17 +54,19 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
         </div>
         
         <div className="project-content">
-          <p className="project-description">{project.description}</p>
+          <div className="project-section" id="project-description">
+            <p className="project-description">{project.description}</p>
+          </div>
           
           {project.context && (
-            <div className="project-section">
+            <div className="project-section" id="project-context">
               <h2 className="project-section-title">Context</h2>
               <p className="project-section-text">{project.context}</p>
             </div>
           )}
           
           {project.process && project.process.length > 0 && (
-            <div className="project-section">
+            <div className="project-section" id="project-process">
               <h2 className="project-section-title">Process</h2>
               <ul className="project-process-list">
                 {project.process.map((step, index) => (
@@ -71,7 +77,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
           )}
           
           {project.results && (
-            <div className="project-section">
+            <div className="project-section" id="project-results">
               <h2 className="project-section-title">Results</h2>
               <p className="project-section-text">{project.results}</p>
             </div>
