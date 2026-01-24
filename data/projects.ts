@@ -14,6 +14,23 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: 'interactive-balloons',
+    title: 'Interactive Balloons with Rive and SwiftUI for the Contra Challenge',
+    video: '/assets/video/Interactive Balloons with Rive and Swiftui for the Contra challenge.mp4',
+    description: 'Interactive balloons animation created with Rive and SwiftUI for the Contra challenge.',
+    tags: ['Rive', 'SwiftUI', 'Contra'],
+    year: '2024',
+    client: 'Personal Project',
+    role: 'Designer & Developer',
+    context: 'Created an interactive balloons animation using Rive and SwiftUI as part of the Contra challenge.',
+    process: [
+      'Designed balloon interaction concept',
+      'Created animations in Rive',
+      'Integrated with SwiftUI',
+      'Refined interactions and timing'
+    ]
+  },
+  {
     slug: 'etmoney-onboarding',
     title: 'ET Money Onboarding with Rive & SwiftUI',
     video: '/assets/video/Et money onboarding with Rive & SwiftUI.mp4',
@@ -49,23 +66,6 @@ export const projects: Project[] = [
     ]
   },
   {
-    slug: 'twitter-popular',
-    title: 'Twitter Popular Interaction with Rive',
-    video: '/assets/video/Twitter popular interaction with Rive.mp4',
-    description: 'Recreating Twitter\'s popular interaction using Rive animation.',
-    tags: ['Rive'],
-    year: '2024',
-    client: 'Personal Project',
-    role: 'Designer & Prototyper',
-    context: 'Explored recreating Twitter\'s popular interaction pattern using Rive for learning and experimentation.',
-    process: [
-      'Analyzed Twitter\'s interaction pattern',
-      'Prototyped animation in Rive',
-      'Refined timing and easing',
-      'Shared with design community'
-    ]
-  },
-  {
     slug: 'zomato-weather',
     title: 'Zomato Weather Concept with Rive and Play',
     video: '/assets/video/Zomato Weather concept with rive and play.mp4',
@@ -80,6 +80,57 @@ export const projects: Project[] = [
       'Designed interaction flows',
       'Prototyped with Rive and Play',
       'Refined animations and transitions'
+    ]
+  },
+  {
+    slug: 'drag-and-order',
+    title: 'Drag & Drop Interaction with Figma and Play',
+    video: '/assets/video/drag and order.mp4',
+    description: 'Just tested a drag & drop interaction using Figma and Play! It took me 10 minutes to complete the process and an additional hour to record and edit the session.',
+    tags: ['Play', 'Figma', 'Prototyping', 'iOS'],
+    year: '2024',
+    client: 'Personal Project',
+    role: 'Designer & Prototyper',
+    context: 'Explored drag & drop interactions using Figma and Play, demonstrating how quickly interactive prototypes can be created with these tools.',
+    process: [
+      'Designed interface in Figma with proper auto-layout',
+      'Copied and pasted designs into Play',
+      'Created drag & drop interaction in Play',
+      'Recorded and edited the session for sharing'
+    ]
+  },
+  {
+    slug: 'cred-bottom-navigation',
+    title: 'CRED Bottom Navigation Recreation with SwiftUI and Rive',
+    video: '/assets/video/CRED Bottom Navigation recreation with SwiftUI and Rive.mp4',
+    description: 'A recreation of CRED\'s bottom navigation, representing closure to a cycle started in 2023. This project demonstrates that good design is not expensive to make but takes care and understanding of the basics.',
+    tags: ['SwiftUI', 'Rive', 'CRED'],
+    year: '2024',
+    client: 'Personal Project',
+    role: 'Designer & Developer',
+    context: 'Back in 2014, I stumbled upon UX Design and fell in love with it. This recreation of CRED\'s bottom navigation is closure to a cycle I started in 2023, showing that good design is accessible to everyone who cares about the basics.',
+    process: [
+      'Analyzed CRED\'s bottom navigation design',
+      'Recreated the interaction using SwiftUI and Rive',
+      'Focused on understanding the design fundamentals',
+      'Demonstrated that quality design is about care, not cost'
+    ]
+  },
+  {
+    slug: 'twitter-popular',
+    title: 'Twitter Popular Interaction with Rive',
+    video: '/assets/video/Twitter popular interaction with Rive.mp4',
+    description: 'Recreating Twitter\'s popular interaction using Rive animation.',
+    tags: ['Rive'],
+    year: '2024',
+    client: 'Personal Project',
+    role: 'Designer & Prototyper',
+    context: 'Explored recreating Twitter\'s popular interaction pattern using Rive for learning and experimentation.',
+    process: [
+      'Analyzed Twitter\'s interaction pattern',
+      'Prototyped animation in Rive',
+      'Refined timing and easing',
+      'Shared with design community'
     ]
   },
   {
