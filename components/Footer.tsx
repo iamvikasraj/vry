@@ -1,13 +1,9 @@
 export default function Footer() {
   return (
-    <footer className="colophon border-t mt-xl">
-      <div className="colophon-content flex justify-between items-center overline p-sm">
-        <div>© 2025 Vikas Raj Yadav. All rights reserved.</div>
-        <div className="colophon-links flex gap-md">
-          <a href="/privacy">Privacy</a>
-          <a href="/terms">Terms</a>
-          <a href="/contact">Contact</a>
-        </div>
+    <footer className="colophon">
+      <div className="colophon-content">
+        <div>© 2026 Vikas Raj Yadav. All rights reserved.</div>
+        <div>Think Different</div>
       </div>
     </footer>
   )

@@ -8,6 +8,7 @@ import AboutIntro from '@/components/AboutIntro'
 import WorkFilters from '@/components/WorkFilters'
 import WorkGrid from '@/components/WorkGrid'
 import GridToggle from '@/components/GridToggle'
+import { projects } from '@/data/projects'
 
 interface Project {
   video?: string
@@ -19,82 +20,17 @@ interface Project {
 }
 
 export default function Home() {
-  const [gridSize, setGridSize] = useState<'2x2' | '4x4'>('2x2')
+  const [gridSize, setGridSize] = useState<'1x1' | '2x2'>('2x2')
   const [activeFilter, setActiveFilter] = useState<string>('All')
 
-  // Using videos 1-10 in order
-  const allProjects: Project[] = [
-    {
-      video: '/assets/video/1.mp4',
-      title: 'ET Money App Onboarding',
-      link: '/projects/etmoney',
-      description: 'A shareable celebration, fully created in Rive.',
-      tags: ['Live Projects', 'Rive'],
-    },
-    {
-      video: '/assets/video/2.mp4',
-      title: 'HDFC Bank Digital Banking',
-      link: '/projects/hdfc',
-      description: 'A new look and feel for one of banking\'s most trusted platforms.',
-      tags: ['Live Projects'],
-    },
-    {
-      video: '/assets/video/3.mp4',
-      title: 'Rive Animation Tutorials',
-      link: '/projects/rive-tutorial',
-      description: 'Exploring Rive animation capabilities for product designers.',
-      tags: ['Rive'],
-    },
-    {
-      video: '/assets/video/4.mp4',
-      title: 'Motion Design Experiments',
-      link: '/projects/motion-experiments',
-      description: 'Exploring the boundaries of motion design and micro-interactions.',
-      tags: ['Rive'],
-    },
-    {
-      video: '/assets/video/5.mp4',
-      title: 'HDFC Onboarding Experience',
-      link: '/projects/hdfc-onboarding',
-      description: 'A streamlined onboarding flow that improved conversion rates.',
-      tags: ['Live Projects'],
-    },
-    {
-      video: '/assets/video/6.mp4',
-      title: 'Design System Framework',
-      link: '/projects/design-system',
-      description: 'A comprehensive design system for scalable product development.',
-      tags: ['Live Projects'],
-    },
-    {
-      video: '/assets/video/7.mp4',
-      title: 'Payment Gateway Redesign',
-      link: '/projects/payment-gateway',
-      description: 'Innovative design solutions for modern payment experiences.',
-      tags: ['Live Projects'],
-    },
-    {
-      video: '/assets/video/8.mp4',
-      title: 'Micro-interactions Library',
-      link: '/projects/micro-interactions',
-      description: 'Pushing boundaries in user experience design.',
-      tags: ['Rive'],
-    },
-    {
-      video: '/assets/video/9.mp4',
-      title: 'Banking App UI Kit',
-      link: '/projects/banking-ui-kit',
-      description: 'Creating memorable digital experiences.',
-      tags: ['Live Projects'],
-    },
-    {
-      video: '/assets/video/10.mp4',
-      title: 'Animation Principles Guide',
-      link: '/projects/animation-guide',
-      description: 'Design that makes a difference.',
-      tags: ['Rive'],
-    },
-  ]
+  // Convert projects data to format needed for WorkGrid
+  const allProjects: Project[] = projects.map(project => ({
+    video: project.video,
+    title: project.title,
+    link: `/projects/${project.slug}`,
+    description: project.description,
+    tags: project.tags,
+  }))
 
   // Filter projects based on active filter
   const filteredProjects = useMemo(() => {
@@ -102,7 +38,9 @@ export default function Home() {
       return allProjects
     }
     return allProjects.filter((project) =>
-      project.tags.some((tag) => tag.toLowerCase() === activeFilter.toLowerCase())
+      project.tags.some((tag) => 
+        tag.trim().toLowerCase() === activeFilter.trim().toLowerCase()
+      )
     )
   }, [activeFilter])
 

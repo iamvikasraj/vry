@@ -10,8 +10,6 @@ export default function WorkFilters({ activeFilter, onFilterChange }: WorkFilter
     'All',
     'Live Projects',
     'Rive',
-    'Play',
-    'SwiftUI',
   ]
 
   return (

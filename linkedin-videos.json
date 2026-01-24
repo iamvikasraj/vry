@@ -1,0 +1,62 @@
+{
+  "posts": [
+    {
+      "url": "https://www.linkedin.com/posts/vraj247_rive-contra-challenge-activity-7420020367051837440-_hw4",
+      "projectTitle": "Rive Animation Tutorials",
+      "videoUrl": "",
+      "videoFilename": "rive-contra-challenge.mp4",
+      "description": "Scripting with Rive Challenge - Rive x Contra"
+    },
+    {
+      "url": "https://www.linkedin.com/posts/vraj247_thinkinteraction-rive-play-activity-7418216248439681024-sH33",
+      "projectTitle": "Motion Design Experiments",
+      "videoUrl": "",
+      "videoFilename": "think-interaction-workshop.mp4",
+      "description": "Think Interaction - Rive x Play 2025 edition workshop"
+    },
+    {
+      "url": "https://www.linkedin.com/posts/vraj247_designengineer-designwithswiftui-ux-activity-7407352057629704192-0qCH",
+      "projectTitle": "Design System Framework",
+      "videoUrl": "",
+      "videoFilename": "loop-care-journey.mp4",
+      "description": "Care Journey feature at Loop Health - SwiftUI prototyping"
+    },
+    {
+      "url": "https://www.linkedin.com/posts/vraj247_so-last-year-i-finished-my-threejs-certification-activity-7402298404493533184-_zY2",
+      "projectTitle": "Micro-interactions Library",
+      "videoUrl": "",
+      "videoFilename": "threejs-experiment.mp4",
+      "description": "Three.js certification and experiments"
+    },
+    {
+      "url": "https://www.linkedin.com/posts/vraj247_designengineer-ios-swiftui-activity-7401845384828096512-kiI5",
+      "projectTitle": "Component Library",
+      "videoUrl": "",
+      "videoFilename": "pinterest-swiftui.mp4",
+      "description": "Design with SwiftUI ft. Pinterest - interaction design practice"
+    }
+  ],
+  "instructions": [
+    "HOW TO GET VIDEO URLs:",
+    "",
+    "Method 1 - Browser DevTools:",
+    "1. Open the LinkedIn post in your browser",
+    "2. Press F12 to open DevTools",
+    "3. Go to Network tab",
+    "4. Filter by 'Media' or search for '.mp4'",
+    "5. Play the video in the post",
+    "6. Find the video request in Network tab",
+    "7. Copy the Request URL (it will be something like: https://media.licdn.com/dms/video/...)",
+    "",
+    "Method 2 - Inspect Element:",
+    "1. Right-click on the video in the LinkedIn post",
+    "2. Select 'Inspect' or 'Inspect Element'",
+    "3. Look for <video> tag in the HTML",
+    "4. Find the 'src' attribute and copy the URL",
+    "",
+    "Once you have the video URLs:",
+    "1. Paste them in the 'videoUrl' field above",
+    "2. Run: npm run fetch-linkedin",
+    "3. Videos will be downloaded and projects updated automatically"
+  ]
+}

@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "fetch-socials": "node scripts/fetch-socials.js",
+    "fetch-linkedin": "node scripts/fetch-linkedin-videos.js",
     "build": "npm run fetch-socials && next build",
     "start": "next start"
   },
