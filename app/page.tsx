@@ -9,6 +9,7 @@ import WorkFilters from '@/components/WorkFilters'
 import WorkGrid from '@/components/WorkGrid'
 import GridToggle from '@/components/GridToggle'
 import { projects } from '@/data/projects'
+import '@/lib/analytics' // Initialize analytics global functions
 
 interface Project {
   video?: string

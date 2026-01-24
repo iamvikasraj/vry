@@ -106,6 +106,7 @@ export const analytics = {
 }
 
 // Make analytics available globally for testing
+// This runs when the module is imported in a client component
 if (typeof window !== 'undefined') {
   (window as any).analytics = analytics
   
@@ -121,7 +122,11 @@ if (typeof window !== 'undefined') {
     return status
   }
   
-  console.log('💡 GA4 Testing:')
-  console.log('   - Run analytics.testAll() to test all events')
-  console.log('   - Run checkGA4Status() to check GA4 status')
+  // Only log once to avoid spam
+  if (!(window as any).__ga4Initialized) {
+    (window as any).__ga4Initialized = true
+    console.log('💡 GA4 Testing:')
+    console.log('   - Run analytics.testAll() to test all events')
+    console.log('   - Run checkGA4Status() to check GA4 status')
+  }
 }

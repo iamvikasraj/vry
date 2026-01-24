@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import '@/lib/analytics' // Initialize analytics and global functions
 
 export default function ClientScripts() {
   useEffect(() => {
