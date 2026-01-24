@@ -216,19 +216,17 @@ export default function RootLayout({
       </head>
       <body>
         {/* Google tag (gtag.js) */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-SYDGLK4LKX"
-          strategy="afterInteractive"
-          async
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-SYDGLK4LKX"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-SYDGLK4LKX');
+            `,
+          }}
         />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-SYDGLK4LKX');
-          `}
-        </Script>
         {children}
       </body>
     </html>
