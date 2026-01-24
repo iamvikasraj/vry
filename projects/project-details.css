@@ -1,0 +1,357 @@
+/* ========================================
+   PROJECT DETAILS PAGE STYLES
+   Blog-style layout inspired by the reference image
+   ======================================== */
+
+/* Home Icon Styling */
+.home-link {
+  display: flex;
+  align-items: center;
+}
+
+.home-icon {
+  color: var(--gray-med);
+  font-size: var(--txt-18);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  padding: var(--sp-8);
+  border-radius: var(--sp-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-icon:hover {
+  color: var(--accent);
+  background-color: var(--bg-color);
+}
+
+.home-svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  transition: stroke 0.2s ease;
+}
+
+.home-icon:hover .home-svg {
+  stroke: var(--accent);
+}
+
+/* Article Header Styles */
+.article-header {
+  padding: var(--sp-48) 0 var(--sp-32);
+  margin-bottom: var(--sp-48);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--sp-16);
+  padding-right: var(--sp-16);
+}
+
+.author-name {
+  font-family: var(--serif-font);
+  font-size: var(--txt-32);
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: var(--sp-16);
+  line-height: 1.1;
+}
+
+.article-date {
+  font-family: var(--serif-font);
+  font-style: italic;
+  font-size: var(--txt-14);
+  color: var(--gray-med);
+  margin-bottom: var(--sp-24);
+}
+
+.journal-subtitle {
+  font-family: var(--sans-font);
+  font-size: var(--txt-16);
+  color: var(--gray-med);
+  font-style: italic;
+  margin-bottom: var(--sp-4);
+}
+
+.article-title {
+  font-family: var(--serif-font);
+  font-size: var(--txt-60);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--sp-32);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+.title-line {
+  display: block;
+}
+
+.title-subtitle {
+  font-size: var(--txt-20);
+  font-weight: 300;
+  color: var(--gray-med);
+  margin-top: var(--sp-16);
+  line-height: 1.4;
+}
+
+/* Social Sharing Styles */
+.social-sharing {
+  margin-top: var(--sp-32);
+}
+
+.social-share-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+}
+
+.social-share-btn.dribbble {
+  background-color: var(--text-color);
+  color: white;
+  overflow: hidden;
+}
+
+.profile-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.social-share-btn.medium {
+  background-color: white;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+.social-share-btn:hover {
+  transform: scale(1.05);
+}
+
+.share-icon {
+  font-family: var(--sans-font);
+  font-weight: 600;
+  font-size: var(--txt-16);
+}
+
+/* Article Content Layout */
+.article-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 var(--sp-16);
+}
+
+.article-body {
+  font-family: var(--sans-font);
+  line-height: 1.7;
+  color: var(--text-color);
+}
+
+/* Drop Cap Styling */
+.drop-cap {
+  font-family: var(--serif-font);
+  font-size: var(--txt-72);
+  font-weight: 400;
+  float: left;
+  line-height: 0.8;
+  margin-right: var(--sp-12);
+  margin-top: var(--sp-8);
+  color: var(--text-color);
+}
+
+.intro-text {
+  font-size: var(--txt-18);
+  line-height: 1.7;
+  margin-bottom: var(--sp-48);
+  color: var(--text-color);
+}
+
+/* Section Styling */
+.article-section {
+  margin-top: var(--sp-48);
+  margin-bottom: var(--sp-96);
+  padding: var(--sp-16) 0;
+}
+
+
+.section-quote {
+  font-family: var(--serif-font);
+  font-size: var(--txt-32);
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--text-color);
+  margin-top: var(--sp-24);
+  margin-bottom: var(--sp-24);
+  padding-left: var(--sp-16);
+  border-left: 2px solid var(--accent);
+  padding: var(--sp-12) var(--sp-16);
+}
+
+.section-content {
+  margin-top: var(--sp-16);
+}
+
+.section-title {
+  font-family: var(--serif-font);
+  font-size: var(--txt-28);
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: var(--sp-24);
+  color: var(--text-color);
+}
+
+.section-text {
+  font-size: var(--txt-16);
+  line-height: 1.7;
+  margin-bottom: var(--sp-24);
+  color: var(--text-color);
+}
+
+.section-text:last-child {
+  margin-bottom: 0;
+}
+
+/* Project Showcase */
+.project-showcase {
+  margin-top: 32px ;
+  margin-bottom: 32px ;
+  text-align: center;
+}
+
+.showcase-video {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 32px ;
+  margin-bottom: 32px ;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+}
+
+.showcase-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.showcase-caption {
+  font-family: var(--sans-font);
+  font-size: var(--txt-14);
+  color: var(--gray-med);
+  font-style: italic;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .article-title {
+    font-size: var(--txt-32);
+    line-height: 1.2;
+  }
+  
+  .title-line.indent {
+    margin-left: 0;
+  }
+  
+  .article-content {
+    padding: 0 var(--sp-8);
+  }
+  
+  .drop-cap {
+    font-size: var(--txt-48);
+    margin-right: var(--sp-8);
+    margin-top: var(--sp-4);
+  }
+  
+  .intro-text {
+    font-size: var(--txt-16);
+  }
+  
+  .section-title {
+    font-size: var(--txt-24);
+  }
+  
+  .section-quote {
+    font-size: var(--txt-16);
+    padding-left: var(--sp-12);
+  }
+  
+  .social-share-btn {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .share-icon {
+    font-size: var(--txt-14);
+  }
+}
+
+@media (max-width: 480px) {
+  .article-title {
+    font-size: var(--txt-28);
+  }
+  
+  .title-line.indent {
+    margin-left: var(--sp-16);
+  }
+  
+  .article-header {
+    padding: var(--sp-32) 0 var(--sp-24);
+  }
+  
+  .article-section {
+    margin-bottom: var(--sp-48);
+  }
+  
+  .section-quote {
+    font-size: var(--txt-15);
+    padding-left: var(--sp-8);
+  }
+  
+  .section-title {
+    font-size: var(--txt-20);
+  }
+  
+  .showcase-video {
+    margin-bottom: var(--sp-12);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .social-sharing,
+  .colophon {
+    display: none;
+  }
+  
+  .article-content {
+    max-width: none;
+    padding: 0;
+  }
+  
+  .article-title {
+    font-size: var(--txt-32);
+    margin-bottom: var(--sp-24);
+  }
+  
+  .section-title {
+    font-size: var(--txt-20);
+    margin-bottom: var(--sp-16);
+  }
+  
+  .section-text {
+    font-size: var(--txt-14);
+    margin-bottom: var(--sp-16);
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "vikasrajyadav-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "fetch-socials": "node scripts/fetch-socials.js",
+    "fetch-linkedin": "node scripts/fetch-linkedin-videos.js",
+    "build": "npm run fetch-socials && next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "^14.2.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "typescript": "^5.3.0"
+  }
+}
