@@ -1129,7 +1129,6 @@ a {
 .workshop-title {
   font-size: var(--txt-16);
   font-weight: 600;
-  margin-bottom: var(--sp-48);
 }
 
 .workshop-venue {
@@ -2237,9 +2236,10 @@ a {
   align-items: baseline;
   padding-bottom: var(--sp-16);
   border-bottom: 1px solid var(--border-light);
+  margin-bottom: var(--sp-16);
 }
 
-.workshop-item-timeline:last-child {
+.workshops-list > div:last-child .workshop-item-timeline {
   border-bottom: none;
   padding-bottom: 0;
 }
@@ -2252,8 +2252,8 @@ a {
 
 .workshop-title {
   font-family: var(--sans-font);
-  font-size: var(--txt-18);
-  font-weight: 400;
+  font-size: var(--txt-16);
+  font-weight: 600;
   color: var(--text-color);
 }
 
@@ -2269,6 +2269,20 @@ a {
   font-size: var(--txt-18);
   font-weight: 400;
   color: var(--gray-med);
+}
+
+.workshop-video-container {
+  width: 100%;
+  margin-top: var(--sp-16);
+  display: block;
+}
+
+.workshop-video {
+  width: 100%;
+  height: auto;
+  display: block;
+  background-color: #000;
+  min-height: 200px;
 }
 
 /* Work Page */

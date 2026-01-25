@@ -19,6 +19,8 @@ export default function Workshops() {
       description: 'Exploring advanced Rive scripting techniques and animation workflows.',
     },
   ]
+  
+  const workshopVideo = '/assets/video/Think Interaction Workshop.mp4'
 
   return (
     <div className="page-container">
@@ -34,12 +36,34 @@ export default function Workshops() {
 
           <div className="workshops-list">
             {workshops.map((workshop, index) => (
-              <div key={index} className="workshop-item-timeline">
-                <div className="workshop-info">
-                  <div className="workshop-title">{workshop.title}</div>
-                  <div className="workshop-venue">{workshop.venue}</div>
+              <div key={index}>
+                <div className="workshop-item-timeline">
+                  <div className="workshop-info">
+                    <div className="workshop-title">{workshop.title}</div>
+                    <div className="workshop-venue">{workshop.venue}</div>
+                  </div>
+                  <div className="workshop-year">{workshop.year}</div>
                 </div>
-                <div className="workshop-year">{workshop.year}</div>
+                {workshop.title === 'Think Interaction Workshop' && (
+                  <div className="workshop-video-container">
+                    <video
+                      src={workshopVideo}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="workshop-video"
+                      onError={(e) => {
+                        console.error('Video load error:', e)
+                      }}
+                      onLoadStart={() => {
+                        console.log('Video loading:', workshopVideo)
+                      }}
+                    >
+                      <source src={workshopVideo} type="video/mp4" />
+                    </video>
+                  </div>
+                )}
               </div>
             ))}
           </div>
