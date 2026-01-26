@@ -1,9 +1,18 @@
 export default function Footer() {
   return (
     <footer className="colophon">
+      <div className="colophon-image-container">
+        <img
+          src="/assets/images/footer.jpeg"
+          alt="Think Different"
+          className="colophon-image"
+        />
+      </div>
       <div className="colophon-content">
-        <div className="colophon-copyright">© 2026</div>
-        <div className="colophon-brand">Think Different</div>
+        <div className="colophon-copyright">
+          <span className="colophon-year">© 2026</span>
+          <span className="colophon-name">Vikas Raj Yadav</span>
+        </div>
       </div>
     </footer>
   )

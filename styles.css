@@ -1292,14 +1292,34 @@ a {
   margin-top: var(--sp-80);
 }
 
+.colophon-image-container {
+  width: 100%;
+  margin-bottom: var(--sp-32);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.colophon-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .colophon-content {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: var(--sp-32);
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-24);
+  text-align: center;
+  width: 100%;
 }
 
 .colophon-copyright {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
   font-family: var(--sans-font);
   font-size: var(--txt-14);
   font-weight: 400;
@@ -1307,13 +1327,13 @@ a {
   letter-spacing: 0.02em;
 }
 
-.colophon-brand {
+.colophon-year,
+.colophon-name {
   font-family: var(--sans-font);
-  font-size: var(--txt-60);
+  font-size: var(--txt-14);
   font-weight: 400;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  color: var(--text-color);
+  color: var(--gray-med);
+  letter-spacing: 0.02em;
 }
 
 .colophon-links {
@@ -1466,15 +1486,22 @@ a {
     margin-top: var(--sp-48);
   }
   
-  .colophon-content {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--sp-24);
-    width: 100%;
+  .colophon-image-container {
+    margin-bottom: var(--sp-24);
   }
   
-  .colophon-brand {
-    font-size: var(--txt-40);
+  .colophon-image {
+    max-width: 100%;
+  }
+  
+  .colophon-content {
+    gap: var(--sp-20);
+  }
+  
+  .colophon-copyright {
+    flex-direction: column;
+    gap: var(--sp-8);
+    text-align: center;
   }
 
   .colophon-links {
@@ -2333,7 +2360,7 @@ a {
 .lets-work-content {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-24);
+  gap: var(--sp-32);
   max-width: 720px;
 }
 
@@ -2347,20 +2374,76 @@ a {
   margin: 0;
 }
 
-.lets-work-cta {
+.lets-work-description {
   font-family: var(--sans-font);
   font-size: var(--txt-18);
   font-weight: 400;
-  color: var(--text-color);
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  transition: opacity 0.2s ease;
-  width: fit-content;
+  line-height: 1.6;
+  color: var(--gray-med);
+  margin: 0;
 }
 
-.lets-work-cta:hover {
+.lets-work-link {
+  color: var(--text-color);
+  text-decoration: underline;
+  text-decoration-color: var(--border-color);
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.lets-work-link:hover {
+  text-decoration-color: var(--text-color);
+}
+
+.lets-work-contact {
+  margin-top: var(--sp-8);
+}
+
+.lets-work-email-link {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s ease;
+}
+
+.lets-work-email-link:hover {
   opacity: 0.7;
+}
+
+.lets-work-email-content {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-16);
+}
+
+.lets-work-profile-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.lets-work-email-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.lets-work-email-address {
+  font-family: var(--sans-font);
+  font-size: var(--txt-16);
+  font-weight: 400;
+  color: var(--text-color);
+  line-height: 1.4;
+}
+
+.lets-work-reply-time {
+  font-family: var(--sans-font);
+  font-size: var(--txt-14);
+  font-weight: 400;
+  color: var(--gray-med);
+  line-height: 1.4;
 }
 
 /* Home workshops section - using SectionHeader component */
@@ -3628,14 +3711,14 @@ a {
   }
   
   .lets-work-content {
-    gap: var(--sp-20);
+    gap: var(--sp-24);
   }
   
   .lets-work-title {
     font-size: var(--txt-24);
   }
   
-  .lets-work-cta {
+  .lets-work-description {
     font-size: var(--txt-16);
   }
   
@@ -3737,11 +3820,22 @@ a {
     margin-top: var(--sp-32);
   }
   
-  .colophon-brand {
-    font-size: var(--txt-32);
+  .colophon-image-container {
+    margin-bottom: var(--sp-16);
+  }
+  
+  .colophon-content {
+    gap: var(--sp-16);
   }
   
   .colophon-copyright {
+    flex-direction: column;
+    gap: var(--sp-8);
+    text-align: center;
+  }
+  
+  .colophon-year,
+  .colophon-name {
     font-size: var(--txt-12);
   }
   
@@ -3831,15 +3925,28 @@ a {
   }
   
   .lets-work-content {
-    gap: var(--sp-16);
+    gap: var(--sp-20);
   }
   
   .lets-work-title {
     font-size: var(--txt-20);
   }
   
-  .lets-work-cta {
+  .lets-work-description {
     font-size: var(--txt-14);
+  }
+  
+  .lets-work-profile-img {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .lets-work-email-address {
+    font-size: var(--txt-14);
+  }
+  
+  .lets-work-reply-time {
+    font-size: var(--txt-12);
   }
   
   .home-workshops-title {
