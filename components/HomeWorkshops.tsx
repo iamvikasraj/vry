@@ -39,14 +39,14 @@ export default function HomeWorkshops() {
       title: 'Think Interaction Workshop',
       date: '2025',
       venue: 'Rive x Play 2025',
-      type: 'In-Person',
+      type: 'In-Person' as const,
       image: '/assets/video/Think Interaction Workshop.mp4',
     },
     {
       title: 'Rive Q&A at Big Basket Workshop',
       date: '2025',
       venue: 'Big Basket',
-      type: 'In-Person',
+      type: 'In-Person' as const,
       images: [
         '/assets/images/Rive-1.jpg',
         '/assets/images/Rive-2.jpg',
