@@ -3,6 +3,7 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ClientScripts from '@/components/ClientScripts'
+import TimelineItem from '@/components/TimelineItem'
 
 export default function Workshops() {
   const workshops = [
@@ -37,13 +38,16 @@ export default function Workshops() {
           <div className="workshops-list">
             {workshops.map((workshop, index) => (
               <div key={index}>
-                <div className="workshop-item-timeline">
-                  <div className="workshop-info">
-                    <div className="workshop-title">{workshop.title}</div>
-                    <div className="workshop-venue">{workshop.venue}</div>
-                  </div>
-                  <div className="workshop-year">{workshop.year}</div>
-                </div>
+                <TimelineItem
+                  leftContent={
+                    <div className="workshop-info">
+                      <div className="workshop-title">{workshop.title}</div>
+                      <div className="workshop-venue">{workshop.venue}</div>
+                    </div>
+                  }
+                  rightContent={<div className="workshop-year">{workshop.year}</div>}
+                  className="workshop-item-timeline"
+                />
                 {workshop.title === 'Think Interaction Workshop' && (
                   <div className="workshop-video-container">
                     <video

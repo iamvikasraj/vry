@@ -1,13 +1,17 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import Link from 'next/link'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ClientScripts from '@/components/ClientScripts'
+import HeroSection from '@/components/HeroSection'
 import AboutIntro from '@/components/AboutIntro'
-import WorkFilters from '@/components/WorkFilters'
+import ExpertiseHighlights from '@/components/ExpertiseHighlights'
+import RecognitionBadges from '@/components/RecognitionBadges'
+import HomeWorkshops from '@/components/HomeWorkshops'
+import LetsWorkTogether from '@/components/LetsWorkTogether'
+import SectionHeader from '@/components/SectionHeader'
 import WorkGrid from '@/components/WorkGrid'
-import GridToggle from '@/components/GridToggle'
 import { projects } from '@/data/projects'
 import '@/lib/analytics' // Initialize analytics global functions
 
@@ -21,11 +25,8 @@ interface Project {
 }
 
 export default function Home() {
-  const [gridSize, setGridSize] = useState<'1x1' | '2x2'>('2x2')
-  const [activeFilter, setActiveFilter] = useState<string>('All')
-
-  // Convert projects data to format needed for WorkGrid
-  const allProjects: Project[] = projects.map(project => ({
+  // Get first 4 projects as featured
+  const featuredProjects: Project[] = projects.slice(0, 4).map(project => ({
     video: project.video,
     title: project.title,
     link: `/projects/${project.slug}`,
@@ -33,33 +34,38 @@ export default function Home() {
     tags: project.tags,
   }))
 
-  // Filter projects based on active filter
-  const filteredProjects = useMemo(() => {
-    if (activeFilter === 'All') {
-      return allProjects
-    }
-    return allProjects.filter((project) =>
-      project.tags.some((tag) => 
-        tag.trim().toLowerCase() === activeFilter.trim().toLowerCase()
-      )
-    )
-  }, [activeFilter])
-
   return (
     <div className="page-container">
       <Header />
 
+      {/* Hero Section */}
+      <HeroSection />
+
       {/* About Intro */}
       <AboutIntro />
 
-      {/* Work Filters with Grid Toggle */}
-      <div className="work-controls">
-        <WorkFilters activeFilter={activeFilter} onFilterChange={setActiveFilter} />
-        <GridToggle gridSize={gridSize} onToggle={setGridSize} />
-      </div>
+      {/* Recognition Badges */}
+      <RecognitionBadges />
 
-      {/* Work Grid */}
-      <WorkGrid projects={filteredProjects} gridSize={gridSize} />
+      {/* Featured Projects */}
+      <section className="featured-section">
+        <SectionHeader
+          title="Featured"
+          linkHref="/work"
+          linkLabel="View all work"
+          className="featured-header"
+        />
+        <WorkGrid projects={featuredProjects} gridSize="2x2" />
+      </section>
+
+      {/* Expertise Highlights */}
+      <ExpertiseHighlights />
+
+      {/* Workshops Section */}
+      <HomeWorkshops />
+
+      {/* Let's Work Together Section */}
+      <LetsWorkTogether />
 
       <Footer />
       <ClientScripts />
