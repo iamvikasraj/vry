@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GA4 Debug Test</title>
+</head>
+<body>
+  <h1>GA4 Debug Test Page</h1>
+  <button onclick="testGA4()">Test GA4 Event</button>
+  <div id="status"></div>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SYDGLK4LKX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SYDGLK4LKX');
+    
+    // Check status
+    setTimeout(() => {
+      const status = document.getElementById('status');
+      status.innerHTML = `
+        <h2>GA4 Status:</h2>
+        <p>gtag available: ${typeof window.gtag === 'function' ? '✅ Yes' : '❌ No'}</p>
+        <p>dataLayer length: ${window.dataLayer.length}</p>
+        <p>Property ID: G-SYDGLK4LKX</p>
+      `;
+    }, 1000);
+    
+    function testGA4() {
+      if (window.gtag) {
+        window.gtag('event', 'test_event', {
+          test_param: 'manual_test',
+          test_value: 123
+        });
+        alert('Test event sent! Check GA4 Realtime reports.');
+      } else {
+        alert('GA4 not loaded!');
+      }
+    }
+  </script>
+</body>
+</html>

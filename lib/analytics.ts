@@ -15,15 +15,48 @@ export const trackEvent = (eventName: string, eventParams?: Record<string, any>)
     window.dataLayer = []
   }
   
-  // Use gtag if available, otherwise push to dataLayer
+  const params = eventParams || {}
+  
+  // Wait a bit for gtag to be ready, then send
+  const sendEvent = () => {
+    if (typeof window.gtag === 'function') {
+      try {
+        window.gtag('event', eventName, params)
+        console.log('✅ GA4 Event sent:', eventName, params)
+      } catch (error) {
+        console.error('❌ GA4 Event error:', error)
+      }
+    } else {
+      // Push to dataLayer - gtag will process when ready
+      window.dataLayer.push({
+        event: eventName,
+        ...params
+      })
+      console.log('📤 GA4 Event queued:', eventName, params)
+    }
+  }
+  
+  // If gtag is ready, send immediately
   if (typeof window.gtag === 'function') {
-    window.gtag('event', eventName, eventParams || {})
+    sendEvent()
   } else {
-    // Push to dataLayer - gtag will process it when loaded
-    window.dataLayer.push({
-      event: eventName,
-      ...(eventParams || {})
-    })
+    // Wait for gtag to load (max 5 seconds)
+    let attempts = 0
+    const checkGtag = setInterval(() => {
+      attempts++
+      if (typeof window.gtag === 'function') {
+        clearInterval(checkGtag)
+        sendEvent()
+      } else if (attempts >= 10) {
+        // After 5 seconds, just queue to dataLayer
+        clearInterval(checkGtag)
+        window.dataLayer.push({
+          event: eventName,
+          ...params
+        })
+        console.warn('⚠️ GA4 gtag not loaded after 5s, queued to dataLayer:', eventName)
+      }
+    }, 500)
   }
 }
 
@@ -55,4 +88,45 @@ export const analytics = {
   trackVideoHover: (title: string) => {
     trackEvent('video_hover', { video_title: title })
   },
+  
+  // Test all events - available in browser console
+  testAll: () => {
+    console.log('🧪 Testing all GA4 events...')
+    analytics.trackProjectClick('Test Project', 'test-project', ['Test', 'Demo'])
+    analytics.trackProjectView('Test Project', 'test-project')
+    analytics.trackProjectTimeSpent('Test Project', 'test-project', 45)
+    analytics.trackProjectSectionClick('Test Project', 'test-project', 'Context')
+    analytics.trackFilterChange('All')
+    analytics.trackGridToggle('1x1')
+    analytics.trackNavigationClick('work', 'Work')
+    analytics.trackVideoPlay('Test Video', '/test.mp4')
+    analytics.trackVideoHover('Test Video')
+    console.log('✅ All test events sent! Check GA4 Realtime reports.')
+  },
+}
+
+// Make analytics available globally for testing
+// This runs when the module is imported in a client component
+if (typeof window !== 'undefined') {
+  (window as any).analytics = analytics
+  
+  // Add status check function
+  ;(window as any).checkGA4Status = () => {
+    const status = {
+      gtag: typeof (window as any).gtag === 'function',
+      dataLayer: Array.isArray((window as any).dataLayer),
+      dataLayerLength: (window as any).dataLayer?.length || 0,
+      propertyId: 'G-SYDGLK4LKX'
+    }
+    console.table(status)
+    return status
+  }
+  
+  // Only log once to avoid spam
+  if (!(window as any).__ga4Initialized) {
+    (window as any).__ga4Initialized = true
+    console.log('💡 GA4 Testing:')
+    console.log('   - Run analytics.testAll() to test all events')
+    console.log('   - Run checkGA4Status() to check GA4 status')
+  }
 }

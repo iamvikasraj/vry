@@ -55,14 +55,6 @@ export default function Header() {
             <span className="nav-full">About</span>
             <span className="nav-short">ab</span>
           </Link>
-          <Link 
-            href="/contact" 
-            className={pathname === '/contact' ? 'active' : ''}
-            onClick={() => analytics.trackNavigationClick('contact', 'Contact')}
-          >
-            <span className="nav-full">Contact</span>
-            <span className="nav-short">co</span>
-          </Link>
         </nav>
       </div>
     </header>

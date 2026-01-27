@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
+import GA4PageView from '@/components/GA4PageView'
 import '../styles.css'
 
 export const metadata: Metadata = {
@@ -53,12 +54,8 @@ export default function RootLayout({
         <meta name="revisit-after" content="7 days" />
         
         {/* Fonts */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
-          rel="stylesheet"
-        />
+        <link rel="preconnect" href="https://use.typekit.net" />
+        <link rel="stylesheet" href="https://use.typekit.net/wjs0dtk.css" />
         
         {/* Font Awesome */}
         <link
@@ -110,7 +107,7 @@ export default function RootLayout({
                 }
               ],
               "sameAs": [
-                "https://twitter.com/vraj247",
+                "https://x.com/vryworks",
                 "https://linkedin.com/in/vraj247",
                 "https://dribbble.com/Vraj247",
                 "https://www.behance.net/Vraj247"
@@ -223,10 +220,22 @@ export default function RootLayout({
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-SYDGLK4LKX');
+              gtag('config', 'G-SYDGLK4LKX', {
+                send_page_view: true
+              });
+              
+              // Verify GA4 is loaded
+              setTimeout(function() {
+                if (typeof window.gtag === 'function') {
+                  console.log('✅ GA4 loaded successfully: G-SYDGLK4LKX');
+                } else {
+                  console.error('❌ GA4 failed to load');
+                }
+              }, 2000);
             `,
           }}
         />
+        <GA4PageView />
         {children}
       </body>
     </html>
