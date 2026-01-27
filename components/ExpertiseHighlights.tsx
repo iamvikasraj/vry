@@ -17,11 +17,9 @@ export default function ExpertiseHighlights() {
       <h2 className="expertise-title">Core Expertise</h2>
       <div className="expertise-grid">
         {expertiseAreas.map((area, index) => (
-          <div key={index} className="expertise-item">
-            <div className="expertise-header">
-              <span className="expertise-name">{area.name}</span>
-              <span className="expertise-level">{area.level}</span>
-            </div>
+          <div key={`${area.name}-${area.level}-${index}`} className="expertise-cell">
+            <div className="expertise-name">{area.name}</div>
+            <div className="expertise-level">{area.level}</div>
           </div>
         ))}
       </div>
