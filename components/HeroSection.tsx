@@ -42,9 +42,7 @@ export default function HeroSection() {
     <section className="hero-section">
       <div className="hero-content">
           <h1 className="hero-title">
-            Staff Product Designer & Technologist
-            <br />
-            <span className="hero-subtitle">10+ years crafting digital experiences</span>
+            Hi, I'm Vikas Raj Yadav—a Staff Product Designer & Technologist building products at Loop Health (YC 20). Previously led design teams at Paytm, HDFC Bank, and ETMoney—shaping experiences used by millions.
           </h1>
         <div className="hero-social-icons">
           {socialLinks.map((social) => (
