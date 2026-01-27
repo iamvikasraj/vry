@@ -47,6 +47,9 @@ export default function Home() {
       {/* Recognition Badges */}
       <RecognitionBadges />
 
+      {/* Expertise Highlights */}
+      <ExpertiseHighlights />
+
       {/* Featured Projects */}
       <section className="featured-section">
         <SectionHeader
@@ -57,9 +60,6 @@ export default function Home() {
         />
         <WorkGrid projects={featuredProjects} gridSize="2x2" />
       </section>
-
-      {/* Expertise Highlights */}
-      <ExpertiseHighlights />
 
       {/* Workshops Section */}
       <HomeWorkshops />

@@ -7,11 +7,11 @@ export default function Footer() {
           alt="Think Different"
           className="colophon-image"
         />
-      </div>
-      <div className="colophon-content">
-        <div className="colophon-copyright">
-          <span className="colophon-year">© 2026</span>
-          <span className="colophon-name">Vikas Raj Yadav</span>
+        <div className="colophon-content">
+          <div className="colophon-copyright">
+            <span className="colophon-year">© 2026</span>
+            <span className="colophon-name">Vikas Raj Yadav</span>
+          </div>
         </div>
       </div>
     </footer>

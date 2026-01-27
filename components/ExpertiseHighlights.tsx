@@ -14,14 +14,16 @@ export default function ExpertiseHighlights() {
 
   return (
     <section className="expertise-section">
-      <h2 className="expertise-title">Core Expertise</h2>
       <div className="expertise-grid">
-        {expertiseAreas.map((area, index) => (
-          <div key={`${area.name}-${area.level}-${index}`} className="expertise-cell">
-            <div className="expertise-name">{area.name}</div>
-            <div className="expertise-level">{area.level}</div>
-          </div>
-        ))}
+        {expertiseAreas.map((area, index) => {
+          const levelClass = area.level.toLowerCase().replace(/\s+/g, '-')
+          return (
+            <div key={`${area.name}-${area.level}-${index}`} className="expertise-cell">
+              <div className="expertise-name">{area.name}</div>
+              <div className={`expertise-level expertise-level-${levelClass}`}>{area.level}</div>
+            </div>
+          )
+        })}
       </div>
     </section>
   )

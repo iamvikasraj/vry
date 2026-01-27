@@ -41,11 +41,11 @@ export default function HeroSection() {
   return (
     <section className="hero-section">
       <div className="hero-content">
-        <h1 className="hero-title">
-          Staff Product Designer & Technologist
-          <br />
-          <span className="hero-subtitle">Building at Loop Health (YC 20). Previously led design teams at Paytm, HDFC Bank, and ETMoney—shaping products used by millions.</span>
-        </h1>
+          <h1 className="hero-title">
+            Staff Product Designer & Technologist
+            <br />
+            <span className="hero-subtitle">10+ years crafting digital experiences</span>
+          </h1>
         <div className="hero-social-icons">
           {socialLinks.map((social) => (
             <Link
