@@ -88,7 +88,20 @@ export const analytics = {
   trackVideoHover: (title: string) => {
     trackEvent('video_hover', { video_title: title })
   },
-  
+  /** Portfolio LLM chat: user sent a message (no message content — privacy) */
+  trackChatMessageSent: (charLength?: number) => {
+    trackEvent('portfolio_chat_message', {
+      message_length_bucket:
+        charLength == null
+          ? 'unknown'
+          : charLength < 50
+            ? 'short'
+            : charLength < 200
+              ? 'medium'
+              : 'long',
+    })
+  },
+
   // Test all events - available in browser console
   testAll: () => {
     console.log('🧪 Testing all GA4 events...')
@@ -101,6 +114,7 @@ export const analytics = {
     analytics.trackNavigationClick('work', 'Work')
     analytics.trackVideoPlay('Test Video', '/test.mp4')
     analytics.trackVideoHover('Test Video')
+    analytics.trackChatMessageSent(42)
     console.log('✅ All test events sent! Check GA4 Realtime reports.')
   },
 }

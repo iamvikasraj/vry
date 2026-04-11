@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --hostname 0.0.0.0",
+    "dev:local": "next dev",
     "fetch-socials": "node scripts/fetch-socials.js",
     "fetch-linkedin": "node scripts/fetch-linkedin-videos.js",
     "build": "npm run fetch-socials && next build",
@@ -11,6 +12,7 @@
   },
   "dependencies": {
     "next": "^14.2.0",
+    "openai": "^6.34.0",
     "react": "^18.3.0",
     "react-dom": "^18.3.0"
   },

@@ -9,6 +9,7 @@ import WorkGrid from '@/components/WorkGrid'
 import GridToggle from '@/components/GridToggle'
 import TimelineItem from '@/components/TimelineItem'
 import { projects } from '@/data/projects'
+import { workEmployers } from '@/data/workEmployers'
 
 interface Project {
   video?: string
@@ -22,17 +23,6 @@ interface Project {
 export default function Work() {
   const [gridSize, setGridSize] = useState<'1x1' | '2x2'>('2x2')
   const [activeFilter, setActiveFilter] = useState<string>('All')
-
-  const workExperiences = [
-    { company: 'Loop Health', period: '2025-Present' },
-    { company: 'ET Money', period: '2024-2024' },
-    { company: 'Time Bridge', period: '2022-2024' },
-    { company: 'HDFC', period: '2021-2022' },
-    { company: 'Paytm', period: '2018-2021' },
-    { company: 'Grappus', period: '2017-2018' },
-    { company: 'ProProfs', period: '2016-2017' },
-    { company: 'Startup', period: '2015-2016' },
-  ]
 
   // Convert projects data to format needed for WorkGrid
   const allProjects: Project[] = projects.map(project => ({
@@ -86,9 +76,9 @@ export default function Work() {
         {/* Work Timeline */}
         <div className="work-timeline-section">
           <div className="work-timeline">
-            {workExperiences.map((work, index) => (
+            {workEmployers.map((work) => (
               <TimelineItem
-                key={index}
+                key={work.slug}
                 leftContent={<div className="work-company">{work.company}</div>}
                 rightContent={<div className="work-period">{work.period}</div>}
                 className="work-item-timeline"
