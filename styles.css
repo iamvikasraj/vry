@@ -1194,13 +1194,18 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
 /* Content area */
 .home-terminal-idle-assistant-card > .home-terminal-assistant-chat-inline {
   background: #0c100d;
-  padding: 0;
+  padding: var(--sp-16);
   flex-direction: column;
-  gap: var(--sp-8);
+  gap: var(--sp-16);
 }
 
 .home-terminal-idle-assistant-card > .home-terminal-assistant-chat-inline .home-terminal-idle-assistant-blurb {
   margin-bottom: 0;
+  line-height: 1.65;
+}
+
+.home-terminal-idle-assistant-card .home-terminal-idle-assistant-blurb--follow {
+  margin-top: var(--sp-10);
 }
 
 .home-terminal-idle-assistant-shell-line.home-terminal-prompt-cli-assistant {
@@ -1269,6 +1274,10 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
   min-height: 0;
 }
 
+.home-terminal-idle-assistant-card .portfolio-chat--terminal {
+  gap: var(--sp-12);
+}
+
 .page-container.page-container-terminal .portfolio-chat--terminal .portfolio-chat-messages {
   flex: 1 1 auto;
   min-height: var(--sp-48);
@@ -1297,7 +1306,7 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
 }
 
 .page-container.page-container-terminal .portfolio-chat--terminal .portfolio-chat-bubble--assistant .portfolio-chat-bubble-text {
-  padding: 0 var(--sp-2);
+  padding: 0;
 }
 
 .page-container.page-container-terminal .portfolio-chat--terminal .portfolio-chat-form {
@@ -1380,6 +1389,46 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
   .portfolio-chat-prompt-line {
   flex: 1 1 auto;
   min-height: 0;
+}
+
+/* Idle assistant: message panel + prompt (after terminal defaults so these win) */
+.page-container.page-container-terminal
+  .home-terminal-idle-assistant-card
+  .portfolio-chat--terminal
+  .portfolio-chat-messages {
+  padding: var(--sp-12);
+  margin: 0;
+  border-radius: var(--sp-2);
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(0, 255, 65, 0.1);
+  box-shadow: inset 0 1px 0 rgba(0, 255, 65, 0.04);
+}
+
+.page-container.page-container-terminal
+  .home-terminal-idle-assistant-card
+  .portfolio-chat--terminal:not(.portfolio-chat--terminal-empty)
+  .portfolio-chat-form {
+  border-top: none;
+  padding-top: var(--sp-12);
+}
+
+.page-container.page-container-terminal
+  .home-terminal-idle-assistant-card
+  .portfolio-chat--terminal.portfolio-chat--terminal-empty
+  .portfolio-chat-prompt-line {
+  border-radius: var(--sp-2);
+  border: 1px solid rgba(0, 255, 65, 0.16);
+  padding: var(--sp-10) var(--sp-16);
+  box-shadow:
+    inset 0 1px 0 rgba(0, 255, 65, 0.07),
+    0 0 0 1px rgba(0, 0, 0, 0.45);
+}
+
+.page-container.page-container-terminal
+  .home-terminal-idle-assistant-card
+  .portfolio-chat--terminal:not(.portfolio-chat--terminal-empty)
+  .portfolio-chat-prompt-line {
+  border-radius: 0 0 var(--sp-2) var(--sp-2);
 }
 
 .portfolio-chat-prompt-caret {

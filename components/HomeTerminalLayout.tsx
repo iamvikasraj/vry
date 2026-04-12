@@ -41,7 +41,12 @@ function IdleCursor({ sound, children }: { sound: TerminalUiSoundApi; children?:
             aria-label={"Message Ti about Vikas's work or experience"}
           >
             <p className="home-terminal-idle-assistant-blurb home-terminal-dim">
-              I&apos;m ti—I can talk through Vikas&apos;s work, projects, and how he tends to operate. If you&apos;re hiring, I can help you get a first-round picture by answering your questions directly.
+              I&apos;m <span className="ti-name">ti</span> — I can walk through Vikas&apos;s work, projects, and how he
+              tends to operate day to day.
+            </p>
+            <p className="home-terminal-idle-assistant-blurb home-terminal-idle-assistant-blurb--follow home-terminal-dim">
+              If you&apos;re hiring, ask me anything—I&apos;ll help you get a useful first-round picture from what&apos;s
+              on this site.
             </p>
             {children}
           </div>
@@ -154,10 +159,21 @@ export default function HomeTerminalLayout() {
                   </div>
                   <div className="home-terminal-intro home-terminal-intro--compact">
                     <p className="home-terminal-intro-title">
-                      Staff product designer &amp; technologist at <strong>Loop Health</strong>{' '}
-                      <span className="home-terminal-dim">(YC 20), Bengaluru</span>
-                      {' — '}
-                      <span className="home-terminal-dim">10+ years in product</span>.
+                      My name is <strong>Vikas Raj Yadav</strong>. I&apos;m a staff product designer and technologist at{' '}
+                      <strong>Loop Health</strong> <span className="home-terminal-dim">(YC 20)</span>, and I&apos;m{' '}
+                      <span className="home-terminal-dim">based in Bengaluru</span>.
+                      <br />
+                      I&apos;ve spent <span className="home-terminal-dim">10+ years in product</span>, mostly in{' '}
+                      <span className="home-terminal-dim">fintech and regulated spaces</span>
+                      {' — '}think <strong>ETMoney</strong>, <strong>HDFC Bank</strong>, and <strong>Paytm</strong>.
+                      <br />
+                      I care about{' '}
+                      <span className="home-terminal-dim">
+                        motion, interaction craft, prototyping (including SwiftUI), and design systems
+                      </span>
+                      —not as buzzwords, but as the work I actually ship.
+                      <br />
+                      I&apos;m also a <span className="home-terminal-dim">Rive and Play ambassador</span> in India.
                     </p>
                   </div>
                   <nav className="home-terminal-routes" aria-label="Site pages">
