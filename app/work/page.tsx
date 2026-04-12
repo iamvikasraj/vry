@@ -7,6 +7,7 @@ import ClientScripts from '@/components/ClientScripts'
 import WorkFilters from '@/components/WorkFilters'
 import WorkGrid from '@/components/WorkGrid'
 import GridToggle from '@/components/GridToggle'
+import PortfolioFolderIcon from '@/components/PortfolioFolderIcon'
 import TimelineItem from '@/components/TimelineItem'
 import { projects } from '@/data/projects'
 import { workEmployers } from '@/data/workEmployers'
@@ -51,6 +52,10 @@ export default function Work() {
 
       <section className="work-page">
         <div className="work-content">
+          <div className="page-folder-heading">
+            <PortfolioFolderIcon />
+            <h1 className="work-page-title">Work</h1>
+          </div>
           <div className="work-description">
             <p>
               Right now, I'm building at <strong>Loop Health</strong> (YC 20) as a Staff Product Designer and Technologist, working at the intersection of design, engineering and business.
@@ -74,7 +79,7 @@ export default function Work() {
         </div>
 
         {/* Work Timeline */}
-        <div className="work-timeline-section">
+        <div className="work-timeline-section" id="work-companies">
           <div className="work-timeline">
             {workEmployers.map((work) => (
               <TimelineItem

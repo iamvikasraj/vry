@@ -11,21 +11,39 @@ interface Msg {
   content: string
 }
 
-const WELCOME: Msg = {
+const WELCOME_DEFAULT: Msg = {
   role: 'assistant',
-  content: 'Hey. Ask whatever—work, motion, Rive, past roles, or where to find something on the site.',
+  content:
+    "Hi—I'm tuned on Vikas's work and site. Ask about case studies, motion and Rive, roles, or where to find something.",
 }
 
-export default function PortfolioChat({ terminalSound }: { terminalSound?: TerminalUiSoundApi }) {
-  const [messages, setMessages] = useState<Msg[]>([WELCOME])
+export default function PortfolioChat({
+  terminalSound,
+  variant = 'default',
+}: {
+  terminalSound?: TerminalUiSoundApi
+  variant?: 'default' | 'terminal'
+}) {
+  const [messages, setMessages] = useState<Msg[]>(() =>
+    variant === 'terminal' ? [] : [WELCOME_DEFAULT]
+  )
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const listRef = useRef<HTMLDivElement>(null)
+  const scrollEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: 'smooth' })
-  }, [messages, loading])
+    if (variant === 'terminal' && messages.length === 0 && !loading) return
+    const el = scrollEndRef.current
+    if (!el) return
+    const reduceMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    el.scrollIntoView({
+      behavior: reduceMotion ? 'auto' : 'smooth',
+      block: 'end',
+    })
+  }, [messages, loading, variant])
 
   const send = useCallback(async () => {
     const text = input.trim()
@@ -81,17 +99,30 @@ export default function PortfolioChat({ terminalSound }: { terminalSound?: Termi
     }
   }, [input, loading, messages, terminalSound])
 
+  const terminalThreadHidden =
+    variant === 'terminal' && messages.length === 0 && !loading
+
   return (
-    <div className="portfolio-chat">
-      <div className="portfolio-chat-messages" ref={listRef}>
+    <div
+      className={
+        variant === 'terminal'
+          ? `portfolio-chat portfolio-chat--terminal${terminalThreadHidden ? ' portfolio-chat--terminal-empty' : ''}`
+          : 'portfolio-chat'
+      }
+    >
+      <div
+        className="portfolio-chat-messages"
+        hidden={terminalThreadHidden}
+        aria-hidden={terminalThreadHidden}
+      >
         {messages.map((m, i) => (
           <div
             key={i}
             className={`portfolio-chat-bubble portfolio-chat-bubble--${m.role}`}
           >
-            <div className="portfolio-chat-bubble-label">
-              {m.role === 'user' ? 'You' : 'Portfolio'}
-            </div>
+            {m.role === 'user' ? (
+              <div className="portfolio-chat-bubble-label">You</div>
+            ) : null}
             <div className="portfolio-chat-bubble-text">
               {m.content || (loading && i === messages.length - 1 && m.role === 'assistant' ? '…' : '')}
             </div>
@@ -99,10 +130,14 @@ export default function PortfolioChat({ terminalSound }: { terminalSound?: Termi
         ))}
         {loading && messages[messages.length - 1]?.role === 'user' && (
           <div className="portfolio-chat-bubble portfolio-chat-bubble--assistant">
-            <div className="portfolio-chat-bubble-label">Portfolio</div>
             <div className="portfolio-chat-bubble-text">…</div>
           </div>
         )}
+        <div
+          ref={scrollEndRef}
+          className="portfolio-chat-scroll-anchor"
+          aria-hidden="true"
+        />
       </div>
       {error && <p className="portfolio-chat-error">{error}</p>}
       <form
@@ -115,12 +150,16 @@ export default function PortfolioChat({ terminalSound }: { terminalSound?: Termi
         <input
           type="text"
           className="portfolio-chat-input"
-          placeholder="Ask anything about Vikas's work…"
+          placeholder={
+            variant === 'terminal'
+              ? 'e.g. Staff product designer for health SaaS?'
+              : 'Message…'
+          }
           value={input}
           onChange={(e) => setInput(e.target.value)}
           disabled={loading}
           autoComplete="off"
-          aria-label="Message"
+          aria-label={variant === 'terminal' ? 'Message Ti' : 'Message'}
         />
         <button
           type="submit"
@@ -128,7 +167,7 @@ export default function PortfolioChat({ terminalSound }: { terminalSound?: Termi
           disabled={loading || !input.trim()}
           onMouseEnter={() => terminalSound?.playHover()}
         >
-          Send
+          {variant === 'terminal' ? 'send' : 'Send'}
         </button>
       </form>
     </div>

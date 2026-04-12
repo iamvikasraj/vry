@@ -6,61 +6,10 @@ import ClientScripts from '@/components/ClientScripts'
 import TimelineItem from '@/components/TimelineItem'
 import WorkshopRSVP from '@/components/WorkshopRSVP'
 import WorkshopEventRegister from '@/components/WorkshopEventRegister'
-
-type Workshop = {
-  title: string
-  year: string
-  venue: string
-  description: string
-  /** Optional full date (YYYY-MM-DD) for upcoming workshops with RSVP */
-  eventDate?: string
-  /** Optional time string (e.g. "7pm–9pm") when using registrationUrl */
-  eventTime?: string
-  /** When set, show external registration CTA instead of RSVP form */
-  registrationUrl?: string
-  /** What's included (for event card when registrationUrl is set) */
-  includes?: string[]
-  /** Longer description for event card */
-  eventDescription?: string
-}
+import PortfolioFolderIcon from '@/components/PortfolioFolderIcon'
+import { workshops } from '@/data/workshops'
 
 export default function Workshops() {
-  const workshops: Workshop[] = [
-    {
-      title: 'Rive Ambassador Happy Hour — Bengaluru 🇮🇳',
-      year: '2026',
-      venue: 'The Craftery By Subko, Koramangala, Bengaluru',
-      description: 'Casual meetup for Rive users, motion designers, and developers. Meet Vikas Raj Yadav, Rive Ambassador, IRL—no talks, no pressure, just good conversations.',
-      eventDate: '2026-02-12',
-      eventTime: '7pm–9pm',
-      registrationUrl: 'https://lnkd.in/g8HB_nWD',
-      includes: [
-        '1 espresso-based coffee (per person)',
-        '1 mini fudge-stuffed croissant (free)',
-      ],
-      eventDescription: 'A relaxed, come-as-you-are meetup to hang out, swap notes, and connect in person. Whether you’re deep into Rive or just getting started, come meet fellow builders and enjoy a cozy evening with the local Rive community.',
-    },
-    {
-      title: 'Rive Workshop',
-      year: '2026',
-      venue: 'TBD',
-      description: 'Hands-on Rive workshop on interaction and motion design.',
-      eventDate: '2026-03-18',
-    },
-    {
-      title: 'Think Interaction Workshop',
-      year: '2025',
-      venue: 'Rive x Play 2025',
-      description: 'Workshop on interaction design and motion principles using Rive.',
-    },
-    {
-      title: 'Scripting with Rive Challenge',
-      year: '2024',
-      venue: 'Rive x Contra',
-      description: 'Exploring advanced Rive scripting techniques and animation workflows.',
-    },
-  ]
-
   const workshopVideo = '/assets/video/Think Interaction Workshop.mp4'
   const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_RSVP
 
@@ -70,6 +19,10 @@ export default function Workshops() {
 
       <section className="workshops-page">
         <div className="workshops-content">
+          <div className="page-folder-heading">
+            <PortfolioFolderIcon />
+            <h1 className="work-page-title">Workshops</h1>
+          </div>
           <div className="workshops-description">
             <p>
               I regularly conduct workshops and share knowledge on interaction design, motion design, and prototyping. As a <strong>Rive and Play ambassador</strong>, I help designers learn new tools and techniques.

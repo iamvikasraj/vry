@@ -3,7 +3,7 @@ import Footer from '@/components/Footer'
 import ClientScripts from '@/components/ClientScripts'
 import PortfolioFolderIcon from '@/components/PortfolioFolderIcon'
 
-export default function Contact() {
+export default function Hobbies() {
   return (
     <div className="page-container">
       <Header />
@@ -11,11 +11,9 @@ export default function Contact() {
       <section className="section">
         <div className="page-folder-heading">
           <PortfolioFolderIcon />
-          <h1 className="h1">Contact</h1>
+          <h1 className="h1">Hobbies</h1>
         </div>
-        <p className="body1">
-          Contact page content coming soon.
-        </p>
+        <p className="body1">Content coming soon.</p>
       </section>
 
       <Footer />

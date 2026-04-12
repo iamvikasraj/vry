@@ -3,6 +3,7 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ClientScripts from '@/components/ClientScripts'
+import PortfolioFolderIcon from '@/components/PortfolioFolderIcon'
 
 export default function About() {
   return (
@@ -10,6 +11,10 @@ export default function About() {
       <Header />
 
       <section className="about-intro">
+        <div className="page-folder-heading">
+          <PortfolioFolderIcon />
+          <h1 className="work-page-title">About</h1>
+        </div>
         <div className="about-text">
           <div className="about-intro-expanded">
             <p>

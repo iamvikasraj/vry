@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Footer from '@/components/Footer'
 import ClientScripts from '@/components/ClientScripts'
+import PortfolioFolderIcon from '@/components/PortfolioFolderIcon'
 import ProjectViewTracker from '@/components/ProjectViewTracker'
 import ProjectSectionTracker from '@/components/ProjectSectionTracker'
 import { projects, getProjectBySlug } from '@/data/projects'
@@ -30,7 +31,10 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
         </Link>
         
         <div className="project-header">
-          <h1 className="project-title">{project.title}</h1>
+          <div className="project-header-title-row">
+            <PortfolioFolderIcon />
+            <h1 className="project-title">{project.title}</h1>
+          </div>
           {(project.year || project.client || project.role) && (
             <div className="project-meta">
               {project.year && <span className="project-meta-item">{project.year}</span>}
