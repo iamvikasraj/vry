@@ -32,20 +32,20 @@ function IdleCursor({ sound, children }: { sound: TerminalUiSoundApi; children?:
   return (
     <div className="home-terminal-idle-assistant">
       <p className="home-terminal-sr-only">
-        Ti, Vikas&apos;s assistant. Ask about his work in the field below, or use the contact link.
+        Ti, Vikas&apos;s assistant. You can ask about his work in the message field, or reach him on the contact page.
       </p>
       <div className="home-terminal-idle-assistant-card">
         <p className="home-terminal-prompt home-terminal-prompt-idle home-terminal-prompt-cli-assistant home-terminal-idle-assistant-shell-line">
           <span className="home-terminal-chat-ai-dot home-terminal-prompt-cli-assistant-dot" aria-hidden />
           <span className="home-terminal-prompt-cli-assistant-prompt">
-            <span className="home-terminal-prompt-assistant-name">ti</span>
+            <span className="home-terminal-prompt-assistant-name">Ti</span>
             <span className="home-terminal-prompt-at">@</span>
             <span className="home-terminal-prompt-host">portfolio</span>
             <span className="home-terminal-prompt-path">:~/context$</span>
           </span>
         </p>
         <p className="home-terminal-idle-assistant-blurb home-terminal-dim">
-          I&apos;m Ti, Vikas&apos;s assistant—ask below, or{' '}
+          I&apos;m <span className="ti-name">Ti</span>—I can talk through Vikas&apos;s work, projects, and how he tends to operate. Type below, or{' '}
           <Link
             href="/contact/"
             className="home-terminal-inline-link home-terminal-idle-assistant-blurb-link"
@@ -53,12 +53,12 @@ function IdleCursor({ sound, children }: { sound: TerminalUiSoundApi; children?:
           >
             /contact
           </Link>{' '}
-          for him directly.
+          if you want him in the loop directly.
         </p>
         {children ? (
           <div
             className="home-terminal-assistant-chat-inline"
-            aria-label="Ask Ti about fit and experience"
+            aria-label={"Message Ti about Vikas's work or experience"}
           >
             {children}
           </div>

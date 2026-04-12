@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { Fragment, useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import { analytics } from '@/lib/analytics'
 import type { TerminalUiSoundApi } from '@/hooks/useTerminalUiSound'
 
@@ -11,10 +11,25 @@ interface Msg {
   content: string
 }
 
+/** Renders assistant copy with “Ti” in small caps (matches terminal styling). */
+function assistantTextWithTiSmallCaps(text: string): ReactNode {
+  if (!text) return ''
+  const parts = text.split(/(\bTi\b)/g)
+  return parts.map((part, i) =>
+    part === 'Ti' ? (
+      <span className="ti-name" key={i}>
+        Ti
+      </span>
+    ) : (
+      <Fragment key={i}>{part}</Fragment>
+    )
+  )
+}
+
 const WELCOME_DEFAULT: Msg = {
   role: 'assistant',
   content:
-    "Hi—I'm tuned on Vikas's work and site. Ask about case studies, motion and Rive, roles, or where to find something.",
+    "Hey—I'm Ti. I know this portfolio pretty well, so ask me anything: a project, how Vikas works, motion/Rive stuff, or where to dig deeper on the site.",
 }
 
 export default function PortfolioChat({
@@ -124,7 +139,12 @@ export default function PortfolioChat({
               <div className="portfolio-chat-bubble-label">You</div>
             ) : null}
             <div className="portfolio-chat-bubble-text">
-              {m.content || (loading && i === messages.length - 1 && m.role === 'assistant' ? '…' : '')}
+              {m.role === 'assistant'
+                ? assistantTextWithTiSmallCaps(
+                    m.content ||
+                      (loading && i === messages.length - 1 ? '…' : '')
+                  )
+                : m.content}
             </div>
           </div>
         ))}
@@ -152,8 +172,8 @@ export default function PortfolioChat({
           className="portfolio-chat-input"
           placeholder={
             variant === 'terminal'
-              ? 'e.g. Staff product designer for health SaaS?'
-              : 'Message…'
+              ? 'Ask in your own words…'
+              : 'Ask me something…'
           }
           value={input}
           onChange={(e) => setInput(e.target.value)}

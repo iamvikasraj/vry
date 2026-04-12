@@ -1357,10 +1357,22 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
   min-width: 0;
 }
 
+/* Ti (assistant): typographic small caps */
+.home-terminal-prompt-assistant-name,
+.home-terminal .ti-name,
+.portfolio-chat .ti-name {
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.08em;
+}
+
 .home-terminal-prompt-assistant-name {
   color: var(--term-fg);
   font-weight: 700;
-  letter-spacing: 0.04em;
+}
+
+.home-terminal-idle-assistant-blurb .ti-name,
+.portfolio-chat .ti-name {
+  font-weight: inherit;
 }
 
 .home-terminal-cursor {

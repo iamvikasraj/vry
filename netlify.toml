@@ -5,7 +5,12 @@
 [build.environment]
   NODE_VERSION = "18"
 
+# Static export has no Next.js server — Ti chat runs as a Netlify Function.
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
+  from = "/api/chat"
+  to = "/.netlify/functions/chat"
   status = 200
+  force = true
+
+# Do not SPA-fallback the whole site: Next export already emits HTML per route.
+# A catch-all to index.html breaks real pages and would have masked /api/chat.
