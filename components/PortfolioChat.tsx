@@ -135,22 +135,42 @@ export default function PortfolioChat({
             key={i}
             className={`portfolio-chat-bubble portfolio-chat-bubble--${m.role}`}
           >
-            {m.role === 'user' ? (
-              <div className="portfolio-chat-bubble-label">You</div>
-            ) : null}
-            <div className="portfolio-chat-bubble-text">
-              {m.role === 'assistant'
-                ? assistantTextWithTiSmallCaps(
-                    m.content ||
-                      (loading && i === messages.length - 1 ? '…' : '')
-                  )
-                : m.content}
-            </div>
+            {variant === 'terminal' ? (
+              <div className="portfolio-chat-bubble-text">
+                <span className="portfolio-chat-bubble-prefix" aria-hidden="true">
+                  {m.role === 'user' ? '> ' : 'ti$ '}
+                </span>
+                {m.role === 'assistant'
+                  ? assistantTextWithTiSmallCaps(
+                      m.content ||
+                        (loading && i === messages.length - 1 ? '▋' : '')
+                    )
+                  : m.content}
+              </div>
+            ) : (
+              <>
+                {m.role === 'user' ? (
+                  <div className="portfolio-chat-bubble-label">You</div>
+                ) : null}
+                <div className="portfolio-chat-bubble-text">
+                  {m.role === 'assistant'
+                    ? assistantTextWithTiSmallCaps(
+                        m.content ||
+                          (loading && i === messages.length - 1 ? '…' : '')
+                      )
+                    : m.content}
+                </div>
+              </>
+            )}
           </div>
         ))}
         {loading && messages[messages.length - 1]?.role === 'user' && (
           <div className="portfolio-chat-bubble portfolio-chat-bubble--assistant">
-            <div className="portfolio-chat-bubble-text">…</div>
+            <div className="portfolio-chat-bubble-text">
+              {variant === 'terminal' ? (
+                <><span className="portfolio-chat-bubble-prefix" aria-hidden="true">ti$ </span>▋</>
+              ) : '…'}
+            </div>
           </div>
         )}
         <div
@@ -167,28 +187,51 @@ export default function PortfolioChat({
           void send()
         }}
       >
-        <input
-          type="text"
-          className="portfolio-chat-input"
-          placeholder={
-            variant === 'terminal'
-              ? 'Ask in your own words…'
-              : 'Ask me something…'
-          }
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          disabled={loading}
-          autoComplete="off"
-          aria-label={variant === 'terminal' ? 'Message Ti' : 'Message'}
-        />
-        <button
-          type="submit"
-          className="portfolio-chat-send"
-          disabled={loading || !input.trim()}
-          onMouseEnter={() => terminalSound?.playHover()}
-        >
-          {variant === 'terminal' ? 'send' : 'Send'}
-        </button>
+        {variant === 'terminal' ? (
+          <div className="portfolio-chat-prompt-line">
+            <span className="portfolio-chat-prompt-caret" aria-hidden="true">
+              <span className="portfolio-chat-prompt-dot" aria-hidden="true" />
+              <span className="portfolio-chat-prompt-fullpath">
+                <span className="home-terminal-prompt-assistant-name">ti</span>
+                <span>@</span>
+                <span>portfolio</span>
+                <span>:~/context$</span>
+              </span>
+            </span>
+            <input
+              type="text"
+              className="portfolio-chat-input portfolio-chat-input--terminal"
+              placeholder="type and hit enter…"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              disabled={loading}
+              autoComplete="off"
+              aria-label="Message Ti"
+            />
+            <span className="portfolio-chat-prompt-hint" aria-hidden="true">↵</span>
+          </div>
+        ) : (
+          <>
+            <input
+              type="text"
+              className="portfolio-chat-input"
+              placeholder="Ask me something…"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              disabled={loading}
+              autoComplete="off"
+              aria-label="Message"
+            />
+            <button
+              type="submit"
+              className="portfolio-chat-send"
+              disabled={loading || !input.trim()}
+              onMouseEnter={() => terminalSound?.playHover()}
+            >
+              Send
+            </button>
+          </>
+        )}
       </form>
     </div>
   )

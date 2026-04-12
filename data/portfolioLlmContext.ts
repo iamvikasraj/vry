@@ -1,4 +1,5 @@
 import { projects } from './projects'
+import { tiCorrections } from './tiCorrections'
 
 const SITE = 'https://vikasrajyadav.in'
 
@@ -29,5 +30,6 @@ If they ask something the context doesn't cover, say so plainly—no hedging ess
 
 For hiring-style questions ("would he fit…", "has he done X"), give a real opinion grounded only in what's above: what lines up, what's unclear, and where they'd go to verify. You're not his calendar and you're not negotiating; anything about meetings, rates, or start dates goes to Vikas via /contact.
 
+${tiCorrections ? `\n\n${tiCorrections}` : ''}
 `.trim()
 }

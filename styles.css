@@ -1165,22 +1165,42 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: var(--sp-8);
+  gap: 0;
   width: 100%;
   max-width: 100%;
-  padding: var(--sp-8) var(--sp-12);
-  border: 1px solid var(--term-border);
-  border-radius: var(--sp-2);
-  background: rgba(0, 0, 0, 0.24);
+  padding: 0;
+  border: 1px solid rgba(0, 255, 65, 0.18);
+  border-radius: 10px;
+  background: transparent;
+  overflow: hidden;
   box-shadow:
-    inset 0 0 0 1px rgba(0, 255, 65, 0.08),
-    0 var(--sp-2) var(--sp-12) rgba(0, 0, 0, 0.28);
+    0 0 0 3px rgba(0, 0, 0, 0.6),
+    0 0 0 4px rgba(0, 255, 65, 0.08),
+    0 12px 40px rgba(0, 0, 0, 0.6),
+    0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
+/* Title bar — now lives inside the prompt line */
 .home-terminal-idle-assistant-shell-line {
-  margin: 0 0 var(--sp-4) 0;
-  padding-bottom: var(--sp-4);
-  border-bottom: 1px solid rgba(0, 255, 65, 0.1);
+  margin: 0;
+  padding: var(--sp-10) var(--sp-16);
+  background: #1e2420;
+  border-bottom: 1px solid rgba(0, 255, 65, 0.12);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-8);
+}
+
+/* Content area */
+.home-terminal-idle-assistant-card > .home-terminal-assistant-chat-inline {
+  background: #0c100d;
+  padding: 0;
+  flex-direction: column;
+  gap: var(--sp-8);
+}
+
+.home-terminal-idle-assistant-card > .home-terminal-assistant-chat-inline .home-terminal-idle-assistant-blurb {
+  margin-bottom: 0;
 }
 
 .home-terminal-idle-assistant-shell-line.home-terminal-prompt-cli-assistant {
@@ -1218,6 +1238,13 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
   width: var(--sp-8);
   height: var(--sp-8);
   box-shadow: 0 0 var(--sp-12) rgba(0, 255, 65, 0.45);
+  animation: home-terminal-ai-pulse 2s ease-in-out infinite;
+}
+
+.home-terminal-titlebar-cursor {
+  font-size: var(--txt-11);
+  margin-left: 2px;
+  vertical-align: middle;
 }
 
 .home-terminal-assistant-stack {
@@ -1231,8 +1258,8 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
   flex: 1 1 auto;
   min-height: 0;
   margin-top: var(--sp-12);
-  padding-top: var(--sp-12);
-  border-top: 1px solid rgba(0, 255, 65, 0.12);
+  padding-top: 0;
+  border-top: none;
   display: flex;
   flex-direction: column;
 }
@@ -1244,8 +1271,8 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
 
 .page-container.page-container-terminal .portfolio-chat--terminal .portfolio-chat-messages {
   flex: 1 1 auto;
-  min-height: var(--sp-80);
-  max-height: min(38vh, 22rem);
+  min-height: var(--sp-48);
+  max-height: min(24vh, 14rem);
   gap: var(--sp-12);
   padding-bottom: var(--sp-12);
 }
@@ -1277,18 +1304,22 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
   border-top: 1px solid var(--term-border);
   padding-top: var(--sp-12);
   gap: var(--sp-8);
+  width: 100%;
 }
 
 .page-container.page-container-terminal .portfolio-chat--terminal.portfolio-chat--terminal-empty .portfolio-chat-form {
   border-top: none;
-  padding-top: var(--sp-8);
+  padding-top: 0;
+  flex: 1 1 auto;
+  min-height: 0;
+  flex-direction: column;
 }
 
 .page-container.page-container-terminal
   .home-terminal-assistant-stack:has(.portfolio-chat--terminal-empty)
   .home-terminal-assistant-chat-inline {
   margin-top: var(--sp-8);
-  padding-top: var(--sp-8);
+  padding-top: 0;
 }
 
 .page-container.page-container-terminal .portfolio-chat--terminal .portfolio-chat-input {
@@ -1331,6 +1362,98 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
   background: rgba(0, 255, 65, 0.08);
 }
 
+.page-container.page-container-terminal .portfolio-chat--terminal .portfolio-chat-prompt-line {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  gap: var(--sp-8);
+  background: #1e2420;
+  padding: var(--sp-8) var(--sp-16);
+  border-top: 1px solid rgba(0, 255, 65, 0.12);
+  border-radius: 0 0 9px 9px;
+}
+
+.page-container.page-container-terminal
+  .portfolio-chat--terminal.portfolio-chat--terminal-empty
+  .portfolio-chat-prompt-line {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.portfolio-chat-prompt-caret {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-8);
+  font-family: var(--mono-font);
+  font-size: var(--txt-12);
+  font-weight: 700;
+  color: var(--term-fg);
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.portfolio-chat-prompt-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--term-fg);
+  flex-shrink: 0;
+  animation: home-terminal-ai-pulse 2s ease-in-out infinite;
+  box-shadow: 0 0 8px rgba(0, 255, 65, 0.45);
+}
+
+.portfolio-chat-prompt-fullpath {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  font-size: var(--txt-12);
+  font-weight: 600;
+}
+
+.portfolio-chat-input--terminal {
+  flex: 1;
+  font-family: var(--mono-font) !important;
+  font-size: var(--txt-12) !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  color: var(--term-fg) !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.portfolio-chat-input--terminal::placeholder {
+  color: var(--term-fg-dim) !important;
+  font-style: italic;
+}
+
+.portfolio-chat-prompt-hint {
+  font-family: var(--mono-font);
+  font-size: var(--txt-11);
+  color: var(--term-fg-dim);
+  flex-shrink: 0;
+  user-select: none;
+  opacity: 0.5;
+}
+
+/* Terminal bubble prefix (> for user, ti$ for assistant) */
+.portfolio-chat-bubble-prefix {
+  font-family: var(--mono-font);
+  font-weight: 700;
+  user-select: none;
+}
+
+.portfolio-chat-bubble--user .portfolio-chat-bubble-prefix {
+  color: var(--term-fg);
+}
+
+.portfolio-chat-bubble--assistant .portfolio-chat-bubble-prefix {
+  color: var(--term-fg-dim);
+}
+
 .page-container.page-container-terminal .portfolio-chat--terminal .portfolio-chat-error {
   font-family: var(--mono-font);
   font-size: var(--txt-12);
@@ -1358,7 +1481,6 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
 }
 
 /* Ti (assistant): typographic small caps */
-.home-terminal-prompt-assistant-name,
 .home-terminal .ti-name,
 .portfolio-chat .ti-name {
   font-variant-caps: all-small-caps;

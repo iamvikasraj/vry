@@ -35,31 +35,14 @@ function IdleCursor({ sound, children }: { sound: TerminalUiSoundApi; children?:
         Ti, Vikas&apos;s assistant. You can ask about his work in the message field, or reach him on the contact page.
       </p>
       <div className="home-terminal-idle-assistant-card">
-        <p className="home-terminal-prompt home-terminal-prompt-idle home-terminal-prompt-cli-assistant home-terminal-idle-assistant-shell-line">
-          <span className="home-terminal-chat-ai-dot home-terminal-prompt-cli-assistant-dot" aria-hidden />
-          <span className="home-terminal-prompt-cli-assistant-prompt">
-            <span className="home-terminal-prompt-assistant-name">Ti</span>
-            <span className="home-terminal-prompt-at">@</span>
-            <span className="home-terminal-prompt-host">portfolio</span>
-            <span className="home-terminal-prompt-path">:~/context$</span>
-          </span>
-        </p>
-        <p className="home-terminal-idle-assistant-blurb home-terminal-dim">
-          I&apos;m <span className="ti-name">Ti</span>—I can talk through Vikas&apos;s work, projects, and how he tends to operate. Type below, or{' '}
-          <Link
-            href="/contact/"
-            className="home-terminal-inline-link home-terminal-idle-assistant-blurb-link"
-            onMouseEnter={() => sound.playHover()}
-          >
-            /contact
-          </Link>{' '}
-          if you want him in the loop directly.
-        </p>
         {children ? (
           <div
             className="home-terminal-assistant-chat-inline"
             aria-label={"Message Ti about Vikas's work or experience"}
           >
+            <p className="home-terminal-idle-assistant-blurb home-terminal-dim">
+              I&apos;m ti—I can talk through Vikas&apos;s work, projects, and how he tends to operate. If you&apos;re hiring, I can help you get a first-round picture by answering your questions directly.
+            </p>
             {children}
           </div>
         ) : null}
