@@ -8,6 +8,8 @@ import { workshops } from '@/data/workshops'
 import { workEmployers } from '@/data/workEmployers'
 import PortfolioChat from '@/components/PortfolioChat'
 import PortfolioFolderIcon from '@/components/PortfolioFolderIcon'
+import GitHubContributionsPanel from '@/components/GitHubContributionsPanel'
+import type { GitHubContributionsPayload } from '@/lib/githubContributions'
 import { useTerminalUiSound, type TerminalUiSoundApi } from '@/hooks/useTerminalUiSound'
 
 function Prompt({ cwd, cmd }: { cwd: string; cmd: string }) {
@@ -74,7 +76,11 @@ const showHomeTerminalCompanies =
 const showHomeTerminalProjectIndex =
   process.env.NEXT_PUBLIC_HOME_TERMINAL_SHOW_PROJECT_INDEX === 'true'
 
-export default function HomeTerminalLayout() {
+export default function HomeTerminalLayout({
+  githubContributions = null,
+}: {
+  githubContributions?: GitHubContributionsPayload | null
+}) {
   const [overlaysReady, setOverlaysReady] = useState(false)
   const [catalogOpen, setCatalogOpen] = useState(false)
   const [catalogPage, setCatalogPage] = useState(0)
@@ -148,9 +154,10 @@ export default function HomeTerminalLayout() {
       <div className="home-terminal-shell">
         <div className="home-terminal-body">
           <div className="home-terminal-split">
-            <div className="home-terminal-split-layout">
+            <div className="home-terminal-split-layout home-terminal-bento">
               <div className="home-terminal-split-main">
-                <section className="home-terminal-block home-terminal-welcome" aria-labelledby="home-terminal-hello">
+                <div className="home-terminal-bento-tile home-terminal-bento-tile--main">
+                  <section className="home-terminal-block home-terminal-welcome" aria-labelledby="home-terminal-hello">
                   <Prompt cwd="~" cmd="cat ./welcome.txt" />
                   <div className="home-terminal-welcome-lead">
                     <p className="home-terminal-greeting" id="home-terminal-hello">
@@ -219,9 +226,9 @@ export default function HomeTerminalLayout() {
                       })}
                     </div>
                   </nav>
-                </section>
+                  </section>
 
-                {showHomeTerminalCompanies ? (
+                  {showHomeTerminalCompanies ? (
                   <section
                     className="home-terminal-block home-terminal-companies"
                     aria-labelledby="home-terminal-companies-heading"
@@ -249,9 +256,9 @@ export default function HomeTerminalLayout() {
                       ))}
                     </ul>
                   </section>
-                ) : null}
+                  ) : null}
 
-                {showHomeTerminalProjectIndex ? (
+                  {showHomeTerminalProjectIndex ? (
                   <section
                     className="home-terminal-block home-terminal-ls-section"
                     aria-labelledby="home-terminal-ls-heading"
@@ -389,13 +396,30 @@ export default function HomeTerminalLayout() {
                       <span className="home-terminal-dim"># full archive</span>
                     </p>
                   </section>
-                ) : null}
+                  ) : null}
+                </div>
               </div>
-              <aside className="home-terminal-split-assistant" aria-label="Ti, Vikas's assistant">
+              <aside
+                className="home-terminal-split-assistant home-terminal-bento-rail"
+                aria-label="GitHub activity and Ti, Vikas's assistant"
+              >
                 <div className="home-terminal-assistant-stack">
-                  <IdleCursor sound={sound}>
-                    <PortfolioChat terminalSound={sound} variant="terminal" />
-                  </IdleCursor>
+                  {githubContributions ? (
+                    <section
+                      className="home-terminal-bento-tile home-terminal-bento-tile--github home-terminal-github"
+                      aria-label="GitHub contributions"
+                    >
+                      <GitHubContributionsPanel
+                        data={githubContributions}
+                        onProfileLinkHover={() => sound.playHover()}
+                      />
+                    </section>
+                  ) : null}
+                  <div className="home-terminal-bento-tile home-terminal-bento-tile--ti">
+                    <IdleCursor sound={sound}>
+                      <PortfolioChat terminalSound={sound} variant="terminal" />
+                    </IdleCursor>
+                  </div>
                 </div>
               </aside>
             </div>

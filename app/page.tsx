@@ -1,14 +1,14 @@
-'use client'
-
 import ClientScripts from '@/components/ClientScripts'
 import HomeTerminalLayout from '@/components/HomeTerminalLayout'
-import '@/lib/analytics' // Initialize analytics global functions
+import { getGitHubContributions } from '@/lib/githubContributions'
 
-export default function Home() {
+export default async function Home() {
+  const githubContributions = await getGitHubContributions()
+
   return (
     <div className="page-container page-container-terminal">
       <main className="home-terminal-main">
-        <HomeTerminalLayout />
+        <HomeTerminalLayout githubContributions={githubContributions} />
       </main>
       <ClientScripts />
     </div>

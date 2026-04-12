@@ -678,7 +678,7 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
   }
 }
 
-/* Homepage: portfolio (main) left, assistant right from 960px; stacked below that */
+/* Homepage: shell holds a bento grid (main tile | rail: GitHub + Ti) */
 .home-terminal-split {
   display: flex;
   flex-direction: column;
@@ -698,10 +698,64 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
   -webkit-overflow-scrolling: touch;
 }
 
+.home-terminal-split-layout.home-terminal-bento {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-12);
+  align-items: start;
+  align-content: start;
+}
+
+.home-terminal-bento-tile {
+  border: 1px solid rgba(0, 255, 65, 0.14);
+  border-radius: 10px;
+  background: rgba(6, 10, 8, 0.72);
+  box-shadow:
+    inset 0 1px 0 rgba(0, 255, 65, 0.06),
+    0 var(--sp-8) var(--sp-24) rgba(0, 0, 0, 0.35);
+  padding: var(--sp-16);
+  min-width: 0;
+}
+
+.home-terminal-bento-tile--main {
+  min-height: 0;
+}
+
+.home-terminal-bento-tile--main .home-terminal-block {
+  margin-bottom: var(--sp-24);
+}
+
+.home-terminal-bento-tile--main .home-terminal-block:last-child {
+  margin-bottom: 0;
+}
+
+.home-terminal-bento-tile--github {
+  padding: var(--sp-12) var(--sp-16);
+  min-width: 0;
+}
+
+.home-terminal-bento-tile--ti {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: min(40vh, 22rem);
+}
+
+.home-terminal-bento-rail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-12);
+  min-width: 0;
+  min-height: 0;
+}
+
 .home-terminal-split-main {
   flex: 1 1 auto;
   min-width: 0;
   min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .home-terminal-split-assistant {
@@ -709,9 +763,9 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
   width: 100%;
 }
 
-/* Mobile: scroll main only; assistant (Ti card) stays at bottom of the shell */
+/* Mobile: scroll main tile; rail stacks below */
 @media (max-width: 959px) {
-  .home-terminal-split-layout {
+  .home-terminal-split-layout.home-terminal-bento {
     overflow-y: hidden;
     gap: var(--sp-12);
   }
@@ -725,43 +779,59 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
     -webkit-overflow-scrolling: touch;
   }
 
-  .home-terminal-split-assistant {
+  .home-terminal-split-assistant.home-terminal-bento-rail {
     position: relative;
     z-index: 2;
-    padding-top: var(--sp-12);
-    border-top: 1px solid var(--term-border);
-    background: var(--term-bg-panel);
-    box-shadow: 0 calc(-1 * var(--sp-8)) var(--sp-24) rgba(0, 0, 0, 0.4);
+    flex-shrink: 0;
   }
 
-  .home-terminal-split-assistant .home-terminal-idle-assistant {
+  .home-terminal-bento-rail .home-terminal-idle-assistant {
     margin-top: 0;
   }
 }
 
 @media (min-width: 960px) {
-  .home-terminal-split-layout {
-    flex-direction: row;
-    /* Stretch main column to row height so welcome can space intro vs routes vertically */
+  .home-terminal-split-layout.home-terminal-bento {
+    grid-template-columns: minmax(0, 1.35fr) minmax(15rem, 22rem);
+    gap: var(--sp-16);
     align-items: stretch;
-    gap: var(--sp-32);
   }
 
   .home-terminal-split-main {
-    flex: 1 1 0;
-    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
   }
 
-  .home-terminal-split-assistant {
-    flex: 0 0 clamp(17rem, 28vw, 22rem);
+  .home-terminal-bento-tile--main {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .home-terminal-split-assistant.home-terminal-bento-rail {
+    flex-shrink: 0;
     width: auto;
     max-width: 100%;
-    position: sticky;
-    top: 0;
-    align-self: flex-start;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
   }
 
-  /* Home: fill the shell with flex space-between — routes sit lower in the viewport */
+  .home-terminal-bento-rail .home-terminal-assistant-stack {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-12);
+  }
+
+  .home-terminal-bento-rail .home-terminal-bento-tile--ti {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
   .page-container.page-container-terminal .home-terminal-split-main {
     display: flex;
     flex-direction: column;
@@ -771,13 +841,13 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
   .page-container.page-container-terminal .home-terminal-welcome {
     display: flex;
     flex-direction: column;
-    flex: 1 1 auto;
+    flex: 0 1 auto;
     min-height: 0;
   }
 
   .page-container.page-container-terminal .home-terminal-welcome .home-terminal-routes {
-    margin-top: auto;
-    padding-top: var(--sp-24);
+    margin-top: var(--sp-16);
+    padding-top: 0;
   }
 }
 
@@ -926,6 +996,256 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
 .home-terminal-route-link:focus-visible {
   outline: 2px solid var(--term-amber);
   outline-offset: var(--sp-2);
+}
+
+.home-terminal-github-panel {
+  margin-top: 0;
+}
+
+.home-terminal-github-heading {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--sp-8);
+  margin: 0 0 var(--sp-12) 0;
+  padding: 0;
+  font-family: var(--mono-font);
+  font-size: var(--txt-13);
+  font-weight: 600;
+  color: var(--term-fg);
+  line-height: 1.2;
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.home-terminal-github-heading-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-8);
+  min-width: 0;
+  flex: 1;
+  line-height: 1.55;
+  font-weight: 400;
+}
+
+.home-terminal-github-display-name {
+  font-weight: 600;
+  color: var(--term-fg);
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+}
+
+.home-terminal-github-contributions-line {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--sp-8);
+}
+
+/* Softer than the display name; keeps graph as the hero */
+.home-terminal-github-heading-stack .home-terminal-github-contributions-line {
+  color: var(--term-fg-dim);
+  font-size: var(--txt-12);
+}
+
+.home-terminal-github-heading-stack .home-terminal-github-contributions-line .home-terminal-github-heading-text {
+  font-weight: 500;
+  color: var(--term-fg-dim);
+}
+
+.home-terminal-github-heading-stack .home-terminal-github-contributions-line .home-terminal-github-total {
+  color: var(--term-fg-dim);
+  font-weight: 500;
+}
+
+.home-terminal-github-repo-line {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-8);
+  max-width: 100%;
+  font-size: var(--txt-13);
+  font-weight: 400;
+}
+
+.home-terminal-github-repo-below-grid {
+  margin: var(--sp-12) 0 0;
+  padding: 0;
+  font-family: var(--mono-font);
+  line-height: 1.55;
+}
+
+.home-terminal-github-heading-brand {
+  display: flex;
+  flex-shrink: 0;
+  color: var(--term-fg);
+}
+
+.home-terminal-github-logo {
+  display: block;
+  width: var(--sp-24);
+  height: var(--sp-24);
+  color: var(--term-fg);
+}
+
+.home-terminal-github-stars-words {
+  flex-shrink: 0;
+}
+
+/* Min ~48px tap target; photo stays 24px */
+.home-terminal-github-avatar-link {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-12);
+  margin: calc(-1 * var(--sp-12));
+  line-height: 0;
+  border-radius: 50%;
+  outline-offset: var(--sp-4);
+}
+
+.home-terminal-github-avatar-link:focus-visible {
+  outline: 2px solid rgba(0, 255, 65, 0.45);
+}
+
+.home-terminal-github-avatar-frame {
+  display: block;
+  line-height: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(0, 255, 65, 0.18);
+}
+
+.home-terminal-github-avatar {
+  display: block;
+  width: var(--sp-24);
+  height: var(--sp-24);
+  object-fit: cover;
+}
+
+.home-terminal-github-heading-text {
+  font-weight: 600;
+}
+
+.home-terminal-github-repo-link {
+  word-break: break-all;
+}
+
+.home-terminal-github-total {
+  color: var(--term-fg);
+  font-weight: 600;
+}
+
+/* GitHub-style: weeks as columns (oldest → newest left → right), days Sun→Sat top → bottom */
+.home-terminal-github-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: var(--sp-2);
+  width: 100%;
+  max-width: 100%;
+  max-height: calc(7 * 10px + 6 * var(--sp-2));
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: var(--sp-4);
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 255, 65, 0.28) rgba(0, 255, 65, 0.05);
+}
+
+.home-terminal-github-grid::-webkit-scrollbar {
+  height: var(--sp-4);
+}
+
+.home-terminal-github-grid::-webkit-scrollbar-track {
+  background: rgba(0, 255, 65, 0.05);
+  border-radius: var(--sp-2);
+}
+
+.home-terminal-github-grid::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 65, 0.22);
+  border-radius: var(--sp-2);
+}
+
+.home-terminal-github-grid::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 65, 0.32);
+}
+
+.home-terminal-github-week {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: var(--sp-2);
+  flex-shrink: 0;
+}
+
+.home-terminal-github-day {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: var(--sp-2);
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.home-terminal-github-day--0 {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.home-terminal-github-day--1 {
+  background: rgba(0, 255, 65, 0.32);
+}
+
+.home-terminal-github-day--2 {
+  background: rgba(0, 255, 65, 0.48);
+}
+
+.home-terminal-github-day--3 {
+  background: rgba(0, 255, 65, 0.66);
+}
+
+.home-terminal-github-day--4 {
+  background: rgba(0, 255, 65, 0.88);
+}
+
+.home-terminal-github-legend {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--sp-8);
+  margin: var(--sp-8) 0 0;
+  font-size: var(--txt-11);
+}
+
+.home-terminal-github-legend-cells {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.page-container.page-container-terminal .home-terminal-bento-tile--ti .home-terminal-idle-assistant {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-container.page-container-terminal
+  .home-terminal-bento-tile--ti
+  .home-terminal-idle-assistant-card {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .home-terminal-route-folder-icon.portfolio-folder-icon-slot {
