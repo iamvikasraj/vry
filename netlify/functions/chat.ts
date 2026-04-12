@@ -1,4 +1,5 @@
 import {
+  CHAT_ENV_MISSING_MESSAGE,
   getChatApiKey,
   sanitizeMessages,
   streamAssistantDeltas,
@@ -34,14 +35,13 @@ export const handler: NetlifyHandler = async (event) => {
     }
   }
 
-  if (!getChatApiKey()) {
+  const keyInfo = getChatApiKey()
+  console.log('[Ti chat] key detected:', keyInfo ? `yes (grok=${keyInfo.useGrok})` : 'no')
+  if (!keyInfo) {
     return {
       statusCode: 503,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        error:
-          'Chat is not configured. Set XAI_API_KEY or OPENAI_API_KEY in Netlify environment variables.',
-      }),
+      body: JSON.stringify({ error: CHAT_ENV_MISSING_MESSAGE }),
     }
   }
 
@@ -66,10 +66,12 @@ export const handler: NetlifyHandler = async (event) => {
   }
 
   try {
+    console.log('[Ti chat] starting xAI request')
     let body = ''
     for await (const chunk of streamAssistantDeltas(messages)) {
       body += chunk
     }
+    console.log('[Ti chat] response ok, length:', body.length)
     return {
       statusCode: 200,
       headers: {
@@ -79,6 +81,7 @@ export const handler: NetlifyHandler = async (event) => {
       body,
     }
   } catch (e) {
+    console.error('[Ti chat] error:', e)
     const message = e instanceof Error ? e.message : 'Chat request failed'
     return {
       statusCode: 500,

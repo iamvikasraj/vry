@@ -1,4 +1,5 @@
 import {
+  CHAT_ENV_MISSING_MESSAGE,
   getChatApiKey,
   sanitizeMessages,
   streamAssistantDeltas,
@@ -6,13 +7,10 @@ import {
 
 export async function POST(req: Request) {
   if (!getChatApiKey()) {
-    return new Response(
-      JSON.stringify({
-        error:
-          'Chat is not configured. Set XAI_API_KEY or OPENAI_API_KEY in your environment.',
-      }),
-      { status: 503, headers: { 'Content-Type': 'application/json' } }
-    )
+    return new Response(JSON.stringify({ error: CHAT_ENV_MISSING_MESSAGE }), {
+      status: 503,
+      headers: { 'Content-Type': 'application/json' },
+    })
   }
 
   let body: { messages?: unknown }

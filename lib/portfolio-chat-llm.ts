@@ -34,6 +34,13 @@ export function sanitizeMessages(raw: unknown): ChatMessage[] {
   return out.slice(-20)
 }
 
+/** Shown when no API key is available (local or Netlify function runtime). */
+export const CHAT_ENV_MISSING_MESSAGE =
+  'Ti chat needs an API key. On Netlify: Site configuration → Environment variables → add XAI_API_KEY (Grok) or OPENAI_API_KEY. ' +
+  'Important: enable that variable for Functions / serverless runtime—not Builds only—or the chat function will not see it. ' +
+  'Use the exact names above. Save, then redeploy. For deploy previews, include the same variable for Preview context. ' +
+  'Local dev: put the key in .env.local (next dev) or .env (netlify dev).'
+
 export function getChatApiKey(): { apiKey: string; useGrok: boolean } | null {
   const xaiKey = process.env.XAI_API_KEY?.trim()
   const openaiKey = process.env.OPENAI_API_KEY?.trim()

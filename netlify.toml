@@ -4,6 +4,8 @@
 
 [build.environment]
   NODE_VERSION = "18"
+  # Note: variables here are for the build only. API keys for Ti must be set in the Netlify
+  # UI with Functions scope so netlify/functions/chat can read them at runtime.
 
 # Static export has no Next.js server — Ti chat runs as a Netlify Function.
 [[redirects]]
