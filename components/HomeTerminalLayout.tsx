@@ -2,27 +2,12 @@
 
 import Link from 'next/link'
 import { useEffect, useState, type ReactNode } from 'react'
-import { createPortal } from 'react-dom'
 import { projects, type Project } from '@/data/projects'
 import { workshops } from '@/data/workshops'
 import { workEmployers } from '@/data/workEmployers'
-import PortfolioChat from '@/components/PortfolioChat'
 import PortfolioFolderIcon from '@/components/PortfolioFolderIcon'
-import GitHubContributionsPanel from '@/components/GitHubContributionsPanel'
 import type { GitHubContributionsPayload } from '@/lib/githubContributions'
-import { useTerminalUiSound, type TerminalUiSoundApi } from '@/hooks/useTerminalUiSound'
-
-function Prompt({ cwd, cmd }: { cwd: string; cmd: string }) {
-  return (
-    <p className="home-terminal-prompt">
-      <span className="home-terminal-prompt-user">vry</span>
-      <span className="home-terminal-prompt-at">@</span>
-      <span className="home-terminal-prompt-host">portfolio</span>
-      <span className="home-terminal-prompt-path">:{cwd}$</span>{' '}
-      <span className="home-terminal-prompt-cmd">{cmd}</span>
-    </p>
-  )
-}
+import { useTerminalUiSound } from '@/hooks/useTerminalUiSound'
 
 const HOME_TERMINAL_ROUTES = [
   { href: '/work/', label: 'projects', counts: 'projects' as const },
@@ -30,29 +15,23 @@ const HOME_TERMINAL_ROUTES = [
   { href: '/workshops/', label: 'workshops', counts: 'workshops' as const },
 ] as const
 
-function IdleCursor({ sound, children }: { sound: TerminalUiSoundApi; children?: ReactNode }) {
+function IdleCursor() {
   return (
     <div className="home-terminal-idle-assistant">
       <p className="home-terminal-sr-only">
-        Ti, Vikas&apos;s assistant. You can ask about his work in the message field, or reach him on the contact page.
+        Ti, Vikas&apos;s assistant. For questions or hiring, use the contact page.
       </p>
       <div className="home-terminal-idle-assistant-card">
-        {children ? (
-          <div
-            className="home-terminal-assistant-chat-inline"
-            aria-label={"Message Ti about Vikas's work or experience"}
-          >
-            <p className="home-terminal-idle-assistant-blurb home-terminal-dim">
-              I&apos;m <span className="ti-name">ti</span> — I can walk through Vikas&apos;s work, projects, and how he
-              tends to operate day to day.
-            </p>
-            <p className="home-terminal-idle-assistant-blurb home-terminal-idle-assistant-blurb--follow home-terminal-dim">
-              If you&apos;re hiring, ask me anything—I&apos;ll help you get a useful first-round picture from what&apos;s
-              on this site.
-            </p>
-            {children}
-          </div>
-        ) : null}
+        <div className="home-terminal-idle-assistant-content" aria-label="About Ti">
+          <p className="home-terminal-idle-assistant-blurb home-terminal-dim">
+            I&apos;m <span className="ti-name">ti</span> — I can walk through Vikas&apos;s work, projects, and how he tends to
+            operate day to day.
+          </p>
+          <p className="home-terminal-idle-assistant-blurb home-terminal-idle-assistant-blurb--follow home-terminal-dim">
+            If you&apos;re hiring, reach out via the contact page—I&apos;ll help you get a useful first-round picture from what&apos;s
+            on this site.
+          </p>
+        </div>
       </div>
     </div>
   )
@@ -81,14 +60,9 @@ export default function HomeTerminalLayout({
 }: {
   githubContributions?: GitHubContributionsPayload | null
 }) {
-  const [overlaysReady, setOverlaysReady] = useState(false)
   const [catalogOpen, setCatalogOpen] = useState(false)
   const [catalogPage, setCatalogPage] = useState(0)
   const sound = useTerminalUiSound()
-
-  useEffect(() => {
-    setOverlaysReady(true)
-  }, [])
 
   useEffect(() => {
     const unlock = () => {
@@ -139,18 +113,8 @@ export default function HomeTerminalLayout({
     return acc
   }, {})
 
-  const crtOverlays = (
-    <div className="home-terminal-overlays" aria-hidden>
-      <div className="home-terminal-vignette" />
-      <div className="home-terminal-crt" />
-      <div className="home-terminal-scanlines" />
-    </div>
-  )
-
   return (
     <div className="home-terminal">
-      {overlaysReady ? createPortal(crtOverlays, document.body) : null}
-
       <div className="home-terminal-shell">
         <div className="home-terminal-body">
           <div className="home-terminal-split">
@@ -158,7 +122,6 @@ export default function HomeTerminalLayout({
               <div className="home-terminal-split-main">
                 <div className="home-terminal-bento-tile home-terminal-bento-tile--main">
                   <section className="home-terminal-block home-terminal-welcome" aria-labelledby="home-terminal-hello">
-                  <Prompt cwd="~" cmd="cat ./welcome.txt" />
                   <div className="home-terminal-welcome-lead">
                     <p className="home-terminal-greeting" id="home-terminal-hello">
                       hello internet!
@@ -263,7 +226,6 @@ export default function HomeTerminalLayout({
                     className="home-terminal-block home-terminal-ls-section"
                     aria-labelledby="home-terminal-ls-heading"
                   >
-                    <Prompt cwd="~/work" cmd="ls -l" />
                     <p className="home-terminal-section-lead home-terminal-dim">
                       Case studies and experiments, newest first. Each row opens the project page.
                     </p>
@@ -401,24 +363,11 @@ export default function HomeTerminalLayout({
               </div>
               <aside
                 className="home-terminal-split-assistant home-terminal-bento-rail"
-                aria-label="GitHub activity and Ti, Vikas's assistant"
+                aria-label="Ti, Vikas's assistant"
               >
                 <div className="home-terminal-assistant-stack">
-                  {githubContributions ? (
-                    <section
-                      className="home-terminal-bento-tile home-terminal-bento-tile--github home-terminal-github"
-                      aria-label="GitHub contributions"
-                    >
-                      <GitHubContributionsPanel
-                        data={githubContributions}
-                        onProfileLinkHover={() => sound.playHover()}
-                      />
-                    </section>
-                  ) : null}
                   <div className="home-terminal-bento-tile home-terminal-bento-tile--ti">
-                    <IdleCursor sound={sound}>
-                      <PortfolioChat terminalSound={sound} variant="terminal" />
-                    </IdleCursor>
+                    <IdleCursor />
                   </div>
                 </div>
               </aside>

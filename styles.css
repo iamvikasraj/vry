@@ -7,25 +7,25 @@ html {
 }
 
 :root {
-  /* Colors - Light mode (portfolio reimagine) */
-  --text-color: #1a1a1a;
-  --bg-color: #f5f3ef;
-  --surface-color: #ebe8e3;
-  --border-color: #d4d0c8;
-  --border-light: #e5e2dc;
-  --link-color: #4a4a4a;
-  --hover-color: #1a1a1a;
-  --gray-light: #e5e2dc;
-  --gray-med: #6b6560;
-  --accent: #980000;
-  --accent-orange: #c44d1a;
-  --shadow-surface: 0 2px 8px rgba(0, 0, 0, 0.06);
-  --shadow-lifted: 0 12px 40px rgba(0, 0, 0, 0.12);
+  /* Colors - Plain text (rsms.me-ish) */
+  --text-color: #111111;
+  --bg-color: #ffffff;
+  --surface-color: transparent;
+  --border-color: rgba(0, 0, 0, 0.12);
+  --border-light: rgba(0, 0, 0, 0.08);
+  --link-color: #111111;
+  --hover-color: #000000;
+  --gray-light: rgba(0, 0, 0, 0.06);
+  --gray-med: rgba(0, 0, 0, 0.62);
+  --accent: #111111;
+  --accent-orange: #111111;
+  --shadow-surface: none;
+  --shadow-lifted: none;
 
   /* Typography */
-  --sans-font: 'clother', sans-serif;
+  --sans-font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
   --serif-font: 'EB Garamond', Garamond, 'Times New Roman', serif;
-  --mono-font: 'Space Mono', 'Courier New', monospace;
+  --mono-font: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 
   /* Layout */
   --container-width: 1440px;
@@ -102,14 +102,33 @@ body {
   font-family: var(--sans-font);
   background-color: var(--bg-color);
   color: var(--text-color);
-  line-height: 1.6;
-  font-size: var(--txt-16);
+  line-height: 1.65;
+  font-size: 17px;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* Firefox scrollbar */
   scrollbar-width: thin;
   scrollbar-color: var(--border-color) transparent;
+}
+
+/* Plain layout: readable single column */
+.page-container {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 3.5rem 1.25rem;
+}
+
+/* Links: rsms-like */
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  color: var(--hover-color);
 }
 
 /* Custom scrollbar for Webkit browsers (Chrome, Safari, Edge) */
@@ -501,53 +520,9 @@ body {
 }
 
 /* ========================================
-   HOME — 90s terminal (CRT / phosphor)
-   Scoped palette — only this page
+   HOME (formerly “terminal”)
+   Keep layout classes, drop CRT/CLI theme
    ======================================== */
-/* Prevent margin-collapse through transparent wrappers exposing body (--bg-color). */
-html:has(.page-container-terminal),
-body:has(.page-container-terminal) {
-  background-color: #020802;
-}
-
-/* One viewport tall: no document scroll; inner columns scroll */
-html:has(.page-container-terminal) {
-  height: 100%;
-}
-
-body:has(.page-container-terminal) {
-  min-height: 100%;
-  overflow: hidden;
-}
-
-/* Home terminal: scrollbar hidden; scrolling still works (wheel, trackpad, touch) */
-html:has(.page-container-terminal),
-body:has(.page-container-terminal) {
-  scrollbar-width: none;
-}
-
-html:has(.page-container-terminal)::-webkit-scrollbar,
-body:has(.page-container-terminal)::-webkit-scrollbar {
-  display: none;
-  width: 0;
-  height: 0;
-}
-
-.page-container-terminal {
-  /* Matrix-style construct palette */
-  --term-bg: #000000;
-  --term-bg-panel: #020802;
-  --term-fg: #00ff41;
-  --term-fg-dim: #008f11;
-  --term-amber: #b4ffc8;
-  --term-amber-dim: #00c030;
-  --term-border: #003d20;
-  --term-glow: rgba(0, 255, 65, 0.32);
-
-  width: 100%;
-  background: var(--term-bg-panel);
-  color: var(--term-fg);
-}
 
 .home-terminal-main {
   display: flex;
@@ -565,10 +540,19 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
   flex-direction: column;
   flex: 1 1 auto;
   min-height: 0;
-  font-family: var(--mono-font);
-  font-size: var(--txt-13);
-  line-height: 1.5;
-  text-shadow: 0 0 var(--sp-8) var(--term-glow);
+  /* Map legacy terminal vars to the new minimal-dark theme */
+  --term-fg: var(--text-color);
+  --term-fg-dim: var(--gray-med);
+  --term-amber: var(--accent);
+  --term-amber-dim: var(--accent-orange);
+  --term-border: var(--border-color);
+  --term-glow: transparent;
+
+  font-family: var(--sans-font);
+  font-size: var(--txt-16);
+  line-height: 1.6;
+  text-shadow: none;
+  color: var(--text-color);
   padding: 0;
 }
 
@@ -647,29 +631,26 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
   );
 }
 
+/* Avoid `all: unset` here — it resets flex/box-sizing and can collapse the home layout. */
 .home-terminal-shell {
-  position: relative;
-  z-index: 1;
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
   min-height: 0;
+  width: 100%;
   margin: 0;
-  border: 1px solid var(--term-border);
-  border-radius: var(--sp-2);
-  background: rgba(0, 0, 0, 0.2);
-  box-shadow:
-    inset 0 0 0 1px rgba(0, 255, 65, 0.14),
-    0 0 var(--sp-24) rgba(0, 0, 0, 0.35);
-  overflow: hidden;
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-sizing: border-box;
 }
 
 .home-terminal-body {
+  padding: 0;
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
   min-height: 0;
-  padding: var(--sp-12);
 }
 
 @media (min-width: 640px) {
@@ -699,21 +680,15 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
 }
 
 .home-terminal-split-layout.home-terminal-bento {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--sp-12);
-  align-items: start;
-  align-content: start;
+  display: block;
 }
 
 .home-terminal-bento-tile {
-  border: 1px solid rgba(0, 255, 65, 0.14);
-  border-radius: 10px;
-  background: rgba(6, 10, 8, 0.72);
-  box-shadow:
-    inset 0 1px 0 rgba(0, 255, 65, 0.06),
-    0 var(--sp-8) var(--sp-24) rgba(0, 0, 0, 0.35);
-  padding: var(--sp-16);
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
   min-width: 0;
 }
 
@@ -732,6 +707,25 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
 .home-terminal-bento-tile--github {
   padding: var(--sp-12) var(--sp-16);
   min-width: 0;
+  overflow: hidden;
+}
+
+.home-terminal-github-empty {
+  font-family: var(--mono-font);
+  font-size: var(--txt-12);
+  line-height: 1.55;
+}
+
+.home-terminal-inline-code {
+  display: inline-block;
+  font-family: var(--mono-font);
+  font-size: 0.95em;
+  padding: 0 var(--sp-4);
+  border-radius: var(--sp-2);
+  border: 1px solid rgba(0, 255, 65, 0.16);
+  background: rgba(0, 0, 0, 0.28);
+  color: var(--term-fg);
+  vertical-align: baseline;
 }
 
 .home-terminal-bento-tile--ti {
@@ -761,6 +755,7 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
 .home-terminal-split-assistant {
   flex-shrink: 0;
   width: 100%;
+  margin-top: 2.5rem;
 }
 
 /* Mobile: scroll main tile; rail stacks below */
@@ -792,6 +787,7 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
 
 @media (min-width: 960px) {
   .home-terminal-split-layout.home-terminal-bento {
+    display: grid;
     grid-template-columns: minmax(0, 1.35fr) minmax(15rem, 22rem);
     gap: var(--sp-16);
     align-items: stretch;
@@ -1005,9 +1001,11 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
 .home-terminal-github-heading {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: flex-start;
   gap: var(--sp-8);
+  min-width: 0;
+  max-width: 100%;
   margin: 0 0 var(--sp-12) 0;
   padding: 0;
   font-family: var(--mono-font);
@@ -1023,7 +1021,8 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--sp-8);
+  justify-content: center;
+  gap: 0px;
   min-width: 0;
   flex: 1;
   line-height: 1.55;
@@ -1143,21 +1142,7 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
 
 /* GitHub-style: weeks as columns (oldest → newest left → right), days Sun→Sat top → bottom */
 .home-terminal-github-grid {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: stretch;
-  gap: var(--sp-2);
-  width: 100%;
-  max-width: 100%;
-  max-height: calc(7 * 10px + 6 * var(--sp-2));
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding-bottom: var(--sp-4);
-  box-sizing: border-box;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0, 255, 65, 0.28) rgba(0, 255, 65, 0.05);
+  display: none;
 }
 
 .home-terminal-github-grid::-webkit-scrollbar {
@@ -1165,17 +1150,17 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
 }
 
 .home-terminal-github-grid::-webkit-scrollbar-track {
-  background: rgba(0, 255, 65, 0.05);
+  background: rgba(255, 209, 102, 0.06);
   border-radius: var(--sp-2);
 }
 
 .home-terminal-github-grid::-webkit-scrollbar-thumb {
-  background: rgba(0, 255, 65, 0.22);
+  background: rgba(255, 209, 102, 0.18);
   border-radius: var(--sp-2);
 }
 
 .home-terminal-github-grid::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 255, 65, 0.32);
+  background: rgba(255, 209, 102, 0.26);
 }
 
 .home-terminal-github-week {
@@ -1201,28 +1186,23 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
 }
 
 .home-terminal-github-day--1 {
-  background: rgba(0, 255, 65, 0.32);
+  background: rgba(255, 209, 102, 0.22);
 }
 
 .home-terminal-github-day--2 {
-  background: rgba(0, 255, 65, 0.48);
+  background: rgba(255, 209, 102, 0.34);
 }
 
 .home-terminal-github-day--3 {
-  background: rgba(0, 255, 65, 0.66);
+  background: rgba(255, 209, 102, 0.52);
 }
 
 .home-terminal-github-day--4 {
-  background: rgba(0, 255, 65, 0.88);
+  background: rgba(255, 209, 102, 0.74);
 }
 
 .home-terminal-github-legend {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: var(--sp-8);
-  margin: var(--sp-8) 0 0;
-  font-size: var(--txt-11);
+  display: none;
 }
 
 .home-terminal-github-legend-cells {
@@ -1489,15 +1469,23 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
   width: 100%;
   max-width: 100%;
   padding: 0;
-  border: 1px solid rgba(0, 255, 65, 0.18);
-  border-radius: 10px;
-  background: transparent;
+  border: none;
+  border-radius: var(--sp-8);
+  background: rgba(0, 0, 0, 0.22);
   overflow: hidden;
-  box-shadow:
-    0 0 0 3px rgba(0, 0, 0, 0.6),
-    0 0 0 4px rgba(0, 255, 65, 0.08),
-    0 12px 40px rgba(0, 0, 0, 0.6),
-    0 2px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: none;
+  /* Dark rail: Ti blurbs + chat share readable light-on-dark tokens (home root is plain-text light). */
+  --term-fg: rgba(232, 245, 236, 0.94);
+  --term-fg-dim: rgba(200, 215, 205, 0.58);
+  --term-border: rgba(255, 255, 255, 0.12);
+  --term-amber: #a8e6af;
+  --term-amber-dim: rgba(168, 230, 175, 0.55);
+  --text-color: var(--term-fg);
+  --gray-med: var(--term-fg-dim);
+  --surface-color: rgba(255, 255, 255, 0.06);
+  --border-color: var(--term-border);
+  --border-light: rgba(255, 255, 255, 0.08);
+  --accent: #c4e8c8;
 }
 
 /* Title bar — now lives inside the prompt line */
@@ -1512,14 +1500,15 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
 }
 
 /* Content area */
-.home-terminal-idle-assistant-card > .home-terminal-assistant-chat-inline {
+.home-terminal-idle-assistant-card > .home-terminal-idle-assistant-content {
   background: #0c100d;
   padding: var(--sp-16);
+  display: flex;
   flex-direction: column;
-  gap: var(--sp-16);
+  gap: var(--sp-12);
 }
 
-.home-terminal-idle-assistant-card > .home-terminal-assistant-chat-inline .home-terminal-idle-assistant-blurb {
+.home-terminal-idle-assistant-card > .home-terminal-idle-assistant-content .home-terminal-idle-assistant-blurb {
   margin-bottom: 0;
   line-height: 1.65;
 }
@@ -1579,25 +1568,6 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
   min-height: 0;
 }
 
-.home-terminal-assistant-chat-inline {
-  flex: 1 1 auto;
-  min-height: 0;
-  margin-top: var(--sp-12);
-  padding-top: 0;
-  border-top: none;
-  display: flex;
-  flex-direction: column;
-}
-
-.page-container.page-container-terminal .home-terminal-assistant-chat-inline .portfolio-chat--terminal {
-  flex: 1 1 auto;
-  min-height: 0;
-}
-
-.home-terminal-idle-assistant-card .portfolio-chat--terminal {
-  gap: var(--sp-12);
-}
-
 .page-container.page-container-terminal .portfolio-chat--terminal .portfolio-chat-messages {
   flex: 1 1 auto;
   min-height: var(--sp-48);
@@ -1642,13 +1612,6 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
   flex: 1 1 auto;
   min-height: 0;
   flex-direction: column;
-}
-
-.page-container.page-container-terminal
-  .home-terminal-assistant-stack:has(.portfolio-chat--terminal-empty)
-  .home-terminal-assistant-chat-inline {
-  margin-top: var(--sp-8);
-  padding-top: 0;
 }
 
 .page-container.page-container-terminal .portfolio-chat--terminal .portfolio-chat-input {
@@ -1709,6 +1672,25 @@ body:has(.page-container-terminal)::-webkit-scrollbar {
   .portfolio-chat-prompt-line {
   flex: 1 1 auto;
   min-height: 0;
+}
+
+/* Ti card: when the terminal thread is empty, avoid a second “boxed” panel. */
+.page-container.page-container-terminal
+  .home-terminal-idle-assistant-card
+  .portfolio-chat--terminal.portfolio-chat--terminal-empty
+  .portfolio-chat-prompt-line {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+}
+
+.page-container.page-container-terminal
+  .home-terminal-idle-assistant-card
+  .portfolio-chat--terminal.portfolio-chat--terminal-empty
+  .portfolio-chat-prompt-dot {
+  box-shadow: 0 0 6px rgba(0, 255, 65, 0.25);
 }
 
 /* Idle assistant: message panel + prompt (after terminal defaults so these win) */

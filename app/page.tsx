@@ -6,8 +6,8 @@ export default async function Home() {
   const githubContributions = await getGitHubContributions()
 
   return (
-    <div className="page-container page-container-terminal">
-      <main className="home-terminal-main">
+    <div className="page-container">
+      <main>
         <HomeTerminalLayout githubContributions={githubContributions} />
       </main>
       <ClientScripts />
