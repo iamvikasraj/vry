@@ -1,11 +1,13 @@
 'use client'
 
 import Link from 'next/link'
+import { createPortal } from 'react-dom'
 import { useEffect, useState, type ReactNode } from 'react'
 import { projects, type Project } from '@/data/projects'
 import { workshops } from '@/data/workshops'
 import { workEmployers } from '@/data/workEmployers'
 import PortfolioFolderIcon from '@/components/PortfolioFolderIcon'
+import PortfolioChat from '@/components/PortfolioChat'
 import type { GitHubContributionsPayload } from '@/lib/githubContributions'
 import { useTerminalUiSound } from '@/hooks/useTerminalUiSound'
 
@@ -14,6 +16,20 @@ const HOME_TERMINAL_ROUTES = [
   { href: '/work/#work-companies', label: 'companies', counts: 'companies' as const },
   { href: '/workshops/', label: 'workshops', counts: 'workshops' as const },
 ] as const
+
+function VT100Prompt({ cwd = '~', cmd }: { cwd?: string; cmd?: string }) {
+  return (
+    <p className="home-terminal-prompt">
+      <span className="home-terminal-prompt-user">vry</span>
+      <span className="home-terminal-prompt-at">@</span>
+      <span className="home-terminal-prompt-host">vt100</span>
+      <span className="home-terminal-prompt-path">:{cwd}$</span>
+      {cmd ? <span className="home-terminal-prompt-cmd"> {cmd}</span> : (
+        <span className="home-terminal-block-cursor" aria-hidden> █</span>
+      )}
+    </p>
+  )
+}
 
 function IdleCursor() {
   return (
@@ -60,9 +76,14 @@ export default function HomeTerminalLayout({
 }: {
   githubContributions?: GitHubContributionsPayload | null
 }) {
+  const [overlaysReady, setOverlaysReady] = useState(false)
   const [catalogOpen, setCatalogOpen] = useState(false)
   const [catalogPage, setCatalogPage] = useState(0)
   const sound = useTerminalUiSound()
+
+  useEffect(() => {
+    setOverlaysReady(true)
+  }, [])
 
   useEffect(() => {
     const unlock = () => {
@@ -113,15 +134,30 @@ export default function HomeTerminalLayout({
     return acc
   }, {})
 
+  const crtOverlays = (
+    <div className="home-terminal-overlays" aria-hidden>
+      <div className="home-terminal-vignette" />
+      <div className="home-terminal-crt" />
+      <div className="home-terminal-scanlines" />
+    </div>
+  )
+
   return (
     <div className="home-terminal">
+      {overlaysReady ? createPortal(crtOverlays, document.body) : null}
       <div className="home-terminal-shell">
+        <div className="home-terminal-statusbar" aria-hidden>
+          <span>VT100</span>
+          <span>VRY PORTFOLIO</span>
+          <span>TERM=vt100 · cols=80</span>
+        </div>
         <div className="home-terminal-body">
           <div className="home-terminal-split">
             <div className="home-terminal-split-layout home-terminal-bento">
               <div className="home-terminal-split-main">
                 <div className="home-terminal-bento-tile home-terminal-bento-tile--main">
                   <section className="home-terminal-block home-terminal-welcome" aria-labelledby="home-terminal-hello">
+                  <VT100Prompt cwd="~" cmd="cat welcome.txt" />
                   <div className="home-terminal-welcome-lead">
                     <p className="home-terminal-greeting" id="home-terminal-hello">
                       hello internet!
@@ -189,6 +225,7 @@ export default function HomeTerminalLayout({
                       })}
                     </div>
                   </nav>
+                  <VT100Prompt />
                   </section>
 
                   {showHomeTerminalCompanies ? (
@@ -367,7 +404,11 @@ export default function HomeTerminalLayout({
               >
                 <div className="home-terminal-assistant-stack">
                   <div className="home-terminal-bento-tile home-terminal-bento-tile--ti">
-                    <IdleCursor />
+                    <div className="home-terminal-ti-header" aria-hidden>
+                      <span className="home-terminal-ti-label">ti</span>
+                      <span className="home-terminal-dim"> — visitor guide</span>
+                    </div>
+                    <PortfolioChat variant="terminal" terminalSound={sound} />
                   </div>
                 </div>
               </aside>

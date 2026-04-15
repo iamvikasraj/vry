@@ -540,19 +540,12 @@ a:hover {
   flex-direction: column;
   flex: 1 1 auto;
   min-height: 0;
-  /* Map legacy terminal vars to the new minimal-dark theme */
-  --term-fg: var(--text-color);
-  --term-fg-dim: var(--gray-med);
-  --term-amber: var(--accent);
-  --term-amber-dim: var(--accent-orange);
-  --term-border: var(--border-color);
-  --term-glow: transparent;
 
-  font-family: var(--sans-font);
-  font-size: var(--txt-16);
-  line-height: 1.6;
-  text-shadow: none;
-  color: var(--text-color);
+  font-family: var(--mono-font);
+  font-size: var(--txt-13);
+  line-height: 1.5;
+  text-shadow: 0 0 var(--sp-8) var(--term-glow);
+  color: var(--term-fg);
   padding: 0;
 }
 
@@ -575,45 +568,45 @@ a:hover {
   box-shadow: inset 0 0 var(--sp-80) rgba(0, 0, 0, 0.55);
 }
 
-/* CRT face: curved tube falloff, top glass glare, inner bezel */
+/* CRT face: amber P3 tube — warm glass tint, corner falloff, top glare */
 .home-terminal-overlays .home-terminal-crt {
   pointer-events: none;
   position: absolute;
   inset: 0;
   z-index: 2;
   background:
-    /* specular highlight — top-left glass reflection */
-    linear-gradient(
-      165deg,
-      rgba(210, 230, 255, 0.22) 0%,
-      rgba(255, 255, 255, 0.08) 12%,
-      transparent 36%
-    ),
-    /* hood / upper bezel shadow under the glass */
+    /* warm amber glass tint */
     linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.42) 0%,
-      rgba(0, 0, 0, 0.12) 18%,
+      rgba(40, 20, 0, 0.18) 0%,
+      rgba(20, 10, 0, 0.06) 40%,
+      rgba(40, 20, 0, 0.14) 100%
+    ),
+    /* specular highlight — top-left glass reflection (warm) */
+    linear-gradient(
+      155deg,
+      rgba(255, 220, 140, 0.16) 0%,
+      rgba(255, 200, 100, 0.06) 14%,
       transparent 38%
     ),
     /* elliptical tube — corners darker than center */
     radial-gradient(
-      ellipse 92% 76% at 50% 50%,
+      ellipse 88% 72% at 50% 50%,
       rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0.08) 62%,
-      rgba(0, 0, 0, 0.28) 100%
+      rgba(0, 0, 0, 0.12) 60%,
+      rgba(0, 0, 0, 0.42) 100%
     ),
-    /* faint aperture grille (shadow mask) */
+    /* faint shadow mask */
     repeating-linear-gradient(
       90deg,
-      rgba(0, 0, 0, 0.045) 0px,
-      rgba(0, 0, 0, 0.045) 1px,
+      rgba(0, 0, 0, 0.04) 0px,
+      rgba(0, 0, 0, 0.04) 1px,
       transparent 1px,
       transparent 3px
     );
   box-shadow:
-    inset 0 0 100px rgba(0, 0, 0, 0.28),
-    inset 0 0 28px rgba(0, 0, 0, 0.35);
+    inset 0 0 120px rgba(10, 5, 0, 0.45),
+    inset 0 0 32px rgba(0, 0, 0, 0.5);
 }
 
 .home-terminal-overlays .home-terminal-scanlines {
@@ -621,13 +614,13 @@ a:hover {
   position: absolute;
   inset: 0;
   z-index: 3;
-  opacity: 0.14;
+  opacity: 0.22;
   background: repeating-linear-gradient(
     0deg,
     transparent,
     transparent 2px,
-    rgba(0, 0, 0, 0.45) 2px,
-    rgba(0, 0, 0, 0.45) 3px
+    rgba(0, 0, 0, 0.55) 2px,
+    rgba(0, 0, 0, 0.55) 3px
   );
 }
 
@@ -640,13 +633,25 @@ a:hover {
   width: 100%;
   margin: 0;
   padding: 0;
-  border: none;
-  background: transparent;
   box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  /* Barrel distortion illusion via border-radius + inset shadow */
+  border-radius: 6px / 8px;
+  border: 1px solid var(--term-border);
+  background: rgba(6, 4, 0, 0.55);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 176, 0, 0.10),
+    inset 0 0 60px rgba(0, 0, 0, 0.5),
+    0 0 0 6px #1a1000,
+    0 0 0 8px #2a1c00,
+    0 0 32px rgba(0, 0, 0, 0.8);
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .home-terminal-body {
-  padding: 0;
+  padding: var(--sp-24) var(--sp-16) var(--sp-32);
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
@@ -655,7 +660,7 @@ a:hover {
 
 @media (min-width: 640px) {
   .home-terminal-body {
-    padding: var(--sp-16);
+    padding: var(--sp-32) var(--sp-24) var(--sp-40);
   }
 }
 
@@ -722,7 +727,7 @@ a:hover {
   font-size: 0.95em;
   padding: 0 var(--sp-4);
   border-radius: var(--sp-2);
-  border: 1px solid rgba(0, 255, 65, 0.16);
+  border: 1px solid rgba(255, 176, 0, 0.16);
   background: rgba(0, 0, 0, 0.28);
   color: var(--term-fg);
   vertical-align: baseline;
@@ -734,6 +739,22 @@ a:hover {
   display: flex;
   flex-direction: column;
   min-height: min(40vh, 22rem);
+}
+
+.home-terminal-ti-header {
+  padding: var(--sp-8) var(--sp-12);
+  border-bottom: 1px solid var(--term-border);
+  font-family: var(--mono-font);
+  font-size: var(--txt-11);
+  letter-spacing: 0.08em;
+  flex-shrink: 0;
+}
+
+.home-terminal-ti-label {
+  font-weight: 700;
+  color: var(--term-amber);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
 }
 
 .home-terminal-bento-rail {
@@ -883,8 +904,8 @@ a:hover {
   letter-spacing: 0.04em;
   line-height: 1.15;
   text-shadow:
-    0 0 var(--sp-24) rgba(0, 255, 65, 0.22),
-    0 0 var(--sp-48) rgba(0, 255, 65, 0.08);
+    0 0 var(--sp-24) rgba(255, 176, 0, 0.22),
+    0 0 var(--sp-48) rgba(255, 176, 0, 0.08);
 }
 
 @media (min-width: 640px) {
@@ -1109,7 +1130,7 @@ a:hover {
 }
 
 .home-terminal-github-avatar-link:focus-visible {
-  outline: 2px solid rgba(0, 255, 65, 0.45);
+  outline: 2px solid rgba(255, 176, 0, 0.45);
 }
 
 .home-terminal-github-avatar-frame {
@@ -1117,7 +1138,7 @@ a:hover {
   line-height: 0;
   border-radius: 50%;
   overflow: hidden;
-  box-shadow: 0 0 0 1px rgba(0, 255, 65, 0.18);
+  box-shadow: 0 0 0 1px rgba(255, 176, 0, 0.18);
 }
 
 .home-terminal-github-avatar {
@@ -1231,6 +1252,15 @@ a:hover {
 .home-terminal-route-folder-icon.portfolio-folder-icon-slot {
   height: var(--sp-32);
   width: calc(var(--sp-32) * 116 / 82);
+}
+
+/* Amber phosphor: override hardcoded green SVG fills to match VT100 theme */
+.page-container-terminal .portfolio-folder-icon-svg path:first-child {
+  fill: #2a1500 !important;
+  stroke: #ffb000 !important;
+}
+.page-container-terminal .portfolio-folder-icon-svg path:last-child {
+  stroke: #ffb000 !important;
 }
 
 .home-terminal-h2--question {
@@ -1374,7 +1404,7 @@ a:hover {
   border-radius: var(--sp-2);
   background: rgba(0, 0, 0, 0.35);
   color: var(--term-fg);
-  box-shadow: 0 0 var(--sp-8) rgba(0, 255, 65, 0.12);
+  box-shadow: 0 0 var(--sp-8) rgba(255, 176, 0, 0.12);
 }
 
 .home-terminal-continue-btn {
@@ -1389,7 +1419,7 @@ a:hover {
   border: 1px solid var(--term-fg);
   border-radius: var(--sp-2);
   text-shadow: none;
-  box-shadow: 0 0 var(--sp-16) rgba(0, 255, 65, 0.25);
+  box-shadow: 0 0 var(--sp-16) rgba(255, 176, 0, 0.25);
 }
 
 .home-terminal-continue-btn:hover {
@@ -1492,8 +1522,8 @@ a:hover {
 .home-terminal-idle-assistant-shell-line {
   margin: 0;
   padding: var(--sp-10) var(--sp-16);
-  background: #1e2420;
-  border-bottom: 1px solid rgba(0, 255, 65, 0.12);
+  background: #1a0f00;
+  border-bottom: 1px solid rgba(255, 176, 0, 0.12);
   display: flex;
   align-items: center;
   gap: var(--sp-8);
@@ -1551,7 +1581,7 @@ a:hover {
 .home-terminal-idle-assistant .home-terminal-chat-ai-dot {
   width: var(--sp-8);
   height: var(--sp-8);
-  box-shadow: 0 0 var(--sp-12) rgba(0, 255, 65, 0.45);
+  box-shadow: 0 0 var(--sp-12) rgba(255, 176, 0, 0.45);
   animation: home-terminal-ai-pulse 2s ease-in-out infinite;
 }
 
@@ -1590,8 +1620,8 @@ a:hover {
 
 .page-container.page-container-terminal .portfolio-chat--terminal .portfolio-chat-bubble--user .portfolio-chat-bubble-text {
   padding: var(--sp-8) var(--sp-12);
-  background: rgba(0, 255, 65, 0.08);
-  border: 1px solid rgba(0, 255, 65, 0.22);
+  background: rgba(255, 176, 0, 0.08);
+  border: 1px solid rgba(255, 176, 0, 0.22);
   border-radius: var(--sp-2);
 }
 
@@ -1651,7 +1681,7 @@ a:hover {
   opacity: 1;
   color: var(--term-fg);
   border-color: var(--term-amber-dim);
-  background: rgba(0, 255, 65, 0.08);
+  background: rgba(255, 176, 0, 0.08);
 }
 
 .page-container.page-container-terminal .portfolio-chat--terminal .portfolio-chat-prompt-line {
@@ -1661,9 +1691,9 @@ a:hover {
   min-width: 0;
   width: 100%;
   gap: var(--sp-8);
-  background: #1e2420;
+  background: #1a0f00;
   padding: var(--sp-8) var(--sp-16);
-  border-top: 1px solid rgba(0, 255, 65, 0.12);
+  border-top: 1px solid rgba(255, 176, 0, 0.12);
   border-radius: 0 0 9px 9px;
 }
 
@@ -1690,7 +1720,7 @@ a:hover {
   .home-terminal-idle-assistant-card
   .portfolio-chat--terminal.portfolio-chat--terminal-empty
   .portfolio-chat-prompt-dot {
-  box-shadow: 0 0 6px rgba(0, 255, 65, 0.25);
+  box-shadow: 0 0 6px rgba(255, 176, 0, 0.25);
 }
 
 /* Idle assistant: message panel + prompt (after terminal defaults so these win) */
@@ -1702,8 +1732,8 @@ a:hover {
   margin: 0;
   border-radius: var(--sp-2);
   background: rgba(0, 0, 0, 0.22);
-  border: 1px solid rgba(0, 255, 65, 0.1);
-  box-shadow: inset 0 1px 0 rgba(0, 255, 65, 0.04);
+  border: 1px solid rgba(255, 176, 0, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 176, 0, 0.04);
 }
 
 .page-container.page-container-terminal
@@ -1719,10 +1749,10 @@ a:hover {
   .portfolio-chat--terminal.portfolio-chat--terminal-empty
   .portfolio-chat-prompt-line {
   border-radius: var(--sp-2);
-  border: 1px solid rgba(0, 255, 65, 0.16);
+  border: 1px solid rgba(255, 176, 0, 0.16);
   padding: var(--sp-10) var(--sp-16);
   box-shadow:
-    inset 0 1px 0 rgba(0, 255, 65, 0.07),
+    inset 0 1px 0 rgba(255, 176, 0, 0.07),
     0 0 0 1px rgba(0, 0, 0, 0.45);
 }
 
@@ -1752,7 +1782,7 @@ a:hover {
   background: var(--term-fg);
   flex-shrink: 0;
   animation: home-terminal-ai-pulse 2s ease-in-out infinite;
-  box-shadow: 0 0 8px rgba(0, 255, 65, 0.45);
+  box-shadow: 0 0 8px rgba(255, 176, 0, 0.45);
 }
 
 .portfolio-chat-prompt-fullpath {
@@ -1852,6 +1882,13 @@ a:hover {
   display: inline-block;
   animation: home-terminal-blink 1.1s step-end infinite;
   color: var(--term-fg);
+}
+
+.home-terminal-block-cursor {
+  display: inline-block;
+  animation: home-terminal-blink 1s step-end infinite;
+  color: var(--term-fg);
+  font-weight: normal;
 }
 
 .home-terminal-h1 {
@@ -1996,7 +2033,7 @@ a:hover {
 .home-terminal-companies-simple-link:hover {
   color: var(--term-amber);
   border-left-color: var(--term-amber-dim);
-  box-shadow: inset var(--sp-4) 0 var(--sp-24) rgba(0, 255, 65, 0.12);
+  box-shadow: inset var(--sp-4) 0 var(--sp-24) rgba(255, 176, 0, 0.12);
   text-shadow: 0 0 var(--sp-12) var(--term-glow);
   transform: translateX(var(--sp-4));
 }
@@ -2123,7 +2160,7 @@ a:hover {
   border: 1px solid var(--term-border);
   border-radius: var(--sp-2);
   background: rgba(0, 0, 0, 0.35);
-  box-shadow: inset 0 0 0 1px rgba(0, 255, 65, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(255, 176, 0, 0.08);
   transition:
     color 0.15s ease,
     border-color 0.15s ease,
@@ -2135,8 +2172,8 @@ a:hover {
   color: var(--term-fg);
   border-color: var(--term-amber-dim);
   box-shadow:
-    inset 0 0 0 1px rgba(0, 255, 65, 0.14),
-    0 0 var(--sp-16) rgba(0, 255, 65, 0.08);
+    inset 0 0 0 1px rgba(255, 176, 0, 0.14),
+    0 0 var(--sp-16) rgba(255, 176, 0, 0.08);
 }
 
 .home-terminal-ls-toggle:focus-visible {
@@ -2183,7 +2220,7 @@ a:hover {
 .home-terminal-ls-pager-btn:hover:not(:disabled) {
   color: var(--term-fg);
   border-color: var(--term-amber-dim);
-  background: rgba(0, 255, 65, 0.06);
+  background: rgba(255, 176, 0, 0.06);
 }
 
 .home-terminal-ls-pager-btn:focus-visible {
@@ -2215,13 +2252,13 @@ a:hover {
   background:
     linear-gradient(
       118deg,
-      rgba(0, 255, 65, 0.05) 0%,
+      rgba(255, 176, 0, 0.05) 0%,
       transparent 40%,
       transparent 100%
     ),
     rgba(0, 0, 0, 0.28);
   box-shadow:
-    inset 0 0 0 1px rgba(0, 255, 65, 0.09),
+    inset 0 0 0 1px rgba(255, 176, 0, 0.09),
     inset 0 1px 0 rgba(180, 255, 200, 0.05),
     0 0 var(--sp-32) rgba(0, 0, 0, 0.45);
 }
@@ -2431,7 +2468,7 @@ a:hover {
 .home-terminal-ls-row:hover {
   color: var(--term-amber);
   border-left-color: var(--term-amber-dim);
-  box-shadow: inset var(--sp-4) 0 var(--sp-24) rgba(0, 255, 65, 0.1);
+  box-shadow: inset var(--sp-4) 0 var(--sp-24) rgba(255, 176, 0, 0.1);
   text-shadow: 0 0 var(--sp-12) var(--term-glow);
   transform: translateX(var(--sp-4));
 }
@@ -2476,7 +2513,7 @@ a:hover {
   height: var(--sp-8);
   border-radius: 50%;
   background: var(--term-amber);
-  box-shadow: 0 0 var(--sp-12) rgba(0, 255, 65, 0.45);
+  box-shadow: 0 0 var(--sp-12) rgba(255, 176, 0, 0.45);
   animation: home-terminal-ai-pulse 2.4s ease-in-out infinite;
 }
 
@@ -2735,6 +2772,43 @@ a:hover {
  * Home terminal page: one viewport tall, inner scroll (main column).
  * Beats later `.page-container` padding/max-width.
  */
+.page-container-terminal {
+  /* Amber phosphor — P3 tube (VT100 / DEC hardware terminal) */
+  --term-bg: #060400;
+  --term-bg-panel: #0a0700;
+  --term-fg: #ffb000;
+  --term-fg-dim: #7a5200;
+  --term-amber: #ffd060;
+  --term-amber-dim: #c07800;
+  --term-border: #3d2400;
+  --term-glow: rgba(255, 176, 0, 0.38);
+  /* Outer bezel color — warm dark plastic */
+  --term-bezel: #1a1200;
+  --term-bezel-mid: #251900;
+
+  width: 100%;
+  /* Warm near-black background — like a dark room behind the terminal */
+  background: radial-gradient(ellipse 80% 70% at 50% 40%, #1a1000 0%, #060400 100%);
+  color: var(--term-fg);
+}
+
+/* VT100 status bar — top of screen, classic reverse-video style */
+.home-terminal-statusbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1px var(--sp-8);
+  background: var(--term-fg);
+  color: var(--term-bg);
+  font-family: var(--mono-font);
+  font-size: var(--txt-11);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  user-select: none;
+  flex-shrink: 0;
+}
+
 .page-container.page-container-terminal {
   box-sizing: border-box;
   display: flex;
