@@ -21,8 +21,8 @@ const SCREEN_Z = D / 2  // front face Z
 
 // Shared plastic material props — warm beige/cream like a real 90s CRT
 const plastic = {
-  roughness: 0.85,
-  metalness: 0.04,
+  roughness: 0.82,
+  metalness: 0.06,
 }
 
 interface CRTMonitor3DProps {
