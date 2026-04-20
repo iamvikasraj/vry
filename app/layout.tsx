@@ -1,7 +1,15 @@
 import type { Metadata } from 'next'
+import { DM_Mono } from 'next/font/google'
 import Script from 'next/script'
 import GA4PageView from '@/components/GA4PageView'
 import '../styles.css'
+
+const dmMono = DM_Mono({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  variable: '--font-dm-mono',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Vikas Raj Yadav | Staff Product Designer & Technologist | UI/UX Designer | Motion Design Expert | Bengaluru',
@@ -31,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={dmMono.variable}>
       <head>
         <link rel="icon" type="image/png" href="/assets/favicon/favicon.png" />
         <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon/favicon-512x512.png" />
@@ -223,15 +231,6 @@ export default function RootLayout({
               gtag('config', 'G-SYDGLK4LKX', {
                 send_page_view: true
               });
-              
-              // Verify GA4 is loaded
-              setTimeout(function() {
-                if (typeof window.gtag === 'function') {
-                  console.log('✅ GA4 loaded successfully: G-SYDGLK4LKX');
-                } else {
-                  console.error('❌ GA4 failed to load');
-                }
-              }, 2000);
             `,
           }}
         />
