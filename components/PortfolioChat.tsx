@@ -2,7 +2,6 @@
 
 import { Fragment, useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import { analytics } from '@/lib/analytics'
-import type { TerminalUiSoundApi } from '@/hooks/useTerminalUiSound'
 
 type Role = 'user' | 'assistant'
 
@@ -11,60 +10,34 @@ interface Msg {
   content: string
 }
 
-/** Renders assistant copy with “Ti” in small caps (matches terminal styling). */
-function assistantTextWithTiSmallCaps(text: string): ReactNode {
+function renderAssistant(text: string): ReactNode {
   if (!text) return ''
   const parts = text.split(/(\bTi\b)/g)
   return parts.map((part, i) =>
-    part === 'Ti' ? (
-      <span className="ti-name" key={i}>
-        Ti
-      </span>
-    ) : (
-      <Fragment key={i}>{part}</Fragment>
-    )
+    part === 'Ti' ? <span className="ti-name" key={i}>Ti</span> : <Fragment key={i}>{part}</Fragment>
   )
 }
 
-const WELCOME_DEFAULT: Msg = {
+const WELCOME: Msg = {
   role: 'assistant',
-  content:
-    "Hey—I'm Ti. I know this portfolio pretty well, so ask me anything: a project, how Vikas works, motion/Rive stuff, or where to dig deeper on the site.",
+  content: "Hey—I'm Ti. I know this portfolio pretty well. Ask me about a project, how Vikas works, motion/Rive stuff, or whether he'd be a good fit for your team.",
 }
 
-export default function PortfolioChat({
-  terminalSound,
-  variant = 'default',
-}: {
-  terminalSound?: TerminalUiSoundApi
-  variant?: 'default' | 'terminal'
-}) {
-  const [messages, setMessages] = useState<Msg[]>(() =>
-    variant === 'terminal' ? [] : [WELCOME_DEFAULT]
-  )
+export default function PortfolioChat() {
+  const [messages, setMessages] = useState<Msg[]>([WELCOME])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const scrollEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (variant === 'terminal' && messages.length === 0 && !loading) return
-    const el = scrollEndRef.current
-    if (!el) return
-    const reduceMotion =
-      typeof window !== 'undefined' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    el.scrollIntoView({
-      behavior: reduceMotion ? 'auto' : 'smooth',
-      block: 'end',
-    })
-  }, [messages, loading, variant])
+    scrollEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
+  }, [messages, loading])
 
   const send = useCallback(async () => {
     const text = input.trim()
     if (!text || loading) return
 
-    terminalSound?.playActivate()
     setError(null)
     setInput('')
     const userMsg: Msg = { role: 'user', content: text }
@@ -77,9 +50,7 @@ export default function PortfolioChat({
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          messages: history.map(({ role, content }) => ({ role, content })),
-        }),
+        body: JSON.stringify({ messages: history.map(({ role, content }) => ({ role, content })) }),
       })
 
       if (!res.ok) {
@@ -93,145 +64,70 @@ export default function PortfolioChat({
       const decoder = new TextDecoder()
       let assistant = ''
 
-      setMessages((prev) => [...prev, { role: 'assistant', content: '' }])
+      setMessages(prev => [...prev, { role: 'assistant', content: '' }])
 
       while (true) {
         const { done, value } = await reader.read()
         if (done) break
         assistant += decoder.decode(value, { stream: true })
-        setMessages((prev) => {
+        setMessages(prev => {
           const next = [...prev]
           next[next.length - 1] = { role: 'assistant', content: assistant }
           return next
         })
       }
     } catch (e) {
-      const msg = e instanceof Error ? e.message : 'Something went wrong'
-      setError(msg)
-      setMessages((prev) => prev.slice(0, -1))
+      setError(e instanceof Error ? e.message : 'Something went wrong')
+      setMessages(prev => prev.slice(0, -1))
     } finally {
       setLoading(false)
     }
-  }, [input, loading, messages, terminalSound])
-
-  const terminalThreadHidden =
-    variant === 'terminal' && messages.length === 0 && !loading
+  }, [input, loading, messages])
 
   return (
-    <div
-      className={
-        variant === 'terminal'
-          ? `portfolio-chat portfolio-chat--terminal${terminalThreadHidden ? ' portfolio-chat--terminal-empty' : ''}`
-          : 'portfolio-chat'
-      }
-    >
-      <div
-        className="portfolio-chat-messages"
-        hidden={terminalThreadHidden}
-        aria-hidden={terminalThreadHidden}
-      >
+    <div className="portfolio-chat">
+      <div className="portfolio-chat-messages">
         {messages.map((m, i) => (
-          <div
-            key={i}
-            className={`portfolio-chat-bubble portfolio-chat-bubble--${m.role}`}
-          >
-            {variant === 'terminal' ? (
-              <div className="portfolio-chat-bubble-text">
-                <span className="portfolio-chat-bubble-prefix" aria-hidden="true">
-                  {m.role === 'user' ? '> ' : 'ti$ '}
-                </span>
-                {m.role === 'assistant'
-                  ? assistantTextWithTiSmallCaps(
-                      m.content ||
-                        (loading && i === messages.length - 1 ? '▋' : '')
-                    )
-                  : m.content}
-              </div>
-            ) : (
-              <>
-                {m.role === 'user' ? (
-                  <div className="portfolio-chat-bubble-label">You</div>
-                ) : null}
-                <div className="portfolio-chat-bubble-text">
-                  {m.role === 'assistant'
-                    ? assistantTextWithTiSmallCaps(
-                        m.content ||
-                          (loading && i === messages.length - 1 ? '…' : '')
-                      )
-                    : m.content}
-                </div>
-              </>
-            )}
+          <div key={i} className={`portfolio-chat-bubble portfolio-chat-bubble--${m.role}`}>
+            {m.role === 'user' && <div className="portfolio-chat-bubble-label">You</div>}
+            <div className="portfolio-chat-bubble-text">
+              {m.role === 'assistant'
+                ? renderAssistant(m.content || (loading && i === messages.length - 1 ? '…' : ''))
+                : m.content}
+            </div>
           </div>
         ))}
         {loading && messages[messages.length - 1]?.role === 'user' && (
           <div className="portfolio-chat-bubble portfolio-chat-bubble--assistant">
-            <div className="portfolio-chat-bubble-text">
-              {variant === 'terminal' ? (
-                <><span className="portfolio-chat-bubble-prefix" aria-hidden="true">ti$ </span>▋</>
-              ) : '…'}
-            </div>
+            <div className="portfolio-chat-bubble-text">…</div>
           </div>
         )}
-        <div
-          ref={scrollEndRef}
-          className="portfolio-chat-scroll-anchor"
-          aria-hidden="true"
-        />
+        <div ref={scrollEndRef} aria-hidden="true" />
       </div>
+
       {error && <p className="portfolio-chat-error">{error}</p>}
+
       <form
         className="portfolio-chat-form"
-        onSubmit={(e) => {
-          e.preventDefault()
-          void send()
-        }}
+        onSubmit={e => { e.preventDefault(); void send() }}
       >
-        {variant === 'terminal' ? (
-          <div className="portfolio-chat-prompt-line">
-            <span className="portfolio-chat-prompt-caret" aria-hidden="true">
-              <span className="portfolio-chat-prompt-dot" aria-hidden="true" />
-              <span className="portfolio-chat-prompt-fullpath">
-                <span className="home-terminal-prompt-assistant-name">ti</span>
-                <span>@</span>
-                <span>portfolio</span>
-                <span>:~/context$</span>
-              </span>
-            </span>
-            <input
-              type="text"
-              className="portfolio-chat-input portfolio-chat-input--terminal"
-              placeholder="type and hit enter…"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              disabled={loading}
-              autoComplete="off"
-              aria-label="Message Ti"
-            />
-            <span className="portfolio-chat-prompt-hint" aria-hidden="true">↵</span>
-          </div>
-        ) : (
-          <>
-            <input
-              type="text"
-              className="portfolio-chat-input"
-              placeholder="Ask me something…"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              disabled={loading}
-              autoComplete="off"
-              aria-label="Message"
-            />
-            <button
-              type="submit"
-              className="portfolio-chat-send"
-              disabled={loading || !input.trim()}
-              onMouseEnter={() => terminalSound?.playHover()}
-            >
-              Send
-            </button>
-          </>
-        )}
+        <input
+          type="text"
+          className="portfolio-chat-input"
+          placeholder="Ask me something…"
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          disabled={loading}
+          autoComplete="off"
+          aria-label="Message Ti"
+        />
+        <button
+          type="submit"
+          className="portfolio-chat-send"
+          disabled={loading || !input.trim()}
+        >
+          Send
+        </button>
       </form>
     </div>
   )

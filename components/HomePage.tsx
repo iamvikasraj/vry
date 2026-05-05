@@ -84,6 +84,14 @@ export default function HomePage() {
               </button>
             ))}
           </nav>
+          <Link href="/chat" className="home-de-sidebar-link home-de-sidebar-chat-entry">
+            <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0.75 0.75H11.75V8.75H9L6.25 10.75L3.5 8.75H0.75V0.75Z" stroke="currentColor" strokeWidth="1.5"/>
+              <circle cx="3.75" cy="4.75" r="1" fill="currentColor"/>
+              <circle cx="8.75" cy="4.75" r="1" fill="currentColor"/>
+            </svg>
+            ASK TI
+          </Link>
         </aside>
 
         <div className="home-de-main-content">
