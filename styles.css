@@ -2087,8 +2087,8 @@ a {
 
 .project-title {
   font-family: var(--sans-font);
-  font-size: var(--txt-32);
-  font-weight: 400;
+  font-size: var(--txt-18);
+  font-weight: 500;
   color: var(--text-color);
   margin: 0 0 var(--sp-32) 0;
   letter-spacing: -0.01em;
@@ -2150,8 +2150,8 @@ a {
 
 .project-section-title {
   font-family: var(--sans-font);
-  font-size: var(--txt-20);
-  font-weight: 400;
+  font-size: var(--txt-18);
+  font-weight: 500;
   color: var(--text-color);
   margin: 0 0 var(--sp-12) 0;
   letter-spacing: -0.01em;
@@ -2814,28 +2814,24 @@ a {
   }
   
   .project-title {
-    font-size: var(--txt-24);
+    font-size: var(--txt-14);
     margin-bottom: var(--sp-32);
   }
-  
+
   .project-video-container {
     margin-bottom: var(--sp-32);
   }
-  
-  .project-title {
-    font-size: var(--txt-24);
-  }
-  
+
   .project-meta-item {
     font-size: var(--txt-12);
   }
-  
+
   .project-description {
     font-size: var(--txt-14);
   }
-  
+
   .project-section-title {
-    font-size: var(--txt-16);
+    font-size: var(--txt-14);
   }
   
   .project-section-text {
