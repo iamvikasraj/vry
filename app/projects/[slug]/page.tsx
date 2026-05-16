@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ClientScripts from '@/components/ClientScripts'
 import ProjectViewTracker from '@/components/ProjectViewTracker'
@@ -24,6 +25,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
     <div className="page-container">
       <ProjectViewTracker projectTitle={project.title} projectSlug={project.slug} />
       <ProjectSectionTracker projectTitle={project.title} projectSlug={project.slug} />
+      <Header />
       <section className="project-detail">
         <Link href="/" className="project-back-link">
           Back
