@@ -1,0 +1,19 @@
+Buttons are the most common interactive element on any screen, and most of them feel dead. No feedback, no personality, just a color change on tap. I built an interactive button in Rive that actually responds — hover, press, release, success — each state with its own motion.
+
+## The states
+
+**Idle** — the button has a subtle breathing animation. Nothing dramatic, just enough to signal that it's alive and tappable.
+
+**Hover** — on desktop, the button lifts slightly with a shadow increase. The label tracking widens by 1px. These are small signals that add up.
+
+**Press** — the button compresses on the Y-axis (squash), the fill darkens, and there's a ripple from the touch point. The ripple origin is a Rive listener input, so it starts exactly where you clicked.
+
+**Success** — on release, the button stretches back (stretch after squash), the label fades out, a checkmark draws in, and the fill shifts to green. Total time: 500ms.
+
+## Why Rive over CSS
+
+CSS can do hover states and transitions. But the squash-and-stretch, the positional ripple, the shape morphing from text to checkmark — these need a real animation tool. Rive lets you design these as connected states rather than isolated keyframes.
+
+## Tools
+
+**Rive** — 4-state machine with listener inputs for touch position

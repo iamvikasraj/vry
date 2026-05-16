@@ -1,0 +1,20 @@
+Small moments matter in financial apps. A button that confirms a transaction, a toggle that locks a goal — these micro-interactions tell users their action was received. I designed a set of them for ET Money using Rive.
+
+## Why micro-interactions
+
+In fintech, trust is everything. When a user taps "Invest," they need to feel it worked. A static state change isn't enough — the transition itself communicates reliability. A smooth, confident animation says "we got it" better than any toast notification.
+
+## How they work
+
+Each interaction is a self-contained Rive component with multiple states — idle, active, success, error. The state machine handles transitions, so the app just sets an input and the animation resolves itself.
+
+**Button confirmations** — the invest button morphs into a checkmark with a slight bounce, then settles. The whole thing takes 400ms but it removes the need for a separate confirmation screen.
+
+**Toggle locks** — when you lock a savings goal, the toggle doesn't just slide — it clicks into place with a subtle snap animation. The affordance communicates permanence.
+
+**Pull-to-refresh** — the refresh indicator ties into Rive's listener system so the animation speed matches the gesture velocity. Feels physical.
+
+## Tools
+
+**Rive** — state machines with input listeners for gesture-driven feedback
+**Figma** — interaction specifications and component documentation

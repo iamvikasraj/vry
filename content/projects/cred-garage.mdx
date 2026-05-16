@@ -1,0 +1,22 @@
+CRED Garage is one of those features that feels like it shouldn't exist in a payments app — but it works because CRED treats utility as a design opportunity. I explored the vehicle management flow and prototyped it with Rive and Play.
+
+## Why Garage works
+
+Most super-apps bolt on features as separate modules. CRED integrates them into the reward ecosystem — your car insurance renewal earns you CRED coins, your FASTag recharge is a one-tap action. Garage isn't a feature, it's a context.
+
+## What I prototyped
+
+**Vehicle card** — the main interaction is a card that expands to show your vehicle's details — insurance status, FASTag balance, emission certificate. I used Rive for the card expansion because the reveal has a specific choreography: the image scales up, details stagger in, and action buttons slide from the bottom.
+
+**Status animations** — each vehicle metric (insurance, pollution, FASTag) has a status indicator. Green pulsing for active, amber for expiring soon, red for expired. These are continuous Rive animations that run independently, giving the card a sense of liveness.
+
+**Quick actions** — the bottom actions (renew, recharge, remind me) use Rive for press feedback — a branded squash-and-stretch that matches CRED's interaction language.
+
+## What I learned
+
+CRED's design language is consistent enough that recreating any feature means internalizing their principles first — dark backgrounds, generous spacing, confident typography, deliberate motion. The feature is secondary to the system.
+
+## Tools
+
+**Rive** — card expansion, status indicators, button feedback
+**Play** — full vehicle management flow prototype

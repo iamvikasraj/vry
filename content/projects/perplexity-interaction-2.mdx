@@ -1,0 +1,21 @@
+Part two of the Perplexity exploration — this time going deeper into the follow-up flow and how the interface handles multi-turn conversations without losing context.
+
+## The deeper problem
+
+Single-turn AI is straightforward. Multi-turn is where most interfaces break down. Previous answers get pushed up, context is lost, and the conversation feels like a stack of disconnected responses. Perplexity handles this better than most.
+
+## What I focused on
+
+**Thread continuity** — when you ask a follow-up, the previous answer compresses into a summary card. It's still visible but reduced, keeping the focus on the new response. I recreated this collapse animation — the text reflows, sources minimize to icons, and the card height animates down.
+
+**Context indicators** — Perplexity shows which parts of the previous answer the new response builds on. I explored this with subtle highlight connections between the compressed card and the new answer.
+
+**Scroll behavior** — the new answer auto-scrolls into view but respects the user's position if they've scrolled up. This required tracking scroll intent vs. content-push scroll — a nuance most prototyping tools struggle with.
+
+## What I learned
+
+Multi-turn AI interfaces need spatial memory. Users need to feel where they are in a conversation, not just see a timeline. Compression and expansion of previous context is more effective than infinite scroll.
+
+## Tools
+
+**Play** — multi-screen prototype with scroll-aware animations

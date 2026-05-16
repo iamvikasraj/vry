@@ -1,0 +1,22 @@
+A slider seems simple — drag a thumb, get a value. But making it feel native on iOS while running the visuals through Rive opened up an interesting challenge: real-time data binding between two different rendering systems.
+
+## The challenge
+
+Rive runs its own render loop. SwiftUI has its own state system. Making them talk to each other in real time — 60 times per second, with no visible lag — required more thought than the interaction itself.
+
+## How data binding works
+
+**Rive inputs as the source of truth** — the slider thumb position is a Rive number input. SwiftUI reads this value on every frame via Rive's `StateMachineController` and surfaces it as a `@Published` property.
+
+**Two-way sync** — dragging the thumb in Rive updates SwiftUI's state. But SwiftUI can also set the value programmatically (like resetting to default), which pushes back into Rive's input. Both directions need to work without creating feedback loops.
+
+**The visual layer** — because the slider lives in Rive, I could do things that are hard in native UIKit/SwiftUI — the track fills with a gradient that shifts hue based on value, the thumb has a squash-and-stretch on drag, and there's a subtle particle trail on fast swipes.
+
+## Why this matters
+
+Data binding between animation tools and native code is an underexplored space. Most Rive integrations are fire-and-forget — trigger an animation, wait for it to finish. Real-time binding opens up a whole category of interactive components.
+
+## Tools
+
+**Rive** — slider state machine with number inputs and listeners
+**SwiftUI** — state management, `ObservableObject` bridge

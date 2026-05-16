@@ -1,0 +1,23 @@
+This one's personal. Back in 2014, I stumbled into UX Design and fell in love with it. A decade later, I recreated CRED's bottom navigation as a way to close a loop — proving to myself that good design isn't expensive, it just takes care.
+
+## Why CRED
+
+CRED's navigation is one of the most discussed pieces of UI in India's design community. It's opinionated, it's smooth, and it has personality. Recreating it was less about copying and more about understanding — what makes it feel so intentional?
+
+## The build
+
+**SwiftUI for structure** — the tab bar layout, the view switching, the gesture handling. SwiftUI's declarative approach made it easy to match CRED's spatial logic — each tab has a presence even when it's not active.
+
+**Rive for motion** — the icon animations are where CRED's nav gets its character. Each icon has idle, selected, and transition states. I built these as Rive state machines so they respond to tab changes instantly, not as canned animations.
+
+**The details** — the subtle scale on the active tab, the haptic timing, the way inactive icons dim but don't disappear. These are the decisions that separate "we made a tab bar" from "we designed navigation."
+
+## What it taught me
+
+Good design isn't about access to tools or budgets. It's about noticing — seeing what CRED did with their dim curve on inactive icons, understanding why the transition timing is 280ms and not 200ms. The basics, done with attention.
+
+## Tools
+
+**SwiftUI** — layout, gestures, haptics
+**Rive** — icon state machines with 3 states each
+**Xcode** — profiling animation frame rates

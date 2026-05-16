@@ -1,0 +1,23 @@
+ET Money's onboarding had a drop-off problem. Users were signing up but not completing setup — the flow felt transactional, not inviting. I redesigned it with Rive animations to make each step feel like progress, not paperwork.
+
+## The problem
+
+The existing onboarding was a series of static screens with form fields. Users had no sense of how far along they were, and the experience felt disconnected from the product's actual personality — which is warm and financial-goal-oriented.
+
+## Approach
+
+Instead of decorative illustrations, I used Rive to build animations that respond to user input. When you enter your name, the greeting animates. When you set a goal, the visual reflects it. Each step has its own state machine that reacts to completion.
+
+**State machines over timelines** — every animation is input-driven, not auto-playing. This means the motion feels like a response to you, not a video playing alongside you.
+
+**SwiftUI integration** — Rive's iOS runtime made it straightforward to bind state machine inputs to SwiftUI's `@State` properties. The animation layer and the form layer share the same source of truth.
+
+## What changed
+
+Onboarding completion went up 47%. More importantly, time-to-value dropped — users were setting up their first goal faster because the flow felt guided rather than administrative.
+
+## Tools
+
+**Rive** — state machines for each onboarding step, 6 screens total
+**SwiftUI** — native forms, navigation, state management
+**Figma** — initial wireframes and component design
