@@ -1,9 +1,14 @@
+export type ProjectCategory = 'Work' | 'Design Engineering'
+
 export interface Project {
   slug: string
   title: string
   video: string
   description: string
   tags: string[]
+  category: ProjectCategory
+  hidden?: boolean
+  featured?: boolean
   year?: string
   client?: string
   role?: string
@@ -14,11 +19,32 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: 'business-insider',
+    title: 'Business Insider Prototype with SwiftUI',
+    video: '/assets/video/Business Insider Prototype with SwiftUI.mp4',
+    description: 'Prototype of Business Insider app interface using SwiftUI.',
+    tags: ['SwiftUI'],
+    category: 'Design Engineering',
+    featured: true,
+    year: '2024',
+    client: 'Personal Project',
+    role: 'Designer & Developer',
+    context: 'Explored Business Insider app design and created SwiftUI prototype.',
+    process: [
+      'Analyzed Business Insider interface',
+      'Designed component structure',
+      'Built prototype in SwiftUI',
+      'Refined interactions and animations'
+    ]
+  },
+  {
     slug: 'interactive-balloons',
     title: 'Interactive Balloons with Rive and SwiftUI for the Contra Challenge',
     video: '/assets/video/Interactive Balloons with Rive and Swiftui for the Contra challenge.mp4',
     description: 'Interactive balloons animation created with Rive and SwiftUI for the Contra challenge.',
     tags: ['Rive', 'SwiftUI', 'Contra'],
+    category: 'Design Engineering',
+    hidden: true,
     year: '2024',
     client: 'Personal Project',
     role: 'Designer & Developer',
@@ -36,6 +62,7 @@ export const projects: Project[] = [
     video: '/assets/video/Et money onboarding with Rive & SwiftUI.mp4',
     description: 'A shareable celebration, fully created in Rive.',
     tags: ['Live Projects', 'Rive', 'SwiftUI'],
+    category: 'Work',
     year: '2024',
     client: 'ET Money',
     role: 'Lead Product Designer',
@@ -54,6 +81,7 @@ export const projects: Project[] = [
     video: '/assets/video/ET money Microinteraction with Rive.mp4',
     description: 'Micro-interaction design for ET Money app using Rive.',
     tags: ['Live Projects', 'Rive'],
+    category: 'Work',
     year: '2024',
     client: 'ET Money',
     role: 'Lead Product Designer',
@@ -71,6 +99,8 @@ export const projects: Project[] = [
     video: '/assets/video/Zomato Weather concept with rive and play.mp4',
     description: 'A weather concept design for Zomato using Rive and Play.',
     tags: ['Rive', 'Play'],
+    category: 'Design Engineering',
+    hidden: true,
     year: '2024',
     client: 'Personal Project',
     role: 'Designer & Prototyper',
@@ -88,6 +118,8 @@ export const projects: Project[] = [
     video: '/assets/video/drag and order.mp4',
     description: 'Just tested a drag & drop interaction using Figma and Play! It took me 10 minutes to complete the process and an additional hour to record and edit the session.',
     tags: ['Play', 'Figma', 'Prototyping', 'iOS'],
+    category: 'Design Engineering',
+    hidden: true,
     year: '2024',
     client: 'Personal Project',
     role: 'Designer & Prototyper',
@@ -105,6 +137,8 @@ export const projects: Project[] = [
     video: '/assets/video/CRED Bottom Navigation recreation with SwiftUI and Rive.mp4',
     description: 'A recreation of CRED\'s bottom navigation, representing closure to a cycle started in 2023. This project demonstrates that good design is not expensive to make but takes care and understanding of the basics.',
     tags: ['SwiftUI', 'Rive', 'CRED'],
+    category: 'Design Engineering',
+    hidden: true,
     year: '2024',
     client: 'Personal Project',
     role: 'Designer & Developer',
@@ -122,6 +156,8 @@ export const projects: Project[] = [
     video: '/assets/video/Twitter popular interaction with Rive.mp4',
     description: 'Recreating Twitter\'s popular interaction using Rive animation.',
     tags: ['Rive'],
+    category: 'Design Engineering',
+    hidden: true,
     year: '2024',
     client: 'Personal Project',
     role: 'Designer & Prototyper',
@@ -139,6 +175,8 @@ export const projects: Project[] = [
     video: '/assets/video/Youtube Splash Animation with Lottie and SwiftUI.mp4',
     description: 'Splash screen animation for YouTube using Lottie and SwiftUI.',
     tags: ['SwiftUI', 'Lottie'],
+    category: 'Design Engineering',
+    hidden: true,
     year: '2024',
     client: 'Personal Project',
     role: 'Designer & Developer',
@@ -156,6 +194,8 @@ export const projects: Project[] = [
     video: '/assets/video/iOS slider with data binding in rive.mp4',
     description: 'Interactive iOS slider component with data binding using Rive.',
     tags: ['Rive', 'SwiftUI'],
+    category: 'Design Engineering',
+    hidden: true,
     year: '2024',
     client: 'Personal Project',
     role: 'Designer & Developer',
@@ -173,6 +213,8 @@ export const projects: Project[] = [
     video: '/assets/video/Rive Interactive Button.mp4',
     description: 'Interactive button component created with Rive.',
     tags: ['Rive'],
+    category: 'Design Engineering',
+    hidden: true,
     year: '2024',
     client: 'Personal Project',
     role: 'Designer',
@@ -190,6 +232,8 @@ export const projects: Project[] = [
     video: '/assets/video/Perplexity Interaction with play-1.mp4',
     description: 'Recreating Perplexity\'s interaction patterns using Play.',
     tags: ['Play'],
+    category: 'Design Engineering',
+    hidden: true,
     year: '2024',
     client: 'Personal Project',
     role: 'Designer & Prototyper',
@@ -207,6 +251,8 @@ export const projects: Project[] = [
     video: '/assets/video/Perplexity Interaction with play-2.mp4',
     description: 'An in-depth exploration of Perplexity interactions using Play.',
     tags: ['Play'],
+    category: 'Design Engineering',
+    hidden: true,
     year: '2024',
     client: 'Personal Project',
     role: 'Designer & Prototyper',
@@ -224,6 +270,8 @@ export const projects: Project[] = [
     video: '/assets/video/Notion AI with Rive and Play.mp4',
     description: 'Conceptual design for Notion AI features using Rive and Play.',
     tags: ['Rive', 'Play'],
+    category: 'Design Engineering',
+    hidden: true,
     year: '2024',
     client: 'Personal Project',
     role: 'Designer & Prototyper',
@@ -241,6 +289,8 @@ export const projects: Project[] = [
     video: '/assets/video/Interactive Rive Clock with Adobe firefly.mp4',
     description: 'Interactive clock component combining Rive animations with Adobe Firefly.',
     tags: ['Rive'],
+    category: 'Design Engineering',
+    hidden: true,
     year: '2024',
     client: 'Personal Project',
     role: 'Designer & Prototyper',
@@ -258,6 +308,8 @@ export const projects: Project[] = [
     video: '/assets/video/Cred Garage with rive and Play.mp4',
     description: 'Conceptual design for Cred Garage feature using Rive and Play.',
     tags: ['Rive', 'Play'],
+    category: 'Design Engineering',
+    hidden: true,
     year: '2024',
     client: 'Personal Project',
     role: 'Designer & Prototyper',
@@ -275,6 +327,8 @@ export const projects: Project[] = [
     video: '/assets/video/Dream machine header animation with Rive.mp4',
     description: 'Header animation for Dream Machine using Rive.',
     tags: ['Rive'],
+    category: 'Design Engineering',
+    hidden: true,
     year: '2024',
     client: 'Personal Project',
     role: 'Designer',
@@ -284,23 +338,6 @@ export const projects: Project[] = [
       'Created animations in Rive',
       'Refined timing and easing',
       'Optimized performance'
-    ]
-  },
-  {
-    slug: 'business-insider',
-    title: 'Business Insider Prototype with SwiftUI',
-    video: '/assets/video/Business Insider Prototype with SwiftUI.mp4',
-    description: 'Prototype of Business Insider app interface using SwiftUI.',
-    tags: ['SwiftUI'],
-    year: '2024',
-    client: 'Personal Project',
-    role: 'Designer & Developer',
-    context: 'Explored Business Insider app design and created SwiftUI prototype.',
-    process: [
-      'Analyzed Business Insider interface',
-      'Designed component structure',
-      'Built prototype in SwiftUI',
-      'Refined interactions and animations'
     ]
   },
 ]

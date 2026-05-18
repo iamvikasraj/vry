@@ -129,9 +129,16 @@ body {
 .home-page--de {
   font-family: var(--sans-font);
   color: var(--text-color);
-  background: linear-gradient(180deg, #f3f5f7 0%, #d7dde3 100%);
-  background-attachment: fixed;
   min-height: 100vh;
+  position: relative;
+}
+
+.home-page--de::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, #f3f5f7 0%, #d7dde3 100%);
 }
 
 .home-de-main {
@@ -144,7 +151,7 @@ body {
 
 @media (max-width: 768px) {
   .home-de-main {
-    flex-direction: column;
+    display: block;
   }
 }
 
@@ -154,19 +161,40 @@ body {
   align-self: flex-start;
   width: 240px;
   flex-shrink: 0;
-  height: 100vh;
+  max-height: 100vh;
+  overflow-y: auto;
   padding: var(--sp-48) var(--sp-24);
   display: flex;
   flex-direction: column;
   gap: var(--sp-16);
 }
 
+@media (max-width: 1024px) and (min-width: 769px) {
+  .home-de-sidebar {
+    height: auto;
+    min-height: 0;
+    padding-top: var(--sp-24);
+    padding-bottom: var(--sp-24);
+    gap: var(--sp-8);
+  }
+  .home-de-sidebar-nav {
+    padding-top: var(--sp-16);
+    margin-top: var(--sp-8);
+  }
+}
+
 @media (max-width: 768px) {
   .home-de-sidebar {
     position: relative;
+    top: 0;
     width: 100%;
+    height: auto;
     min-height: 0;
-    padding: var(--sp-24);
+    max-height: none;
+    overflow: visible;
+    padding: var(--sp-24) var(--sp-16) var(--sp-16);
+    gap: var(--sp-8);
+    border-bottom: 1px solid var(--border-light);
   }
 }
 
@@ -190,6 +218,22 @@ body {
   padding-top: var(--sp-32);
 }
 
+@media (max-width: 768px) {
+  .home-de-sidebar-nav {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: var(--sp-8);
+    margin-top: var(--sp-16);
+    padding-top: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .home-de-sidebar-nav::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 .home-de-sidebar-link {
   margin: 0;
   padding: 0;
@@ -205,6 +249,21 @@ body {
   text-decoration: none;
   width: 100%;
   text-align: left;
+}
+
+@media (max-width: 768px) {
+  .home-de-sidebar-link {
+    flex: 0 0 auto;
+    width: auto;
+    font-size: var(--txt-11);
+    white-space: nowrap;
+    padding: var(--sp-4) var(--sp-8);
+    border: 1px solid transparent;
+  }
+
+  .home-de-sidebar-link--active {
+    border-color: var(--text-color);
+  }
 }
 
 .home-de-sidebar-link:hover {
@@ -369,11 +428,24 @@ body {
   margin: 0;
 }
 
+@media (max-width: 768px) {
+  .home-de-sidebar-pov {
+    display: none;
+  }
+}
+
 .home-de-main-content {
   flex: 1;
   min-width: 0;
   padding: var(--sp-24);
   overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+  .home-de-main-content {
+    padding: 0 0 var(--sp-32);
+    overflow: visible;
+  }
 }
 
 @media (min-width: 769px) {
@@ -483,13 +555,21 @@ body {
   padding: 0 0 var(--sp-24);
 }
 
-@media (min-width: 640px) {
+@media (max-width: 768px) {
   .home-de-card-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    padding-bottom: var(--sp-32);
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1024px) {
+  .home-de-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-24);
+  }
+}
+
+@media (min-width: 1440px) {
   .home-de-card-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -635,7 +715,7 @@ body {
   width: 100%;
   text-decoration: none;
   color: inherit;
-  border-radius: 16px;
+  border-radius: 0;
   overflow: hidden;
   background: var(--gray-light);
 }
@@ -658,6 +738,22 @@ body {
   position: relative;
 }
 
+@media (max-width: 768px) {
+  .home-de-thumb {
+    background: var(--gray-light);
+    border-bottom: none;
+  }
+
+  .home-de-thumb:hover,
+  .home-de-thumb.home-de-thumb--hover {
+    opacity: 1;
+  }
+
+  .home-de-thumb-media {
+    aspect-ratio: auto;
+  }
+}
+
 .home-de-thumb-video {
   position: absolute;
   inset: 0;
@@ -667,17 +763,12 @@ body {
   display: block;
 }
 
-.home-de-thumb-title {
-  font-family: var(--sans-font);
-  font-size: var(--txt-13);
-  font-weight: 500;
-  color: var(--text-color);
-  line-height: 1.4;
-  padding: var(--sp-8) var(--sp-2);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+@media (max-width: 768px) {
+  .home-de-thumb-video {
+    position: static;
+    height: auto;
+    object-fit: contain;
+  }
 }
 
 /* Links: rsms-like */

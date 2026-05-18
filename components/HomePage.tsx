@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { projects, type Project } from '@/data/projects'
 import PortfolioChat from '@/components/PortfolioChat'
 
-const TAGS = ['All', 'Rive', 'SwiftUI', 'Play', 'Live Projects']
+const CATEGORIES = ['All', 'Work', 'Design Engineering']
 
 function ProjectThumbCard({ project, featured }: { project: Project; featured?: boolean }) {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -45,18 +45,20 @@ function ProjectThumbCard({ project, featured }: { project: Project; featured?: 
           />
         </div>
       </Link>
-      <span className="home-de-thumb-title">{project.title}</span>
     </article>
   )
 }
 
 export default function HomePage() {
-  const [activeTag, setActiveTag] = useState('All')
+  const [activeCategory, setActiveCategory] = useState('All')
   const [showChat, setShowChat] = useState(false)
 
   const filtered = useMemo(
-    () => (activeTag === 'All' ? projects : projects.filter(p => p.tags.includes(activeTag))),
-    [activeTag],
+    () => {
+      const visible = projects.filter(p => !p.hidden)
+      return activeCategory === 'All' ? visible : visible.filter(p => p.category === activeCategory)
+    },
+    [activeCategory],
   )
 
   return (
@@ -73,14 +75,14 @@ export default function HomePage() {
             I care about motion that serves function, not decoration. 10 years in FinTech. Rive &amp; Play Ambassador.
           </p>
           <nav className="home-de-sidebar-nav" aria-label="Filter work by tag">
-            {TAGS.map(tag => (
+            {CATEGORIES.map(cat => (
               <button
-                key={tag}
+                key={cat}
                 type="button"
-                className={`home-de-sidebar-link${activeTag === tag ? ' home-de-sidebar-link--active' : ''}`}
-                onClick={() => setActiveTag(tag)}
+                className={`home-de-sidebar-link${activeCategory === cat ? ' home-de-sidebar-link--active' : ''}`}
+                onClick={() => setActiveCategory(cat)}
               >
-                {tag.toUpperCase()}
+                {cat.toUpperCase()}
               </button>
             ))}
           </nav>
@@ -90,7 +92,7 @@ export default function HomePage() {
           <section id="work" className="home-de-work home-de-work--only">
             <div className="home-de-card-grid">
               {filtered.map(p => (
-                <ProjectThumbCard key={p.slug} project={p} />
+                <ProjectThumbCard key={p.slug} project={p} featured={p.featured} />
               ))}
             </div>
           </section>
