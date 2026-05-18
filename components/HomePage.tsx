@@ -38,20 +38,14 @@ function ProjectThumbCard({ project, featured }: { project: Project; featured?: 
             className="home-de-thumb-video"
             src={project.video}
             muted
+            autoPlay
             playsInline
             loop
             preload="metadata"
           />
         </div>
-        <div className="home-de-thumb-overlay">
-          <span className="home-de-thumb-title">{project.title}</span>
-          <div className="home-de-thumb-tags">
-            {project.tags.slice(0, 3).map(tag => (
-              <span key={tag} className="home-de-thumb-tag">{tag}</span>
-            ))}
-          </div>
-        </div>
       </Link>
+      <span className="home-de-thumb-title">{project.title}</span>
     </article>
   )
 }

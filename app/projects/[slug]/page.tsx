@@ -42,6 +42,19 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
 
         <h1 className="project-title">{project.title}</h1>
 
+        <div className="project-video-container project-video-container--bleed">
+          <video
+            src={project.video}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="project-video"
+          >
+            <source src={project.video} type="video/mp4" />
+          </video>
+        </div>
+
         {(project.year || project.client || project.role) && (
           <div className="project-meta-grid">
             {project.year && (
@@ -70,19 +83,6 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
             )}
           </div>
         )}
-
-        <div className="project-video-container project-video-container--bleed">
-          <video
-            src={project.video}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="project-video"
-          >
-            <source src={project.video} type="video/mp4" />
-          </video>
-        </div>
 
         <div className="project-content">
           {MDXContent ? (

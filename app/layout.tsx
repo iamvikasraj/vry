@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { DM_Mono, Inter } from 'next/font/google'
+import { DM_Mono, Inter, Work_Sans } from 'next/font/google'
 import Script from 'next/script'
 import GA4PageView from '@/components/GA4PageView'
 import '../styles.css'
@@ -14,6 +14,12 @@ const dmMono = DM_Mono({
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
+  display: 'swap',
+})
+
+const workSans = Work_Sans({
+  subsets: ['latin'],
+  variable: '--font-work-sans',
   display: 'swap',
 })
 
@@ -45,13 +51,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${dmMono.variable} ${inter.variable}`}>
+    <html lang="en" className={`${dmMono.variable} ${inter.variable} ${workSans.variable}`}>
       <head>
-        <Script
-          src="//unpkg.com/react-grab@0.1.33/dist/index.global.js"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
+        {process.env.NODE_ENV === 'development' && (
+          <Script
+            src="//unpkg.com/react-grab@0.1.33/dist/index.global.js"
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
+        )}
+        <link rel="stylesheet" href="https://use.typekit.net/wjs0dtk.css" />
         <link rel="icon" type="image/png" href="/assets/favicon/favicon.png" />
         <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon/favicon-512x512.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/favicon-512x512.png" />
