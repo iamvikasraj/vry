@@ -127,8 +127,8 @@ body {
 }
 
 .home-page--de {
-  font-family: var(--sans-font);
-  color: var(--text-color);
+  font-family: var(--de-font);
+  color: var(--de-black);
   min-height: 100vh;
   position: relative;
 }
@@ -138,7 +138,11 @@ body {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(180deg, #f3f5f7 0%, #d7dde3 100%);
+  background-color: var(--de-bg-bottom);
+  background-image: var(--de-bg-gradient);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed;
 }
 
 .home-de-main {
@@ -159,11 +163,12 @@ body {
   position: sticky;
   top: 0;
   align-self: flex-start;
-  width: 240px;
+  width: var(--de-sidebar-width);
   flex-shrink: 0;
+  height: 100vh;
   max-height: 100vh;
   overflow-y: auto;
-  padding: var(--sp-48) var(--sp-24);
+  padding: var(--de-sidebar-padding-y) var(--de-sidebar-padding-x);
   display: flex;
   flex-direction: column;
   gap: var(--sp-16);
@@ -173,8 +178,8 @@ body {
   .home-de-sidebar {
     height: auto;
     min-height: 0;
-    padding-top: var(--sp-24);
-    padding-bottom: var(--sp-24);
+    padding-top: var(--de-gutter);
+    padding-bottom: var(--de-gutter);
     gap: var(--sp-8);
   }
   .home-de-sidebar-nav {
@@ -192,22 +197,22 @@ body {
     min-height: 0;
     max-height: none;
     overflow: visible;
-    padding: var(--sp-24) var(--sp-16) var(--sp-16);
+    padding: var(--de-gutter-mobile);
     gap: var(--sp-8);
-    border-bottom: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--de-skeleton-border);
   }
 }
 
 .home-de-sidebar-logo {
-  font-size: var(--txt-16);
+  font-size: var(--de-nav-size);
   font-weight: 600;
-  color: var(--text-color);
+  color: var(--de-black);
   text-decoration: none;
   margin-bottom: 0;
 }
 
 .home-de-sidebar-logo:hover {
-  opacity: 0.72;
+  opacity: 0.7;
 }
 
 .home-de-sidebar-nav {
@@ -240,15 +245,17 @@ body {
   border: none;
   background: none;
   font: inherit;
-  font-size: var(--txt-13);
+  font-family: var(--de-font);
+  font-size: var(--de-nav-size);
   font-weight: 500;
-  letter-spacing: 0.05em;
+  letter-spacing: var(--de-nav-tracking);
   text-transform: uppercase;
-  color: var(--gray-med);
+  color: var(--de-gray-dark);
   cursor: pointer;
   text-decoration: none;
   width: 100%;
   text-align: left;
+  transition: color 0.2s ease;
 }
 
 @media (max-width: 768px) {
@@ -262,22 +269,53 @@ body {
   }
 
   .home-de-sidebar-link--active {
-    border-color: var(--text-color);
+    border-color: var(--de-black);
   }
 }
 
 .home-de-sidebar-link:hover {
-  color: var(--text-color);
+  color: var(--de-black);
 }
 
 .home-de-sidebar-link--active {
-  color: var(--text-color);
+  color: var(--de-black);
   font-weight: 600;
 }
 
 .home-de-sidebar-link:focus-visible {
-  outline: 2px solid var(--text-color);
+  outline: 2px solid rgba(0, 0, 0, 0.35);
   outline-offset: var(--sp-2);
+}
+
+.home-de-sidebar-entity {
+  margin: 0;
+  padding-top: 1.25rem;
+  flex-shrink: 0;
+}
+
+.home-de-sidebar-entity-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--de-font);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--de-gray-dark);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.home-de-sidebar-entity-link:hover {
+  opacity: 0.7;
+}
+
+.home-de-sidebar-entity-mark {
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 999px;
+  background: var(--de-brand-gradient);
 }
 
 .home-de-ti-card {
@@ -410,21 +448,20 @@ body {
 }
 
 .home-de-sidebar-role {
-  font-size: var(--txt-12);
+  font-size: 0.8125rem;
   font-weight: 400;
   line-height: 1.5;
-  color: var(--gray-med);
+  color: var(--de-gray-dark);
   margin: calc(var(--sp-4) * -1) 0 0 0;
 }
 
 .home-de-sidebar-pov {
-  font-family: var(--sans-font);
-  font-size: var(--txt-12);
+  font-family: var(--de-font);
+  font-size: 0.8125rem;
   font-weight: 400;
   font-style: italic;
   line-height: 1.5;
-  color: var(--gray-med);
-  opacity: 0.7;
+  color: var(--de-gray-muted);
   margin: 0;
 }
 
@@ -437,13 +474,13 @@ body {
 .home-de-main-content {
   flex: 1;
   min-width: 0;
-  padding: var(--sp-24);
+  padding: calc(var(--de-gutter) + 0.5rem) var(--de-gutter);
   overflow-x: hidden;
 }
 
 @media (max-width: 768px) {
   .home-de-main-content {
-    padding: 0 0 var(--sp-32);
+    padding: 0 var(--de-gutter-mobile) var(--de-gutter-mobile);
     overflow: visible;
   }
 }
@@ -717,7 +754,7 @@ body {
   color: inherit;
   border-radius: 0;
   overflow: hidden;
-  background: var(--gray-light);
+  background: var(--de-skeleton-fill);
 }
 
 .home-de-thumb:hover,
@@ -734,7 +771,7 @@ body {
   width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  background: var(--gray-light);
+  background: var(--de-skeleton-fill);
   position: relative;
 }
 

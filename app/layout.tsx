@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { DM_Mono, Inter, Work_Sans } from 'next/font/google'
 import Script from 'next/script'
 import GA4PageView from '@/components/GA4PageView'
+import '../styles/design-engineering-tokens.css'
 import '../styles.css'
 
 const dmMono = DM_Mono({
@@ -66,7 +67,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/favicon-512x512.png" />
         <link rel="manifest" href="/assets/favicon/site.webmanifest" />
         <link rel="robots" href="/robots.txt" />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#DAD9DA" />
         <link rel="canonical" href="https://vikasrajyadav.in/" />
         
         {/* Additional Meta for AI Search Engines */}

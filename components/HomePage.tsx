@@ -86,6 +86,17 @@ export default function HomePage() {
               </button>
             ))}
           </nav>
+          <p className="home-de-sidebar-entity">
+            <a
+              href="https://designengineer.ing"
+              className="home-de-sidebar-entity-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="home-de-sidebar-entity-mark" aria-hidden />
+              design engineering →
+            </a>
+          </p>
         </aside>
 
         <div className="home-de-main-content">
