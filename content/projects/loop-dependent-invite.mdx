@@ -1,0 +1,21 @@
+Adding a dependent to a corporate health plan sounds simple until you account for verification, employer rules, partial completion, and invites that expire mid-flow.
+
+## The problem
+
+The existing invite flow assumed a happy path: employee sends link, dependent completes signup, done. In practice, invites expired, dependents abandoned mid-form, and employees couldn't tell whether their family member was actually covered.
+
+## Approach
+
+I redesigned Dependent Invite around **recoverable progress** — every state tells the employee or dependent exactly where things stand and what action unblocks them.
+
+**Invite lifecycle** — sent, opened, in progress, completed, expired. Each state has clear copy and a single primary action. Re-send is always one tap away, not buried in settings.
+
+**Edge case first** — I prototyped expired invites, duplicate dependents, and partial form saves before polishing the happy path. Healthcare enrollment errors are high-stakes; the UI has to handle them gracefully.
+
+**Employer context** — different companies have different dependent eligibility rules. The flow adapts messaging based on plan configuration without exposing backend complexity to the member.
+
+## Tools
+
+**Figma** — flow design and state documentation
+**SwiftUI** — native prototyping for form and validation patterns
+**Loop Health design system** — shared form components and error states

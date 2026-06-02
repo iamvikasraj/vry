@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { DM_Mono, Inter, Work_Sans } from 'next/font/google'
-import Script from 'next/script'
 import GA4PageView from '@/components/GA4PageView'
 import '../styles/design-engineering-tokens.css'
 import '../styles.css'
@@ -54,13 +53,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${dmMono.variable} ${inter.variable} ${workSans.variable}`}>
       <head>
-        {process.env.NODE_ENV === 'development' && (
-          <Script
-            src="//unpkg.com/react-grab@0.1.33/dist/index.global.js"
-            crossOrigin="anonymous"
-            strategy="afterInteractive"
-          />
-        )}
         <link rel="stylesheet" href="https://use.typekit.net/wjs0dtk.css" />
         <link rel="icon" type="image/png" href="/assets/favicon/favicon.png" />
         <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon/favicon-512x512.png" />

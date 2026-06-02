@@ -9,6 +9,7 @@ export interface Project {
   category: ProjectCategory
   hidden?: boolean
   featured?: boolean
+  metaLabel?: string
   year?: string
   client?: string
   role?: string
@@ -19,13 +20,67 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: 'loop-doctor-on-demand',
+    title: 'Loop Health — Doctor on Demand',
+    video: '/assets/video/loop-doctor-on-demand.mp4',
+    description: 'Telehealth experience for booking and connecting with doctors on demand within the Loop Health app.',
+    tags: ['Live Projects', 'Healthcare'],
+    category: 'Work',
+    year: '2025',
+    client: 'Loop Health',
+    role: 'Staff Product Designer & Technologist',
+    context: 'Designed the end-to-end Doctor on Demand flow — from discovery and booking to consultation handoff — for Loop Health members and their employers.',
+    process: [
+      'Mapped member and employer journeys for on-demand care',
+      'Prototyped key flows in SwiftUI for rapid iteration with engineering',
+      'Refined booking, wait-time, and consultation states with the product team',
+      'Shipped production-ready patterns across iOS and web surfaces'
+    ]
+  },
+  {
+    slug: 'loop-care-journey',
+    title: 'Loop Health — Care Journey',
+    video: '/assets/video/loop-care-journey.mp4',
+    description: 'Care pathway experience that guides members through their health journey with clear status and next steps.',
+    tags: ['Live Projects', 'Healthcare', 'SwiftUI'],
+    category: 'Work',
+    year: '2025',
+    client: 'Loop Health',
+    role: 'Staff Product Designer & Technologist',
+    context: 'Built the Care Journey feature to help members understand where they are in their care plan and what to do next — reducing confusion in a complex healthcare product.',
+    process: [
+      'Synthesized care pathway requirements with clinical and ops stakeholders',
+      'Designed progressive disclosure for multi-step care flows',
+      'Prototyped interactions in SwiftUI to validate timing and hierarchy',
+      'Aligned design system components with engineering for scale'
+    ]
+  },
+  {
+    slug: 'loop-dependent-invite',
+    title: 'Loop Health — Dependent Invite',
+    video: '/assets/video/loop-dependent-invite.mp4',
+    description: 'Flow for employees to invite and onboard dependents onto their Loop Health benefits plan.',
+    tags: ['Live Projects', 'Healthcare'],
+    category: 'Work',
+    year: '2026',
+    client: 'Loop Health',
+    role: 'Staff Product Designer & Technologist',
+    context: 'Designed the Dependent Invite experience so employees can add family members to their corporate health plan with minimal friction and clear verification steps.',
+    process: [
+      'Audited existing invite and enrollment pain points',
+      'Designed invite, verification, and onboarding states',
+      'Prototyped edge cases — expired invites, partial completion, re-send',
+      'Collaborated with engineering on API constraints and error handling'
+    ]
+  },
+  {
     slug: 'business-insider',
     title: 'Business Insider Prototype with SwiftUI',
     video: '/assets/video/Business Insider Prototype with SwiftUI.mp4',
     description: 'Prototype of Business Insider app interface using SwiftUI.',
     tags: ['SwiftUI'],
     category: 'Design Engineering',
-    featured: true,
+    metaLabel: 'App Redesign',
     year: '2024',
     client: 'Personal Project',
     role: 'Designer & Developer',
@@ -63,6 +118,7 @@ export const projects: Project[] = [
     description: 'A shareable celebration, fully created in Rive.',
     tags: ['Live Projects', 'Rive', 'SwiftUI'],
     category: 'Work',
+    metaLabel: 'App Design',
     year: '2024',
     client: 'ET Money',
     role: 'Lead Product Designer',
@@ -82,6 +138,7 @@ export const projects: Project[] = [
     description: 'Micro-interaction design for ET Money app using Rive.',
     tags: ['Live Projects', 'Rive'],
     category: 'Work',
+    metaLabel: 'Microinteraction',
     year: '2024',
     client: 'ET Money',
     role: 'Lead Product Designer',
@@ -91,6 +148,139 @@ export const projects: Project[] = [
       'Designed micro-animations using Rive',
       'Tested with users for feedback',
       'Implemented across the app'
+    ]
+  },
+  {
+    slug: 'gabit-branding',
+    title: 'Gabit Branding',
+    video: '/assets/video/gabit-branding.mp4',
+    description: 'Brand identity and visual system for Gabit — a D2C skincare brand.',
+    tags: ['Live Projects', 'Branding'],
+    category: 'Work',
+    metaLabel: 'Branding',
+    year: '2022',
+    client: 'Gabit',
+    role: 'Lead Product Designer',
+    context: 'Defined Gabit\'s brand identity — logo, color, typography, and visual language — for a skincare product launching direct-to-consumer.',
+    process: [
+      'Researched brand positioning in the D2C skincare market',
+      'Explored visual directions and identity systems',
+      'Delivered logo, palette, type, and application guidelines',
+      'Aligned brand assets with upcoming product and web launches'
+    ]
+  },
+  {
+    slug: 'gabit-product-design-page',
+    title: 'Gabit Product Design Page',
+    video: '/assets/video/gabit-product-design-page.mp4',
+    description: 'Product detail page design for Gabit skincare — storytelling, ingredients, and conversion-focused layout.',
+    tags: ['Live Projects', 'E-commerce'],
+    category: 'Work',
+    metaLabel: 'Product Design',
+    year: '2022',
+    client: 'Gabit',
+    role: 'Lead Product Designer',
+    context: 'Designed the skincare product page for Gabit — balancing brand storytelling with clear product information and purchase flow.',
+    process: [
+      'Structured PDP hierarchy for ingredients, benefits, and social proof',
+      'Designed responsive layouts for mobile-first shoppers',
+      'Applied Gabit brand system across photography, type, and CTAs',
+      'Iterated on conversion patterns with product and marketing stakeholders'
+    ]
+  },
+  {
+    slug: 'paytm-postpaid',
+    title: 'Paytm Postpaid',
+    video: '/assets/video/paytm-postpaid.mp4',
+    description: 'Buy-now-pay-later experience inside Paytm — from eligibility and onboarding to repayment flows.',
+    tags: ['Live Projects', 'FinTech'],
+    category: 'Work',
+    metaLabel: 'App Design',
+    year: '2021',
+    client: 'Paytm',
+    role: 'Lead Product Designer',
+    context: 'Designed Paytm Postpaid end-to-end for millions of users — credit eligibility, activation, checkout integration, and repayment — in a regulated fintech product.',
+    process: [
+      'Mapped postpaid journeys across discovery, KYC, and first transaction',
+      'Designed checkout and repayment states for high-trust financial flows',
+      'Partnered with product and engineering on rollout across Paytm surfaces',
+      'Iterated on clarity and error handling for credit-limit edge cases'
+    ]
+  },
+  {
+    slug: 'paytm-travel',
+    title: 'Paytm Travel',
+    video: '/assets/video/paytm-travel.mp4',
+    description: 'Travel booking experience within Paytm — flights, hotels, and trip discovery at scale.',
+    tags: ['Live Projects', 'FinTech'],
+    category: 'Work',
+    metaLabel: 'App Design',
+    year: '2020',
+    client: 'Paytm',
+    role: 'Lead Product Designer',
+    context: 'Led design for Paytm Travel, shaping search, booking, and post-purchase flows for a high-volume travel vertical inside the super app.',
+    process: [
+      'Structured search and results patterns for flights and hotels',
+      'Designed booking funnels with progressive disclosure for complex itineraries',
+      'Aligned UI with Paytm design system while solving travel-specific needs',
+      'Collaborated with ops and engineering on payment and cancellation flows'
+    ]
+  },
+  {
+    slug: 'paytm-trains',
+    title: 'Paytm Trains',
+    video: '/assets/video/paytm-trains.mp4',
+    description: 'IRCTC train booking inside Paytm — search, seat selection, and ticket management.',
+    tags: ['Live Projects', 'FinTech'],
+    category: 'Work',
+    metaLabel: 'App Design',
+    year: '2019',
+    client: 'Paytm',
+    role: 'Lead Product Designer',
+    context: 'Designed Paytm Trains for one of India\'s highest-frequency booking use cases — tight IRCTC constraints, peak-load UX, and clear status throughout the journey.',
+    process: [
+      'Audited existing train booking pain points and drop-off points',
+      'Designed search, PNR, and seat-selection flows for mobile-first users',
+      'Handled waitlist, cancellation, and refund states with explicit status design',
+      'Shipped patterns reused across other Paytm commerce verticals'
+    ]
+  },
+  {
+    slug: 'paytm-design-system-v1',
+    title: 'Paytm Design System V1.0',
+    video: '/assets/video/paytm-design-system-v1.mp4',
+    description: 'First-generation Paytm design system — components, patterns, and documentation for product teams at scale.',
+    tags: ['Live Projects', 'Design Systems'],
+    category: 'Work',
+    metaLabel: 'Design System',
+    year: '2018–2021',
+    client: 'Paytm',
+    role: 'Lead Product Designer',
+    context: 'Built Paytm Design System V1.0 to unify dozens of product squads — foundational components, interaction patterns, and governance as the app scaled.',
+    process: [
+      'Audited inconsistent UI patterns across Paytm verticals',
+      'Defined core components, typography, and spacing for iOS and Android',
+      'Documented usage guidelines and partnered with engineering on adoption',
+      'Evolved the system as new verticals — travel, trains, postpaid — shipped'
+    ]
+  },
+  {
+    slug: 'uber-dti',
+    title: 'Uber DTI',
+    video: '/assets/video/uber-dti.mp4',
+    description: 'Design technology work with Uber DTI — tooling, prototypes, and interaction design.',
+    tags: ['Live Projects'],
+    category: 'Work',
+    metaLabel: 'DTI',
+    year: '2017',
+    client: 'Uber',
+    role: 'Product Designer',
+    context: 'Contributed to Uber DTI initiatives in 2017 — design technology, prototyping, and interaction craft for product teams.',
+    process: [
+      'Collaborated with design and engineering on DTI-led experiments',
+      'Prototyped interaction patterns and design tooling workflows',
+      'Documented patterns for handoff across product surfaces',
+      'Shipped design work aligned with Uber\'s mobile product standards'
     ]
   },
   {
@@ -345,4 +535,17 @@ export const projects: Project[] = [
 // Helper to get project by slug
 export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find(p => p.slug === slug)
+}
+
+export function getLiveProjects(): Project[] {
+  return projects.filter(p => !p.hidden && p.tags.includes('Live Projects'))
+}
+
+export function getPlaygroundProjects(): Project[] {
+  return projects.filter(p => p.category === 'Design Engineering')
+}
+
+export function getProjectListHref(project: Project): string {
+  if (project.category === 'Design Engineering') return '/playground'
+  return '/live-projects'
 }

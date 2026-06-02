@@ -1,0 +1,21 @@
+Healthcare products are inherently multi-step — referrals, tests, follow-ups, prescriptions. Care Journey makes that complexity legible for members who just want to know what happens next.
+
+## The problem
+
+Members would complete one step in their care plan and lose track of what came after. Support tickets and drop-off both pointed to the same issue: the app showed tasks, not a journey.
+
+## Approach
+
+Care Journey reframes care as a **pathway with visible progress** — where you are, what's done, what's next, and who to contact if something stalls.
+
+**Progressive disclosure** — the full pathway exists, but the default view shows only the current and upcoming steps. Past steps collapse into a timeline you can expand when needed.
+
+**SwiftUI prototyping** — I prototyped state transitions and scroll behavior in SwiftUI to get the hierarchy right before handoff. Healthcare UI needs to feel calm; getting spacing and motion right on device was faster than debating in static mocks.
+
+**Cross-functional alignment** — clinical ops, support, and engineering each had different mental models of a "journey." The design became the shared artifact that reconciled them.
+
+## Tools
+
+**SwiftUI** — interaction prototyping
+**Figma** — journey mapping and component design
+**Loop Health design system** — consistent patterns across surfaces

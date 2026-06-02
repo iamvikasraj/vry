@@ -1,10 +1,10 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import Footer from '@/components/Footer'
 import ClientScripts from '@/components/ClientScripts'
 import ProjectViewTracker from '@/components/ProjectViewTracker'
 import ProjectSectionTracker from '@/components/ProjectSectionTracker'
-import { projects, getProjectBySlug } from '@/data/projects'
+import ProjectVideo from '@/components/ProjectVideo'
+import { projects, getProjectBySlug, getProjectListHref } from '@/data/projects'
 
 async function loadMDX(slug: string) {
   try {
@@ -32,28 +32,18 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
   const MDXContent = await loadMDX(slug)
 
   return (
-    <div className="page-container">
+    <div className="home-page home-page--de">
       <ProjectViewTracker projectTitle={project.title} projectSlug={project.slug} />
       <ProjectSectionTracker projectTitle={project.title} projectSlug={project.slug} />
-      <section className="project-detail">
-        <Link href="/" className="project-back-link">
+      <main className="project-de-main">
+        <section className="project-detail">
+        <Link href={getProjectListHref(project)} className="project-back-link">
           Back
         </Link>
 
         <h1 className="project-title">{project.title}</h1>
 
-        <div className="project-video-container project-video-container--bleed">
-          <video
-            src={project.video}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="project-video"
-          >
-            <source src={project.video} type="video/mp4" />
-          </video>
-        </div>
+        <ProjectVideo src={project.video} />
 
         {(project.year || project.client || project.role) && (
           <div className="project-meta-grid">
@@ -120,9 +110,8 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
             </>
           )}
         </div>
-      </section>
-
-      <Footer />
+        </section>
+      </main>
       <ClientScripts />
     </div>
   )
