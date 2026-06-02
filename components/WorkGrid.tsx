@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import MediaPlaceholder from '@/components/MediaPlaceholder'
+import { analytics } from '@/lib/analytics'
 
 interface Project {
   video?: string
