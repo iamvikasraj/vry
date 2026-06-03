@@ -3,12 +3,10 @@ import ClientScripts from '@/components/ClientScripts'
 import ProjectSiteHeader from '@/components/ProjectSiteHeader'
 import ProjectViewTracker from '@/components/ProjectViewTracker'
 import ProjectSectionTracker from '@/components/ProjectSectionTracker'
-import ProjectVideo from '@/components/ProjectVideo'
-import ProjectHero from '@/components/ProjectHero'
+import ProjectDetailMedia from '@/components/ProjectDetailMedia'
 import ProjectGallery from '@/components/ProjectGallery'
 import ProjectArticleFooter from '@/components/ProjectArticleFooter'
 import ProjectMoreProjects from '@/components/ProjectMoreProjects'
-import { hasPublicAsset } from '@/lib/projectAssets'
 import { projects, getProjectBySlug } from '@/data/projects'
 
 async function loadMDX(slug: string) {
@@ -35,9 +33,6 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
   }
 
   const MDXContent = await loadMDX(slug)
-  const videoAvailable = hasPublicAsset(project.video)
-  const brandCover = Boolean(project.coverImage?.endsWith('.svg'))
-  const useImageHero = Boolean(project.coverImage) && (brandCover || !videoAvailable)
 
   return (
     <div className="home-page home-page--de home-page--de-detail">
@@ -61,11 +56,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
           </header>
 
           <div className="project-detail-media">
-            {useImageHero && project.coverImage ? (
-              <ProjectHero src={project.coverImage} alt={project.title} />
-            ) : (
-              <ProjectVideo src={project.video} poster={project.coverImage} />
-            )}
+            <ProjectDetailMedia project={project} />
           </div>
 
         {!MDXContent && project.images && project.images.length > 0 && (

@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react'
 import { mediaAssetPath } from '@/lib/mediaAssetPath'
+import MediaPlaceholder from '@/components/MediaPlaceholder'
 
 type ProjectVideoProps = {
   src: string
@@ -10,20 +11,37 @@ type ProjectVideoProps = {
 
 export default function ProjectVideo({ src, poster }: ProjectVideoProps) {
   const erroredRef = useRef(false)
-  const [error, setError] = useState(false)
+  const [videoError, setVideoError] = useState(false)
+  const [posterError, setPosterError] = useState(false)
   const videoSrc = mediaAssetPath(src)
+  const showPoster = poster && !posterError && videoError
 
   const handleError = () => {
     if (erroredRef.current) return
     erroredRef.current = true
-    setError(true)
+    setVideoError(true)
   }
 
-  if (error && poster) {
+  if (videoError && !showPoster) {
+    return (
+      <div className="project-video-container project-video-container--bleed">
+        <div className="project-media-placeholder-wrap">
+          <MediaPlaceholder label="Video coming soon" className="project-media-placeholder" />
+        </div>
+      </div>
+    )
+  }
+
+  if (showPoster) {
     return (
       <div className="project-video-container project-video-container--bleed">
         <div className="project-cover-wrap">
-          <img src={poster} alt="" className="project-cover-image" />
+          <img
+            src={poster}
+            alt=""
+            className="project-cover-image"
+            onError={() => setPosterError(true)}
+          />
         </div>
       </div>
     )

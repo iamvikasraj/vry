@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import Link from 'next/link'
 import type { Project } from '@/data/projects'
 import { mediaAssetPath } from '@/lib/mediaAssetPath'
+import MediaPlaceholder from '@/components/MediaPlaceholder'
 
 function isBrandCover(coverImage?: string) {
   return Boolean(coverImage?.endsWith('.svg'))
@@ -13,18 +14,24 @@ function ProjectThumbCard({ project }: { project: Project }) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [hovered, setHovered] = useState(false)
   const [ready, setReady] = useState(false)
-  const [error, setError] = useState(false)
+  const [videoError, setVideoError] = useState(false)
+  const [coverError, setCoverError] = useState(false)
   const brandCover = isBrandCover(project.coverImage)
   const videoSrc = mediaAssetPath(project.video)
-  const showCoverPhoto = Boolean(project.coverImage) && (brandCover || !ready || error)
+  const hasCover = Boolean(project.coverImage) && !coverError
+  const showCoverPhoto = hasCover && (brandCover || !ready || videoError)
+  const showPlaceholder =
+    (brandCover && (!project.coverImage || coverError)) ||
+    (!brandCover && videoError && !hasCover)
 
   const onEnter = () => {
-    if (brandCover) return
+    if (brandCover || showPlaceholder) return
     videoRef.current?.play()
     setHovered(true)
   }
+
   const onLeave = () => {
-    if (brandCover) return
+    if (brandCover || showPlaceholder) return
     if (videoRef.current) {
       videoRef.current.pause()
       videoRef.current.currentTime = 0
@@ -43,6 +50,12 @@ function ProjectThumbCard({ project }: { project: Project }) {
         <div
           className={`home-de-thumb-media${brandCover ? ' home-de-thumb-media--brand' : ''}`}
         >
+          {showPlaceholder && (
+            <MediaPlaceholder
+              className="home-de-thumb-placeholder"
+              label="Preview coming soon"
+            />
+          )}
           {showCoverPhoto && project.coverImage && (
             <img
               src={project.coverImage}
@@ -52,9 +65,10 @@ function ProjectThumbCard({ project }: { project: Project }) {
                   ? 'home-de-thumb-cover'
                   : 'home-de-thumb-video home-de-thumb-video--ready'
               }
+              onError={() => setCoverError(true)}
             />
           )}
-          {!brandCover && !error && (
+          {!brandCover && !showPlaceholder && !videoError && (
             <video
               ref={videoRef}
               className={`home-de-thumb-video${project.coverImage ? (ready ? ' home-de-thumb-video--ready home-de-thumb-video--over-cover' : '') : ' home-de-thumb-video--ready'}`}
@@ -68,7 +82,7 @@ function ProjectThumbCard({ project }: { project: Project }) {
               onLoadedData={() => setReady(true)}
               onLoadedMetadata={() => setReady(true)}
               onCanPlay={() => setReady(true)}
-              onError={() => setError(true)}
+              onError={() => setVideoError(true)}
             />
           )}
         </div>

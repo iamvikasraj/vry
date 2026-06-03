@@ -1,12 +1,16 @@
-'use client'
-
 import Link from 'next/link'
 import type { Project } from '@/data/projects'
+import type { ProjectPreviewMedia } from '@/lib/projectMedia.server'
 import { mediaAssetPath } from '@/lib/mediaAssetPath'
+import MediaPlaceholder from '@/components/MediaPlaceholder'
 
-export default function ProjectPreviewCard({ project }: { project: Project }) {
-  const videoSrc = !project.coverImage && project.video ? mediaAssetPath(project.video) : null
-  const brandCover = Boolean(project.coverImage?.endsWith('.svg'))
+type ProjectPreviewCardProps = {
+  project: Project
+  media: ProjectPreviewMedia
+}
+
+export default function ProjectPreviewCard({ project, media }: ProjectPreviewCardProps) {
+  const { brandCover, coverAvailable, videoAvailable } = media
 
   return (
     <Link
@@ -18,7 +22,7 @@ export default function ProjectPreviewCard({ project }: { project: Project }) {
         className={`de-more-projects__preview-thumb${brandCover ? ' de-more-projects__preview-thumb--brand' : ''}`}
         style={{ aspectRatio: '16 / 9' }}
       >
-        {project.coverImage ? (
+        {coverAvailable ? (
           <img
             src={project.coverImage}
             alt=""
@@ -27,16 +31,21 @@ export default function ProjectPreviewCard({ project }: { project: Project }) {
             }
             loading="lazy"
           />
-        ) : videoSrc ? (
+        ) : videoAvailable ? (
           <video
-            src={videoSrc}
+            src={mediaAssetPath(project.video)}
             className="de-more-projects__preview-video"
             muted
             playsInline
             preload="metadata"
             aria-hidden
           />
-        ) : null}
+        ) : (
+          <MediaPlaceholder
+            className="de-more-projects__preview-placeholder"
+            label="Preview coming soon"
+          />
+        )}
       </div>
       <div className="de-more-projects__preview-content">
         <h3 className="de-more-projects__preview-title">{project.title}</h3>

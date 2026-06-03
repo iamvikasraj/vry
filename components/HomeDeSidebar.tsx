@@ -2,35 +2,14 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { getLiveProjects, getPlaygroundProjects, getProjectBySlug } from '@/data/projects'
+import { getLiveProjects, getPlaygroundProjects } from '@/data/projects'
+import { getActiveDeNavId } from '@/lib/deNav'
 import { SOCIAL_LINKS } from '@/lib/socialLinks'
 
 const NAV_LINKS = [
   { href: '/live-projects', label: 'Live Projects', id: 'live-projects' as const, count: getLiveProjects().length },
   { href: '/playground', label: 'Playground', id: 'playground' as const, count: getPlaygroundProjects().length },
 ] as const
-
-function normalizePath(path: string) {
-  if (path.length > 1 && path.endsWith('/')) return path.slice(0, -1)
-  return path
-}
-
-function getActiveNavId(pathname: string | null): 'live-projects' | 'playground' | null {
-  const path = normalizePath(pathname ?? '')
-
-  if (path === '/' || path === '/live-projects') return 'live-projects'
-  if (path === '/playground') return 'playground'
-
-  if (path.startsWith('/projects/')) {
-    const slug = path.slice('/projects/'.length)
-    const project = getProjectBySlug(slug)
-    if (!project) return null
-    if (project.category === 'Design Engineering') return 'playground'
-    if (project.tags.includes('Live Projects')) return 'live-projects'
-  }
-
-  return null
-}
 
 const EXTERNAL_LINK = {
   href: 'https://designengineer.ing',
@@ -39,7 +18,7 @@ const EXTERNAL_LINK = {
 
 export default function HomeDeSidebar() {
   const pathname = usePathname()
-  const activeNavId = getActiveNavId(pathname)
+  const activeNavId = getActiveDeNavId(pathname)
 
   return (
     <aside className="home-de-sidebar" aria-label="Site">

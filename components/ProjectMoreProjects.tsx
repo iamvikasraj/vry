@@ -1,5 +1,6 @@
 import type { Project } from '@/data/projects'
 import { getRelatedProjects } from '@/data/projects'
+import { getProjectPreviewMedia } from '@/lib/projectMedia.server'
 import ProjectPreviewCard from '@/components/ProjectPreviewCard'
 
 type ProjectMoreProjectsProps = {
@@ -20,7 +21,11 @@ export default function ProjectMoreProjects({ project }: ProjectMoreProjectsProp
       </h2>
       <div className="de-more-projects__list">
         {related.map((item) => (
-          <ProjectPreviewCard key={item.slug} project={item} />
+          <ProjectPreviewCard
+            key={item.slug}
+            project={item}
+            media={getProjectPreviewMedia(item)}
+          />
         ))}
       </div>
     </aside>

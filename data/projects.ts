@@ -120,13 +120,13 @@ export const projects: Project[] = [
   },
   {
     slug: 'etmoney-rive',
-    title: 'ET Money — Onboarding & Microinteractions with Rive & SwiftUI',
+    title: 'ET Money — New App Onboarding with Rive & SwiftUI',
     video: '/assets/video/Et money onboarding with Rive & SwiftUI.mp4',
     description:
-      'Onboarding flows and in-app microinteractions for ET Money — motion-led experiences built in Rive and shipped with SwiftUI.',
+      'New app onboarding for ET Money — a motion-led first-run experience built in Rive and shipped with SwiftUI.',
     tags: ['Live Projects', 'Rive', 'SwiftUI'],
     category: 'Work',
-    metaLabel: 'App Design · Microinteraction',
+    metaLabel: 'App Design · Rive & SwiftUI',
     year: '2024',
     client: 'ET Money',
     role: 'Lead Product Designer',
@@ -178,42 +178,25 @@ export const projects: Project[] = [
     tools: ['Pen & Paper', 'Sketch', 'Illustrator', 'After Effects'],
   },
   {
-    slug: 'paytm-travel',
-    title: 'Paytm Travel',
+    slug: 'paytm-travel-trains',
+    title: 'Paytm — Travel & Trains',
     video: '/assets/video/paytm-travel.mp4',
-    description: 'Travel booking experience within Paytm — flights, hotels, and trip discovery at scale.',
+    description:
+      'Flights, hotels, and IRCTC train booking inside Paytm — search, booking, and ticket management at super-app scale.',
     tags: ['Live Projects', 'FinTech'],
     category: 'Work',
     metaLabel: 'App Design',
-    year: '2020',
+    year: '2019–2020',
     client: 'Paytm',
     role: 'Lead Product Designer',
-    context: 'Led design for Paytm Travel, shaping search, booking, and post-purchase flows for a high-volume travel vertical inside the super app.',
+    context:
+      'Led design for Paytm Travel and Trains — high-volume booking verticals with complex itineraries, IRCTC constraints, and clear status from search through post-purchase.',
     process: [
-      'Structured search and results patterns for flights and hotels',
-      'Designed booking funnels with progressive disclosure for complex itineraries',
-      'Aligned UI with Paytm design system while solving travel-specific needs',
-      'Collaborated with ops and engineering on payment and cancellation flows'
-    ]
-  },
-  {
-    slug: 'paytm-trains',
-    title: 'Paytm Trains',
-    video: '/assets/video/paytm-trains.mp4',
-    description: 'IRCTC train booking inside Paytm — search, seat selection, and ticket management.',
-    tags: ['Live Projects', 'FinTech'],
-    category: 'Work',
-    metaLabel: 'App Design',
-    year: '2019',
-    client: 'Paytm',
-    role: 'Lead Product Designer',
-    context: 'Designed Paytm Trains for one of India\'s highest-frequency booking use cases — tight IRCTC constraints, peak-load UX, and clear status throughout the journey.',
-    process: [
-      'Audited existing train booking pain points and drop-off points',
-      'Designed search, PNR, and seat-selection flows for mobile-first users',
-      'Handled waitlist, cancellation, and refund states with explicit status design',
-      'Shipped patterns reused across other Paytm commerce verticals'
-    ]
+      'Structured search and results for flights, hotels, and train routes',
+      'Designed booking funnels with progressive disclosure for complex trips',
+      'Built train flows for PNR, seat selection, waitlist, and refunds',
+      'Aligned patterns with the Paytm design system across commerce verticals',
+    ],
   },
   {
     slug: 'paytm-design-system-v1',
