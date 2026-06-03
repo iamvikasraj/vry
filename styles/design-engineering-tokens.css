@@ -1,12 +1,12 @@
 /**
  * Design tokens — vry.work portfolio
- * Canvas (warm paper) is vry-only. Typography, grays, and layout align with designengineer.ing.
+ * Canvas matches designengineer.ing. Typography, grays, and layout stay shared.
  */
 :root {
-  /* Canvas — warm paper */
-  --de-bg-top: #C4C0BA;
-  --de-bg-bottom: #E6E2DC;
-  --de-bg-gradient: linear-gradient(180deg, #C4C0BA 12%, #E6E2DC 100%);
+  /* Canvas — designengineer.ing gradient */
+  --de-bg-top: #BFC3C8;
+  --de-bg-bottom: #DAD9DA;
+  --de-bg-gradient: linear-gradient(180deg, #BFC3C8 17.31%, #DAD9DA 100%);
 
   /* Brand mark (favicon) */
   --de-brand-mint: #9DF6C1;
@@ -36,8 +36,8 @@
   --de-nav-tracking: 0.05em;
 
   /* Skeleton / placeholders (loading states) */
-  --de-skeleton-fill: rgba(196, 192, 186, 0.38);
-  --de-skeleton-border: rgba(196, 192, 186, 0.32);
+  --de-skeleton-fill: rgba(191, 195, 200, 0.38);
+  --de-skeleton-border: rgba(191, 195, 200, 0.32);
 
   /* Media cards — neutral surface so thumbs don’t inherit canvas tint */
   --de-media-surface: #f7f5f2;
