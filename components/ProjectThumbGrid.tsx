@@ -3,35 +3,39 @@
 import { useRef, useState } from 'react'
 import Link from 'next/link'
 import type { Project } from '@/data/projects'
+import type { ProjectThumbMedia } from '@/lib/projectMedia'
 import { mediaAssetPath } from '@/lib/mediaAssetPath'
 import MediaPlaceholder from '@/components/MediaPlaceholder'
 
-function isBrandCover(coverImage?: string) {
-  return Boolean(coverImage?.endsWith('.svg'))
+export type ProjectThumbGridItem = {
+  project: Project
+  media: ProjectThumbMedia
 }
 
-function ProjectThumbCard({ project }: { project: Project }) {
+function ProjectThumbCard({ project, media }: ProjectThumbGridItem) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [hovered, setHovered] = useState(false)
   const [ready, setReady] = useState(false)
   const [videoError, setVideoError] = useState(false)
-  const [coverError, setCoverError] = useState(false)
-  const brandCover = isBrandCover(project.coverImage)
-  const videoSrc = mediaAssetPath(project.video)
-  const hasCover = Boolean(project.coverImage) && !coverError
-  const showCoverPhoto = hasCover && (brandCover || !ready || videoError)
-  const showPlaceholder =
-    (brandCover && (!project.coverImage || coverError)) ||
-    (!brandCover && videoError && !hasCover)
+  const [imageError, setImageError] = useState(false)
+
+  const { brandCover, videoAvailable, thumbSrc } = media
+  const staticOnly = Boolean(thumbSrc && (!videoAvailable || brandCover))
+  const showVideo = videoAvailable && !brandCover && !videoError
+  const showImage =
+    Boolean(thumbSrc) &&
+    !imageError &&
+    (staticOnly || (showVideo && (!ready || videoError)))
+  const showPlaceholder = !showImage && !showVideo
 
   const onEnter = () => {
-    if (brandCover || showPlaceholder) return
+    if (!showVideo) return
     videoRef.current?.play()
     setHovered(true)
   }
 
   const onLeave = () => {
-    if (brandCover || showPlaceholder) return
+    if (!showVideo) return
     if (videoRef.current) {
       videoRef.current.pause()
       videoRef.current.currentTime = 0
@@ -51,29 +55,26 @@ function ProjectThumbCard({ project }: { project: Project }) {
           className={`home-de-thumb-media${brandCover ? ' home-de-thumb-media--brand' : ''}`}
         >
           {showPlaceholder && (
-            <MediaPlaceholder
-              className="home-de-thumb-placeholder"
-              label="Preview coming soon"
-            />
+            <MediaPlaceholder className="home-de-thumb-placeholder" label="" />
           )}
-          {showCoverPhoto && project.coverImage && (
+          {showImage && thumbSrc && (
             <img
-              src={project.coverImage}
+              src={thumbSrc}
               alt={project.title}
               className={
                 brandCover
                   ? 'home-de-thumb-cover'
                   : 'home-de-thumb-video home-de-thumb-video--ready'
               }
-              onError={() => setCoverError(true)}
+              onError={() => setImageError(true)}
             />
           )}
-          {!brandCover && !showPlaceholder && !videoError && (
+          {showVideo && (
             <video
               ref={videoRef}
-              className={`home-de-thumb-video${project.coverImage ? (ready ? ' home-de-thumb-video--ready home-de-thumb-video--over-cover' : '') : ' home-de-thumb-video--ready'}`}
-              src={videoSrc}
-              poster={project.coverImage}
+              className={`home-de-thumb-video${thumbSrc ? (ready ? ' home-de-thumb-video--ready home-de-thumb-video--over-cover' : '') : ' home-de-thumb-video--ready'}`}
+              src={mediaAssetPath(project.video)}
+              poster={thumbSrc}
               muted
               autoPlay
               playsInline
@@ -98,11 +99,11 @@ function ProjectThumbCard({ project }: { project: Project }) {
   )
 }
 
-export default function ProjectThumbGrid({ projects }: { projects: Project[] }) {
+export default function ProjectThumbGrid({ items }: { items: ProjectThumbGridItem[] }) {
   return (
     <div className="home-de-card-grid">
-      {projects.map((p) => (
-        <ProjectThumbCard key={p.slug} project={p} />
+      {items.map((item) => (
+        <ProjectThumbCard key={item.project.slug} {...item} />
       ))}
     </div>
   )

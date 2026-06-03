@@ -1,6 +1,6 @@
 import type { Project } from '@/data/projects'
 import { getRelatedProjects } from '@/data/projects'
-import { getProjectPreviewMedia } from '@/lib/projectMedia.server'
+import { getProjectThumbMedia } from '@/lib/projectMedia.server'
 import ProjectPreviewCard from '@/components/ProjectPreviewCard'
 
 type ProjectMoreProjectsProps = {
@@ -24,7 +24,7 @@ export default function ProjectMoreProjects({ project }: ProjectMoreProjectsProp
           <ProjectPreviewCard
             key={item.slug}
             project={item}
-            media={getProjectPreviewMedia(item)}
+            media={getProjectThumbMedia(item)}
           />
         ))}
       </div>

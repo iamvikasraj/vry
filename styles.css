@@ -130,6 +130,7 @@ body {
   font-family: var(--de-font);
   color: var(--de-black);
   min-height: 100vh;
+  min-height: 100dvh;
   position: relative;
   width: 100%;
   max-width: 100%;
@@ -156,8 +157,10 @@ body {
 
 .home-de-main {
   display: flex;
+  align-items: stretch;
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   padding: 0;
   background: transparent;
 }
@@ -171,22 +174,45 @@ body {
 .home-de-sidebar {
   position: sticky;
   top: 0;
-  align-self: flex-start;
   width: var(--de-sidebar-width);
   flex-shrink: 0;
-  height: 100vh;
-  max-height: 100vh;
   overflow-y: auto;
   padding: var(--de-sidebar-padding-y) var(--de-sidebar-padding-x);
   display: flex;
   flex-direction: column;
   gap: var(--sp-16);
+  box-sizing: border-box;
 }
 
-@media (max-width: 1024px) and (min-width: 769px) {
+/* Desktop — sidebar + grid locked to viewport; grid scrolls inside main */
+@media (min-width: 1025px) {
+  .home-de-main {
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100dvh;
+    overflow: hidden;
+  }
+
   .home-de-sidebar {
-    height: auto;
-    min-height: 0;
+    align-self: flex-start;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100dvh;
+  }
+}
+
+/* Tablet (iPad landscape, etc.) — sidebar stretches full screen height */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .home-de-main {
+    align-items: stretch;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .home-de-sidebar {
+    align-self: stretch;
+    min-height: 100vh;
+    min-height: 100dvh;
     padding-top: var(--de-gutter);
     padding-bottom: var(--de-gutter);
     gap: var(--sp-8);
@@ -232,7 +258,7 @@ body {
 .home-de-sidebar-nav {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-4);
+  gap: var(--sp-8);
   margin: 0;
   width: 100%;
 }
@@ -507,9 +533,23 @@ body {
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .home-de-main-content {
     height: 100vh;
+    height: 100dvh;
+    max-height: 100dvh;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .home-de-main-content {
+    flex: 1;
+    min-height: 100vh;
+    min-height: 100dvh;
     overflow-y: auto;
     display: flex;
     flex-direction: column;

@@ -1,16 +1,17 @@
 import Link from 'next/link'
 import type { Project } from '@/data/projects'
-import type { ProjectPreviewMedia } from '@/lib/projectMedia.server'
+import type { ProjectThumbMedia } from '@/lib/projectMedia'
 import { mediaAssetPath } from '@/lib/mediaAssetPath'
 import MediaPlaceholder from '@/components/MediaPlaceholder'
 
 type ProjectPreviewCardProps = {
   project: Project
-  media: ProjectPreviewMedia
+  media: ProjectThumbMedia
 }
 
 export default function ProjectPreviewCard({ project, media }: ProjectPreviewCardProps) {
-  const { brandCover, coverAvailable, videoAvailable } = media
+  const { brandCover, videoAvailable, thumbSrc } = media
+  const showImage = Boolean(thumbSrc && (!videoAvailable || brandCover))
 
   return (
     <Link
@@ -22,9 +23,9 @@ export default function ProjectPreviewCard({ project, media }: ProjectPreviewCar
         className={`de-more-projects__preview-thumb${brandCover ? ' de-more-projects__preview-thumb--brand' : ''}`}
         style={{ aspectRatio: '16 / 9' }}
       >
-        {coverAvailable ? (
+        {showImage && thumbSrc ? (
           <img
-            src={project.coverImage}
+            src={thumbSrc}
             alt=""
             className={
               brandCover ? 'de-more-projects__preview-cover' : 'de-more-projects__preview-image'
@@ -41,10 +42,7 @@ export default function ProjectPreviewCard({ project, media }: ProjectPreviewCar
             aria-hidden
           />
         ) : (
-          <MediaPlaceholder
-            className="de-more-projects__preview-placeholder"
-            label="Preview coming soon"
-          />
+          <MediaPlaceholder className="de-more-projects__preview-placeholder" label="" />
         )}
       </div>
       <div className="de-more-projects__preview-content">
