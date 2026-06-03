@@ -60,7 +60,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/favicon-192.png" />
         <link rel="manifest" href="/assets/favicon/site.webmanifest" />
         <link rel="robots" href="/robots.txt" />
-        <meta name="theme-color" content="#D8D0E0" />
+        <meta name="theme-color" content="#E6E2DC" />
         <link rel="canonical" href="https://vikasrajyadav.in/" />
         
         {/* Additional Meta for AI Search Engines */}

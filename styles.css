@@ -151,7 +151,7 @@ body {
 /* Project detail — flat light canvas for long-form reading */
 .home-page--de-detail::before {
   background-image: none;
-  background-color: var(--de-bg-top);
+  background-color: var(--de-bg-bottom);
 }
 
 .home-de-main {
