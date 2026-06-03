@@ -54,9 +54,10 @@ export default function RootLayout({
     <html lang="en" className={`${dmMono.variable} ${inter.variable} ${workSans.variable}`}>
       <head>
         <link rel="stylesheet" href="https://use.typekit.net/wjs0dtk.css" />
-        <link rel="icon" type="image/png" href="/assets/favicon/favicon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon/favicon-192.png" />
         <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon/favicon-512x512.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/favicon-512x512.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/favicon-192.png" />
         <link rel="manifest" href="/assets/favicon/site.webmanifest" />
         <link rel="robots" href="/robots.txt" />
         <meta name="theme-color" content="#D8D0E0" />
