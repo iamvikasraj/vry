@@ -3,20 +3,28 @@
 import { useRef, useState } from 'react'
 import Link from 'next/link'
 import type { Project } from '@/data/projects'
-import MediaPlaceholder from '@/components/MediaPlaceholder'
+import { mediaAssetPath } from '@/lib/mediaAssetPath'
+
+function isBrandCover(coverImage?: string) {
+  return Boolean(coverImage?.endsWith('.svg'))
+}
 
 function ProjectThumbCard({ project }: { project: Project }) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [hovered, setHovered] = useState(false)
   const [ready, setReady] = useState(false)
   const [error, setError] = useState(false)
-  const showPlaceholder = !ready || error
+  const brandCover = isBrandCover(project.coverImage)
+  const videoSrc = mediaAssetPath(project.video)
+  const showCoverPhoto = Boolean(project.coverImage) && (brandCover || !ready || error)
 
   const onEnter = () => {
+    if (brandCover) return
     videoRef.current?.play()
     setHovered(true)
   }
   const onLeave = () => {
+    if (brandCover) return
     if (videoRef.current) {
       videoRef.current.pause()
       videoRef.current.currentTime = 0
@@ -32,20 +40,37 @@ function ProjectThumbCard({ project }: { project: Project }) {
         onMouseEnter={onEnter}
         onMouseLeave={onLeave}
       >
-        <div className="home-de-thumb-media">
-          {showPlaceholder && <MediaPlaceholder />}
-          <video
-            ref={videoRef}
-            className={`home-de-thumb-video${ready && !error ? ' home-de-thumb-video--ready' : ''}`}
-            src={project.video}
-            muted
-            autoPlay
-            playsInline
-            loop
-            preload="metadata"
-            onLoadedData={() => setReady(true)}
-            onError={() => setError(true)}
-          />
+        <div
+          className={`home-de-thumb-media${brandCover ? ' home-de-thumb-media--brand' : ''}`}
+        >
+          {showCoverPhoto && project.coverImage && (
+            <img
+              src={project.coverImage}
+              alt={project.title}
+              className={
+                brandCover
+                  ? 'home-de-thumb-cover'
+                  : 'home-de-thumb-video home-de-thumb-video--ready'
+              }
+            />
+          )}
+          {!brandCover && !error && (
+            <video
+              ref={videoRef}
+              className={`home-de-thumb-video${project.coverImage ? (ready ? ' home-de-thumb-video--ready home-de-thumb-video--over-cover' : '') : ' home-de-thumb-video--ready'}`}
+              src={videoSrc}
+              poster={project.coverImage}
+              muted
+              autoPlay
+              playsInline
+              loop
+              preload="auto"
+              onLoadedData={() => setReady(true)}
+              onLoadedMetadata={() => setReady(true)}
+              onCanPlay={() => setReady(true)}
+              onError={() => setError(true)}
+            />
+          )}
         </div>
         <div className="home-de-thumb-caption">
           <h2 className="home-de-thumb-title">{project.title}</h2>
@@ -62,7 +87,7 @@ function ProjectThumbCard({ project }: { project: Project }) {
 export default function ProjectThumbGrid({ projects }: { projects: Project[] }) {
   return (
     <div className="home-de-card-grid">
-      {projects.map(p => (
+      {projects.map((p) => (
         <ProjectThumbCard key={p.slug} project={p} />
       ))}
     </div>

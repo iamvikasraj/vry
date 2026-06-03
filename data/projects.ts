@@ -4,6 +4,10 @@ export interface Project {
   slug: string
   title: string
   video: string
+  /** Hero / grid thumbnail when set (e.g. converted from camera RAW) */
+  coverImage?: string
+  /** Additional images shown in the case study gallery */
+  images?: string[]
   description: string
   tags: string[]
   category: ProjectCategory
@@ -16,6 +20,8 @@ export interface Project {
   context?: string
   process?: string[]
   results?: string
+  /** Design / craft tools shown in project meta (optional) */
+  tools?: string[]
 }
 
 export const projects: Project[] = [
@@ -62,6 +68,7 @@ export const projects: Project[] = [
     description: 'Flow for employees to invite and onboard dependents onto their Loop Health benefits plan.',
     tags: ['Live Projects', 'Healthcare'],
     category: 'Work',
+    hidden: true,
     year: '2026',
     client: 'Loop Health',
     role: 'Staff Product Designer & Technologist',
@@ -112,100 +119,63 @@ export const projects: Project[] = [
     ]
   },
   {
-    slug: 'etmoney-onboarding',
-    title: 'ET Money Onboarding with Rive & SwiftUI',
+    slug: 'etmoney-rive',
+    title: 'ET Money — Onboarding & Microinteractions with Rive & SwiftUI',
     video: '/assets/video/Et money onboarding with Rive & SwiftUI.mp4',
-    description: 'A shareable celebration, fully created in Rive.',
+    description:
+      'Onboarding flows and in-app microinteractions for ET Money — motion-led experiences built in Rive and shipped with SwiftUI.',
     tags: ['Live Projects', 'Rive', 'SwiftUI'],
     category: 'Work',
-    metaLabel: 'App Design',
+    metaLabel: 'App Design · Microinteraction',
     year: '2024',
     client: 'ET Money',
     role: 'Lead Product Designer',
-    context: 'Redesigned the onboarding experience to improve user engagement and reduce drop-off rates.',
+    context:
+      'Led Rive-driven onboarding and microinteraction work for ET Money — from first-run education through delightful feedback across core investment surfaces.',
     process: [
-      'Conducted user research to understand onboarding pain points',
-      'Created interactive prototypes using Rive for motion design',
-      'Iterated on flows based on user testing feedback',
-      'Collaborated with engineering team for implementation'
+      'Researched onboarding pain points and key interaction moments in the journey',
+      'Prototyped onboarding and micro-animations in Rive',
+      'Iterated with user testing and engineering on timing and hierarchy',
+      'Integrated motion with SwiftUI for production rollout',
     ],
-    results: 'Improved onboarding completion rate by 47% and reduced time-to-value for new users.'
+    results: 'Improved onboarding completion rate by 47% and reduced time-to-value for new users.',
   },
   {
-    slug: 'etmoney-microinteraction',
-    title: 'ET Money Microinteraction with Rive',
-    video: '/assets/video/ET money Microinteraction with Rive.mp4',
-    description: 'Micro-interaction design for ET Money app using Rive.',
-    tags: ['Live Projects', 'Rive'],
-    category: 'Work',
-    metaLabel: 'Microinteraction',
-    year: '2024',
-    client: 'ET Money',
-    role: 'Lead Product Designer',
-    context: 'Created engaging micro-interactions to enhance user experience and provide delightful feedback.',
-    process: [
-      'Identified key interaction points in the user journey',
-      'Designed micro-animations using Rive',
-      'Tested with users for feedback',
-      'Implemented across the app'
-    ]
-  },
-  {
-    slug: 'gabit-branding',
-    title: 'Gabit Branding',
+    slug: 'gabit-early-stage',
+    title: 'Gabit - Early Stage Branding and Product Experiences',
     video: '/assets/video/gabit-branding.mp4',
-    description: 'Brand identity and visual system for Gabit — a D2C skincare brand.',
-    tags: ['Live Projects', 'Branding'],
+    coverImage: '/assets/projects/gabit-early-stage/cover.svg',
+    description:
+      'Early-stage brand identity and product experiences for Gabit — visual system, PDP storytelling, and conversion-focused skincare commerce.',
+    tags: ['Live Projects', 'Branding', 'E-commerce'],
     category: 'Work',
-    metaLabel: 'Branding',
+    metaLabel: 'Branding · Product Design',
     year: '2022',
     client: 'Gabit',
     role: 'Lead Product Designer',
-    context: 'Defined Gabit\'s brand identity — logo, color, typography, and visual language — for a skincare product launching direct-to-consumer.',
+    context:
+      'Led Gabit\'s early D2C skincare work — from brand identity through product detail experiences that connected storytelling, ingredients, and purchase flow.',
     process: [
       'Researched brand positioning in the D2C skincare market',
-      'Explored visual directions and identity systems',
-      'Delivered logo, palette, type, and application guidelines',
-      'Aligned brand assets with upcoming product and web launches'
-    ]
-  },
-  {
-    slug: 'gabit-product-design-page',
-    title: 'Gabit Product Design Page',
-    video: '/assets/video/gabit-product-design-page.mp4',
-    description: 'Product detail page design for Gabit skincare — storytelling, ingredients, and conversion-focused layout.',
-    tags: ['Live Projects', 'E-commerce'],
-    category: 'Work',
-    metaLabel: 'Product Design',
-    year: '2022',
-    client: 'Gabit',
-    role: 'Lead Product Designer',
-    context: 'Designed the skincare product page for Gabit — balancing brand storytelling with clear product information and purchase flow.',
-    process: [
+      'Delivered logo, palette, typography, and application guidelines',
       'Structured PDP hierarchy for ingredients, benefits, and social proof',
-      'Designed responsive layouts for mobile-first shoppers',
-      'Applied Gabit brand system across photography, type, and CTAs',
-      'Iterated on conversion patterns with product and marketing stakeholders'
-    ]
+      'Applied the brand system across photography, type, and CTAs',
+    ],
   },
   {
     slug: 'paytm-postpaid',
     title: 'Paytm Postpaid',
     video: '/assets/video/paytm-postpaid.mp4',
-    description: 'Buy-now-pay-later experience inside Paytm — from eligibility and onboarding to repayment flows.',
+    coverImage: '/assets/projects/paytm-postpaid/02.jpg',
+    description: 'Buy Now Pay Later inside Paytm — making postpaid the default payment method across the super app.',
     tags: ['Live Projects', 'FinTech'],
     category: 'Work',
+    featured: true,
     metaLabel: 'App Design',
-    year: '2021',
+    year: '2018–2019',
     client: 'Paytm',
     role: 'Lead Product Designer',
-    context: 'Designed Paytm Postpaid end-to-end for millions of users — credit eligibility, activation, checkout integration, and repayment — in a regulated fintech product.',
-    process: [
-      'Mapped postpaid journeys across discovery, KYC, and first transaction',
-      'Designed checkout and repayment states for high-trust financial flows',
-      'Partnered with product and engineering on rollout across Paytm surfaces',
-      'Iterated on clarity and error handling for credit-limit edge cases'
-    ]
+    tools: ['Pen & Paper', 'Sketch', 'Illustrator', 'After Effects'],
   },
   {
     slug: 'paytm-travel',
@@ -538,7 +508,10 @@ export function getProjectBySlug(slug: string): Project | undefined {
 }
 
 export function getLiveProjects(): Project[] {
-  return projects.filter(p => !p.hidden && p.tags.includes('Live Projects'))
+  const live = projects.filter(p => !p.hidden && p.tags.includes('Live Projects'))
+  const featured = live.filter(p => p.featured)
+  const rest = live.filter(p => !p.featured)
+  return [...featured, ...rest]
 }
 
 export function getPlaygroundProjects(): Project[] {
@@ -548,4 +521,10 @@ export function getPlaygroundProjects(): Project[] {
 export function getProjectListHref(project: Project): string {
   if (project.category === 'Design Engineering') return '/playground'
   return '/live-projects'
+}
+
+export function getRelatedProjects(project: Project, limit = 2): Project[] {
+  const list =
+    project.category === 'Design Engineering' ? getPlaygroundProjects() : getLiveProjects()
+  return list.filter((p) => p.slug !== project.slug).slice(0, limit)
 }

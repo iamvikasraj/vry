@@ -1,5 +1,6 @@
 import type { MDXComponents } from 'mdx/types'
-
+import ProjectFigure from '@/components/mdx/ProjectFigure'
+import ProjectFigureGrid from '@/components/mdx/ProjectFigureGrid'
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     wrapper: ({ children }) => <div className="mdx-content">{children}</div>,
@@ -10,6 +11,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     li: ({ children }) => <li className="project-process-item">{children}</li>,
     strong: ({ children }) => <strong className="mdx-strong">{children}</strong>,
     code: ({ children }) => <code className="mdx-code">{children}</code>,
+    ProjectFigure,
+    ProjectFigureGrid,
     ...components,
   }
 }

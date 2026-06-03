@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { getLiveProjects, getPlaygroundProjects, getProjectBySlug } from '@/data/projects'
+import { SOCIAL_LINKS } from '@/lib/socialLinks'
 
 const NAV_LINKS = [
   { href: '/live-projects', label: 'Live Projects', id: 'live-projects' as const, count: getLiveProjects().length },
@@ -36,20 +37,13 @@ const EXTERNAL_LINK = {
   label: 'Design Engineer.ing',
 }
 
-const SOCIAL_LINKS = [
-  { href: 'https://x.com/vryworks', label: 'X', icon: 'fa-brands fa-x-twitter' },
-  { href: 'https://linkedin.com/in/vraj247', label: 'LinkedIn', icon: 'fa-brands fa-linkedin-in' },
-  { href: 'https://dribbble.com/Vraj247', label: 'Dribbble', icon: 'fa-brands fa-dribbble' },
-  { href: 'https://github.com/vraj247', label: 'GitHub', icon: 'fa-brands fa-github' },
-]
-
 export default function HomeDeSidebar() {
   const pathname = usePathname()
   const activeNavId = getActiveNavId(pathname)
 
   return (
     <aside className="home-de-sidebar" aria-label="Site">
-      <Link href="/live-projects" className="home-de-sidebar-logo">
+      <Link href="/" className="home-de-sidebar-logo">
         Vikas Raj Yadav
       </Link>
       <p className="home-de-sidebar-role">

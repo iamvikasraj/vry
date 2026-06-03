@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import MediaPlaceholder from '@/components/MediaPlaceholder'
 import { analytics } from '@/lib/analytics'
+import { mediaAssetPath } from '@/lib/mediaAssetPath'
 
 interface Project {
   video?: string
@@ -151,10 +152,10 @@ function VideoPlayer({ src, projectTitle }: { src: string; projectTitle: string 
         playsInline
         preload="auto"
         className={`lazy-video ${isLoaded ? 'loaded' : ''}`}
-        src={src}
+        src={mediaAssetPath(src)}
         onError={() => setHasError(true)}
       >
-        <source src={src} type="video/mp4" />
+        <source src={mediaAssetPath(src)} type="video/mp4" />
       </video>
       {(!isLoaded || hasError) && <MediaPlaceholder className="video-placeholder" />}
     </div>

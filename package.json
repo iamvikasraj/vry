@@ -3,12 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/ensure-dev-cache.js",
+    "predev:local": "node scripts/ensure-dev-cache.js",
     "dev": "next dev --hostname 0.0.0.0",
     "dev:clean": "rm -rf .next && next dev --hostname 0.0.0.0",
     "dev:local": "next dev",
     "fetch-socials": "node scripts/fetch-socials.js",
     "fetch-linkedin": "node scripts/fetch-linkedin-videos.js",
     "build": "npm run fetch-socials && next build",
+    "postbuild": "node scripts/cleanup-after-build.js",
     "start": "next start"
   },
   "dependencies": {

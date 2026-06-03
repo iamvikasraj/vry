@@ -1,10 +1,15 @@
 import { notFound } from 'next/navigation'
-import Link from 'next/link'
 import ClientScripts from '@/components/ClientScripts'
+import ProjectSiteHeader from '@/components/ProjectSiteHeader'
 import ProjectViewTracker from '@/components/ProjectViewTracker'
 import ProjectSectionTracker from '@/components/ProjectSectionTracker'
 import ProjectVideo from '@/components/ProjectVideo'
-import { projects, getProjectBySlug, getProjectListHref } from '@/data/projects'
+import ProjectHero from '@/components/ProjectHero'
+import ProjectGallery from '@/components/ProjectGallery'
+import ProjectArticleFooter from '@/components/ProjectArticleFooter'
+import ProjectMoreProjects from '@/components/ProjectMoreProjects'
+import { hasPublicAsset } from '@/lib/projectAssets'
+import { projects, getProjectBySlug } from '@/data/projects'
 
 async function loadMDX(slug: string) {
   try {
@@ -16,7 +21,7 @@ async function loadMDX(slug: string) {
 }
 
 export async function generateStaticParams() {
-  return projects.map((project) => ({
+  return projects.filter((p) => !p.hidden).map((project) => ({
     slug: project.slug,
   }))
 }
@@ -30,48 +35,46 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
   }
 
   const MDXContent = await loadMDX(slug)
+  const videoAvailable = hasPublicAsset(project.video)
+  const brandCover = Boolean(project.coverImage?.endsWith('.svg'))
+  const useImageHero = Boolean(project.coverImage) && (brandCover || !videoAvailable)
 
   return (
-    <div className="home-page home-page--de">
+    <div className="home-page home-page--de home-page--de-detail">
       <ProjectViewTracker projectTitle={project.title} projectSlug={project.slug} />
       <ProjectSectionTracker projectTitle={project.title} projectSlug={project.slug} />
       <main className="project-de-main">
+        <ProjectSiteHeader />
         <section className="project-detail">
-        <Link href={getProjectListHref(project)} className="project-back-link">
-          Back
-        </Link>
+          <header className="project-detail-header">
+            <div className="project-detail-hero">
+              <h1 className="project-title">{project.title}</h1>
+              {(project.client || project.year || project.role) && (
+                <p className="project-detail-byline">
+                  {[project.client, project.year, project.role].filter(Boolean).join(' · ')}
+                </p>
+              )}
+              {project.tools && project.tools.length > 0 && (
+                <p className="project-detail-tools">{project.tools.join(', ')}</p>
+              )}
+            </div>
+          </header>
 
-        <h1 className="project-title">{project.title}</h1>
-
-        <ProjectVideo src={project.video} />
-
-        {(project.year || project.client || project.role) && (
-          <div className="project-meta-grid">
-            {project.year && (
-              <div className="project-meta-block">
-                <span className="project-meta-label">Year</span>
-                <span className="project-meta-value">{project.year}</span>
-              </div>
-            )}
-            {project.client && (
-              <div className="project-meta-block">
-                <span className="project-meta-label">Client</span>
-                <span className="project-meta-value">{project.client}</span>
-              </div>
-            )}
-            {project.role && (
-              <div className="project-meta-block">
-                <span className="project-meta-label">Role</span>
-                <span className="project-meta-value">{project.role}</span>
-              </div>
-            )}
-            {project.tags && (
-              <div className="project-meta-block">
-                <span className="project-meta-label">Tools</span>
-                <span className="project-meta-value">{project.tags.join(', ')}</span>
-              </div>
+          <div className="project-detail-media">
+            {useImageHero && project.coverImage ? (
+              <ProjectHero src={project.coverImage} alt={project.title} />
+            ) : (
+              <ProjectVideo src={project.video} poster={project.coverImage} />
             )}
           </div>
+
+        {!MDXContent && project.images && project.images.length > 0 && (
+          <ProjectGallery
+            images={project.images.map((src) => ({
+              src,
+              alt: project.title,
+            }))}
+          />
         )}
 
         <div className="project-content">
@@ -110,6 +113,9 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
             </>
           )}
         </div>
+
+        <ProjectMoreProjects project={project} />
+        <ProjectArticleFooter />
         </section>
       </main>
       <ClientScripts />
