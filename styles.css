@@ -522,13 +522,14 @@ body {
 .home-de-main-content {
   flex: 1;
   min-width: 0;
-  padding: calc(var(--de-gutter) + 0.5rem) var(--de-gutter);
+  padding: calc(var(--de-gutter) + 0.5rem) var(--de-gutter)
+    calc(var(--sp-80) + var(--sp-48));
   overflow-x: hidden;
 }
 
 @media (max-width: 768px) {
   .home-de-main-content {
-    padding: 0 var(--de-gutter-mobile) var(--de-gutter-mobile);
+    padding: 0 var(--de-gutter-mobile) calc(var(--sp-80) + var(--sp-48));
     overflow: visible;
   }
 }
