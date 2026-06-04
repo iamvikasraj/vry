@@ -1,12 +1,11 @@
 import HomeDeLayout from '@/components/HomeDeLayout'
-import ProjectThumbGridSection from '@/components/ProjectThumbGridSection'
-import { getLiveProjects } from '@/data/projects'
+import EmployerThumbGridSection from '@/components/EmployerThumbGridSection'
 
 export default function LiveProjectsPage() {
   return (
     <HomeDeLayout>
       <section id="work" className="home-de-work home-de-work--only">
-        <ProjectThumbGridSection projects={getLiveProjects()} />
+        <EmployerThumbGridSection />
       </section>
     </HomeDeLayout>
   )

@@ -1,14 +1,19 @@
+'use client'
+
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { getDeListHref } from '@/lib/deNav'
 import { SOCIAL_LINKS } from '@/lib/socialLinks'
 
 export default function ProjectArticleFooter() {
+  const listHref = getDeListHref(usePathname())
   const year = new Date().getFullYear()
 
   return (
     <footer className="de-article-footer" aria-label="Site footer">
       <div className="de-article-footer__inner">
         <p className="de-article-footer__brand">
-          <Link href="/">
+          <Link href={listHref}>
             <span className="de-article-footer__brand-line">Vikas Raj</span>
             <span className="de-article-footer__brand-line">Yadav</span>
           </Link>

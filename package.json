@@ -10,8 +10,13 @@
     "dev:local": "next dev",
     "fetch-socials": "node scripts/fetch-socials.js",
     "fetch-linkedin": "node scripts/fetch-linkedin-videos.js",
+    "prebuild": "node scripts/clean-next.js",
     "build": "npm run fetch-socials && next build",
     "postbuild": "node scripts/cleanup-after-build.js",
+    "test": "npm run test:types && npm run test:build",
+    "test:types": "tsc --noEmit",
+    "test:build": "npm run build && node scripts/smoke-test.js",
+    "test:dev": "node scripts/smoke-dev.js",
     "start": "next start"
   },
   "dependencies": {

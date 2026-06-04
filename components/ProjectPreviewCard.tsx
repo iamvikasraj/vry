@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { Project } from '@/data/projects'
 import type { ProjectThumbMedia } from '@/lib/projectMedia'
 import { mediaAssetPath } from '@/lib/mediaAssetPath'
+import { projectHref } from '@/lib/projectHref'
 import MediaPlaceholder from '@/components/MediaPlaceholder'
 
 type ProjectPreviewCardProps = {
@@ -15,7 +16,7 @@ export default function ProjectPreviewCard({ project, media }: ProjectPreviewCar
 
   return (
     <Link
-      href={`/projects/${project.slug}`}
+      href={projectHref(project.slug)}
       className="de-more-projects__preview"
       aria-label={project.title}
     >

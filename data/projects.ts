@@ -84,20 +84,22 @@ export const projects: Project[] = [
     slug: 'business-insider',
     title: 'Business Insider Prototype with SwiftUI',
     video: '/assets/video/Business Insider Prototype with SwiftUI.mp4',
-    description: 'Prototype of Business Insider app interface using SwiftUI.',
-    tags: ['SwiftUI'],
-    category: 'Design Engineering',
-    metaLabel: 'App Redesign',
+    description:
+      'SwiftUI prototype of the Business Insider India app — editorial layout, navigation, and reading experience for Times Bridge.',
+    tags: ['Live Projects', 'SwiftUI'],
+    category: 'Work',
+    metaLabel: 'App Redesign · SwiftUI',
     year: '2024',
-    client: 'Personal Project',
-    role: 'Designer & Developer',
-    context: 'Explored Business Insider app design and created SwiftUI prototype.',
+    client: 'Times Bridge',
+    role: 'Lead Product Designer',
+    context:
+      'Built a high-fidelity SwiftUI prototype of the Business Insider app while at Times Bridge — validating IA, component structure, and motion for a publisher-grade mobile experience.',
     process: [
-      'Analyzed Business Insider interface',
-      'Designed component structure',
-      'Built prototype in SwiftUI',
-      'Refined interactions and animations'
-    ]
+      'Audited Business Insider mobile patterns and editorial hierarchy',
+      'Designed component structure and navigation in SwiftUI',
+      'Prototyped key reading and discovery flows',
+      'Refined interactions and transitions for handoff',
+    ],
   },
   {
     slug: 'interactive-balloons',
@@ -502,8 +504,8 @@ export function getPlaygroundProjects(): Project[] {
 }
 
 export function getProjectListHref(project: Project): string {
-  if (project.category === 'Design Engineering') return '/playground'
-  return '/live-projects'
+  if (project.category === 'Design Engineering') return '/playground/'
+  return '/live-projects/'
 }
 
 export function getRelatedProjects(project: Project, limit = 2): Project[] {

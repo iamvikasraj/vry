@@ -2,18 +2,22 @@
 
 import { useRef, useState } from 'react'
 import Link from 'next/link'
-import type { Project } from '@/data/projects'
+import type { LiveEmployerCard } from '@/data/employerCards'
 import type { ProjectThumbMedia } from '@/lib/projectMedia'
 import { mediaAssetPath } from '@/lib/mediaAssetPath'
-import { projectHref } from '@/lib/projectHref'
+import { employerChapterHref } from '@/lib/deRoutes'
 import MediaPlaceholder from '@/components/MediaPlaceholder'
 
-export type ProjectThumbGridItem = {
-  project: Project
+export type EmployerThumbGridItem = LiveEmployerCard & {
   media: ProjectThumbMedia
 }
 
-export function ProjectThumbCard({ project, media }: ProjectThumbGridItem) {
+function EmployerThumbCard({
+  employer,
+  featuredProject,
+  highlights,
+  media,
+}: EmployerThumbGridItem) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [hovered, setHovered] = useState(false)
   const [ready, setReady] = useState(false)
@@ -28,6 +32,9 @@ export function ProjectThumbCard({ project, media }: ProjectThumbGridItem) {
     !imageError &&
     (staticOnly || (showVideo && (!ready || videoError)))
   const showPlaceholder = !showImage && !showVideo
+
+  const projectCount = highlights.length
+  const stint = `${employer.position} · ${projectCount} ${projectCount === 1 ? 'project' : 'projects'}`
 
   const onEnter = () => {
     if (!showVideo) return
@@ -45,12 +52,13 @@ export function ProjectThumbCard({ project, media }: ProjectThumbGridItem) {
   }
 
   return (
-    <article className="home-de-thumb-wrap">
+    <article className="home-de-thumb-wrap home-de-employer-card">
       <Link
-        href={projectHref(project.slug)}
+        href={employerChapterHref(employer.slug)}
         className={`home-de-thumb${hovered ? ' home-de-thumb--hover' : ''}`}
         onMouseEnter={onEnter}
         onMouseLeave={onLeave}
+        aria-label={`View ${employer.company} work`}
       >
         <div
           className={`home-de-thumb-media${brandCover ? ' home-de-thumb-media--brand' : ''}`}
@@ -61,7 +69,7 @@ export function ProjectThumbCard({ project, media }: ProjectThumbGridItem) {
           {showImage && thumbSrc && (
             <img
               src={thumbSrc}
-              alt={project.title}
+              alt=""
               className={
                 brandCover
                   ? 'home-de-thumb-cover'
@@ -74,7 +82,7 @@ export function ProjectThumbCard({ project, media }: ProjectThumbGridItem) {
             <video
               ref={videoRef}
               className={`home-de-thumb-video${thumbSrc ? (ready ? ' home-de-thumb-video--ready home-de-thumb-video--over-cover' : '') : ' home-de-thumb-video--ready'}`}
-              src={mediaAssetPath(project.video)}
+              src={mediaAssetPath(featuredProject.video)}
               poster={thumbSrc}
               muted
               autoPlay
@@ -89,19 +97,19 @@ export function ProjectThumbCard({ project, media }: ProjectThumbGridItem) {
           )}
         </div>
         <div className="home-de-thumb-caption">
-          <h2 className="home-de-thumb-title">{project.title}</h2>
-          <p className="home-de-thumb-meta">{project.metaLabel ?? project.category}</p>
+          <h2 className="home-de-thumb-title">{employer.company}</h2>
+          <p className="home-de-thumb-meta home-de-employer-stint">{stint}</p>
         </div>
       </Link>
     </article>
   )
 }
 
-export default function ProjectThumbGrid({ items }: { items: ProjectThumbGridItem[] }) {
+export default function EmployerThumbGrid({ items }: { items: EmployerThumbGridItem[] }) {
   return (
     <div className="home-de-card-grid">
       {items.map((item) => (
-        <ProjectThumbCard key={item.project.slug} {...item} />
+        <EmployerThumbCard key={item.employer.slug} {...item} />
       ))}
     </div>
   )

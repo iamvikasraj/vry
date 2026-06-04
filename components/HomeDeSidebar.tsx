@@ -2,13 +2,15 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { getLiveProjects, getPlaygroundProjects } from '@/data/projects'
+import { getLiveEmployerCards } from '@/data/employerCards'
+import { getPlaygroundProjects } from '@/data/projects'
 import { getActiveDeNavId } from '@/lib/deNav'
+import { DE_ROUTES } from '@/lib/deRoutes'
 import { SOCIAL_LINKS } from '@/lib/socialLinks'
 
 const NAV_LINKS = [
-  { href: '/live-projects', label: 'Live Projects', id: 'live-projects' as const, count: getLiveProjects().length },
-  { href: '/playground', label: 'Playground', id: 'playground' as const, count: getPlaygroundProjects().length },
+  { href: DE_ROUTES.liveProjects, label: 'Live Projects', id: 'live-projects' as const, count: getLiveEmployerCards().length },
+  { href: DE_ROUTES.playground, label: 'Playground', id: 'playground' as const, count: getPlaygroundProjects().length },
 ] as const
 
 const EXTERNAL_LINK = {
@@ -22,11 +24,11 @@ export default function HomeDeSidebar() {
 
   return (
     <aside className="home-de-sidebar" aria-label="Site">
-      <Link href="/" className="home-de-sidebar-logo">
+      <Link href={DE_ROUTES.liveProjects} className="home-de-sidebar-logo">
         Vikas Raj Yadav
       </Link>
       <p className="home-de-sidebar-role">
-        Staff Designer × Technologist @ Loop Health. 10+ years in fintech. Previously Paytm, HDFC &amp; ET Money. Rive &amp; Play Ambassador.
+        Staff Product Designer · Design Engineer · Rive Ambassador · 10+ years in product · Prev. Paytm, HDFC, Loop, Grappus Studios
       </p>
 
       <div className="home-de-sidebar-footer">

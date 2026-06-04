@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import DeShellScrollRestore from '@/components/DeShellScrollRestore'
 import HomeDeSidebar from '@/components/HomeDeSidebar'
 import PortfolioChat from '@/components/PortfolioChat'
 
@@ -9,6 +10,7 @@ export default function HomeDeLayout({ children }: { children: React.ReactNode }
 
   return (
     <div className="home-page home-page--de">
+      <DeShellScrollRestore />
       <main className="home-de-main">
         <HomeDeSidebar />
 

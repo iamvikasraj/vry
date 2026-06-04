@@ -17,4 +17,18 @@ const nextConfig = {
 
 const withMDX = createMDX({})
 
-module.exports = withMDX(nextConfig)
+/** @param {import('next').NextConfig} config */
+function withDevWebpackMemoryCache(config) {
+  if (!isNextDev) return config
+  const webpack = config.webpack
+  config.webpack = (webpackConfig, options) => {
+    const nextConfig =
+      typeof webpack === 'function' ? webpack(webpackConfig, options) : webpackConfig
+    // Disk pack cache (.pack.gz) goes stale when .next is partially deleted or build/dev overlap.
+    nextConfig.cache = { type: 'memory' }
+    return nextConfig
+  }
+  return config
+}
+
+module.exports = withDevWebpackMemoryCache(withMDX(nextConfig))
