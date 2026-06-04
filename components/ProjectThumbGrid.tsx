@@ -13,30 +13,40 @@ export type ProjectThumbGridItem = {
   media: ProjectThumbMedia
 }
 
-export function ProjectThumbCard({ project, media }: ProjectThumbGridItem) {
+type ProjectThumbCardProps = ProjectThumbGridItem & {
+  /** Play video on hover (Playground); autoplay when false. */
+  playOnHover?: boolean
+}
+
+export function ProjectThumbCard({ project, media, playOnHover = false }: ProjectThumbCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [hovered, setHovered] = useState(false)
   const [ready, setReady] = useState(false)
   const [videoError, setVideoError] = useState(false)
   const [imageError, setImageError] = useState(false)
 
-  const { brandCover, videoAvailable, thumbSrc } = media
+  const { brandCover, thumbSrc, videoAvailable } = media
+  const hasPoster = Boolean(thumbSrc)
   const staticOnly = Boolean(thumbSrc && (!videoAvailable || brandCover))
   const showVideo = videoAvailable && !brandCover && !videoError
   const showImage =
     Boolean(thumbSrc) &&
     !imageError &&
-    (staticOnly || (showVideo && (!ready || videoError)))
-  const showPlaceholder = !showImage && !showVideo
+    (staticOnly ||
+      !showVideo ||
+      (playOnHover && !hovered) ||
+      (showVideo && (!ready || videoError)))
+  const showPlaceholder = (!showImage && !showVideo) || (showVideo && videoError && !hasPoster)
+  const videoReady = !hasPoster || ready
 
   const onEnter = () => {
-    if (!showVideo) return
+    if (!playOnHover || !showVideo) return
     videoRef.current?.play()
     setHovered(true)
   }
 
   const onLeave = () => {
-    if (!showVideo) return
+    if (!playOnHover || !showVideo) return
     if (videoRef.current) {
       videoRef.current.pause()
       videoRef.current.currentTime = 0
@@ -73,14 +83,14 @@ export function ProjectThumbCard({ project, media }: ProjectThumbGridItem) {
           {showVideo && (
             <video
               ref={videoRef}
-              className={`home-de-thumb-video${thumbSrc ? (ready ? ' home-de-thumb-video--ready home-de-thumb-video--over-cover' : '') : ' home-de-thumb-video--ready'}`}
+              className={`home-de-thumb-video${hasPoster && playOnHover && ready ? ' home-de-thumb-video--ready home-de-thumb-video--over-cover' : ''}${videoReady ? ' home-de-thumb-video--ready' : ''}`}
               src={mediaAssetPath(project.video)}
               poster={thumbSrc}
               muted
-              autoPlay
+              autoPlay={!playOnHover}
               playsInline
               loop
-              preload="auto"
+              preload={playOnHover && hasPoster ? 'metadata' : 'auto'}
               onLoadedData={() => setReady(true)}
               onLoadedMetadata={() => setReady(true)}
               onCanPlay={() => setReady(true)}
@@ -97,11 +107,21 @@ export function ProjectThumbCard({ project, media }: ProjectThumbGridItem) {
   )
 }
 
-export default function ProjectThumbGrid({ items }: { items: ProjectThumbGridItem[] }) {
+type ProjectThumbGridProps = {
+  items: ProjectThumbGridItem[]
+  playOnHover?: boolean
+  gridClassName?: string
+}
+
+export default function ProjectThumbGrid({
+  items,
+  playOnHover = false,
+  gridClassName,
+}: ProjectThumbGridProps) {
   return (
-    <div className="home-de-card-grid">
+    <div className={`home-de-card-grid${gridClassName ? ` ${gridClassName}` : ''}`}>
       {items.map((item) => (
-        <ProjectThumbCard key={item.project.slug} {...item} />
+        <ProjectThumbCard key={item.project.slug} {...item} playOnHover={playOnHover} />
       ))}
     </div>
   )

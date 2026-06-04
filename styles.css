@@ -986,6 +986,18 @@ body {
   padding-bottom: var(--sp-24);
 }
 
+@media (min-width: 769px) {
+  .home-de-project-list.home-de-project-list--grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-24);
+  }
+
+  .home-de-project-list--grid-2 .home-de-project-list__link {
+    min-width: 0;
+  }
+}
+
 .home-de-employer-chapter__section-body .home-de-project-list__link {
   margin-top: var(--sp-8);
 }
@@ -1103,6 +1115,18 @@ body {
   display: flex;
   flex-direction: column;
   gap: var(--sp-24);
+}
+
+@media (min-width: 769px) {
+  .home-de-workshop-list.home-de-workshop-list--grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-24);
+  }
+
+  .home-de-workshop-list--grid-2 .home-de-workshop-list__link {
+    min-width: 0;
+  }
 }
 
 .home-de-workshop-list__link {

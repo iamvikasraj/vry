@@ -19,7 +19,11 @@ export default function HomeDePortfolioSections() {
         className="home-de-portfolio-section home-de-work"
         aria-label="Playground"
       >
-        <ProjectListSection projects={getPlaygroundProjects()} playOnHover />
+        <ProjectListSection
+          projects={getPlaygroundProjects()}
+          playOnHover
+          layout="grid-2"
+        />
       </section>
 
       <section
@@ -27,7 +31,7 @@ export default function HomeDePortfolioSections() {
         className="home-de-portfolio-section home-de-work"
         aria-label="Workshops"
       >
-        <WorkshopListSection />
+        <WorkshopListSection layout="grid-2" />
       </section>
     </>
   )

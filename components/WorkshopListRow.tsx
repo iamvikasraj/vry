@@ -33,11 +33,9 @@ export default function WorkshopListRow({ workshop }: WorkshopListRowProps) {
         <span className="home-de-workshop-list__title">{workshop.title}</span>
         {meta ? <span className="home-de-workshop-list__meta">{meta}</span> : null}
       </span>
-      {workshop.registrationUrl ? (
-        <span className="home-de-workshop-list__cta" aria-hidden="true">
-          ↗
-        </span>
-      ) : null}
+      <span className="home-de-workshop-list__cta" aria-hidden="true">
+        {workshop.registrationUrl ? '↗' : '→'}
+      </span>
     </>
   )
 
