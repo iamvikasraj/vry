@@ -1,13 +1,11 @@
 import HomeDeLayout from '@/components/HomeDeLayout'
-import ProjectThumbGridSection from '@/components/ProjectThumbGridSection'
-import { getPlaygroundProjects } from '@/data/projects'
+import HomeDePortfolioPage from '@/components/HomeDePortfolioPage'
 
+/** Same single-page portfolio; scrolls to Playground on load. */
 export default function PlaygroundPage() {
   return (
     <HomeDeLayout>
-      <section id="work" className="home-de-work home-de-work--only">
-        <ProjectThumbGridSection projects={getPlaygroundProjects()} />
-      </section>
+      <HomeDePortfolioPage scrollTo="playground" />
     </HomeDeLayout>
   )
 }

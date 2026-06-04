@@ -41,9 +41,18 @@ function main() {
     assertExists(route)
   }
 
-  const liveHtml = fs.readFileSync(path.join(outDir, 'live-projects/index.html'), 'utf8')
-  if (liveHtml.includes('ReferenceError') || liveHtml.includes('Image is not defined')) {
-    throw new Error('live-projects/index.html looks like an error page')
+  for (const file of ['index.html', 'live-projects/index.html', 'playground/index.html']) {
+    const html = fs.readFileSync(path.join(outDir, file), 'utf8')
+    if (html.includes('ReferenceError') || html.includes('Image is not defined')) {
+      throw new Error(`${file} looks like an error page`)
+    }
+    if (
+      !html.includes('id="live-projects"') ||
+      !html.includes('id="playground"') ||
+      !html.includes('id="workshops"')
+    ) {
+      throw new Error(`${file} missing single-page portfolio sections`)
+    }
   }
 
   console.log(`[smoke] OK — ${routes.length} routes present in out/`)

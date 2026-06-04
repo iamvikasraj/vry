@@ -504,8 +504,8 @@ export function getPlaygroundProjects(): Project[] {
 }
 
 export function getProjectListHref(project: Project): string {
-  if (project.category === 'Design Engineering') return '/playground/'
-  return '/live-projects/'
+  if (project.category === 'Design Engineering') return '/#playground'
+  return '/#live-projects'
 }
 
 export function getRelatedProjects(project: Project, limit = 2): Project[] {

@@ -1,7 +1,7 @@
 import type { Project } from '@/data/projects'
 import type { EmployerStoryBlock, EmployerStorySection } from '@/data/employerChapters'
 import { getProjectThumbMedia } from '@/lib/projectMedia.server'
-import EmployerStoryProjectLink from '@/components/EmployerStoryProjectLink'
+import ProjectListLink from '@/components/ProjectListLink'
 
 type EmployerStoryStreamProps = {
   intro?: string
@@ -36,7 +36,7 @@ function StoryBlocks({
             const project = projectsBySlug.get(block.slug)
             if (!project) return null
             return (
-              <EmployerStoryProjectLink
+              <ProjectListLink
                 key={`project-${block.slug}`}
                 project={project}
                 media={getProjectThumbMedia(project)}

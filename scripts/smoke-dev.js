@@ -5,6 +5,7 @@
 const base = (process.argv[2] || 'http://127.0.0.1:3000').replace(/\/$/, '')
 
 const paths = [
+  '/',
   '/live-projects/',
   '/live-projects/paytm/',
   '/live-projects/et-money/',
@@ -12,6 +13,7 @@ const paths = [
   '/live-projects/time-bridge/',
   '/live-projects/grappus/',
   '/playground/',
+  '/workshops/',
   '/projects/business-insider/',
   '/projects/paytm-postpaid/',
 ]

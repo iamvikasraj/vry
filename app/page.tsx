@@ -1,5 +1,10 @@
-import { redirect } from 'next/navigation'
+import HomeDeLayout from '@/components/HomeDeLayout'
+import HomeDePortfolioPage from '@/components/HomeDePortfolioPage'
 
 export default function Home() {
-  redirect('/live-projects/')
+  return (
+    <HomeDeLayout>
+      <HomeDePortfolioPage />
+    </HomeDeLayout>
+  )
 }

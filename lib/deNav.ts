@@ -1,7 +1,8 @@
 import { getProjectBySlug } from '@/data/projects'
 import { DE_ROUTES } from '@/lib/deRoutes'
+import type { DePortfolioSectionId } from '@/lib/deScroll'
 
-export type DeNavId = 'live-projects' | 'playground'
+export type DeNavId = DePortfolioSectionId
 
 function normalizePath(path: string) {
   if (path.length > 1 && path.endsWith('/')) return path.slice(0, -1)
@@ -19,10 +20,10 @@ function projectSlugFromPath(path: string): string | null {
 export function getActiveDeNavId(pathname: string | null): DeNavId | null {
   const path = normalizePath(pathname ?? '')
 
-  if (path === '' || path === '/' || path === '/live-projects' || path.startsWith('/live-projects/')) {
-    return 'live-projects'
-  }
+  if (path.startsWith('/live-projects/')) return 'live-projects'
   if (path === '/playground') return 'playground'
+  if (path === '/workshops') return 'workshops'
+  if (path === '' || path === '/' || path === '/live-projects') return 'live-projects'
 
   const slug = projectSlugFromPath(path)
   if (!slug) return null
@@ -34,8 +35,10 @@ export function getActiveDeNavId(pathname: string | null): DeNavId | null {
   return 'live-projects'
 }
 
-/** List page to return to from a project (or default live projects). */
+/** Home list anchor to return to from a project (or default live projects). */
 export function getDeListHref(pathname: string | null): string {
   const navId = getActiveDeNavId(pathname)
-  return navId === 'playground' ? DE_ROUTES.playground : DE_ROUTES.liveProjects
+  if (navId === 'playground') return DE_ROUTES.playground
+  if (navId === 'workshops') return DE_ROUTES.workshops
+  return DE_ROUTES.liveProjects
 }
