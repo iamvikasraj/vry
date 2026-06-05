@@ -8,8 +8,19 @@ export interface WorkEmployer {
   logo: string
 }
 
+const employerLogoFiles: Record<string, string> = {
+  paytm: 'paytm.svg',
+  'et-money': 'et-money.svg',
+  'loop-health': 'loop-health.png',
+  'time-bridge': 'time-bridge.png',
+  grappus: 'grappus.png',
+  hdfc: 'hdfc.svg',
+  proprofs: 'proprofs.png',
+  startup: 'startup.svg',
+}
+
 export function employerLogoPath(slug: string): string {
-  return `/assets/employers/${slug}.svg`
+  return `/assets/employers/${employerLogoFiles[slug] ?? `${slug}.svg`}`
 }
 
 export function getEmployerBySlug(slug: string): WorkEmployer | undefined {
@@ -80,7 +91,6 @@ export const projectClientToEmployerSlug: Record<string, string> = {
   'Loop Health': 'loop-health',
   'ET Money': 'et-money',
   'Times Bridge': 'time-bridge',
-  Gabit: 'time-bridge',
   Paytm: 'paytm',
   Uber: 'grappus',
   HDFC: 'hdfc',

@@ -7,11 +7,35 @@ export type EmployerStoryThinking = { type: 'thinking'; text: string }
 export type EmployerStoryProject = {
   type: 'project'
   slug: string
-  /** Optional line before the card — why this work matters in the arc. */
-  lead?: string
+  /** Label above the project row; defaults to "Case study" in the story stream. */
+  heading?: string
 }
 
-export type EmployerStoryBlock = EmployerStoryProse | EmployerStoryThinking | EmployerStoryProject
+export type EmployerStorySource = {
+  url: string
+  /** Publication name — row title */
+  outlet: string
+  /** Article headline — row meta */
+  headline: string
+  /** Logo or cover under `public/assets/press/` */
+  image?: string
+}
+
+export function pressImagePath(slug: string): string {
+  return `/assets/press/${slug}.png`
+}
+
+export type EmployerStorySources = {
+  type: 'sources'
+  label?: string
+  items: EmployerStorySource[]
+}
+
+export type EmployerStoryBlock =
+  | EmployerStoryProse
+  | EmployerStoryThinking
+  | EmployerStoryProject
+  | EmployerStorySources
 
 /** One chapter in the stint (e.g. a POD) — spacing is controlled per section in CSS. */
 export type EmployerStorySection = {
@@ -25,7 +49,7 @@ export type EmployerChapterContent = {
   /** SEO / meta only */
   roleSummary: string
   /** Opening paragraph(s) below the hero — `home-de-employer-chapter__intro` */
-  intro?: string
+  intro?: string | string[]
   /** Story body — each item is `home-de-employer-chapter__section` */
   sections: EmployerStorySection[]
 }
@@ -35,8 +59,11 @@ export const employerChapters: Record<string, EmployerChapterContent> = {
   paytm: {
     roleSummary:
       'Lead Product Designer across Paytm Lending, Paytm Travel, and Paytm Central inside the super app.',
-    intro:
-      'I spent three years inside the Paytm super app — not on one product, but across three PODs. Each one was a different kind of problem: credit in checkout, travel with real-world chaos, and the homepage everyone opens first. The through-line was judgment — what to simplify, what to standardize, and when to let a vertical move fast on its own.',
+    intro: [
+      'I joined Paytm as a senior product designer on 8th October in 2018. I remember this because it was one of my dream jobs back then. I was a Paytm user from 2016 and a big advocate of the product.',
+      'It was right after my stint at Grappus Studios. We used to design and develop product experiences that people used to dream of only on Dribbble.',
+      'Anyway, I moved to Bengaluru and started working with a POD called Paytm Lending.',
+    ],
     sections: [
       {
         id: 'lending',
@@ -44,16 +71,87 @@ export const employerChapters: Record<string, EmployerChapterContent> = {
         blocks: [
           {
             type: 'prose',
-            text: 'Postpaid and pay-later. The job wasn’t “add BNPL.” It was to make paying on credit feel as normal as UPI — limits, trust, and state visible without turning checkout into a lecture.',
+            text: 'Paytm Lending consists of products like Paytm Loans, Paytm Postpaid (BNPL), and a few credit card services. The very first project I got to work on was Paytm Postpaid.',
           },
           {
-            type: 'thinking',
-            text: 'The tension I kept coming back to: marketing wanted Postpaid everywhere; risk and ops needed clarity at the moment money left the user’s account. My bias was to design for the worst state first — limit hit, pending capture, retry — because that’s when people decide if a product is “real” or a gimmick.',
+            type: 'prose',
+            text: 'Paytm Postpaid was the answer to the Paytm wallet and a different answer to UPI. I’m talking about early 2019 — UPI was new to the market, and PhonePe had implemented it earlier, so we wanted to take up that space.',
+          },
+          {
+            type: 'prose',
+            text: 'My role was to design for the scale of Paytm Postpaid. We had a very hacky version that inherited Paytm’s passbook design and a simple form to apply. We used to market it as get up to ₹60,000 in spending, but it was very hard to give users a limit above ₹500–2,000',
+          },
+          {
+            type: 'prose',
+            text: 'I was able to design the MVP with all the scale features in 1.5 months, and we were able to ship.',
+          },
+          {
+            type: 'prose',
+            text: 'We did a sentiment analysis and found that most people were complaining about smaller spend limits, inconsistency with spend limits, not being able to understand the offering, where they could use it, and so on.',
+          },
+          {
+            type: 'prose',
+            text: 'So I came up with a gamification model. The idea was to increase daily active users and monthly active users on the product. We implemented logic to increment the spend limit by letting users top up — paying bills before the monthly bill was due.',
+          },
+          {
+            type: 'prose',
+            text: 'But later we got a notice from RBI that we could not lend money if we operated a bank. So we had to bring in a co-lending partner, Clix Capital, and design a new onboarding for that.',
+          },
+          {
+            type: 'prose',
+            text: 'There we needed users to link their PAN, which led to an increase in spend limit — so we had to drop the gamification idea but carried the interaction forward.',
+          },
+          {
+            type: 'prose',
+            text: 'We were able to launch and onboard 1 million active users by August 2019.',
           },
           {
             type: 'project',
             slug: 'paytm-postpaid',
-            lead: 'Case study — making Postpaid a first-class payment method.',
+          },
+          {
+            type: 'prose',
+            text: 'By mid-2019, regulatory pressure caught up with us. A PIL in the Delhi High Court argued that Paytm Postpaid violated RBI rules for payments banks — Section 1.6 forbids them from lending to customers. Press coverage questioned whether credit could sit inside a payments bank at all, whether Clix Capital’s role was disclosed clearly enough, and whether the product should keep running while that was unresolved. Postpaid was briefly suspended in August; we had to pause the work.',
+          },
+          {
+            type: 'prose',
+            text: 'I was asked to either join the Noida Central team or the Paytm Travel team in Bengaluru. Since I was already in the Bengaluru building, I chose Paytm Travel.',
+          },
+          {
+            type: 'sources',
+            label: 'Press',
+            items: [
+              {
+                outlet: 'Business Today',
+                headline: 'Paytm Postpaid launch (Dec 2018, up to ₹60,000 limit)',
+                image: pressImagePath('business-today'),
+                url: 'https://www.businesstoday.in/technology/news/story/paytm-postpaid-launched-spend-up-to-rs-60000-pay-next-month-124742-2018-12-28',
+              },
+              {
+                outlet: 'Paytm',
+                headline: 'Postpaid listed under 2018 milestones',
+                image: pressImagePath('paytm'),
+                url: 'https://paytm.com/about-us',
+              },
+              {
+                outlet: 'MediaNama',
+                headline: 'PIL on Postpaid vs payments-bank lending rules (May 2019)',
+                image: pressImagePath('medianama'),
+                url: 'https://www.medianama.com/2019/05/223-petition-alleges-paytm-payments-banks-postpaid-lending-service-violates-rbi-operating-guidelines/',
+              },
+              {
+                outlet: 'Economic Times',
+                headline: 'Paytm Postpaid loan book moved to Clix Capital (Jun 2019)',
+                image: pressImagePath('economic-times'),
+                url: 'https://economictimes.indiatimes.com/small-biz/startups/newsbuzz/paytm-postpaid-to-move-its-loan-book-to-clix/articleshow/69920769.cms',
+              },
+              {
+                outlet: 'Entrackr',
+                headline: 'Postpaid service suspended, then clarified (Aug 2019)',
+                image: pressImagePath('entrackr'),
+                url: 'https://entrackr.com/2019/08/paytm-shuts-down-paytm-postpaid/',
+              },
+            ],
           },
         ],
       },
@@ -62,17 +160,8 @@ export const employerChapters: Record<string, EmployerChapterContent> = {
         title: 'Paytm Travel',
         blocks: [
           {
-            type: 'prose',
-            text: 'Flights, hotels, and IRCTC trains in one vertical. Search, booking, and post-purchase had to stay legible when itineraries, rail rules, and partner APIs disagreed.',
-          },
-          {
-            type: 'thinking',
-            text: 'Travel taught me to separate “what the user is trying to do” from “what the system knows.” Status and next steps mattered more than visual polish — especially after booking, when anxiety is highest and support tickets are cheapest to prevent in the UI.',
-          },
-          {
             type: 'project',
             slug: 'paytm-travel-trains',
-            lead: 'Case study — Travel & Trains from search through post-purchase.',
           },
         ],
       },
@@ -91,7 +180,6 @@ export const employerChapters: Record<string, EmployerChapterContent> = {
           {
             type: 'project',
             slug: 'paytm-design-system-v1',
-            lead: 'Case study — Design System v1.0 and platform patterns.',
           },
         ],
       },
@@ -169,28 +257,10 @@ export const employerChapters: Record<string, EmployerChapterContent> = {
   },
   'time-bridge': {
     roleSummary:
-      'Lead Product Designer at Times Bridge — Gabit D2C brand/product work and SwiftUI exploration for Business Insider India.',
+      'Lead Product Designer at Times Bridge — SwiftUI exploration for Business Insider India.',
     intro:
-      'Times Bridge put me on two different clocks — 0→1 D2C for Gabit and a publisher-grade iOS exploration for Business Insider India. Brand-led commerce on one side, editorial density on the other. Same role, different definitions of “done.”',
+      'Times Bridge was publisher-grade mobile work — a SwiftUI prototype for Business Insider India to pressure-test IA, reading flows, and native affordances before the org committed to a direction.',
     sections: [
-      {
-        id: 'gabit',
-        title: 'Gabit',
-        blocks: [
-          {
-            type: 'prose',
-            text: 'Early-stage skincare commerce — brand, PDP, and conversion as one system. The product had to feel like Gabit from the first tap, not logo-on-template.',
-          },
-          {
-            type: 'thinking',
-            text: 'D2C work is where brand teams want expression and growth teams want frictionless checkout. I tried to lock a visual rhythm early so new screens didn’t become one-off campaigns.',
-          },
-          {
-            type: 'project',
-            slug: 'gabit-early-stage',
-          },
-        ],
-      },
       {
         id: 'business-insider',
         title: 'Business Insider India',

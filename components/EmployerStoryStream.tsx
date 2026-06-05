@@ -1,10 +1,11 @@
 import type { Project } from '@/data/projects'
 import type { EmployerStoryBlock, EmployerStorySection } from '@/data/employerChapters'
 import { getProjectThumbMedia } from '@/lib/projectMedia.server'
+import PressListLink from '@/components/PressListLink'
 import ProjectListLink from '@/components/ProjectListLink'
 
 type EmployerStoryStreamProps = {
-  intro?: string
+  intro?: string | string[]
   sections: EmployerStorySection[]
   projectsBySlug: Map<string, Project>
 }
@@ -35,12 +36,33 @@ function StoryBlocks({
           case 'project': {
             const project = projectsBySlug.get(block.slug)
             if (!project) return null
+            const caseStudyLabel = block.heading ?? 'Case study'
             return (
-              <ProjectListLink
+              <div
                 key={`project-${block.slug}`}
-                project={project}
-                media={getProjectThumbMedia(project)}
-              />
+                className="home-de-employer-chapter__case-study"
+                aria-label={caseStudyLabel}
+              >
+                <p className="home-de-employer-chapter__story-label">{caseStudyLabel}</p>
+                <ProjectListLink project={project} media={getProjectThumbMedia(project)} />
+              </div>
+            )
+          }
+          case 'sources': {
+            const pressLabel = block.label ?? 'Press'
+            return (
+              <aside
+                key={`sources-${index}`}
+                className="home-de-employer-chapter__press"
+                aria-label={pressLabel}
+              >
+                <p className="home-de-employer-chapter__story-label">{pressLabel}</p>
+                <div className="home-de-press-list home-de-employer-chapter__press-list">
+                  {block.items.map((item) => (
+                    <PressListLink key={item.url} item={item} />
+                  ))}
+                </div>
+              </aside>
             )
           }
           default:
@@ -56,7 +78,11 @@ export default function EmployerStoryStream({ intro, sections, projectsBySlug }:
     <div className="home-de-employer-chapter__story">
       {intro ? (
         <section className="home-de-employer-chapter__intro" aria-label="Introduction">
-          <p className="home-de-employer-chapter__text">{intro}</p>
+          {(Array.isArray(intro) ? intro : [intro]).map((paragraph, index) => (
+            <p key={`intro-${index}`} className="home-de-employer-chapter__text">
+              {paragraph}
+            </p>
+          ))}
         </section>
       ) : null}
 

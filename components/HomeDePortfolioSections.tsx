@@ -1,4 +1,4 @@
-import EmployerThumbGridSection from '@/components/EmployerThumbGridSection'
+import EmployerListSection from '@/components/EmployerListSection'
 import ProjectListSection from '@/components/ProjectListSection'
 import WorkshopListSection from '@/components/WorkshopListSection'
 import { getPlaygroundProjects } from '@/data/projects'
@@ -11,7 +11,7 @@ export default function HomeDePortfolioSections() {
         className="home-de-portfolio-section home-de-work"
         aria-label="Live Projects"
       >
-        <EmployerThumbGridSection />
+        <EmployerListSection layout="grid-2" />
       </section>
 
       <section

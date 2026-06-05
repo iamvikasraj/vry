@@ -149,8 +149,9 @@ export const projects: Project[] = [
     coverImage: '/assets/projects/gabit-early-stage/cover.svg',
     description:
       'Early-stage brand identity and product experiences for Gabit — visual system, PDP storytelling, and conversion-focused skincare commerce.',
-    tags: ['Live Projects', 'Branding', 'E-commerce'],
+    tags: ['Branding', 'E-commerce'],
     category: 'Work',
+    hidden: true,
     metaLabel: 'Branding · Product Design',
     year: '2022',
     client: 'Gabit',
