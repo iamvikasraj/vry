@@ -27,6 +27,28 @@ export function getEmployerBySlug(slug: string): WorkEmployer | undefined {
   return workEmployers.find((employer) => employer.slug === slug)
 }
 
+/** First calendar year from a period string, e.g. `2022–2024` → `2022`. */
+export function employerStartYear(period: string): string {
+  return period.match(/\d{4}/)?.[0] ?? period
+}
+
+function parseEmployerPeriod(period: string): { startYear: number; endYear: number } {
+  const years = period.match(/\d{4}/g)?.map((year) => parseInt(year, 10)) ?? []
+  const startYear = years[0] ?? 0
+  const endYear = period.includes('Present') ? 9999 : years[1] ?? startYear
+  return { startYear, endYear }
+}
+
+/** Sidebar work history, newest first. */
+export function getEmployerTimeline(): WorkEmployer[] {
+  return [...workEmployers].sort((a, b) => {
+    const aPeriod = parseEmployerPeriod(a.period)
+    const bPeriod = parseEmployerPeriod(b.period)
+    if (bPeriod.endYear !== aPeriod.endYear) return bPeriod.endYear - aPeriod.endYear
+    return bPeriod.startYear - aPeriod.startYear
+  })
+}
+
 export const workEmployers: WorkEmployer[] = [
   {
     slug: 'paytm',

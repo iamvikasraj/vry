@@ -1,11 +1,10 @@
 import HomeDeLayout from '@/components/HomeDeLayout'
-import HomeDePortfolioPage from '@/components/HomeDePortfolioPage'
+import LiveProjectsPageContent from '@/components/LiveProjectsPageContent'
 
-/** Same single-page portfolio; Live Projects is the first section. */
 export default function LiveProjectsPage() {
   return (
     <HomeDeLayout>
-      <HomeDePortfolioPage scrollTo="live-projects" />
+      <LiveProjectsPageContent />
     </HomeDeLayout>
   )
 }

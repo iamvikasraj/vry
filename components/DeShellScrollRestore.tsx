@@ -6,10 +6,10 @@ import { isDePortfolioSectionId, scrollToDeSectionFromHash } from '@/lib/deScrol
 
 function isPortfolioShellPath(pathname: string) {
   const path = pathname.endsWith('/') && pathname.length > 1 ? pathname.slice(0, -1) : pathname
-  return path === '' || path === '/' || path === '/live-projects' || path === '/playground'
+  return path === '' || path === '/' || path === '/workshops'
 }
 
-/** Resets scroll when entering the sidebar shell; honors `#live-projects` / `#playground`. */
+/** Resets scroll when entering the sidebar shell; honors `#playground` / `#workshops` on home. */
 export default function DeShellScrollRestore() {
   const pathname = usePathname()
 

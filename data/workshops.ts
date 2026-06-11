@@ -28,7 +28,7 @@ export const workshops: Workshop[] = [
     year: '2024',
     venue: 'Rive x Contra',
     description: 'Exploring advanced Rive scripting techniques and animation workflows.',
-    portfolio: true,
+    portfolio: false,
   },
   {
     title: 'Rive Ambassador Happy Hour — Bengaluru',
@@ -38,7 +38,7 @@ export const workshops: Workshop[] = [
       'Casual meetup for Rive users, motion designers, and developers—good conversations with the local Rive community.',
     eventDate: '2026-02-12',
     eventTime: '7pm–9pm',
-    portfolio: true,
+    portfolio: false,
   },
   {
     title: 'Rive Workshop',
@@ -46,7 +46,7 @@ export const workshops: Workshop[] = [
     venue: 'Bengaluru',
     description: 'Hands-on Rive workshop on interaction and motion design.',
     eventDate: '2026-03-18',
-    portfolio: true,
+    portfolio: false,
   },
 ]
 

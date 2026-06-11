@@ -1,11 +1,10 @@
 import HomeDeLayout from '@/components/HomeDeLayout'
-import HomeDePortfolioPage from '@/components/HomeDePortfolioPage'
+import PlaygroundPageContent from '@/components/PlaygroundPageContent'
 
-/** Same single-page portfolio; scrolls to Playground on load. */
 export default function PlaygroundPage() {
   return (
     <HomeDeLayout>
-      <HomeDePortfolioPage scrollTo="playground" />
+      <PlaygroundPageContent />
     </HomeDeLayout>
   )
 }

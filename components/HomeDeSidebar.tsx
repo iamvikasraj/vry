@@ -3,8 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
-import { getLiveEmployerCards } from '@/data/employerCards'
-import { getPlaygroundProjects } from '@/data/projects'
+import { PORTFOLIO_PROFILE } from '@/data/portfolioProfile'
 import { DE_ROUTES } from '@/lib/deRoutes'
 import type { DeNavId } from '@/lib/deNav'
 import { getActiveDeNavId } from '@/lib/deNav'
@@ -13,9 +12,8 @@ import { DE_SECTION_HREF, getDeScrollRoot, isDePortfolioSectionId, scrollToDeSec
 import { SOCIAL_LINKS } from '@/lib/socialLinks'
 
 const NAV_LINKS = [
-  { sectionId: 'live-projects' as const, label: 'Live Projects', count: getLiveEmployerCards().length },
-  { sectionId: 'playground' as const, label: 'Playground', count: getPlaygroundProjects().length },
-  { sectionId: 'workshops' as const, label: 'Workshops' },
+  { sectionId: 'playground' as const, label: 'Playground' },
+  { sectionId: 'workshops' as const, label: 'Workshop' },
 ] as const
 
 const EXTERNAL_LINK = {
@@ -23,27 +21,25 @@ const EXTERNAL_LINK = {
   label: 'Design Engineer.ing',
 }
 
-function isPortfolioPage(pathname: string | null) {
-  const path = pathname ?? ''
-  return (
-    path === '/' ||
-    path === '/live-projects' ||
-    path === '/live-projects/' ||
-    path === '/playground' ||
-    path === '/playground/' ||
-    path === '/workshops' ||
-    path === '/workshops/'
-  )
+function normalizePath(path: string) {
+  if (path.length > 1 && path.endsWith('/')) return path.slice(0, -1)
+  return path
+}
+
+/** Home + section scroll routes that render the full single-page portfolio. */
+function isSinglePagePortfolio(pathname: string | null) {
+  const path = normalizePath(pathname ?? '')
+  return path === '' || path === '/' || path === '/workshops'
 }
 
 export default function HomeDeSidebar() {
   const pathname = usePathname()
-  const onPortfolioPage = isPortfolioPage(pathname)
+  const onSinglePagePortfolio = isSinglePagePortfolio(pathname)
   const routeNavId = getActiveDeNavId(pathname)
   const [scrollNavId, setScrollNavId] = useState<DeNavId | null>(routeNavId)
 
   useEffect(() => {
-    if (!onPortfolioPage) {
+    if (!onSinglePagePortfolio) {
       setScrollNavId(routeNavId)
       return
     }
@@ -56,10 +52,10 @@ export default function HomeDeSidebar() {
     syncFromHash()
     window.addEventListener('hashchange', syncFromHash)
     return () => window.removeEventListener('hashchange', syncFromHash)
-  }, [onPortfolioPage, routeNavId, pathname])
+  }, [onSinglePagePortfolio, routeNavId, pathname])
 
   useEffect(() => {
-    if (!onPortfolioPage) return
+    if (!onSinglePagePortfolio) return
 
     const sections = NAV_LINKS.map(({ sectionId }) => document.getElementById(sectionId)).filter(
       Boolean
@@ -89,18 +85,23 @@ export default function HomeDeSidebar() {
 
     sections.forEach((section) => observer.observe(section))
     return () => observer.disconnect()
-  }, [onPortfolioPage, pathname])
+  }, [onSinglePagePortfolio, pathname])
 
-  const activeNavId = onPortfolioPage ? scrollNavId ?? routeNavId : routeNavId
+  const activeNavId = onSinglePagePortfolio ? scrollNavId ?? routeNavId : routeNavId
+
+  const sectionHref = (sectionId: DePortfolioSectionId) => {
+    if (sectionId === 'playground') return DE_ROUTES.playground
+    return DE_SECTION_HREF[sectionId]
+  }
 
   const onSectionClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, sectionId: DePortfolioSectionId) => {
-      if (!onPortfolioPage) return
+      if (!onSinglePagePortfolio || sectionId === 'playground') return
       e.preventDefault()
       scrollToDeSection(sectionId)
       setScrollNavId(sectionId)
     },
-    [onPortfolioPage]
+    [onSinglePagePortfolio]
   )
 
   return (
@@ -108,30 +109,22 @@ export default function HomeDeSidebar() {
       <Link href={DE_ROUTES.home} className="home-de-sidebar-logo">
         Vikas Raj Yadav
       </Link>
-      <p className="home-de-sidebar-role">
-        Staff Product Designer · Design Engineer · Rive Ambassador · 10+ years in product · Prev. Paytm, HDFC, Loop, Grappus Studios
-      </p>
+      <p className="home-de-sidebar-role">{PORTFOLIO_PROFILE.bio}</p>
 
       <div className="home-de-sidebar-footer">
         <nav className="home-de-sidebar-nav" aria-label="Primary">
           {NAV_LINKS.map((link) => {
             const { sectionId, label } = link
-            const count = 'count' in link ? link.count : undefined
             const isActive = activeNavId === sectionId
             return (
               <Link
                 key={sectionId}
-                href={DE_SECTION_HREF[sectionId]}
+                href={sectionHref(sectionId)}
                 className={`home-de-sidebar-link${isActive ? ' home-de-sidebar-link--active' : ''}`}
                 aria-current={isActive ? 'true' : undefined}
                 onClick={(e) => onSectionClick(e, sectionId)}
               >
                 <span>{label}</span>
-                {count != null ? (
-                  <span className="home-de-sidebar-link-count" aria-hidden="true">
-                    {count}
-                  </span>
-                ) : null}
               </Link>
             )
           })}

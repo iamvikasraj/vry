@@ -28,6 +28,22 @@ export default function EmployerChapterView({ card, chapter }: EmployerChapterVi
         <h1 className="home-de-employer-chapter__title">{employer.company}</h1>
         <p className="home-de-employer-chapter__position">{employer.position}</p>
         <p className="home-de-employer-chapter__period">{employer.period}</p>
+        {chapter.companyImage ? (
+          <figure className="home-de-employer-chapter__screen">
+            <img
+              src={chapter.companyImage}
+              alt={chapter.companyImageAlt ?? `${employer.company} product screenshot`}
+            />
+            {chapter.companyImageCaption ? (
+              <figcaption className="home-de-employer-chapter__screen-caption">
+                {chapter.companyImageCaption}
+              </figcaption>
+            ) : null}
+          </figure>
+        ) : null}
+        {chapter.companyContext ? (
+          <p className="home-de-employer-chapter__context">{chapter.companyContext}</p>
+        ) : null}
       </header>
 
       <EmployerStoryStream

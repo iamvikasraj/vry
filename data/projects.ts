@@ -500,13 +500,19 @@ export function getLiveProjects(): Project[] {
   return [...featured, ...rest]
 }
 
+export const HOME_PLAYGROUND_PREVIEW_LIMIT = 4
+
 export function getPlaygroundProjects(): Project[] {
   return projects.filter(p => p.category === 'Design Engineering')
 }
 
+export function getPlaygroundPreviewProjects(limit = HOME_PLAYGROUND_PREVIEW_LIMIT): Project[] {
+  return getPlaygroundProjects().slice(0, limit)
+}
+
 export function getProjectListHref(project: Project): string {
-  if (project.category === 'Design Engineering') return '/#playground'
-  return '/#live-projects'
+  if (project.category === 'Design Engineering') return '/playground/'
+  return '/live-projects/'
 }
 
 export function getRelatedProjects(project: Project, limit = 2): Project[] {

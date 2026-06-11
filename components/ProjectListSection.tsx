@@ -5,8 +5,8 @@ import ProjectListLink from '@/components/ProjectListLink'
 type ProjectListSectionProps = {
   projects: Project[]
   playOnHover?: boolean
-  /** Two-column grid of compact list rows (Playground). */
-  layout?: 'list' | 'grid-2'
+  /** `grid-2` = compact rows; `cards` = large thumb with text below (Playground). */
+  layout?: 'list' | 'grid-2' | 'cards'
 }
 
 export default function ProjectListSection({
@@ -16,7 +16,13 @@ export default function ProjectListSection({
 }: ProjectListSectionProps) {
   return (
     <div
-      className={`home-de-project-list${layout === 'grid-2' ? ' home-de-project-list--grid-2' : ''}`}
+      className={`home-de-project-list${
+        layout === 'grid-2'
+          ? ' home-de-project-list--grid-2'
+          : layout === 'cards'
+            ? ' home-de-project-list--cards'
+            : ''
+      }`}
     >
       {projects.map((project) => (
         <ProjectListLink

@@ -1,8 +1,8 @@
 /** Primary shell routes (must match `trailingSlash: true` in next.config.js). */
 export const DE_ROUTES = {
   home: '/',
-  liveProjects: '/#live-projects',
-  playground: '/#playground',
+  liveProjects: '/live-projects/',
+  playground: '/playground/',
   workshops: '/#workshops',
 } as const
 

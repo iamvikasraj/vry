@@ -1,38 +1,20 @@
-import EmployerListSection from '@/components/EmployerListSection'
+import CvSection from '@/components/CvSection'
 import ProjectListSection from '@/components/ProjectListSection'
 import WorkshopListSection from '@/components/WorkshopListSection'
-import { getPlaygroundProjects } from '@/data/projects'
+import { getPlaygroundPreviewProjects } from '@/data/projects'
 
 export default function HomeDePortfolioSections() {
+  const playgroundPreview = getPlaygroundPreviewProjects()
+
   return (
     <>
-      <section
-        id="live-projects"
-        className="home-de-portfolio-section home-de-work"
-        aria-label="Live Projects"
-      >
-        <EmployerListSection layout="grid-2" />
-      </section>
+      <CvSection id="playground" title="Playground">
+        <ProjectListSection projects={playgroundPreview} playOnHover layout="cards" />
+      </CvSection>
 
-      <section
-        id="playground"
-        className="home-de-portfolio-section home-de-work"
-        aria-label="Playground"
-      >
-        <ProjectListSection
-          projects={getPlaygroundProjects()}
-          playOnHover
-          layout="grid-2"
-        />
-      </section>
-
-      <section
-        id="workshops"
-        className="home-de-portfolio-section home-de-work"
-        aria-label="Workshops"
-      >
-        <WorkshopListSection layout="grid-2" />
-      </section>
+      <CvSection id="workshops" title="Workshop">
+        <WorkshopListSection layout="list" />
+      </CvSection>
     </>
   )
 }

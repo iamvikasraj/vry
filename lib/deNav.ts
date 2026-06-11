@@ -20,10 +20,10 @@ function projectSlugFromPath(path: string): string | null {
 export function getActiveDeNavId(pathname: string | null): DeNavId | null {
   const path = normalizePath(pathname ?? '')
 
-  if (path.startsWith('/live-projects/')) return 'live-projects'
   if (path === '/playground') return 'playground'
   if (path === '/workshops') return 'workshops'
-  if (path === '' || path === '/' || path === '/live-projects') return 'live-projects'
+  if (path.startsWith('/live-projects')) return null
+  if (path === '' || path === '/') return 'playground'
 
   const slug = projectSlugFromPath(path)
   if (!slug) return null
@@ -32,13 +32,13 @@ export function getActiveDeNavId(pathname: string | null): DeNavId | null {
   if (!project) return null
 
   if (project.category === 'Design Engineering') return 'playground'
-  return 'live-projects'
+  return null
 }
 
-/** Home list anchor to return to from a project (or default live projects). */
+/** Home list anchor to return to from a project. */
 export function getDeListHref(pathname: string | null): string {
   const navId = getActiveDeNavId(pathname)
   if (navId === 'playground') return DE_ROUTES.playground
-  if (navId === 'workshops') return DE_ROUTES.workshops
-  return DE_ROUTES.liveProjects
+  if (navId === 'workshops') return '/#workshops'
+  return DE_ROUTES.home
 }

@@ -48,6 +48,12 @@ export type EmployerStorySection = {
 export type EmployerChapterContent = {
   /** SEO / meta only */
   roleSummary: string
+  /** Short context for readers who may not know the company — shown in the chapter header */
+  companyContext?: string
+  /** Optional product screenshot above `companyContext` */
+  companyImage?: string
+  companyImageAlt?: string
+  companyImageCaption?: string
   /** Opening paragraph(s) below the hero — `home-de-employer-chapter__intro` */
   intro?: string | string[]
   /** Story body — each item is `home-de-employer-chapter__section` */
@@ -59,6 +65,11 @@ export const employerChapters: Record<string, EmployerChapterContent> = {
   paytm: {
     roleSummary:
       'Lead Product Designer across Paytm Lending, Paytm Travel, and Paytm Central inside the super app.',
+    companyContext:
+      'Paytm is India’s largest payments super app — wallet, UPI, bill pay, travel, lending, and more from one home screen. If you’re reading this from outside India: it’s the app people use to pay at a tea stall, recharge a phone, or book a train. When I joined in 2018, that shift from cash to phone was still happening everywhere.',
+    companyImage: '/assets/employers/paytm-app-screens.png',
+    companyImageAlt: 'Paytm app home screen before and after redesign',
+    companyImageCaption: 'App screenshots from 2019–2020.',
     intro: [
       'I joined Paytm as a senior product designer on 8th October in 2018. I remember this because it was one of my dream jobs back then. I was a Paytm user from 2016 and a big advocate of the product.',
       'It was right after my stint at Grappus Studios. We used to design and develop product experiences that people used to dream of only on Dribbble.',
