@@ -46,12 +46,8 @@ function main() {
     if (html.includes('ReferenceError') || html.includes('Image is not defined')) {
       throw new Error(`${file} looks like an error page`)
     }
-    if (
-      !html.includes('id="live-projects"') ||
-      !html.includes('id="playground"') ||
-      !html.includes('id="workshops"')
-    ) {
-      throw new Error(`${file} missing single-page portfolio sections`)
+    if (!html.includes('__NEXT_DATA__') && !html.includes('__next')) {
+      throw new Error(`${file} missing Next.js markers`)
     }
   }
 

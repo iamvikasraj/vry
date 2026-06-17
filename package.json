@@ -5,7 +5,7 @@
   "scripts": {
     "predev": "node scripts/ensure-dev-cache.js",
     "predev:local": "node scripts/ensure-dev-cache.js",
-    "dev": "next dev --hostname 0.0.0.0",
+    "dev": "node scripts/dev.js",
     "dev:clean": "rm -rf .next && next dev --hostname 0.0.0.0",
     "dev:local": "next dev",
     "fetch-socials": "node scripts/fetch-socials.js",

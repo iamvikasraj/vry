@@ -259,25 +259,6 @@ export const projects: Project[] = [
     ]
   },
   {
-    slug: 'drag-and-order',
-    title: 'Drag & Drop Interaction with Figma and Play',
-    video: '/assets/video/drag and order.mp4',
-    description: 'Just tested a drag & drop interaction using Figma and Play! It took me 10 minutes to complete the process and an additional hour to record and edit the session.',
-    tags: ['Play', 'Figma', 'Prototyping', 'iOS'],
-    category: 'Design Engineering',
-    hidden: true,
-    year: '2024',
-    client: 'Personal Project',
-    role: 'Designer & Prototyper',
-    context: 'Explored drag & drop interactions using Figma and Play, demonstrating how quickly interactive prototypes can be created with these tools.',
-    process: [
-      'Designed interface in Figma with proper auto-layout',
-      'Copied and pasted designs into Play',
-      'Created drag & drop interaction in Play',
-      'Recorded and edited the session for sharing'
-    ]
-  },
-  {
     slug: 'cred-bottom-navigation',
     title: 'CRED Bottom Navigation Recreation with SwiftUI and Rive',
     video: '/assets/video/CRED Bottom Navigation recreation with SwiftUI and Rive.mp4',
@@ -502,8 +483,52 @@ export function getLiveProjects(): Project[] {
 
 export const HOME_PLAYGROUND_PREVIEW_LIMIT = 4
 
+/** First calendar year on a project — used for chronological ordering. */
+export function projectStartYear(project: Project): number | undefined {
+  const match = project.year?.match(/\d{4}/)
+  return match ? parseInt(match[0], 10) : undefined
+}
+
+/** Design Engineering projects, oldest first. Project 1 is the oldest. */
+export function getPlaygroundProjectsChronological(): Project[] {
+  const list = projects.filter((p) => p.category === 'Design Engineering')
+  return [...list].sort((a, b) => {
+    const ay = projectStartYear(a) ?? 9999
+    const by = projectStartYear(b) ?? 9999
+    if (ay !== by) return ay - by
+    return projects.indexOf(a) - projects.indexOf(b)
+  })
+}
+
+export function getPlaygroundProjectNumber(slug: string): number | undefined {
+  const idx = getPlaygroundProjectsChronological().findIndex((p) => p.slug === slug)
+  return idx === -1 ? undefined : idx + 1
+}
+
+export function getPlaygroundProjectsForYear(year: number): Project[] {
+  return getPlaygroundProjectsChronological().filter((p) => projectStartYear(p) === year)
+}
+
 export function getPlaygroundProjects(): Project[] {
-  return projects.filter(p => p.category === 'Design Engineering')
+  const list = projects.filter(p => p.category === 'Design Engineering')
+  const isMobileExperiment = (project: Project) => {
+    const tags = project.tags || []
+    return (
+      tags.includes('SwiftUI') ||
+      tags.includes('iOS') ||
+      tags.includes('Play') ||
+      project.title.toLowerCase().includes('swiftui') ||
+      project.title.toLowerCase().includes('ios')
+    )
+  }
+
+  const forceBottomSlugs = new Set(['ios-slider'])
+  const withoutForcedBottom = list.filter((p) => !forceBottomSlugs.has(p.slug))
+  const forcedBottom = list.filter((p) => forceBottomSlugs.has(p.slug))
+
+  const mobile = withoutForcedBottom.filter(isMobileExperiment)
+  const rest = withoutForcedBottom.filter((p) => !isMobileExperiment(p))
+  return [...mobile, ...rest, ...forcedBottom]
 }
 
 export function getPlaygroundPreviewProjects(limit = HOME_PLAYGROUND_PREVIEW_LIMIT): Project[] {

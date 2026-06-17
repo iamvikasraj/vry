@@ -752,6 +752,73 @@ body {
   color: var(--de-gray-dark);
 }
 
+.home-de-timeline-preview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-32);
+}
+
+.home-de-timeline-preview__years {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-32);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.home-de-timeline-preview__year {
+  display: inline;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--de-black);
+  text-decoration: none;
+  font-family: var(--de-font);
+  font-size: var(--txt-14);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.home-de-timeline-preview__year--muted {
+  opacity: 0.2;
+}
+
+.home-de-timeline-preview__year:focus-visible {
+  outline: 2px solid rgba(0, 0, 0, 0.35);
+  outline-offset: var(--sp-2);
+}
+
+.home-de-timeline-featured__placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 6px;
+  background: var(--de-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-de-timeline-featured__placeholder--link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.home-de-timeline-empty {
+  margin: 0;
+  font-family: var(--de-font);
+  font-size: var(--txt-14);
+  line-height: 1.4;
+  color: var(--de-gray-muted);
+}
+
+.home-de-timeline-featured__placeholder-text {
+  font-family: var(--de-font);
+  font-size: var(--txt-14);
+  font-weight: 500;
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.6);
+}
+
 @media (max-width: 768px) {
   .home-de-cv-timeline__row {
     grid-template-columns: 5rem 1fr;
@@ -763,6 +830,12 @@ body {
   margin-top: var(--sp-80);
   padding-top: var(--sp-32);
   border-top: 1px solid var(--de-skeleton-border);
+}
+
+/* Workshops feels visually heavy as the last section — tighten its separator spacing. */
+.home-de-portfolio-section + #workshops.home-de-portfolio-section {
+  margin-top: var(--sp-48);
+  padding-top: var(--sp-24);
 }
 
 .home-de-portfolio-section .home-de-card-grid,
@@ -1216,6 +1289,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: bottom center;
 }
 
 .home-de-project-list__thumb--has-poster .home-de-project-list__image:not(.home-de-project-list__image--ready) {
@@ -1278,55 +1352,53 @@ body {
 /* Playground — large thumb, title below */
 .home-de-project-list.home-de-project-list--cards {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--sp-32);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-16);
 }
 
 @media (min-width: 769px) {
   .home-de-project-list.home-de-project-list--cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--sp-32);
+    gap: var(--sp-16);
   }
 }
 
 .home-de-project-list--cards .home-de-project-list__link {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-rows: auto auto;
-  align-items: start;
-  gap: var(--sp-12) var(--sp-8);
+  display: block;
   min-width: 0;
 }
 
 .home-de-project-list--cards .home-de-project-list__thumb {
-  grid-column: 1 / -1;
   width: 100%;
   aspect-ratio: 16 / 9;
 }
 
 .home-de-project-list--cards .home-de-project-list__text {
-  grid-column: 1;
-  flex: none;
+  display: none;
 }
 
 .home-de-project-list--cards .home-de-project-list__cta {
-  grid-column: 2;
-  grid-row: 2;
-  align-self: center;
+  display: none;
 }
 
 /* Workshop list rows — home portfolio */
+.home-de-workshop-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-16);
+}
+
 .home-de-workshop-list {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-24);
+  gap: var(--sp-16);
 }
 
 @media (min-width: 769px) {
   .home-de-workshop-list.home-de-workshop-list--grid-2 {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--sp-24);
+    gap: var(--sp-16);
   }
 
   .home-de-workshop-list--grid-2 .home-de-workshop-list__link {
@@ -1335,8 +1407,9 @@ body {
 }
 
 .home-de-workshop-list__link {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
   gap: var(--sp-12);
   margin: 0;
   padding: 0;
@@ -1360,8 +1433,7 @@ a.home-de-workshop-list__link:hover .home-de-workshop-list__title {
 
 .home-de-workshop-list__thumb {
   position: relative;
-  flex-shrink: 0;
-  width: 5.5rem;
+  width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 6px;
@@ -1388,11 +1460,20 @@ a.home-de-workshop-list__link:hover .home-de-workshop-list__title {
 }
 
 .home-de-workshop-list__text {
-  flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
   gap: var(--sp-4);
+}
+
+.home-de-cv-section#workshops .home-de-workshop-list__text {
+  display: none;
+}
+
+/* When workshops are media-only, remove internal card spacing. */
+.home-de-cv-section#workshops .home-de-workshop-list__link {
+  display: block;
+  gap: 0;
 }
 
 .home-de-workshop-list__title {
@@ -1411,7 +1492,7 @@ a.home-de-workshop-list__link:hover .home-de-workshop-list__title {
 }
 
 .home-de-workshop-list__cta {
-  flex-shrink: 0;
+  display: none;
   font-family: var(--de-font);
   font-size: var(--txt-16);
   line-height: 1;

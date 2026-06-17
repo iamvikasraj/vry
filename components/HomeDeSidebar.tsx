@@ -18,7 +18,7 @@ const NAV_LINKS = [
 
 const EXTERNAL_LINK = {
   href: 'https://designengineer.ing',
-  label: 'Design Engineer.ing',
+  label: 'designengineer.ing',
 }
 
 function normalizePath(path: string) {

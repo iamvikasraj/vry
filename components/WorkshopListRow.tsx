@@ -11,23 +11,32 @@ type WorkshopListRowProps = {
 export default function WorkshopListRow({ workshop }: WorkshopListRowProps) {
   const meta = [workshop.venue, workshop.year].filter(Boolean).join(' · ')
   const hasVideo = Boolean(workshop.video)
+  const hasThumbnail = Boolean(workshop.thumbnail)
 
   const inner = (
     <>
       <div className="home-de-workshop-list__thumb">
-        {!hasVideo ? (
-          <MediaPlaceholder className="home-de-workshop-list__placeholder" label="" />
-        ) : workshop.video ? (
+        {hasVideo && workshop.video ? (
           <video
             className="home-de-workshop-list__image home-de-workshop-list__image--ready"
             src={mediaAssetPath(workshop.video)}
             muted
+            autoPlay
             playsInline
             loop
             preload="metadata"
             aria-hidden
           />
-        ) : null}
+        ) : hasThumbnail && workshop.thumbnail ? (
+          <img
+            className="home-de-workshop-list__image"
+            src={workshop.thumbnail}
+            alt=""
+            aria-hidden
+          />
+        ) : (
+          <MediaPlaceholder className="home-de-workshop-list__placeholder" label="" />
+        )}
       </div>
       <span className="home-de-workshop-list__text">
         <span className="home-de-workshop-list__title">{workshop.title}</span>

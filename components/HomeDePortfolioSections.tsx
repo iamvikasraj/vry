@@ -1,19 +1,28 @@
 import CvSection from '@/components/CvSection'
+import DeTimelinePreview from '@/components/DeTimelinePreview'
 import ProjectListSection from '@/components/ProjectListSection'
 import WorkshopListSection from '@/components/WorkshopListSection'
-import { getPlaygroundPreviewProjects } from '@/data/projects'
+import { getPlaygroundProjects } from '@/data/projects'
 
-export default function HomeDePortfolioSections() {
-  const playgroundPreview = getPlaygroundPreviewProjects()
+type HomeDePortfolioSectionsProps = {
+  filterYear?: number
+}
+
+export default function HomeDePortfolioSections({ filterYear }: HomeDePortfolioSectionsProps) {
+  const playgroundProjects = getPlaygroundProjects()
 
   return (
     <>
-      <CvSection id="playground" title="Playground">
-        <ProjectListSection projects={playgroundPreview} playOnHover layout="cards" />
+      <CvSection id="timeline" title="Timeline">
+        <DeTimelinePreview filterYear={filterYear} />
+      </CvSection>
+
+      <CvSection id="playground" title="Design Engineering Playground">
+        <ProjectListSection projects={playgroundProjects} playOnHover layout="cards" />
       </CvSection>
 
       <CvSection id="workshops" title="Workshop">
-        <WorkshopListSection layout="list" />
+        <WorkshopListSection layout="list" featuredFirst />
       </CvSection>
     </>
   )
