@@ -1,13 +1,25 @@
 import { notFound } from 'next/navigation'
-import Link from 'next/link'
-import Footer from '@/components/Footer'
 import ClientScripts from '@/components/ClientScripts'
+import ProjectSiteHeader from '@/components/ProjectSiteHeader'
 import ProjectViewTracker from '@/components/ProjectViewTracker'
 import ProjectSectionTracker from '@/components/ProjectSectionTracker'
+import ProjectDetailMedia from '@/components/ProjectDetailMedia'
+import ProjectGallery from '@/components/ProjectGallery'
+import ProjectArticleFooter from '@/components/ProjectArticleFooter'
+import ProjectMoreProjects from '@/components/ProjectMoreProjects'
 import { projects, getProjectBySlug } from '@/data/projects'
 
+async function loadMDX(slug: string) {
+  try {
+    const mod = await import(`@/content/projects/${slug}.mdx`)
+    return mod.default
+  } catch {
+    return null
+  }
+}
+
 export async function generateStaticParams() {
-  return projects.map((project) => ({
+  return projects.filter((p) => !p.hidden).map((project) => ({
     slug: project.slug,
   }))
 }
@@ -20,72 +32,83 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
     notFound()
   }
 
+  const MDXContent = await loadMDX(slug)
+
   return (
-    <div className="page-container">
+    <div className="home-page home-page--de home-page--de-detail">
       <ProjectViewTracker projectTitle={project.title} projectSlug={project.slug} />
       <ProjectSectionTracker projectTitle={project.title} projectSlug={project.slug} />
-      <section className="project-detail">
-        <Link href="/" className="project-back-link">
-          Back
-        </Link>
-        
-        <div className="project-header">
-          <h1 className="project-title">{project.title}</h1>
-          {(project.year || project.client || project.role) && (
-            <div className="project-meta">
-              {project.year && <span className="project-meta-item">{project.year}</span>}
-              {project.client && <span className="project-meta-item">{project.client}</span>}
-              {project.role && <span className="project-meta-item">{project.role}</span>}
+      <main className="project-de-main">
+        <ProjectSiteHeader />
+        <section className="project-detail">
+          <header className="project-detail-header">
+            <div className="project-detail-hero">
+              <h1 className="project-title">{project.title}</h1>
+              {(project.client || project.year || project.role) && (
+                <p className="project-detail-byline">
+                  {[project.client, project.year, project.role].filter(Boolean).join(' · ')}
+                </p>
+              )}
+              {project.tools && project.tools.length > 0 && (
+                <p className="project-detail-tools">{project.tools.join(', ')}</p>
+              )}
             </div>
-          )}
-        </div>
-        
-        <div className="project-video-container">
-          <video
-            src={project.video}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="project-video"
-          >
-            <source src={project.video} type="video/mp4" />
-          </video>
-        </div>
-        
-        <div className="project-content">
-          <div className="project-section" id="project-description">
-            <p className="project-description">{project.description}</p>
-          </div>
-          
-          {project.context && (
-            <div className="project-section" id="project-context">
-              <h2 className="project-section-title">Context</h2>
-              <p className="project-section-text">{project.context}</p>
-            </div>
-          )}
-          
-          {project.process && project.process.length > 0 && (
-            <div className="project-section" id="project-process">
-              <h2 className="project-section-title">Process</h2>
-              <ul className="project-process-list">
-                {project.process.map((step, index) => (
-                  <li key={index} className="project-process-item">{step}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-          
-          {project.results && (
-            <div className="project-section" id="project-results">
-              <h2 className="project-section-title">Results</h2>
-              <p className="project-section-text">{project.results}</p>
-            </div>
-          )}
-        </div>
-      </section>
+          </header>
 
-      <Footer />
+          <div className="project-detail-media">
+            <ProjectDetailMedia project={project} />
+          </div>
+
+        {!MDXContent && project.images && project.images.length > 0 && (
+          <ProjectGallery
+            images={project.images.map((src) => ({
+              src,
+              alt: project.title,
+            }))}
+          />
+        )}
+
+        <div className="project-content">
+          {MDXContent ? (
+            <MDXContent />
+          ) : (
+            <>
+              <div className="project-section" id="project-description">
+                <p className="project-description">{project.description}</p>
+              </div>
+
+              {project.context && (
+                <div className="project-section" id="project-context">
+                  <h2 className="project-section-title">Context</h2>
+                  <p className="project-section-text">{project.context}</p>
+                </div>
+              )}
+
+              {project.process && project.process.length > 0 && (
+                <div className="project-section" id="project-process">
+                  <h2 className="project-section-title">Process</h2>
+                  <ul className="project-process-list">
+                    {project.process.map((step, index) => (
+                      <li key={index} className="project-process-item">{step}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {project.results && (
+                <div className="project-section" id="project-results">
+                  <h2 className="project-section-title">Results</h2>
+                  <p className="project-section-text">{project.results}</p>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+
+        <ProjectMoreProjects project={project} />
+        <ProjectArticleFooter />
+        </section>
+      </main>
       <ClientScripts />
     </div>
   )

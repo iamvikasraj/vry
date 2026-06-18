@@ -3,9 +3,12 @@
   command = "npm run build"
 
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "20"
+  # Static export (output: 'export') — do not run @netlify/plugin-nextjs on the `out` folder
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
 
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
+  from = "/api/chat"
+  to = "/.netlify/functions/chat"
   status = 200
+  force = true

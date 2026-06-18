@@ -1,6 +1,27 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
+import { DM_Mono, Inter, Work_Sans } from 'next/font/google'
+import GA4PageView from '@/components/GA4PageView'
+import '../styles/design-engineering-tokens.css'
 import '../styles.css'
+
+const dmMono = DM_Mono({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  variable: '--font-dm-mono',
+  display: 'swap',
+})
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+const workSans = Work_Sans({
+  subsets: ['latin'],
+  variable: '--font-work-sans',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Vikas Raj Yadav | Staff Product Designer & Technologist | UI/UX Designer | Motion Design Expert | Bengaluru',
@@ -30,14 +51,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${dmMono.variable} ${inter.variable} ${workSans.variable}`}>
       <head>
-        <link rel="icon" type="image/png" href="/assets/favicon/favicon.png" />
+        <link rel="stylesheet" href="https://use.typekit.net/wjs0dtk.css" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon/favicon-192.png" />
         <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon/favicon-512x512.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/favicon-512x512.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/favicon-192.png" />
         <link rel="manifest" href="/assets/favicon/site.webmanifest" />
         <link rel="robots" href="/robots.txt" />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#DAD9DA" />
         <link rel="canonical" href="https://vikasrajyadav.in/" />
         
         {/* Additional Meta for AI Search Engines */}
@@ -53,12 +76,8 @@ export default function RootLayout({
         <meta name="revisit-after" content="7 days" />
         
         {/* Fonts */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
-          rel="stylesheet"
-        />
+        <link rel="preconnect" href="https://use.typekit.net" />
+        <link rel="stylesheet" href="https://use.typekit.net/wjs0dtk.css" />
         
         {/* Font Awesome */}
         <link
@@ -110,7 +129,7 @@ export default function RootLayout({
                 }
               ],
               "sameAs": [
-                "https://twitter.com/vraj247",
+                "https://x.com/vryworks",
                 "https://linkedin.com/in/vraj247",
                 "https://dribbble.com/Vraj247",
                 "https://www.behance.net/Vraj247"
@@ -223,10 +242,13 @@ export default function RootLayout({
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-SYDGLK4LKX');
+              gtag('config', 'G-SYDGLK4LKX', {
+                send_page_view: true
+              });
             `,
           }}
         />
+        <GA4PageView />
         {children}
       </body>
     </html>

@@ -56,12 +56,12 @@ export default function Header() {
             <span className="nav-short">ab</span>
           </Link>
           <Link 
-            href="/contact" 
-            className={pathname === '/contact' ? 'active' : ''}
-            onClick={() => analytics.trackNavigationClick('contact', 'Contact')}
+            href="/hobbies" 
+            className={pathname === '/hobbies' ? 'active' : ''}
+            onClick={() => analytics.trackNavigationClick('hobbies', 'Hobbies')}
           >
-            <span className="nav-full">Contact</span>
-            <span className="nav-short">co</span>
+            <span className="nav-full">Hobbies</span>
+            <span className="nav-short">hb</span>
           </Link>
         </nav>
       </div>

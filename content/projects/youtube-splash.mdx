@@ -1,0 +1,22 @@
+The YouTube splash screen is one of the most-seen animations in mobile. Billions of app opens, same logo animation every time. I recreated it using Lottie and SwiftUI to understand what makes a splash feel fast rather than slow.
+
+## The psychology of splash screens
+
+A splash screen is a loading state disguised as branding. The best ones distract you from the wait. YouTube's works because the animation has momentum — it feels like the app is already moving before it's ready.
+
+## How I built it
+
+**Lottie for the animation** — the logo animation is a shape morph with precise timing. Lottie was the right choice here because the animation is predetermined — no state machine needed, just a polished timeline.
+
+**SwiftUI for the transition** — the tricky part isn't the splash itself, it's the handoff to the main UI. I used SwiftUI's `matchedGeometryEffect` to create a seamless transition from the splash logo to the navigation bar logo. No cut, just a spatial continuation.
+
+**Timing** — the whole sequence is under 1.2 seconds. Any longer and it feels like a delay. Any shorter and users don't register the brand moment. YouTube nails this balance.
+
+## What I learned
+
+Splash animations aren't about showing off — they're about managing perception. A well-timed 800ms animation makes an app feel faster than a 200ms fade, because the motion gives the brain something to track.
+
+## Tools
+
+**Lottie** — logo animation with shape morphing
+**SwiftUI** — launch screen, matched geometry transition

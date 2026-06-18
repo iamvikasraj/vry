@@ -1,0 +1,24 @@
+Contra put out a challenge — build something playful with Rive. I wanted to push beyond the usual button animations and build something that felt physical, something you'd actually want to touch.
+
+## Why balloons
+
+Most Rive demos are UI components — toggles, loaders, checkboxes. I wanted to explore something spatial. Balloons felt right because they have natural physics people intuit — they float, bounce, resist, and pop. The interaction writes itself.
+
+## How it works
+
+The entire animation lives in a single Rive state machine. Each balloon has its own set of inputs — position, scale, drag velocity — driven by SwiftUI's gesture system in real time.
+
+- **Drag** — `DragGesture` feeds x/y deltas into Rive inputs, so the balloon follows your finger with slight lag (eased with a spring curve in the state machine)
+- **Release** — on gesture end, a `trigger` input fires the float-away animation. Velocity at release determines the arc
+- **Bounce** — balloons collide with screen edges using Rive's built-in constraints, no physics engine needed
+- **Pop** — a long press triggers the pop state, which plays a particle burst and removes the balloon from the scene
+
+## The tricky part
+
+Syncing SwiftUI gestures with Rive's state machine timing. SwiftUI fires gesture callbacks on the main thread, but Rive's renderer runs on its own loop. The fix was buffering gesture deltas in a `@State` array and flushing them to Rive inputs on each `onAppear` tick — essentially a manual frame sync.
+
+## Tools
+
+- **Rive** — state machine with 4 states per balloon, 12 inputs total
+- **SwiftUI** — gesture handling, layout, state management
+- **Xcode** — profiling to keep it at 60fps with 6+ balloons on screen

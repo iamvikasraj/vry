@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Next.js Dev (network)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev:local", "--", "--port", "3333"],
+      "port": 3333,
+      "autoPort": true
+    }
+  ]
+}

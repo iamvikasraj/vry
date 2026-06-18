@@ -1,20 +1,50 @@
 'use client'
 
+import { useState, useMemo } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ClientScripts from '@/components/ClientScripts'
+import WorkFilters from '@/components/WorkFilters'
+import WorkGrid from '@/components/WorkGrid'
+import GridToggle from '@/components/GridToggle'
+import PortfolioFolderIcon from '@/components/PortfolioFolderIcon'
+import TimelineItem from '@/components/TimelineItem'
+import { projects } from '@/data/projects'
+import { workEmployers } from '@/data/workEmployers'
+
+interface Project {
+  video?: string
+  image?: string
+  title: string
+  link: string
+  description: string
+  tags: string[]
+}
 
 export default function Work() {
-  const workExperiences = [
-    { company: 'Loop Health', period: '2025-Present' },
-    { company: 'ET Money', period: '2024-2024' },
-    { company: 'Time Bridge', period: '2022-2024' },
-    { company: 'HDFC', period: '2021-2022' },
-    { company: 'Paytm', period: '2018-2021' },
-    { company: 'Grappus', period: '2017-2018' },
-    { company: 'ProProfs', period: '2016-2017' },
-    { company: 'Startup', period: '2015-2016' },
-  ]
+  const [gridSize, setGridSize] = useState<'1x1' | '2x2'>('2x2')
+  const [activeFilter, setActiveFilter] = useState<string>('All')
+
+  // Convert projects data to format needed for WorkGrid
+  const allProjects: Project[] = projects.map(project => ({
+    video: project.video,
+    title: project.title,
+    link: `/projects/${project.slug}`,
+    description: project.description,
+    tags: project.tags,
+  }))
+
+  // Filter projects based on active filter
+  const filteredProjects = useMemo(() => {
+    if (activeFilter === 'All') {
+      return allProjects
+    }
+    return allProjects.filter((project) =>
+      project.tags.some((tag) => 
+        tag.trim().toLowerCase() === activeFilter.trim().toLowerCase()
+      )
+    )
+  }, [activeFilter, allProjects])
 
   return (
     <div className="page-container">
@@ -22,6 +52,10 @@ export default function Work() {
 
       <section className="work-page">
         <div className="work-content">
+          <div className="page-folder-heading">
+            <PortfolioFolderIcon />
+            <h1 className="work-page-title">Work</h1>
+          </div>
           <div className="work-description">
             <p>
               Right now, I'm building at <strong>Loop Health</strong> (YC 20) as a Staff Product Designer and Technologist, working at the intersection of design, engineering and business.
@@ -34,12 +68,26 @@ export default function Work() {
             </p>
           </div>
 
+          {/* Work Filters with Grid Toggle */}
+          <div className="work-controls">
+            <WorkFilters activeFilter={activeFilter} onFilterChange={setActiveFilter} />
+            <GridToggle gridSize={gridSize} onToggle={setGridSize} />
+          </div>
+
+          {/* Work Grid */}
+          <WorkGrid projects={filteredProjects} gridSize={gridSize} />
+        </div>
+
+        {/* Work Timeline */}
+        <div className="work-timeline-section" id="work-companies">
           <div className="work-timeline">
-            {workExperiences.map((work, index) => (
-              <div key={index} className="work-item-timeline">
-                <div className="work-company">{work.company}</div>
-                <div className="work-period">{work.period}</div>
-              </div>
+            {workEmployers.map((work) => (
+              <TimelineItem
+                key={work.slug}
+                leftContent={<div className="work-company">{work.company}</div>}
+                rightContent={<div className="work-period">{work.period}</div>}
+                className="work-item-timeline"
+              />
             ))}
           </div>
         </div>

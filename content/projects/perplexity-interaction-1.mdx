@@ -1,0 +1,21 @@
+Perplexity's interface does something rare — it makes an AI product feel fast and transparent. The way results stream in, sources appear, and follow-ups surface is carefully choreographed. I recreated the core interaction flow in Play.
+
+## What makes Perplexity different
+
+Most AI interfaces are a chat box and a loading spinner. Perplexity breaks the response into visual layers — the answer streams, sources fan out beside it, and related questions appear below. Each piece has its own entrance timing.
+
+## Recreating in Play
+
+**The streaming text** — Play doesn't have a native text-streaming component, so I faked it with a reveal mask that moves across pre-set text at a consistent speed. It's not real streaming but it captures the feel.
+
+**Source cards** — these stagger in from the right with a 60ms delay between each. The stagger communicates that these are separate pieces of information arriving, not a batch.
+
+**Follow-up suggestions** — they fade up from below after the main answer completes. This timing is important — showing them too early would compete with the answer. Showing them too late would break the flow.
+
+## Takeaway
+
+Perplexity's UX is really about choreography. Every element has an entrance, a purpose, and a relationship to what came before it. Recreating it made me appreciate how much thought goes into making AI feel conversational rather than computational.
+
+## Tools
+
+**Play** — full interaction prototype with staggered animations

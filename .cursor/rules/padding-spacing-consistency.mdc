@@ -1,0 +1,85 @@
+---
+description: Enforce checking existing values before creating new ones (padding/spacing and components)
+alwaysApply: true
+---
+
+# Consistency Rules: Padding/Spacing & Components
+
+## Rule: Check Existing Values Before Creating New Padding/Spacing
+
+When working with padding, margin, gap, or spacing values in CSS:
+
+### 1. **Always Check First**
+   - Before using any padding/spacing value, search the codebase for existing similar values
+   - Check `styles.css` for CSS custom properties (CSS variables) like `--sp-*` or `--txt-*`
+   - Look for existing padding/margin/gap values in the same context
+
+### 2. **Use Existing Values**
+   - If a similar spacing value exists (within 4-8px), use the existing one
+   - Prefer CSS custom properties from the design system:
+     - `var(--sp-8)`, `var(--sp-12)`, `var(--sp-16)`, `var(--sp-24)`, `var(--sp-32)`, `var(--sp-48)`, `var(--sp-80)`
+   - Match spacing to similar components/sections
+
+### 3. **Before Creating New Values**
+   - If you need a spacing value that doesn't exist:
+     - **STOP and ASK the user first**
+     - Explain why the existing values don't work
+     - Propose the new value and get approval
+   - Only create new CSS custom properties after user approval
+
+### 4. **Examples**
+   - ✅ Good: Using `var(--sp-16)` for padding when similar components use it
+   - ✅ Good: Using `var(--sp-32)` if that's what similar sections use
+   - ❌ Bad: Creating `padding: 20px` when `var(--sp-16)` or `var(--sp-24)` exists
+   - ❌ Bad: Adding `--sp-20` without checking if `--sp-16` or `--sp-24` would work
+
+### 5. **Search Pattern**
+   Before adding padding/spacing, search for:
+   - Similar components in the codebase
+   - Existing spacing patterns in `styles.css`
+   - CSS custom properties that might fit
+
+### 6. **Consistency Priority**
+   - Consistency > Perfection
+   - It's better to use an existing value that's close than to create a new one
+   - Maintain visual consistency across the design system
+
+---
+
+## Component Creation Rule
+
+### 1. **Always Check First**
+   - Before creating any new component, search the codebase for existing similar components
+   - Check `components/` directory for components that might serve the same purpose
+   - Look for components with similar functionality or visual appearance
+
+### 2. **If Component Exists**
+   - **Create a variant** instead of a new component
+   - Extend the existing component with props/variants
+   - Reuse the existing component structure and styles
+   - Example: If `Button` exists, create `Button` variant instead of `NewButton`
+
+### 3. **If Component Doesn't Exist**
+   - **STOP and INFORM the user first**
+   - Explain what component you're planning to create
+   - Describe its purpose and why it's needed
+   - Get user approval before creating the new component
+   - Only create after user confirms
+
+### 4. **Component Naming**
+   - Use descriptive, PascalCase names
+   - Follow existing naming conventions in the project
+   - Check for similar component names to avoid confusion
+
+### 5. **Examples**
+   - ✅ Good: Extending existing `Card` component with new variant
+   - ✅ Good: Creating `WorkshopCard` variant of existing `Card` component
+   - ❌ Bad: Creating `NewCard` when `Card` already exists
+   - ❌ Bad: Creating component without checking if similar one exists
+   - ❌ Bad: Creating new component without informing user first
+
+### 6. **Search Pattern**
+   Before creating a component, search for:
+   - Similar component names in `components/` directory
+   - Components with similar functionality
+   - Existing patterns that could be extended

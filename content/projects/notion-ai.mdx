@@ -1,0 +1,22 @@
+Notion's AI features sit inside a document editor — a fundamentally different context from a chat interface. I explored how AI assistance could feel native to the editing experience using Rive for the interaction feedback and Play for the full flow.
+
+## The design challenge
+
+AI in a document editor has a unique constraint — it can't interrupt the flow of writing. A chat-style AI panel would pull focus away from the content. The interaction needs to feel like an extension of the editor, not a separate tool.
+
+## Concepts I explored
+
+**Inline suggestions** — AI-generated text appears as ghost text ahead of the cursor, similar to code completion. Rive handles the fade-in animation with a shimmer that distinguishes it from typed text. Accepting is a single keystroke.
+
+**Block-level actions** — selecting a paragraph surfaces AI actions (summarize, expand, rewrite) in a floating bar. The bar entrance uses Rive for a soft spring animation that doesn't feel jarring while you're reading.
+
+**The feedback loop** — when AI rewrites a block, the old text doesn't just disappear. It cross-fades with a subtle diff highlight — green for additions, dim for removals — so you can see what changed at a glance.
+
+## What I learned
+
+AI in productivity tools should be invisible until needed and obvious when active. The transition between these two states is where the design work lives — too subtle and users miss it, too loud and it interrupts focus.
+
+## Tools
+
+**Rive** — inline suggestion shimmer, floating bar spring animation
+**Play** — full editing flow prototype with AI interactions

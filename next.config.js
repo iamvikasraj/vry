@@ -1,12 +1,34 @@
 /** @type {import('next').NextConfig} */
+const createMDX = require('@next/mdx')
+
+// `output: 'export'` changes how the server bundle is split in dev and can trigger missing
+// chunk errors (e.g. Cannot find module './948.js'). Only enable it for production builds.
+// Static export → `out/`. postbuild removes `.next` so `npm run dev` never loads export chunks.
+const isNextDev = process.env.NODE_ENV === 'development'
+
 const nextConfig = {
-  output: 'export', // Static export for Netlify
+  ...(!isNextDev ? { output: 'export' } : {}),
   images: {
-    unoptimized: true, // Required for static export
+    unoptimized: true,
   },
   trailingSlash: true,
-  // Preserve your existing file structure
-  distDir: 'out',
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
 }
 
-module.exports = nextConfig
+const withMDX = createMDX({})
+
+/** @param {import('next').NextConfig} config */
+function withDevWebpackMemoryCache(config) {
+  if (!isNextDev) return config
+  const webpack = config.webpack
+  config.webpack = (webpackConfig, options) => {
+    const nextConfig =
+      typeof webpack === 'function' ? webpack(webpackConfig, options) : webpackConfig
+    // Disk pack cache (.pack.gz) goes stale when .next is partially deleted or build/dev overlap.
+    nextConfig.cache = { type: 'memory' }
+    return nextConfig
+  }
+  return config
+}
+
+module.exports = withDevWebpackMemoryCache(withMDX(nextConfig))
