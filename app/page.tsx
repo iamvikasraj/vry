@@ -1,17 +1,10 @@
 import HomeDeLayout from '@/components/HomeDeLayout'
 import HomeDePortfolioPage from '@/components/HomeDePortfolioPage'
 
-type PageProps = {
-  searchParams?: Promise<{ company?: string }>
-}
-
-export default async function Home({ searchParams }: PageProps) {
-  const params = (await searchParams) ?? {}
-  const filterCompany = params.company?.trim() || undefined
-
+export default function Home() {
   return (
     <HomeDeLayout>
-      <HomeDePortfolioPage filterCompany={filterCompany} />
+      <HomeDePortfolioPage />
     </HomeDeLayout>
   )
 }

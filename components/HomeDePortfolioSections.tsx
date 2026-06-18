@@ -1,20 +1,19 @@
+import { Suspense } from 'react'
 import CvSection from '@/components/CvSection'
 import DeTimelinePreview from '@/components/DeTimelinePreview'
 import ProjectListSection from '@/components/ProjectListSection'
 import WorkshopListSection from '@/components/WorkshopListSection'
 import { getPlaygroundProjects } from '@/data/projects'
 
-type HomeDePortfolioSectionsProps = {
-  filterCompany?: string
-}
-
-export default function HomeDePortfolioSections({ filterCompany }: HomeDePortfolioSectionsProps) {
+export default function HomeDePortfolioSections() {
   const playgroundProjects = getPlaygroundProjects()
 
   return (
     <>
       <CvSection id="timeline" title="Featured project" hideHeading>
-        <DeTimelinePreview filterCompany={filterCompany} />
+        <Suspense fallback={null}>
+          <DeTimelinePreview />
+        </Suspense>
       </CvSection>
 
       <CvSection id="playground" title="Interaction Playground">
