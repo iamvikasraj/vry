@@ -4,14 +4,13 @@ import type { DePortfolioSectionId } from '@/lib/deScroll'
 
 type HomeDePortfolioPageProps = {
   scrollTo?: DePortfolioSectionId
-  filterCompany?: string
 }
 
-export default function HomeDePortfolioPage({ scrollTo, filterCompany }: HomeDePortfolioPageProps) {
+export default function HomeDePortfolioPage({ scrollTo }: HomeDePortfolioPageProps) {
   return (
     <>
       <DeSectionScroller sectionId={scrollTo} />
-      <HomeDePortfolioSections filterCompany={filterCompany} />
+      <HomeDePortfolioSections />
     </>
   )
 }

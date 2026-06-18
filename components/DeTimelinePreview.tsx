@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import FeaturedProjectCard from '@/components/FeaturedProjectCard'
 import {
   featuredCompanies,
@@ -6,11 +9,9 @@ import {
   getFeaturedCompanyBySlug,
 } from '@/data/featuredCompanies'
 
-type DeTimelinePreviewProps = {
-  filterCompany?: string
-}
-
-export default function DeTimelinePreview({ filterCompany }: DeTimelinePreviewProps) {
+export default function DeTimelinePreview() {
+  const searchParams = useSearchParams()
+  const filterCompany = searchParams.get('company')?.trim() || undefined
   const activeCompany =
     (filterCompany ? getFeaturedCompanyBySlug(filterCompany) : undefined) ??
     getDefaultFeaturedCompany()
