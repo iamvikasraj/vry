@@ -1,30 +1,51 @@
 'use client'
 
+import Link from 'next/link'
+import { useRef } from 'react'
 import MediaPlaceholder from '@/components/MediaPlaceholder'
 import type { Workshop } from '@/data/workshops'
 import { mediaAssetPath } from '@/lib/mediaAssetPath'
+import { workshopHref } from '@/lib/workshopHref'
 
 type WorkshopListRowProps = {
   workshop: Workshop
 }
 
 export default function WorkshopListRow({ workshop }: WorkshopListRowProps) {
+  const videoRef = useRef<HTMLVideoElement>(null)
   const meta = [workshop.venue, workshop.year].filter(Boolean).join(' · ')
   const hasVideo = Boolean(workshop.video)
   const hasThumbnail = Boolean(workshop.thumbnail)
 
+  const outboundUrl = workshop.registrationUrl ?? workshop.externalUrl
+  const detailHref = workshop.slug ? workshopHref(workshop.slug) : null
+
+  const onVideoEnter = () => {
+    videoRef.current?.play()
+  }
+
+  const onVideoLeave = () => {
+    if (!videoRef.current) return
+    videoRef.current.pause()
+    videoRef.current.currentTime = 0
+  }
+
   const inner = (
     <>
-      <div className="home-de-workshop-list__thumb">
+      <div
+        className="home-de-workshop-list__thumb"
+        onMouseEnter={hasVideo ? onVideoEnter : undefined}
+        onMouseLeave={hasVideo ? onVideoLeave : undefined}
+      >
         {hasVideo && workshop.video ? (
           <video
+            ref={videoRef}
             className="home-de-workshop-list__image home-de-workshop-list__image--ready"
             src={mediaAssetPath(workshop.video)}
             muted
-            autoPlay
             playsInline
             loop
-            preload="metadata"
+            preload="auto"
             aria-hidden
           />
         ) : hasThumbnail && workshop.thumbnail ? (
@@ -43,7 +64,7 @@ export default function WorkshopListRow({ workshop }: WorkshopListRowProps) {
         {meta ? <span className="home-de-workshop-list__meta">{meta}</span> : null}
       </span>
       <span className="home-de-workshop-list__cta" aria-hidden="true">
-        {workshop.registrationUrl ? '↗' : '→'}
+        {workshop.registrationUrl || (outboundUrl && !detailHref) ? '↗' : '→'}
       </span>
     </>
   )
@@ -56,6 +77,32 @@ export default function WorkshopListRow({ workshop }: WorkshopListRowProps) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`${workshop.title} — register (opens in new tab)`}
+      >
+        {inner}
+      </a>
+    )
+  }
+
+  if (detailHref) {
+    return (
+      <Link href={detailHref} className="home-de-workshop-list__link" aria-label={workshop.title}>
+        {inner}
+      </Link>
+    )
+  }
+
+  if (outboundUrl) {
+    return (
+      <a
+        href={outboundUrl}
+        className="home-de-workshop-list__link"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={
+          workshop.externalUrl
+            ? `${workshop.title} — watch (opens in new tab)`
+            : `${workshop.title} (opens in new tab)`
+        }
       >
         {inner}
       </a>

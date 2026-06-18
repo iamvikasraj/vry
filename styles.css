@@ -490,7 +490,7 @@ body {
   font-weight: 400;
   line-height: 1.5;
   color: var(--de-gray-dark);
-  margin: calc(var(--sp-4) * -1) 0 0 0;
+  margin: 0;
 }
 
 .home-de-sidebar-social {
@@ -658,9 +658,9 @@ body {
 
 .home-de-cv-section__heading {
   margin: 0 0 var(--sp-24);
-  font-size: 0.8125rem;
+  font-size: var(--txt-14);
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.2;
   color: var(--de-gray-muted);
 }
 
@@ -758,15 +758,15 @@ body {
   gap: var(--sp-32);
 }
 
-.home-de-timeline-preview__years {
+.home-de-timeline-preview__companies {
   display: flex;
   align-items: center;
   gap: var(--sp-32);
-  overflow: hidden;
+  overflow-x: auto;
   white-space: nowrap;
 }
 
-.home-de-timeline-preview__year {
+.home-de-timeline-preview__company {
   display: inline;
   padding: 0;
   border-radius: 0;
@@ -777,30 +777,60 @@ body {
   font-size: var(--txt-14);
   font-weight: 500;
   line-height: 1.2;
+  flex-shrink: 0;
 }
 
-.home-de-timeline-preview__year--muted {
+.home-de-timeline-preview__company--muted {
   opacity: 0.2;
 }
 
-.home-de-timeline-preview__year:focus-visible {
+.home-de-timeline-preview__company:focus-visible {
   outline: 2px solid rgba(0, 0, 0, 0.35);
   outline-offset: var(--sp-2);
+}
+
+.home-de-timeline-preview__summary {
+  margin: 0;
+  width: 100%;
+  font-family: var(--de-font);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--de-gray-dark);
 }
 
 .home-de-timeline-featured__placeholder {
   width: 100%;
   aspect-ratio: 16 / 9;
   border-radius: 6px;
-  background: var(--de-black);
+  background: var(--de-media-surface);
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.home-de-timeline-featured__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .home-de-timeline-featured__placeholder--link {
   text-decoration: none;
   color: inherit;
+}
+
+.home-de-timeline-featured__placeholder--link:hover {
+  opacity: 0.92;
+}
+
+.home-de-timeline-featured__placeholder--link:focus-visible {
+  outline: 2px solid rgba(0, 0, 0, 0.35);
+  outline-offset: var(--sp-2);
 }
 
 .home-de-timeline-empty {
@@ -812,11 +842,13 @@ body {
 }
 
 .home-de-timeline-featured__placeholder-text {
+  position: relative;
+  z-index: 1;
   font-family: var(--de-font);
   font-size: var(--txt-14);
   font-weight: 500;
   line-height: 1.2;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--de-gray-muted);
 }
 
 @media (max-width: 768px) {

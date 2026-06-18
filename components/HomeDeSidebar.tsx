@@ -12,7 +12,7 @@ import { DE_SECTION_HREF, getDeScrollRoot, isDePortfolioSectionId, scrollToDeSec
 import { SOCIAL_LINKS } from '@/lib/socialLinks'
 
 const NAV_LINKS = [
-  { sectionId: 'playground' as const, label: 'Playground' },
+  { sectionId: 'timeline' as const, label: 'Experiences' },
   { sectionId: 'workshops' as const, label: 'Workshop' },
 ] as const
 
@@ -89,14 +89,11 @@ export default function HomeDeSidebar() {
 
   const activeNavId = onSinglePagePortfolio ? scrollNavId ?? routeNavId : routeNavId
 
-  const sectionHref = (sectionId: DePortfolioSectionId) => {
-    if (sectionId === 'playground') return DE_ROUTES.playground
-    return DE_SECTION_HREF[sectionId]
-  }
+  const sectionHref = (sectionId: DePortfolioSectionId) => DE_SECTION_HREF[sectionId]
 
   const onSectionClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, sectionId: DePortfolioSectionId) => {
-      if (!onSinglePagePortfolio || sectionId === 'playground') return
+      if (!onSinglePagePortfolio) return
       e.preventDefault()
       scrollToDeSection(sectionId)
       setScrollNavId(sectionId)

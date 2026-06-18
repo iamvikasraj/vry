@@ -44,6 +44,27 @@ export const projects: Project[] = [
     ]
   },
   {
+    slug: 'loop-ai-assistant',
+    title: 'Loop Health — AI Assistant',
+    video: '/assets/video/Loop AI Assistant (LinkedIn Export).mp4',
+    description:
+      'General-query AI assistant inside Loop Health — fast answers, clear sourcing, and handoff to human care when needed.',
+    tags: ['Live Projects', 'Healthcare'],
+    category: 'Work',
+    year: '2025',
+    client: 'Loop Health',
+    role: 'Staff Product Designer & Technologist',
+    context:
+      'Designed the member-facing AI assistant for everyday health questions — balancing speed, trust, and safe escalation paths.',
+    process: [
+      'Mapped high-intent query types and failure modes',
+      'Prototyped conversation flows and loading states in SwiftUI',
+      'Defined escalation patterns to doctors and support',
+      'Shipped production patterns with engineering and clinical review',
+    ],
+    tools: ['SwiftUI', 'Figma'],
+  },
+  {
     slug: 'loop-care-journey',
     title: 'Loop Health — Care Journey',
     video: '/assets/video/loop-care-journey.mp4',
@@ -221,6 +242,114 @@ export const projects: Project[] = [
     ]
   },
   {
+    slug: 'et-money-1',
+    title: 'ET Money — Investing flows',
+    video: '',
+    description: 'Personal finance and investing experiences for ET Money — high-compliance flows with clear hierarchy.',
+    tags: ['Live Projects', 'FinTech'],
+    category: 'Work',
+    year: '2020–2022',
+    client: 'ET Money',
+    role: 'Principal Product Designer',
+    context: 'Led UX for core investing journeys — onboarding, fund discovery, and transaction flows under strict compliance constraints.',
+    process: [
+      'Mapped member journeys across mutual funds and SIP flows',
+      'Designed progressive disclosure for complex financial decisions',
+      'Partnered with legal and product on compliant copy patterns',
+      'Shipped patterns adopted across the ET Money app',
+    ],
+  },
+  {
+    slug: 'et-money-2',
+    title: 'ET Money — Design system',
+    video: '',
+    description: 'Design system and component library work for ET Money’s personal finance platform.',
+    tags: ['Live Projects', 'FinTech', 'Design Systems'],
+    category: 'Work',
+    year: '2020–2022',
+    client: 'ET Money',
+    role: 'Principal Product Designer',
+    context: 'Established shared UI patterns for investing, insurance, and money management surfaces.',
+    process: [
+      'Audited inconsistent patterns across product squads',
+      'Defined typography, color, and component APIs',
+      'Documented usage for design and engineering',
+      'Rolled out adoption across high-traffic flows',
+    ],
+  },
+  {
+    slug: 'times-bridge-1',
+    title: 'Times Bridge — Market entry concept',
+    video: '',
+    description: 'Digital product concept for a global media brand entering the Indian market.',
+    tags: ['Live Projects'],
+    category: 'Work',
+    year: '2019',
+    client: 'Times Bridge',
+    role: 'Product Design Consultant',
+    context: 'Partnered with Times Bridge to concept and prototype a consumer product tailored for India.',
+    process: [
+      'Researched local usage patterns and content preferences',
+      'Sketched end-to-end flows and key interaction moments',
+      'Built clickable prototypes for stakeholder review',
+      'Handed off specs to engineering partners',
+    ],
+  },
+  {
+    slug: 'times-bridge-2',
+    title: 'Times Bridge — Prototype sprint',
+    video: '',
+    description: 'Rapid prototyping sprint for cross-functional teams at Times Bridge.',
+    tags: ['Live Projects'],
+    category: 'Work',
+    year: '2019',
+    client: 'Times Bridge',
+    role: 'Product Design Consultant',
+    context: 'Short-cycle design sprint to validate a partnership product direction before build.',
+    process: [
+      'Aligned on success metrics with product and partnerships',
+      'Prototyped core flows in high fidelity',
+      'Ran review sessions with global brand stakeholders',
+      'Delivered build-ready interaction specs',
+    ],
+  },
+  {
+    slug: 'grappus-1',
+    title: 'Grappus — Consumer app',
+    video: '',
+    description: 'Mobile product design for a startup client at Grappus.',
+    tags: ['Live Projects'],
+    category: 'Work',
+    year: '2016–2017',
+    client: 'Grappus',
+    role: 'Product Designer',
+    context: 'Early-career product design — end-to-end mobile flows, visual craft, and developer handoff.',
+    process: [
+      'Wireframed core user journeys with founders',
+      'Designed UI systems and screen states',
+      'Collaborated with engineering on implementation details',
+      'Iterated from user feedback post-launch',
+    ],
+  },
+  {
+    slug: 'grappus-2',
+    title: 'Grappus — Interface system',
+    video: '',
+    description: 'Reusable interface patterns and visual language for Grappus client work.',
+    tags: ['Live Projects'],
+    category: 'Work',
+    year: '2016–2017',
+    client: 'Grappus',
+    role: 'Product Designer',
+    context: 'Built a lightweight component approach to ship multiple client apps faster.',
+    process: [
+      'Defined base typography and spacing scales',
+      'Created reusable UI modules for common patterns',
+      'Documented states for forms, lists, and navigation',
+      'Applied the system across active client projects',
+    ],
+  },
+  {
     slug: 'uber-dti',
     title: 'Uber DTI',
     video: '/assets/video/uber-dti.mp4',
@@ -278,25 +407,6 @@ export const projects: Project[] = [
     ]
   },
   {
-    slug: 'twitter-popular',
-    title: 'Twitter Popular Interaction with Rive',
-    video: '/assets/video/Twitter popular interaction with Rive.mp4',
-    description: 'Recreating Twitter\'s popular interaction using Rive animation.',
-    tags: ['Rive'],
-    category: 'Design Engineering',
-    hidden: true,
-    year: '2024',
-    client: 'Personal Project',
-    role: 'Designer & Prototyper',
-    context: 'Explored recreating Twitter\'s popular interaction pattern using Rive for learning and experimentation.',
-    process: [
-      'Analyzed Twitter\'s interaction pattern',
-      'Prototyped animation in Rive',
-      'Refined timing and easing',
-      'Shared with design community'
-    ]
-  },
-  {
     slug: 'youtube-splash',
     title: 'Youtube Splash Animation with Lottie and SwiftUI',
     video: '/assets/video/Youtube Splash Animation with Lottie and SwiftUI.mp4',
@@ -332,25 +442,6 @@ export const projects: Project[] = [
       'Set up data binding in Rive',
       'Integrated with SwiftUI',
       'Tested interactions and feedback'
-    ]
-  },
-  {
-    slug: 'rive-button',
-    title: 'Rive Interactive Button',
-    video: '/assets/video/Rive Interactive Button.mp4',
-    description: 'Interactive button component created with Rive.',
-    tags: ['Rive'],
-    category: 'Design Engineering',
-    hidden: true,
-    year: '2024',
-    client: 'Personal Project',
-    role: 'Designer',
-    context: 'Explored creating interactive button states and feedback with Rive.',
-    process: [
-      'Designed button states and interactions',
-      'Created animations in Rive',
-      'Refined hover and click feedback',
-      'Shared component with community'
     ]
   },
   {
@@ -448,25 +539,6 @@ export const projects: Project[] = [
       'Refined user experience'
     ]
   },
-  {
-    slug: 'dream-machine',
-    title: 'Dream Machine Header Animation with Rive',
-    video: '/assets/video/Dream machine header animation with Rive.mp4',
-    description: 'Header animation for Dream Machine using Rive.',
-    tags: ['Rive'],
-    category: 'Design Engineering',
-    hidden: true,
-    year: '2024',
-    client: 'Personal Project',
-    role: 'Designer',
-    context: 'Created engaging header animation for Dream Machine concept.',
-    process: [
-      'Designed animation concept',
-      'Created animations in Rive',
-      'Refined timing and easing',
-      'Optimized performance'
-    ]
-  },
 ]
 
 // Helper to get project by slug
@@ -480,8 +552,6 @@ export function getLiveProjects(): Project[] {
   const rest = live.filter(p => !p.featured)
   return [...featured, ...rest]
 }
-
-export const HOME_PLAYGROUND_PREVIEW_LIMIT = 4
 
 /** First calendar year on a project — used for chronological ordering. */
 export function projectStartYear(project: Project): number | undefined {
@@ -529,10 +599,6 @@ export function getPlaygroundProjects(): Project[] {
   const mobile = withoutForcedBottom.filter(isMobileExperiment)
   const rest = withoutForcedBottom.filter((p) => !isMobileExperiment(p))
   return [...mobile, ...rest, ...forcedBottom]
-}
-
-export function getPlaygroundPreviewProjects(limit = HOME_PLAYGROUND_PREVIEW_LIMIT): Project[] {
-  return getPlaygroundProjects().slice(0, limit)
 }
 
 export function getProjectListHref(project: Project): string {

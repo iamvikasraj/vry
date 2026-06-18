@@ -1,8 +1,9 @@
-export type DePortfolioSectionId = 'playground' | 'workshops'
+export type DePortfolioSectionId = 'timeline' | 'playground' | 'workshops'
 
-const SECTION_IDS: DePortfolioSectionId[] = ['playground', 'workshops']
+const SECTION_IDS: DePortfolioSectionId[] = ['timeline', 'playground', 'workshops']
 
 export const DE_SECTION_HREF: Record<DePortfolioSectionId, string> = {
+  timeline: '/#timeline',
   playground: '/#playground',
   workshops: '/#workshops',
 }

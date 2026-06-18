@@ -1,51 +1,43 @@
 import Link from 'next/link'
+import FeaturedProjectCard from '@/components/FeaturedProjectCard'
 import {
-  getTimelineProjectsForYear,
-  getTimelineYears,
-  type TimelinePlaceholder,
-} from '@/data/timelineProjects'
-
-function TimelineProjectCard({ project }: { project: TimelinePlaceholder }) {
-  return (
-    <div
-      className="home-de-timeline-featured__placeholder"
-      aria-label={`Project ${project.id}`}
-    >
-      <span className="home-de-timeline-featured__placeholder-text">Project {project.id}</span>
-    </div>
-  )
-}
+  featuredCompanies,
+  getDefaultFeaturedCompany,
+  getFeaturedCompanyBySlug,
+} from '@/data/featuredCompanies'
 
 type DeTimelinePreviewProps = {
-  filterYear?: number
+  filterCompany?: string
 }
 
-export default function DeTimelinePreview({ filterYear }: DeTimelinePreviewProps) {
-  const years = getTimelineYears()
-  const activeYear = filterYear ?? years[0]
-  const yearProjects = getTimelineProjectsForYear(activeYear)
+export default function DeTimelinePreview({ filterCompany }: DeTimelinePreviewProps) {
+  const activeCompany =
+    (filterCompany ? getFeaturedCompanyBySlug(filterCompany) : undefined) ??
+    getDefaultFeaturedCompany()
 
   return (
-    <div className="home-de-timeline-preview" aria-label="Timeline">
-      <div className="home-de-timeline-preview__years" aria-label="Filter by year">
-        {years.map((year, idx) => (
+    <div className="home-de-timeline-preview">
+      <div className="home-de-timeline-preview__companies" aria-label="Filter by company">
+        {featuredCompanies.map((company) => (
           <Link
-            key={`${year}-${idx}`}
-            href={year === activeYear ? '/' : `/?year=${year}`}
+            key={company.slug}
+            href={company.slug === activeCompany.slug ? '/' : `/?company=${company.slug}`}
             scroll={false}
-            className={`home-de-timeline-preview__year${year === activeYear ? '' : ' home-de-timeline-preview__year--muted'}`}
-            aria-current={year === activeYear ? 'true' : undefined}
+            className={`home-de-timeline-preview__company${company.slug === activeCompany.slug ? '' : ' home-de-timeline-preview__company--muted'}`}
+            aria-current={company.slug === activeCompany.slug ? 'true' : undefined}
           >
-            {year}
+            {company.name}
           </Link>
         ))}
       </div>
 
       <div className="home-de-project-list home-de-project-list--cards home-de-timeline-featured">
-        {yearProjects.map((project) => (
-          <TimelineProjectCard key={project.slug} project={project} />
+        {activeCompany.projects.map((project) => (
+          <FeaturedProjectCard key={project.slug} project={project} />
         ))}
       </div>
+
+      <p className="home-de-timeline-preview__summary">{activeCompany.summary}</p>
     </div>
   )
 }

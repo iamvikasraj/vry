@@ -23,7 +23,7 @@ export function getActiveDeNavId(pathname: string | null): DeNavId | null {
   if (path === '/playground') return 'playground'
   if (path === '/workshops') return 'workshops'
   if (path.startsWith('/live-projects')) return null
-  if (path === '' || path === '/') return 'playground'
+  if (path === '' || path === '/') return 'timeline'
 
   const slug = projectSlugFromPath(path)
   if (!slug) return null
