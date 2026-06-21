@@ -13,9 +13,16 @@ type ProjectListLinkProps = {
   media: ProjectThumbMedia
   /** Play video on hover (Playground); static thumb on company chapters. */
   playOnHover?: boolean
+  /** Full-width card in the Interactions grid. */
+  featured?: boolean
 }
 
-export default function ProjectListLink({ project, media, playOnHover = false }: ProjectListLinkProps) {
+export default function ProjectListLink({
+  project,
+  media,
+  playOnHover = false,
+  featured = false,
+}: ProjectListLinkProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [hovered, setHovered] = useState(false)
   const [ready, setReady] = useState(false)
@@ -56,7 +63,9 @@ export default function ProjectListLink({ project, media, playOnHover = false }:
   return (
     <Link
       href={projectHref(project.slug)}
-      className={`home-de-project-list__link${hovered ? ' home-de-project-list__link--hover' : ''}`}
+      className={`home-de-project-list__link home-de-media-card${hovered ? ' home-de-project-list__link--hover' : ''}${
+        featured ? ' home-de-project-list__link--featured' : ''
+      }`}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       aria-label={`View project: ${project.title}`}
@@ -92,6 +101,10 @@ export default function ProjectListLink({ project, media, playOnHover = false }:
             onError={() => setVideoError(true)}
           />
         )}
+        <span className="home-de-media-caption">
+          <span className="home-de-media-caption__title">{project.title}</span>
+          {meta ? <span className="home-de-media-caption__meta">{meta}</span> : null}
+        </span>
       </div>
       <span className="home-de-project-list__text">
         <span className="home-de-project-list__title">{project.title}</span>

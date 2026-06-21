@@ -1,7 +1,8 @@
-import { Suspense } from 'react'
 import CvSection from '@/components/CvSection'
 import DeTimelinePreview from '@/components/DeTimelinePreview'
+import HomeDeAboutSection from '@/components/HomeDeAboutSection'
 import ProjectListSection from '@/components/ProjectListSection'
+import WritingListSection from '@/components/WritingListSection'
 import WorkshopListSection from '@/components/WorkshopListSection'
 import { getPlaygroundProjects } from '@/data/projects'
 
@@ -10,13 +11,11 @@ export default function HomeDePortfolioSections() {
 
   return (
     <>
-      <CvSection id="timeline" title="Featured project" hideHeading>
-        <Suspense fallback={null}>
-          <DeTimelinePreview />
-        </Suspense>
+      <CvSection id="timeline" title="Experiences">
+        <DeTimelinePreview />
       </CvSection>
 
-      <CvSection id="playground" title="Interaction Playground">
+      <CvSection id="playground" title="Interactions">
         <ProjectListSection
           projects={playgroundProjects}
           playOnHover
@@ -25,8 +24,14 @@ export default function HomeDePortfolioSections() {
       </CvSection>
 
       <CvSection id="workshops" title="Workshop">
-        <WorkshopListSection featuredFirst />
+        <WorkshopListSection layout="grid-2" />
       </CvSection>
+
+      <CvSection id="writing" title="designengineer.ing">
+        <WritingListSection />
+      </CvSection>
+
+      <HomeDeAboutSection />
     </>
   )
 }

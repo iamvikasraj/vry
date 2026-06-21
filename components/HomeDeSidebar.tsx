@@ -13,13 +13,11 @@ import { SOCIAL_LINKS } from '@/lib/socialLinks'
 
 const NAV_LINKS = [
   { sectionId: 'timeline' as const, label: 'Experiences' },
+  { sectionId: 'playground' as const, label: 'Interactions' },
   { sectionId: 'workshops' as const, label: 'Workshop' },
+  { sectionId: 'writing' as const, label: 'designengineer.ing' },
+  { sectionId: 'about' as const, label: 'About' },
 ] as const
-
-const EXTERNAL_LINK = {
-  href: 'https://designengineer.ing',
-  label: 'designengineer.ing',
-}
 
 function normalizePath(path: string) {
   if (path.length > 1 && path.endsWith('/')) return path.slice(0, -1)
@@ -29,7 +27,7 @@ function normalizePath(path: string) {
 /** Home + section scroll routes that render the full single-page portfolio. */
 function isSinglePagePortfolio(pathname: string | null) {
   const path = normalizePath(pathname ?? '')
-  return path === '' || path === '/' || path === '/workshops'
+  return path === '' || path === '/' || path === '/playground' || path === '/workshops'
 }
 
 export default function HomeDeSidebar() {
@@ -125,14 +123,6 @@ export default function HomeDeSidebar() {
               </Link>
             )
           })}
-          <a
-            href={EXTERNAL_LINK.href}
-            className="home-de-sidebar-link home-de-sidebar-link--external"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {EXTERNAL_LINK.label}
-          </a>
         </nav>
 
         <nav className="home-de-sidebar-social" aria-label="Social links">

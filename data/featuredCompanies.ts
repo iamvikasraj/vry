@@ -1,7 +1,17 @@
+import { getProjectBySlug } from '@/data/projects'
+
 export type FeaturedCompanyProject = {
   slug: string
   title: string
+  companyName?: string
   video?: string
+  /** Play in order on hover; loops back to the first clip. */
+  videos?: string[]
+  thumbnail?: string
+  /** Full-width hero on home Experiences section. */
+  hero?: boolean
+  /** Omit from home Experiences grid (e.g. until media is ready). */
+  hidden?: boolean
 }
 
 export type FeaturedCompany = {
@@ -21,12 +31,16 @@ export const featuredCompanies: FeaturedCompany[] = [
       {
         slug: 'loop-doctor-on-demand',
         title: 'Doctor on Demand',
-        video: '/assets/video/loop-doctor-on-demand.mp4',
+        videos: [
+          '/assets/video/loop-doctor-on-demand-after.mp4',
+          '/assets/video/loop-doctor-on-demand-before.mp4',
+        ],
       },
       {
         slug: 'loop-ai-assistant',
         title: 'Loop AI Assistant (General queries)',
         video: '/assets/video/Loop AI Assistant (LinkedIn Export).mp4',
+        hero: true,
       },
     ],
   },
@@ -36,8 +50,8 @@ export const featuredCompanies: FeaturedCompany[] = [
     summary:
       'Built Paytm’s foundational design system and scaled Postpaid to 1M+ users in six months. Led redesigns for India’s largest private B2C train booking platform.',
     projects: [
-      { slug: 'paytm-postpaid', title: 'Paytm Postpaid' },
-      { slug: 'paytm-travel-trains', title: 'Paytm Travel' },
+      { slug: 'paytm-postpaid', title: 'Paytm Postpaid', hidden: true },
+      { slug: 'paytm-travel-trains', title: 'Paytm Travel', hidden: true },
     ],
   },
   {
@@ -46,8 +60,12 @@ export const featuredCompanies: FeaturedCompany[] = [
     summary:
       'Principal Product Designer leading UX for India’s personal finance platform — high-compliance flows, design system work, and product craft across investing and money management.',
     projects: [
-      { slug: 'et-money-1', title: 'Project 1' },
-      { slug: 'et-money-2', title: 'Project 2' },
+      {
+        slug: 'et-money-1',
+        title: 'ET Money — Onboarding',
+        video: '/assets/video/et-money-onboarding.mp4',
+      },
+      { slug: 'et-money-2', title: 'Project 2', hidden: true },
     ],
   },
   {
@@ -56,8 +74,12 @@ export const featuredCompanies: FeaturedCompany[] = [
     summary:
       'Product design consultant partnering with global media brands entering India — concepting, prototyping, and shipping digital products with cross-functional teams.',
     projects: [
-      { slug: 'times-bridge-1', title: 'Project 1' },
-      { slug: 'times-bridge-2', title: 'Project 2' },
+      {
+        slug: 'business-insider',
+        title: 'Business Insider India',
+        video: '/assets/video/bi-india.mp4',
+      },
+      { slug: 'times-bridge-2', title: 'Project 2', hidden: true },
     ],
   },
   {
@@ -66,8 +88,8 @@ export const featuredCompanies: FeaturedCompany[] = [
     summary:
       'Early product design role shipping mobile experiences for startups — interface systems, user flows, and visual craft across consumer apps.',
     projects: [
-      { slug: 'grappus-1', title: 'Project 1' },
-      { slug: 'grappus-2', title: 'Project 2' },
+      { slug: 'grappus-1', title: 'Project 1', hidden: true },
+      { slug: 'grappus-2', title: 'Project 2', hidden: true },
     ],
   },
 ]
@@ -82,4 +104,39 @@ export function getFeaturedCompanyBySlug(slug: string): FeaturedCompany | undefi
 
 export function getDefaultFeaturedCompany(): FeaturedCompany {
   return featuredCompanies[0]
+}
+
+/** All experience project cards — flattened across companies, enriched from project data. */
+export function getAllExperienceProjects(): FeaturedCompanyProject[] {
+  const seen = new Set<string>()
+  const items: FeaturedCompanyProject[] = []
+
+  for (const company of featuredCompanies) {
+    for (const project of company.projects) {
+      if (project.hidden) continue
+      if (seen.has(project.slug)) continue
+      seen.add(project.slug)
+
+      const fromData = getProjectBySlug(project.slug)
+      const video = project.videos ? undefined : (project.video ?? fromData?.video)
+
+      items.push({
+        slug: project.slug,
+        title: fromData?.title ?? project.title,
+        companyName: company.name,
+        video,
+        videos: project.videos,
+        thumbnail: project.thumbnail ?? fromData?.coverImage,
+        hero: project.hero,
+      })
+    }
+  }
+
+  return items.sort((a, b) => {
+    if (a.hero !== b.hero) return a.hero ? -1 : 1
+    const aHasVideo = Boolean(a.video || a.videos?.length)
+    const bHasVideo = Boolean(b.video || b.videos?.length)
+    if (aHasVideo === bHasVideo) return 0
+    return aHasVideo ? -1 : 1
+  })
 }

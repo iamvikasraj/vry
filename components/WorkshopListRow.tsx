@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import MediaPlaceholder from '@/components/MediaPlaceholder'
 import type { Workshop } from '@/data/workshops'
 import { mediaAssetPath } from '@/lib/mediaAssetPath'
@@ -11,31 +11,60 @@ type WorkshopListRowProps = {
   workshop: Workshop
 }
 
+function youtubeEmbedSrc(videoId: string): string {
+  const params = new URLSearchParams({
+    autoplay: '1',
+    mute: '1',
+    controls: '0',
+    modestbranding: '1',
+    rel: '0',
+    playsinline: '1',
+    loop: '1',
+    playlist: videoId,
+  })
+  return `https://www.youtube.com/embed/${videoId}?${params.toString()}`
+}
+
+function youtubeThumbnailSrc(videoId: string): string {
+  return `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`
+}
+
 export default function WorkshopListRow({ workshop }: WorkshopListRowProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
+  const [youtubeHover, setYoutubeHover] = useState(false)
+  const [youtubeReady, setYoutubeReady] = useState(false)
   const meta = [workshop.venue, workshop.year].filter(Boolean).join(' · ')
   const hasVideo = Boolean(workshop.video)
-  const hasThumbnail = Boolean(workshop.thumbnail)
+  const youtubeId = workshop.youtubeId
+  const thumbnailSrc =
+    workshop.thumbnail ?? (youtubeId ? youtubeThumbnailSrc(youtubeId) : undefined)
+  const hasThumbnail = Boolean(thumbnailSrc)
 
   const outboundUrl = workshop.registrationUrl ?? workshop.externalUrl
   const detailHref = workshop.slug ? workshopHref(workshop.slug) : null
 
-  const onVideoEnter = () => {
-    videoRef.current?.play()
+  const onThumbEnter = () => {
+    if (hasVideo) videoRef.current?.play()
+    if (youtubeId) setYoutubeHover(true)
   }
 
-  const onVideoLeave = () => {
-    if (!videoRef.current) return
-    videoRef.current.pause()
-    videoRef.current.currentTime = 0
+  const onThumbLeave = () => {
+    if (hasVideo && videoRef.current) {
+      videoRef.current.pause()
+      videoRef.current.currentTime = 0
+    }
+    if (youtubeId) {
+      setYoutubeHover(false)
+      setYoutubeReady(false)
+    }
   }
 
   const inner = (
     <>
       <div
         className="home-de-workshop-list__thumb"
-        onMouseEnter={hasVideo ? onVideoEnter : undefined}
-        onMouseLeave={hasVideo ? onVideoLeave : undefined}
+        onMouseEnter={hasVideo || youtubeId ? onThumbEnter : undefined}
+        onMouseLeave={hasVideo || youtubeId ? onThumbLeave : undefined}
       >
         {hasVideo && workshop.video ? (
           <video
@@ -48,23 +77,39 @@ export default function WorkshopListRow({ workshop }: WorkshopListRowProps) {
             preload="auto"
             aria-hidden
           />
-        ) : hasThumbnail && workshop.thumbnail ? (
-          <img
-            className="home-de-workshop-list__image"
-            src={workshop.thumbnail}
-            alt=""
-            aria-hidden
-          />
+        ) : hasThumbnail && thumbnailSrc ? (
+          <>
+            <img
+              className={`home-de-workshop-list__image${youtubeHover && youtubeReady ? ' home-de-workshop-list__image--hidden' : ''}`}
+              src={thumbnailSrc}
+              alt=""
+              aria-hidden
+            />
+            {youtubeId && youtubeHover ? (
+              <iframe
+                className={`home-de-workshop-list__youtube${youtubeReady ? ' home-de-workshop-list__youtube--ready' : ''}`}
+                src={youtubeEmbedSrc(youtubeId)}
+                title=""
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                onLoad={() => setYoutubeReady(true)}
+                aria-hidden
+              />
+            ) : null}
+          </>
         ) : (
           <MediaPlaceholder className="home-de-workshop-list__placeholder" label="" />
         )}
+        <span className="home-de-media-caption">
+          <span className="home-de-media-caption__title">{workshop.title}</span>
+          {meta ? <span className="home-de-media-caption__meta">{meta}</span> : null}
+        </span>
       </div>
       <span className="home-de-workshop-list__text">
         <span className="home-de-workshop-list__title">{workshop.title}</span>
         {meta ? <span className="home-de-workshop-list__meta">{meta}</span> : null}
       </span>
       <span className="home-de-workshop-list__cta" aria-hidden="true">
-        {workshop.registrationUrl || (outboundUrl && !detailHref) ? '↗' : '→'}
+        {workshop.registrationUrl || workshop.externalUrl ? '↗' : '→'}
       </span>
     </>
   )
@@ -73,7 +118,7 @@ export default function WorkshopListRow({ workshop }: WorkshopListRowProps) {
     return (
       <a
         href={workshop.registrationUrl}
-        className="home-de-workshop-list__link"
+        className="home-de-workshop-list__link home-de-media-card"
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`${workshop.title} — register (opens in new tab)`}
@@ -83,9 +128,23 @@ export default function WorkshopListRow({ workshop }: WorkshopListRowProps) {
     )
   }
 
+  if (workshop.externalUrl) {
+    return (
+      <a
+        href={workshop.externalUrl}
+        className="home-de-workshop-list__link home-de-media-card"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${workshop.title} — watch on YouTube (opens in new tab)`}
+      >
+        {inner}
+      </a>
+    )
+  }
+
   if (detailHref) {
     return (
-      <Link href={detailHref} className="home-de-workshop-list__link" aria-label={workshop.title}>
+      <Link href={detailHref} className="home-de-workshop-list__link home-de-media-card" aria-label={workshop.title}>
         {inner}
       </Link>
     )
@@ -95,7 +154,7 @@ export default function WorkshopListRow({ workshop }: WorkshopListRowProps) {
     return (
       <a
         href={outboundUrl}
-        className="home-de-workshop-list__link"
+        className="home-de-workshop-list__link home-de-media-card"
         target="_blank"
         rel="noopener noreferrer"
         aria-label={

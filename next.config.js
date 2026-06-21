@@ -7,6 +7,7 @@ const createMDX = require('@next/mdx')
 const isNextDev = process.env.NODE_ENV === 'development'
 
 const nextConfig = {
+  distDir: '.next',
   ...(!isNextDev ? { output: 'export' } : {}),
   images: {
     unoptimized: true,
