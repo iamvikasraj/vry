@@ -10,11 +10,9 @@ export default function WorkshopListSection({ layout = 'list' }: WorkshopListSec
   const items = getPortfolioWorkshops()
 
   const listClassName =
-    layout === 'grid-3'
-      ? 'home-de-workshop-list home-de-workshop-list--grid-3'
-      : layout === 'grid-2'
-        ? 'home-de-workshop-list home-de-workshop-list--grid-2'
-        : 'home-de-workshop-list'
+    layout === 'list'
+      ? 'home-de-workshop-list'
+      : 'home-de-workshop-list home-de-media-grid'
 
   return (
     <div className="home-de-workshop-stack">

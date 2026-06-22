@@ -4,6 +4,8 @@ import { useRef, useState } from 'react'
 import Link from 'next/link'
 import type { Project } from '@/data/projects'
 import type { ProjectThumbMedia } from '@/lib/projectMedia'
+import { getProjectCardMeta } from '@/lib/projectCardMeta'
+import { useCanHover } from '@/lib/useCanHover'
 import { mediaAssetPath } from '@/lib/mediaAssetPath'
 import { projectHref } from '@/lib/projectHref'
 import MediaPlaceholder from '@/components/MediaPlaceholder'
@@ -23,6 +25,8 @@ export default function ProjectListLink({
   playOnHover = false,
   featured = false,
 }: ProjectListLinkProps) {
+  const canHover = useCanHover()
+  const hoverPlay = playOnHover && canHover
   const videoRef = useRef<HTMLVideoElement>(null)
   const [hovered, setHovered] = useState(false)
   const [ready, setReady] = useState(false)
@@ -31,28 +35,28 @@ export default function ProjectListLink({
 
   const { brandCover, thumbSrc, videoAvailable } = media
   const hasPoster = Boolean(thumbSrc)
-  const meta = project.metaLabel ?? project.category
+  const meta = getProjectCardMeta(project)
   const staticOnly = Boolean(thumbSrc && (!videoAvailable || brandCover))
   const showVideo = videoAvailable && !brandCover && !videoError
   const showImage =
     Boolean(thumbSrc) &&
     !imageError &&
-    (staticOnly ||
+      (staticOnly ||
       !showVideo ||
-      (playOnHover && !hovered) ||
+      (hoverPlay && !hovered) ||
       (showVideo && (!ready || videoError)))
   const showPlaceholder = (!showImage && !showVideo) || (showVideo && videoError && !hasPoster)
   /** Video-only thumbs (Playground) stay visible like grid cards; hide only while loading over a poster. */
   const videoReady = !hasPoster || ready
 
   const onEnter = () => {
-    if (!playOnHover || !showVideo) return
+    if (!hoverPlay || !showVideo) return
     videoRef.current?.play()
     setHovered(true)
   }
 
   const onLeave = () => {
-    if (!playOnHover || !showVideo) return
+    if (!hoverPlay || !showVideo) return
     if (videoRef.current) {
       videoRef.current.pause()
       videoRef.current.currentTime = 0
@@ -87,14 +91,14 @@ export default function ProjectListLink({
         {showVideo && (
           <video
             ref={videoRef}
-            className={`home-de-project-list__image${hasPoster && playOnHover && ready ? ' home-de-project-list__image--over-cover' : ''}${videoReady ? ' home-de-project-list__image--ready' : ''}`}
+            className={`home-de-project-list__image${hasPoster && hoverPlay && ready ? ' home-de-project-list__image--over-cover' : ''}${videoReady ? ' home-de-project-list__image--ready' : ''}`}
             src={mediaAssetPath(project.video)}
             poster={thumbSrc}
             muted
-            autoPlay={!playOnHover}
+            autoPlay={!hoverPlay}
             playsInline
             loop
-            preload={playOnHover && hasPoster ? 'metadata' : 'auto'}
+            preload={hoverPlay && hasPoster ? 'metadata' : 'auto'}
             onLoadedData={() => setReady(true)}
             onLoadedMetadata={() => setReady(true)}
             onCanPlay={() => setReady(true)}

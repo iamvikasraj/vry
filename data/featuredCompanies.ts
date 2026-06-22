@@ -4,6 +4,7 @@ export type FeaturedCompanyProject = {
   slug: string
   title: string
   companyName?: string
+  year?: string
   video?: string
   /** Play in order on hover; loops back to the first clip. */
   videos?: string[]
@@ -124,6 +125,7 @@ export function getAllExperienceProjects(): FeaturedCompanyProject[] {
         slug: project.slug,
         title: fromData?.title ?? project.title,
         companyName: company.name,
+        year: fromData?.year,
         video,
         videos: project.videos,
         thumbnail: project.thumbnail ?? fromData?.coverImage,

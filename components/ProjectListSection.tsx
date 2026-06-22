@@ -9,22 +9,6 @@ type ProjectListSectionProps = {
   layout?: 'list' | 'grid-2' | 'cards'
 }
 
-function splitPlaygroundCards(projects: Project[]) {
-  const hero = projects.find((project) => project.playgroundHero)
-  if (!hero) {
-    return { before: projects, hero: null, after: [] as Project[] }
-  }
-
-  const others = projects.filter((project) => project.slug !== hero.slug)
-  const mid = Math.floor(others.length / 2)
-
-  return {
-    before: others.slice(0, mid),
-    hero,
-    after: others.slice(mid),
-  }
-}
-
 export default function ProjectListSection({
   projects,
   playOnHover = false,
@@ -53,35 +37,21 @@ export default function ProjectListSection({
     )
   }
 
-  const { before, hero, after } = splitPlaygroundCards(projects)
+  const hero = projects.find((project) => project.playgroundHero)
 
   return (
     <div className={listClassName}>
-      {before.map((project) => (
-        <ProjectListLink
-          key={project.slug}
-          project={project}
-          media={getProjectThumbMedia(project)}
-          playOnHover={playOnHover}
-        />
-      ))}
-      {hero ? (
-        <ProjectListLink
-          key={hero.slug}
-          project={hero}
-          media={getProjectThumbMedia(hero)}
-          playOnHover={playOnHover}
-          featured
-        />
-      ) : null}
-      {after.map((project) => (
-        <ProjectListLink
-          key={project.slug}
-          project={project}
-          media={getProjectThumbMedia(project)}
-          playOnHover={playOnHover}
-        />
-      ))}
+      <div className="home-de-media-grid">
+        {projects.map((project) => (
+          <ProjectListLink
+            key={project.slug}
+            project={project}
+            media={getProjectThumbMedia(project)}
+            playOnHover={playOnHover}
+            featured={project.slug === hero?.slug}
+          />
+        ))}
+      </div>
     </div>
   )
 }

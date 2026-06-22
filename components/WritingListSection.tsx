@@ -6,7 +6,7 @@ export default function WritingListSection() {
 
   return (
     <div className="home-de-workshop-stack">
-      <div className="home-de-workshop-list home-de-workshop-list--grid-2">
+      <div className="home-de-workshop-list home-de-media-grid">
         {items.map((writing) => (
           <WritingListRow key={writing.slug} writing={writing} />
         ))}

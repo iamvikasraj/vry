@@ -40,7 +40,7 @@ export default function CompanyCoverView({ cover }: CompanyCoverViewProps) {
           <h2 id="company-cover-work" className="company-cover__heading">
             Selected work
           </h2>
-          <div className="home-de-project-list home-de-project-list--cards company-cover__grid">
+          <div className="home-de-project-list home-de-project-list--cards home-de-media-grid company-cover__grid">
             {projects.map((project) => (
               <FeaturedProjectCard key={project.slug} project={project} />
             ))}
