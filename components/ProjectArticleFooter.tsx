@@ -13,9 +13,8 @@ export default function ProjectArticleFooter() {
     <footer className="de-article-footer" aria-label="Site footer">
       <div className="de-article-footer__inner">
         <p className="de-article-footer__brand">
-          <Link href={listHref}>
-            <span className="de-article-footer__brand-line">Vikas Raj</span>
-            <span className="de-article-footer__brand-line">Yadav</span>
+          <Link href={listHref} className="de-article-footer__brand-link">
+            Vikas Raj Yadav
           </Link>
         </p>
 
@@ -27,7 +26,7 @@ export default function ProjectArticleFooter() {
             <span className="de-article-footer__bottom-sep" aria-hidden>
               ·
             </span>
-            <Link href="/about" className="de-article-footer__link">
+            <Link href="/#about" className="de-article-footer__link">
               About
             </Link>
           </div>

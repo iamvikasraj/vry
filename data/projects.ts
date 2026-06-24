@@ -13,6 +13,8 @@ export interface Project {
   category: ProjectCategory
   hidden?: boolean
   featured?: boolean
+  /** Full-width featured card in the home Interactions grid. */
+  playgroundHero?: boolean
   metaLabel?: string
   year?: string
   client?: string
@@ -103,8 +105,8 @@ export const projects: Project[] = [
   },
   {
     slug: 'business-insider',
-    title: 'Business Insider Prototype with SwiftUI',
-    video: '/assets/video/Business Insider Prototype with SwiftUI.mp4',
+    title: 'Business Insider India',
+    video: '/assets/video/bi-india.mp4',
     description:
       'SwiftUI prototype of the Business Insider India app — editorial layout, navigation, and reading experience for Times Bridge.',
     tags: ['Live Projects', 'SwiftUI'],
@@ -243,9 +245,9 @@ export const projects: Project[] = [
   },
   {
     slug: 'et-money-1',
-    title: 'ET Money — Investing flows',
-    video: '',
-    description: 'Personal finance and investing experiences for ET Money — high-compliance flows with clear hierarchy.',
+    title: 'ET Money — Onboarding',
+    video: '/assets/video/et-money-onboarding.mp4',
+    description: 'Onboarding and investing flows for ET Money — high-compliance journeys with clear hierarchy.',
     tags: ['Live Projects', 'FinTech'],
     category: 'Work',
     year: '2020–2022',
@@ -489,6 +491,7 @@ export const projects: Project[] = [
     description: 'Conceptual design for Notion AI features using Rive and Play.',
     tags: ['Rive', 'Play'],
     category: 'Design Engineering',
+    playgroundHero: true,
     hidden: true,
     year: '2024',
     client: 'Personal Project',

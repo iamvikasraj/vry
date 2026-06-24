@@ -48,7 +48,7 @@ export default function Header() {
             <span className="nav-short">ws</span>
           </Link>
           <Link 
-            href="/about" 
+            href="/#about" 
             className={pathname === '/about' ? 'active' : ''}
             onClick={() => analytics.trackNavigationClick('about', 'About')}
           >

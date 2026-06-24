@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import Link from 'next/link'
 import type { Project } from '@/data/projects'
 import type { ProjectThumbMedia } from '@/lib/projectMedia'
+import { getProjectCardMeta } from '@/lib/projectCardMeta'
 import { mediaAssetPath } from '@/lib/mediaAssetPath'
 import { projectHref } from '@/lib/projectHref'
 import MediaPlaceholder from '@/components/MediaPlaceholder'
@@ -38,6 +39,7 @@ export function ProjectThumbCard({ project, media, playOnHover = false }: Projec
       (showVideo && (!ready || videoError)))
   const showPlaceholder = (!showImage && !showVideo) || (showVideo && videoError && !hasPoster)
   const videoReady = !hasPoster || ready
+  const meta = getProjectCardMeta(project)
 
   const onEnter = () => {
     if (!playOnHover || !showVideo) return
@@ -100,7 +102,7 @@ export function ProjectThumbCard({ project, media, playOnHover = false }: Projec
         </div>
         <div className="home-de-thumb-caption">
           <h2 className="home-de-thumb-title">{project.title}</h2>
-          <p className="home-de-thumb-meta">{project.metaLabel ?? project.category}</p>
+          {meta ? <p className="home-de-thumb-meta">{meta}</p> : null}
         </div>
       </Link>
     </article>

@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { Fragment } from 'react'
 import { usePathname } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 import { PORTFOLIO_PROFILE } from '@/data/portfolioProfile'
@@ -13,13 +14,15 @@ import { SOCIAL_LINKS } from '@/lib/socialLinks'
 
 const NAV_LINKS = [
   { sectionId: 'timeline' as const, label: 'Experiences' },
+  { sectionId: 'playground' as const, label: 'Interactions' },
   { sectionId: 'workshops' as const, label: 'Workshop' },
+  {
+    sectionId: 'writing' as const,
+    label: 'designengineer.ing',
+    shortLabel: 'Writing',
+  },
+  { sectionId: 'about' as const, label: 'About' },
 ] as const
-
-const EXTERNAL_LINK = {
-  href: 'https://designengineer.ing',
-  label: 'designengineer.ing',
-}
 
 function normalizePath(path: string) {
   if (path.length > 1 && path.endsWith('/')) return path.slice(0, -1)
@@ -29,7 +32,7 @@ function normalizePath(path: string) {
 /** Home + section scroll routes that render the full single-page portfolio. */
 function isSinglePagePortfolio(pathname: string | null) {
   const path = normalizePath(pathname ?? '')
-  return path === '' || path === '/' || path === '/workshops'
+  return path === '' || path === '/' || path === '/playground' || path === '/workshops'
 }
 
 export default function HomeDeSidebar() {
@@ -106,12 +109,23 @@ export default function HomeDeSidebar() {
       <Link href={DE_ROUTES.home} className="home-de-sidebar-logo">
         Vikas Raj Yadav
       </Link>
-      <p className="home-de-sidebar-role">{PORTFOLIO_PROFILE.bio}</p>
+      <p className="home-de-sidebar-role">
+        <span className="home-de-sidebar-role__desktop">{PORTFOLIO_PROFILE.bio}</span>
+        <span className="home-de-sidebar-role__mobile">
+          {PORTFOLIO_PROFILE.bioLines.map((line, index) => (
+            <Fragment key={line}>
+              {index > 0 ? <br /> : null}
+              {line}
+            </Fragment>
+          ))}
+        </span>
+      </p>
 
       <div className="home-de-sidebar-footer">
         <nav className="home-de-sidebar-nav" aria-label="Primary">
           {NAV_LINKS.map((link) => {
             const { sectionId, label } = link
+            const shortLabel = 'shortLabel' in link ? link.shortLabel : undefined
             const isActive = activeNavId === sectionId
             return (
               <Link
@@ -121,18 +135,21 @@ export default function HomeDeSidebar() {
                 aria-current={isActive ? 'true' : undefined}
                 onClick={(e) => onSectionClick(e, sectionId)}
               >
-                <span>{label}</span>
+                {shortLabel ? (
+                  <>
+                    <span className="home-de-sidebar-link__label home-de-sidebar-link__label--long">
+                      {label}
+                    </span>
+                    <span className="home-de-sidebar-link__label home-de-sidebar-link__label--short">
+                      {shortLabel}
+                    </span>
+                  </>
+                ) : (
+                  <span>{label}</span>
+                )}
               </Link>
             )
           })}
-          <a
-            href={EXTERNAL_LINK.href}
-            className="home-de-sidebar-link home-de-sidebar-link--external"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {EXTERNAL_LINK.label}
-          </a>
         </nav>
 
         <nav className="home-de-sidebar-social" aria-label="Social links">

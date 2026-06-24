@@ -12,8 +12,12 @@ export type Workshop = {
   video?: string
   /** External link for portfolio card (e.g. YouTube recording). */
   externalUrl?: string
+  /** YouTube video id — list card plays embed on hover (muted). */
+  youtubeId?: string
   /** Include on the home portfolio section (default true). */
   portfolio?: boolean
+  /** Home portfolio sort order (lower first). Featured still pins to top. */
+  portfolioOrder?: number
   eventDate?: string
   eventTime?: string
   registrationUrl?: string
@@ -29,8 +33,8 @@ export const workshops: Workshop[] = [
     venue: 'Rive x Play 2025',
     description: 'Workshop on interaction design and motion principles using Rive.',
     video: '/assets/video/Think Interaction Workshop.mp4',
-    featured: true,
     portfolio: true,
+    portfolioOrder: 3,
     includes: ['Rive', 'Figma', 'State machines'],
   },
   {
@@ -41,6 +45,7 @@ export const workshops: Workshop[] = [
     description: 'Design engineering workshop session at IIT Delhi.',
     thumbnail: '/assets/workshops/iit-delhi-1.png',
     portfolio: true,
+    portfolioOrder: 2,
     includes: ['Rive', 'SwiftUI', 'Prototyping'],
   },
   {
@@ -49,9 +54,10 @@ export const workshops: Workshop[] = [
     year: '2026',
     venue: 'Design Originals Club · YouTube',
     description: 'Design engineering workshop session for Design Originals Club on YouTube.',
-    thumbnail: 'https://i.ytimg.com/vi/fTUbis6k8w8/hqdefault.jpg',
-    externalUrl: 'https://youtu.be/fTUbis6k8w8?si=jsjvtDXCJ_Hg7oMP',
+    youtubeId: 'fTUbis6k8w8',
+    externalUrl: 'https://youtu.be/fTUbis6k8w8?si=JZVXY2R1qDC3AadG',
     portfolio: true,
+    portfolioOrder: 4,
     includes: ['Rive', 'Design systems', 'Motion'],
   },
   {
@@ -65,14 +71,18 @@ export const workshops: Workshop[] = [
   },
   {
     slug: 'rive-ambassador-happy-hour-bengaluru-2026',
-    title: 'Rive Ambassador Happy Hour — Bengaluru',
+    title: 'Rive Ambassador Happy Hour',
     year: '2026',
-    venue: 'The Craftery By Subko, Koramangala, Bengaluru',
+    venue: 'The Craftery By Subko · Bangalore',
     description:
-      'Casual meetup for Rive users, motion designers, and developers—good conversations with the local Rive community.',
+      'Casual meetup for Rive users, motion designers, and developers—hosted by Vikas Raj Yadav with the local Rive community in Bangalore.',
+    thumbnail: '/assets/workshops/rive-happy-hour-bengaluru-2026.png',
+    featured: true,
+    portfolio: true,
+    portfolioOrder: 1,
     eventDate: '2026-02-12',
     eventTime: '7pm–9pm',
-    portfolio: false,
+    includes: ['Rive', 'Community', 'Motion design'],
   },
   {
     slug: 'rive-workshop-bengaluru-2026',
@@ -90,7 +100,7 @@ export function getWorkshopBySlug(slug: string): Workshop | undefined {
   return workshops.find((workshop) => workshop.slug === slug)
 }
 
-/** Completed workshops on the home portfolio (newest first). */
+/** Completed workshops on the home portfolio (featured first, then portfolioOrder). */
 export function getPortfolioWorkshops(): Workshop[] {
   return workshops
     .filter((w) => w.portfolio !== false)
@@ -98,6 +108,9 @@ export function getPortfolioWorkshops(): Workshop[] {
       const aFeatured = a.featured ? 1 : 0
       const bFeatured = b.featured ? 1 : 0
       if (aFeatured !== bFeatured) return bFeatured - aFeatured
+      const aOrder = a.portfolioOrder ?? Number.MAX_SAFE_INTEGER
+      const bOrder = b.portfolioOrder ?? Number.MAX_SAFE_INTEGER
+      if (aOrder !== bOrder) return aOrder - bOrder
       return Number(b.year) - Number(a.year)
     })
 }

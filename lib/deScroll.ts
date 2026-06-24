@@ -1,11 +1,13 @@
-export type DePortfolioSectionId = 'timeline' | 'playground' | 'workshops'
+export type DePortfolioSectionId = 'timeline' | 'playground' | 'workshops' | 'writing' | 'about'
 
-const SECTION_IDS: DePortfolioSectionId[] = ['timeline', 'playground', 'workshops']
+const SECTION_IDS: DePortfolioSectionId[] = ['timeline', 'playground', 'workshops', 'writing', 'about']
 
 export const DE_SECTION_HREF: Record<DePortfolioSectionId, string> = {
   timeline: '/#timeline',
   playground: '/#playground',
   workshops: '/#workshops',
+  writing: '/#writing',
+  about: '/#about',
 }
 
 export function isDePortfolioSectionId(value: string): value is DePortfolioSectionId {
