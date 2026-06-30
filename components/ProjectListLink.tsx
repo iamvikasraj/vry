@@ -17,6 +17,8 @@ type ProjectListLinkProps = {
   playOnHover?: boolean
   /** Full-width card in the Interactions grid. */
   featured?: boolean
+  /** Cover letter / highlight — primary line; project title moves to meta */
+  impact?: string
 }
 
 export default function ProjectListLink({
@@ -24,6 +26,7 @@ export default function ProjectListLink({
   media,
   playOnHover = false,
   featured = false,
+  impact,
 }: ProjectListLinkProps) {
   const canHover = useCanHover()
   const hoverPlay = playOnHover && canHover
@@ -111,8 +114,20 @@ export default function ProjectListLink({
         </span>
       </div>
       <span className="home-de-project-list__text">
-        <span className="home-de-project-list__title">{project.title}</span>
-        {meta ? <span className="home-de-project-list__meta">{meta}</span> : null}
+        {impact ? (
+          <>
+            <span className="home-de-project-list__impact">{impact}</span>
+            <span className="home-de-project-list__meta">
+              {project.title}
+              {meta ? ` · ${meta}` : ''}
+            </span>
+          </>
+        ) : (
+          <>
+            <span className="home-de-project-list__title">{project.title}</span>
+            {meta ? <span className="home-de-project-list__meta">{meta}</span> : null}
+          </>
+        )}
       </span>
       <span className="home-de-project-list__cta" aria-hidden="true">
         →

@@ -13,10 +13,12 @@ export default function CompanyCoverPageShell({ children }: { children: React.Re
   return (
     <div className="home-page home-page--de home-page--de-detail home-page--company-cover">
       <main className="project-de-main company-cover-page">
-        <header className="company-cover-page__header" aria-label="Cover">
-          <p className="company-cover-page__brand">Vikas Raj Yadav</p>
-        </header>
-        {children}
+        <div className="company-cover-page__inner">
+          <header className="company-cover-page__header" aria-label="Cover">
+            <p className="company-cover-page__brand">Vikas Raj Yadav</p>
+          </header>
+          {children}
+        </div>
       </main>
     </div>
   )

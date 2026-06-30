@@ -1,52 +1,96 @@
-import FeaturedProjectCard from '@/components/FeaturedProjectCard'
+import ProjectListLink from '@/components/ProjectListLink'
 import HomeDeEmailLink from '@/components/HomeDeEmailLink'
-import type { CompanyCover } from '@/data/companyCovers'
-import { getCoverFeaturedProjects } from '@/data/companyCovers'
+import CompanyCoverCollapsibleSection from '@/components/CompanyCoverCollapsibleSection'
+import CompanyCoverSectionsStagger from '@/components/CompanyCoverSectionsStagger'
+import type { CompanyCover, CompanyCoverProjectRef, CompanyCoverSection } from '@/data/companyCovers'
+import { getProjectBySlug } from '@/data/projects'
+import { getProjectThumbMedia } from '@/lib/projectMedia.server'
 
 type CompanyCoverViewProps = {
   cover: CompanyCover
 }
 
+function CoverProjectList({ projects }: { projects: CompanyCoverProjectRef[] }) {
+  if (projects.length === 0) return null
+
+  return (
+    <div className="home-de-project-list company-cover__projects">
+      {projects.map(({ slug, note }) => {
+        const project = getProjectBySlug(slug)
+        if (!project) return null
+
+        return (
+          <ProjectListLink
+            key={slug}
+            project={project}
+            media={getProjectThumbMedia(project)}
+            impact={note}
+          />
+        )
+      })}
+    </div>
+  )
+}
+
+function CoverSectionBody({ section }: { section: CompanyCoverSection }) {
+  return (
+    <div className="company-cover__section-body">
+      <div className="company-cover__prose">
+        {section.paragraphs.map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
+      </div>
+      {section.projects ? <CoverProjectList projects={section.projects} /> : null}
+    </div>
+  )
+}
+
 export default function CompanyCoverView({ cover }: CompanyCoverViewProps) {
-  const projects = getCoverFeaturedProjects(cover)
+  const meta = [cover.companyName, cover.location].filter(Boolean).join(' · ')
 
   return (
     <article className="company-cover">
-      <header className="company-cover__hero">
-        <p className="company-cover__lede">Prepared for {cover.companyName}</p>
-        <h1 className="company-cover__headline">{cover.headline}</h1>
-        <div className="company-cover__intro">
-          {cover.intro.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
-        </div>
+      <header className="company-cover__letterhead">
+        {cover.roleTitle ? <h1 className="company-cover__role">{cover.roleTitle}</h1> : null}
+        {meta ? <p className="company-cover__meta">{meta}</p> : null}
       </header>
 
-      {cover.relevance && cover.relevance.length > 0 ? (
-        <section className="company-cover__section" aria-labelledby="company-cover-relevance">
-          <h2 id="company-cover-relevance" className="company-cover__heading">
-            Relevant experience
-          </h2>
-          <ul className="company-cover__list">
-            {cover.relevance.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </section>
-      ) : null}
+      <div className="company-cover__opening">
+        {(Array.isArray(cover.opening) ? cover.opening : [cover.opening]).map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
+      </div>
 
-      {projects.length > 0 ? (
-        <section className="company-cover__section" aria-labelledby="company-cover-work">
-          <h2 id="company-cover-work" className="company-cover__heading">
-            Selected work
-          </h2>
-          <div className="home-de-project-list home-de-project-list--cards home-de-media-grid company-cover__grid">
-            {projects.map((project) => (
-              <FeaturedProjectCard key={project.slug} project={project} />
-            ))}
-          </div>
-        </section>
-      ) : null}
+      <CompanyCoverSectionsStagger>
+        {cover.sections.map((section) =>
+          section.collapsible === false ? (
+            <section
+              key={section.id}
+              data-cover-section
+              className="company-cover__section"
+              aria-labelledby={`cover-${section.id}`}
+            >
+              <h2 id={`cover-${section.id}`} className="company-cover__section-title">
+                {section.title}
+              </h2>
+              <CoverSectionBody section={section} />
+            </section>
+          ) : (
+            <CompanyCoverCollapsibleSection
+              key={section.id}
+              id={section.id}
+              title={section.title}
+              role={section.role}
+              period={section.period}
+              defaultOpen={section.defaultOpen}
+            >
+              <CoverSectionBody section={section} />
+            </CompanyCoverCollapsibleSection>
+          ),
+        )}
+      </CompanyCoverSectionsStagger>
+
+      {cover.closing ? <p className="company-cover__closing">{cover.closing}</p> : null}
 
       {cover.cta ? (
         <p className="company-cover__cta">

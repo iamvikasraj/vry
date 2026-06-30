@@ -25,7 +25,8 @@ function getLanIPv4() {
 }
 
 const host = process.env.HOSTNAME || getArgValue("--host") || "0.0.0.0";
-const port = process.env.PORT || getArgValue("--port") || "3000";
+// Default 3010 — Floema/webgl often occupies 3000 on this machine.
+const port = process.env.PORT || getArgValue("--port") || "3010";
 const openUrl = process.env.OPEN_URL !== "0";
 const lanIp = getLanIPv4();
 if (lanIp) console.log(`  - Network:      http://${lanIp}:${port}`);
