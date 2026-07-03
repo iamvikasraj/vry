@@ -1,4 +1,4 @@
-import { getProjectBySlug } from '@/data/projects'
+import { getProjectBySlug, type Project } from '@/data/projects'
 
 export type FeaturedCompanyProject = {
   slug: string
@@ -13,13 +13,19 @@ export type FeaturedCompanyProject = {
   hero?: boolean
   /** Omit from home Experiences grid (e.g. until media is ready). */
   hidden?: boolean
+  /** Under-NDA card — renders a locked treatment instead of media. */
+  nda?: boolean
+  /** Employer/brand mark on locked NDA cards (shown above the title). */
+  ndaLogo?: string
+  /** Show project video/poster on the locked card. Set false until media is ready. */
+  ndaPreview?: boolean
 }
 
 export type FeaturedCompany = {
   slug: string
   name: string
   summary: string
-  projects: [FeaturedCompanyProject, FeaturedCompanyProject]
+  projects: FeaturedCompanyProject[]
 }
 
 export const featuredCompanies: FeaturedCompany[] = [
@@ -43,16 +49,6 @@ export const featuredCompanies: FeaturedCompany[] = [
         video: '/assets/video/Loop AI Assistant (LinkedIn Export).mp4',
         hero: true,
       },
-    ],
-  },
-  {
-    slug: 'paytm',
-    name: 'Paytm',
-    summary:
-      'Built Paytm’s foundational design system and scaled Postpaid to 1M+ users in six months. Led redesigns for India’s largest private B2C train booking platform.',
-    projects: [
-      { slug: 'paytm-postpaid', title: 'Paytm Postpaid', hidden: true },
-      { slug: 'paytm-travel-trains', title: 'Paytm Travel', hidden: true },
     ],
   },
   {
@@ -93,6 +89,17 @@ export const featuredCompanies: FeaturedCompany[] = [
       { slug: 'grappus-2', title: 'Project 2', hidden: true },
     ],
   },
+  {
+    slug: 'paytm',
+    name: 'Paytm',
+    summary:
+      'Built Paytm’s foundational design system and scaled Postpaid to 1M+ users in six months. Led redesigns for India’s largest private B2C train booking platform.',
+    projects: [
+      { slug: 'paytm-postpaid', title: 'Paytm Postpaid', nda: true, ndaPreview: false },
+      { slug: 'paytm-travel-trains', title: 'Paytm Travel', nda: true },
+      { slug: 'paytm-design-system-v1', title: 'Paytm Design System', nda: true },
+    ],
+  },
 ]
 
 export function getFeaturedCompanySlugs(): string[] {
@@ -107,6 +114,14 @@ export function getDefaultFeaturedCompany(): FeaturedCompany {
   return featuredCompanies[0]
 }
 
+/** Poster for locked NDA cards — project media, not the brand mark. */
+function getNdaCardPoster(project: Project | undefined): string | undefined {
+  if (!project) return undefined
+  if (project.images?.[0]) return project.images[0]
+  if (project.coverImage && !project.coverImage.endsWith('.svg')) return project.coverImage
+  return undefined
+}
+
 /** All experience project cards — flattened across companies, enriched from project data. */
 export function getAllExperienceProjects(): FeaturedCompanyProject[] {
   const seen = new Set<string>()
@@ -119,23 +134,38 @@ export function getAllExperienceProjects(): FeaturedCompanyProject[] {
       seen.add(project.slug)
 
       const fromData = getProjectBySlug(project.slug)
-      const video = project.videos ? undefined : (project.video ?? fromData?.video)
+      const ndaPreview = project.nda ? project.ndaPreview !== false : true
+      const video = ndaPreview
+        ? project.videos
+          ? undefined
+          : project.video ?? fromData?.video
+        : undefined
 
       items.push({
         slug: project.slug,
-        title: fromData?.title ?? project.title,
+        title: project.title ?? fromData?.title ?? project.slug,
         companyName: company.name,
         year: fromData?.year,
         video,
-        videos: project.videos,
-        thumbnail: project.thumbnail ?? fromData?.coverImage,
+        videos: ndaPreview ? project.videos : undefined,
+        thumbnail: project.nda
+          ? ndaPreview
+            ? project.thumbnail ?? getNdaCardPoster(fromData)
+            : undefined
+          : project.thumbnail ?? fromData?.coverImage,
         hero: project.hero,
+        nda: project.nda,
+        ndaPreview: project.ndaPreview,
+        ndaLogo:
+          project.ndaLogo ??
+          (company.slug === 'paytm' ? '/assets/employers/paytm.svg' : undefined),
       })
     }
   }
 
   return items.sort((a, b) => {
     if (a.hero !== b.hero) return a.hero ? -1 : 1
+    if (a.nda !== b.nda) return a.nda ? 1 : -1
     const aHasVideo = Boolean(a.video || a.videos?.length)
     const bHasVideo = Boolean(b.video || b.videos?.length)
     if (aHasVideo === bHasVideo) return 0

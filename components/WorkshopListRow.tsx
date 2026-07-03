@@ -33,7 +33,6 @@ export default function WorkshopListRow({ workshop }: WorkshopListRowProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [youtubeHover, setYoutubeHover] = useState(false)
   const [youtubeReady, setYoutubeReady] = useState(false)
-  const meta = [workshop.venue, workshop.year].filter(Boolean).join(' · ')
   const hasVideo = Boolean(workshop.video)
   const youtubeId = workshop.youtubeId
   const thumbnailSrc =
@@ -101,12 +100,10 @@ export default function WorkshopListRow({ workshop }: WorkshopListRowProps) {
         )}
         <span className="home-de-media-caption">
           <span className="home-de-media-caption__title">{workshop.title}</span>
-          {meta ? <span className="home-de-media-caption__meta">{meta}</span> : null}
         </span>
       </div>
       <span className="home-de-workshop-list__text">
         <span className="home-de-workshop-list__title">{workshop.title}</span>
-        {meta ? <span className="home-de-workshop-list__meta">{meta}</span> : null}
       </span>
       <span className="home-de-workshop-list__cta" aria-hidden="true">
         {workshop.registrationUrl || workshop.externalUrl ? '↗' : '→'}

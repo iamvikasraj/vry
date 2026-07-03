@@ -12,3 +12,9 @@
   to = "/.netlify/functions/chat"
   status = 200
   force = true
+
+[[redirects]]
+  from = "/api/nda-unlock"
+  to = "/.netlify/functions/nda-unlock"
+  status = 200
+  force = true

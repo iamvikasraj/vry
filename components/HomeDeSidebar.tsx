@@ -97,6 +97,7 @@ export default function HomeDeSidebar() {
   const onSectionClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, sectionId: DePortfolioSectionId) => {
       if (!onSinglePagePortfolio) return
+      if (!document.getElementById(sectionId)) return
       e.preventDefault()
       scrollToDeSection(sectionId)
       setScrollNavId(sectionId)

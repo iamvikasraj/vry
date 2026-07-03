@@ -25,8 +25,8 @@ export default function Work() {
   const [gridSize, setGridSize] = useState<'1x1' | '2x2'>('2x2')
   const [activeFilter, setActiveFilter] = useState<string>('All')
 
-  // Convert projects data to format needed for WorkGrid
-  const allProjects: Project[] = projects.map(project => ({
+  // Convert projects data to format needed for WorkGrid (NDA cards live only in the Experiences grid)
+  const allProjects: Project[] = projects.filter(project => !project.nda).map(project => ({
     video: project.video,
     title: project.title,
     link: `/projects/${project.slug}`,

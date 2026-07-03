@@ -5,6 +5,7 @@ import ProjectViewTracker from '@/components/ProjectViewTracker'
 import ProjectSectionTracker from '@/components/ProjectSectionTracker'
 import ProjectDetailMedia from '@/components/ProjectDetailMedia'
 import ProjectGallery from '@/components/ProjectGallery'
+import NdaGate from '@/components/NdaGate'
 import ProjectArticleFooter from '@/components/ProjectArticleFooter'
 import ProjectMoreProjects from '@/components/ProjectMoreProjects'
 import { projects, getProjectBySlug } from '@/data/projects'
@@ -59,51 +60,57 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
             <ProjectDetailMedia project={project} />
           </div>
 
-        {!MDXContent && project.images && project.images.length > 0 && (
-          <ProjectGallery
-            images={project.images.map((src) => ({
-              src,
-              alt: project.title,
-            }))}
-          />
+        {project.nda ? (
+          <NdaGate slug={project.slug} />
+        ) : (
+          <>
+            {!MDXContent && project.images && project.images.length > 0 && (
+              <ProjectGallery
+                images={project.images.map((src) => ({
+                  src,
+                  alt: project.title,
+                }))}
+              />
+            )}
+
+            <div className="project-content">
+              {MDXContent ? (
+                <MDXContent />
+              ) : (
+                <>
+                  <div className="project-section" id="project-description">
+                    <p className="project-description">{project.description}</p>
+                  </div>
+
+                  {project.context && (
+                    <div className="project-section" id="project-context">
+                      <h2 className="project-section-title">Context</h2>
+                      <p className="project-section-text">{project.context}</p>
+                    </div>
+                  )}
+
+                  {project.process && project.process.length > 0 && (
+                    <div className="project-section" id="project-process">
+                      <h2 className="project-section-title">Process</h2>
+                      <ul className="project-process-list">
+                        {project.process.map((step, index) => (
+                          <li key={index} className="project-process-item">{step}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {project.results && (
+                    <div className="project-section" id="project-results">
+                      <h2 className="project-section-title">Results</h2>
+                      <p className="project-section-text">{project.results}</p>
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+          </>
         )}
-
-        <div className="project-content">
-          {MDXContent ? (
-            <MDXContent />
-          ) : (
-            <>
-              <div className="project-section" id="project-description">
-                <p className="project-description">{project.description}</p>
-              </div>
-
-              {project.context && (
-                <div className="project-section" id="project-context">
-                  <h2 className="project-section-title">Context</h2>
-                  <p className="project-section-text">{project.context}</p>
-                </div>
-              )}
-
-              {project.process && project.process.length > 0 && (
-                <div className="project-section" id="project-process">
-                  <h2 className="project-section-title">Process</h2>
-                  <ul className="project-process-list">
-                    {project.process.map((step, index) => (
-                      <li key={index} className="project-process-item">{step}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {project.results && (
-                <div className="project-section" id="project-results">
-                  <h2 className="project-section-title">Results</h2>
-                  <p className="project-section-text">{project.results}</p>
-                </div>
-              )}
-            </>
-          )}
-        </div>
 
         <ProjectMoreProjects project={project} />
         <ProjectArticleFooter />

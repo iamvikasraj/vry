@@ -41,11 +41,9 @@ export default async function WorkshopDetail({ params }: { params: Promise<{ slu
           <header className="project-detail-header">
             <div className="project-detail-hero">
               <h1 className="project-title">{workshop.title}</h1>
-              {(workshop.venue || workshop.year) && (
-                <p className="project-detail-byline">
-                  {[workshop.venue, workshop.year].filter(Boolean).join(' · ')}
-                </p>
-              )}
+              {workshop.venue ? (
+                <p className="project-detail-byline">{workshop.venue}</p>
+              ) : null}
               {workshop.includes && workshop.includes.length > 0 && (
                 <p className="project-detail-tools">{workshop.includes.join(', ')}</p>
               )}

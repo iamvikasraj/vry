@@ -12,6 +12,8 @@ export interface Project {
   tags: string[]
   category: ProjectCategory
   hidden?: boolean
+  /** Under-NDA company card — no media, renders a locked hero + NDA-safe write-up. */
+  nda?: boolean
   featured?: boolean
   /** Full-width featured card in the home Interactions grid. */
   playgroundHero?: boolean
@@ -192,25 +194,34 @@ export const projects: Project[] = [
     slug: 'paytm-postpaid',
     title: 'Paytm Postpaid',
     video: '/assets/video/paytm-postpaid.mp4',
-    coverImage: '/assets/projects/paytm-postpaid/02.jpg',
+    coverImage: '/assets/employers/paytm.svg',
     description: 'Buy Now Pay Later inside Paytm — making postpaid the default payment method across the super app.',
-    tags: ['Live Projects', 'FinTech'],
+    tags: ['Live Projects', 'NDA', 'FinTech'],
     category: 'Work',
-    featured: true,
+    nda: true,
     metaLabel: 'App Design',
     year: '2018–2019',
     client: 'Paytm',
     role: 'Lead Product Designer',
     tools: ['Pen & Paper', 'Sketch', 'Illustrator', 'After Effects'],
+    context:
+      'Led design for Paytm Postpaid — scaling BNPL to 1M+ users in six months and embedding lending as a default payment path across the super app.',
+    process: [
+      'Designed checkout and repayment flows that made postpaid feel native to Paytm payments',
+      'Balanced credit limits, eligibility, and trust signals for first-time BNPL users',
+      'Partnered with product and engineering through rapid iteration as adoption scaled',
+    ],
   },
   {
     slug: 'paytm-travel-trains',
-    title: 'Paytm — Travel & Trains',
+    title: 'Paytm Travel',
     video: '/assets/video/paytm-travel.mp4',
+    coverImage: '/assets/employers/paytm.svg',
     description:
       'Flights, hotels, and IRCTC train booking inside Paytm — search, booking, and ticket management at super-app scale.',
-    tags: ['Live Projects', 'FinTech'],
+    tags: ['Live Projects', 'NDA', 'FinTech'],
     category: 'Work',
+    nda: true,
     metaLabel: 'App Design',
     year: '2019–2020',
     client: 'Paytm',
@@ -226,11 +237,13 @@ export const projects: Project[] = [
   },
   {
     slug: 'paytm-design-system-v1',
-    title: 'Paytm Design System V1.0',
+    title: 'Paytm Design System',
     video: '/assets/video/paytm-design-system-v1.mp4',
+    coverImage: '/assets/employers/paytm.svg',
     description: 'First-generation Paytm design system — components, patterns, and documentation for product teams at scale.',
-    tags: ['Live Projects', 'Design Systems'],
+    tags: ['Live Projects', 'NDA', 'Design Systems'],
     category: 'Work',
+    nda: true,
     metaLabel: 'Design System',
     year: '2018–2021',
     client: 'Paytm',
@@ -240,8 +253,8 @@ export const projects: Project[] = [
       'Audited inconsistent UI patterns across Paytm verticals',
       'Defined core components, typography, and spacing for iOS and Android',
       'Documented usage guidelines and partnered with engineering on adoption',
-      'Evolved the system as new verticals — travel, trains, postpaid — shipped'
-    ]
+      'Evolved the system as new verticals — travel, trains, postpaid — shipped',
+    ],
   },
   {
     slug: 'et-money-1',
@@ -605,7 +618,7 @@ export function getPlaygroundProjects(): Project[] {
 }
 
 export function getProjectListHref(project: Project): string {
-  if (project.category === 'Design Engineering') return '/playground/'
+  if (project.category === 'Design Engineering') return '/#playground'
   return '/live-projects/'
 }
 

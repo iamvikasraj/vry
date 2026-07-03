@@ -2,7 +2,7 @@
 export const DE_ROUTES = {
   home: '/',
   liveProjects: '/live-projects/',
-  playground: '/playground/',
+  playground: '/#playground',
   workshops: '/#workshops',
 } as const
 

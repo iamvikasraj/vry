@@ -1,8 +1,8 @@
 import type { Project } from '@/data/projects'
 
-/** Secondary line on home media cards — year preferred over legacy meta labels. */
+/** Secondary line on home media cards — category-style label only (years omitted). */
 export function getProjectCardMeta(
   project: Pick<Project, 'year' | 'metaLabel' | 'category'>,
 ): string | undefined {
-  return project.year ?? project.metaLabel
+  return project.metaLabel
 }

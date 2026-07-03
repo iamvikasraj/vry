@@ -6,6 +6,7 @@ import type { FeaturedCompanyProject } from '@/data/featuredCompanies'
 import { useCanHover } from '@/lib/useCanHover'
 import { mediaAssetPath } from '@/lib/mediaAssetPath'
 import { projectHref } from '@/lib/projectHref'
+import NdaExperienceCard from '@/components/NdaExperienceCard'
 
 type FeaturedProjectCardProps = {
   project: FeaturedCompanyProject
@@ -159,6 +160,11 @@ export default function FeaturedProjectCard({
   variant = 'default',
 }: FeaturedProjectCardProps) {
   const isHero = variant === 'hero'
+
+  if (project.nda) {
+    return <NdaExperienceCard project={project} isHero={isHero} />
+  }
+
   const sources = getVideoSources(project)
   const hasVideo = sources.length > 0
   const isSequence = sources.length > 1
@@ -193,9 +199,6 @@ export default function FeaturedProjectCard({
         {media}
         <span className="home-de-media-caption">
           <span className="home-de-media-caption__title">{project.title}</span>
-          {project.year ? (
-            <span className="home-de-media-caption__meta">{project.year}</span>
-          ) : null}
         </span>
       </div>
     </Link>

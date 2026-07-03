@@ -1,10 +1,11 @@
 import HomeDeLayout from '@/components/HomeDeLayout'
-import PlaygroundPageContent from '@/components/PlaygroundPageContent'
+import HomeDePortfolioPage from '@/components/HomeDePortfolioPage'
 
+/** Same single-page portfolio; scrolls to Interactions on load. */
 export default function PlaygroundPage() {
   return (
     <HomeDeLayout>
-      <PlaygroundPageContent />
+      <HomeDePortfolioPage scrollTo="playground" />
     </HomeDeLayout>
   )
 }
