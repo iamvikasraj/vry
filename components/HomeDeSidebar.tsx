@@ -1,28 +1,33 @@
 'use client'
 
 import Link from 'next/link'
-import { Fragment } from 'react'
+import { Fragment, useCallback, useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
-import { useCallback, useEffect, useState } from 'react'
 import { PORTFOLIO_PROFILE } from '@/data/portfolioProfile'
 import { DE_ROUTES } from '@/lib/deRoutes'
 import type { DeNavId } from '@/lib/deNav'
 import { getActiveDeNavId } from '@/lib/deNav'
-import type { DePortfolioSectionId } from '@/lib/deScroll'
-import { DE_SECTION_HREF, getDeScrollRoot, isDePortfolioSectionId, scrollToDeSection } from '@/lib/deScroll'
+import {
+  DE_SECTION_HREF,
+  getDeScrollRoot,
+  isDePortfolioSectionId,
+  scrollToDeSection,
+} from '@/lib/deScroll'
 import { SOCIAL_LINKS } from '@/lib/socialLinks'
 
 const NAV_LINKS = [
   { sectionId: 'timeline' as const, label: 'Experiences' },
-  { sectionId: 'playground' as const, label: 'Interactions' },
   { sectionId: 'workshops' as const, label: 'Workshop' },
+  { sectionId: 'playground' as const, label: 'Interactions' },
   {
     sectionId: 'writing' as const,
     label: 'designengineer.ing',
-    shortLabel: 'Writing',
+    shortLabel: 'Design Engineering',
   },
   { sectionId: 'about' as const, label: 'About' },
 ] as const
+
+type NavLink = (typeof NAV_LINKS)[number]
 
 function normalizePath(path: string) {
   if (path.length > 1 && path.endsWith('/')) return path.slice(0, -1)
@@ -35,30 +40,21 @@ function isSinglePagePortfolio(pathname: string | null) {
   return path === '' || path === '/' || path === '/playground' || path === '/workshops'
 }
 
+function navHref(sectionId: NavLink['sectionId']) {
+  return DE_SECTION_HREF[sectionId]
+}
+
 export default function HomeDeSidebar() {
   const pathname = usePathname()
   const onSinglePagePortfolio = isSinglePagePortfolio(pathname)
   const routeNavId = getActiveDeNavId(pathname)
-  const [scrollNavId, setScrollNavId] = useState<DeNavId | null>(routeNavId)
+  const [sectionNavId, setSectionNavId] = useState<DeNavId | null>(routeNavId ?? 'timeline')
 
   useEffect(() => {
     if (!onSinglePagePortfolio) {
-      setScrollNavId(routeNavId)
+      setSectionNavId(routeNavId)
       return
     }
-
-    const syncFromHash = () => {
-      const hash = window.location.hash.replace(/^#/, '')
-      if (isDePortfolioSectionId(hash)) setScrollNavId(hash)
-    }
-
-    syncFromHash()
-    window.addEventListener('hashchange', syncFromHash)
-    return () => window.removeEventListener('hashchange', syncFromHash)
-  }, [onSinglePagePortfolio, routeNavId, pathname])
-
-  useEffect(() => {
-    if (!onSinglePagePortfolio) return
 
     const sections = NAV_LINKS.map(({ sectionId }) => document.getElementById(sectionId)).filter(
       Boolean
@@ -76,7 +72,7 @@ export default function HomeDeSidebar() {
 
         const top = visible[0]
         if (top?.target.id && isDePortfolioSectionId(top.target.id)) {
-          setScrollNavId(top.target.id)
+          setSectionNavId(top.target.id)
         }
       },
       {
@@ -88,19 +84,16 @@ export default function HomeDeSidebar() {
 
     sections.forEach((section) => observer.observe(section))
     return () => observer.disconnect()
-  }, [onSinglePagePortfolio, pathname])
+  }, [onSinglePagePortfolio, routeNavId, pathname])
 
-  const activeNavId = onSinglePagePortfolio ? scrollNavId ?? routeNavId : routeNavId
+  const activeNavId = onSinglePagePortfolio ? sectionNavId : routeNavId
 
-  const sectionHref = (sectionId: DePortfolioSectionId) => DE_SECTION_HREF[sectionId]
-
-  const onSectionClick = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>, sectionId: DePortfolioSectionId) => {
+  const onNavClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>, sectionId: NavLink['sectionId']) => {
       if (!onSinglePagePortfolio) return
       if (!document.getElementById(sectionId)) return
       e.preventDefault()
       scrollToDeSection(sectionId)
-      setScrollNavId(sectionId)
     },
     [onSinglePagePortfolio]
   )
@@ -131,10 +124,10 @@ export default function HomeDeSidebar() {
             return (
               <Link
                 key={sectionId}
-                href={sectionHref(sectionId)}
+                href={navHref(sectionId)}
                 className={`home-de-sidebar-link${isActive ? ' home-de-sidebar-link--active' : ''}`}
                 aria-current={isActive ? 'true' : undefined}
-                onClick={(e) => onSectionClick(e, sectionId)}
+                onClick={(e) => onNavClick(e, sectionId)}
               >
                 {shortLabel ? (
                   <>
@@ -146,7 +139,9 @@ export default function HomeDeSidebar() {
                     </span>
                   </>
                 ) : (
-                  <span>{label}</span>
+                  <span className="home-de-sidebar-link__label home-de-sidebar-link__label--inline">
+                    {label}
+                  </span>
                 )}
               </Link>
             )

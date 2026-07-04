@@ -12,6 +12,7 @@ type WritingListRowProps = {
 export default function WritingListRow({ writing }: WritingListRowProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const hasVideo = Boolean(writing.video)
+  const cardTitle = writing.cardTitle ?? writing.title
 
   const onVideoEnter = () => {
     videoRef.current?.play()
@@ -58,12 +59,12 @@ export default function WritingListRow({ writing }: WritingListRowProps) {
         ) : (
           <MediaPlaceholder className="home-de-workshop-list__placeholder" label="" />
         )}
-        <span className="home-de-media-caption">
-          <span className="home-de-media-caption__title">{writing.title}</span>
-        </span>
       </div>
+      <span className="home-de-media-caption home-de-media-caption--below">
+        <span className="home-de-media-caption__title">{cardTitle}</span>
+      </span>
       <span className="home-de-workshop-list__text">
-        <span className="home-de-workshop-list__title">{writing.title}</span>
+        <span className="home-de-workshop-list__title">{cardTitle}</span>
       </span>
       <span className="home-de-workshop-list__cta" aria-hidden="true">
         ↗

@@ -108,11 +108,10 @@ export default function ProjectListLink({
             onError={() => setVideoError(true)}
           />
         )}
-        <span className="home-de-media-caption">
-          <span className="home-de-media-caption__title">{project.title}</span>
-          {meta ? <span className="home-de-media-caption__meta">{meta}</span> : null}
-        </span>
       </div>
+      <span className="home-de-media-caption home-de-media-caption--below">
+        <span className="home-de-media-caption__title">{project.title}</span>
+      </span>
       <span className="home-de-project-list__text">
         {impact ? (
           <>

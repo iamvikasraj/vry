@@ -195,12 +195,10 @@ export default function FeaturedProjectCard({
       }`}
       aria-label={`View project: ${project.title}`}
     >
-      <div className="home-de-timeline-featured__media">
-        {media}
-        <span className="home-de-media-caption">
-          <span className="home-de-media-caption__title">{project.title}</span>
-        </span>
-      </div>
+      <div className="home-de-timeline-featured__media">{media}</div>
+      <span className="home-de-media-caption home-de-media-caption--below">
+        <span className="home-de-media-caption__title">{project.title}</span>
+      </span>
     </Link>
   )
 }

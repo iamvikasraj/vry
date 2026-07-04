@@ -15,16 +15,16 @@ export default function HomeDePortfolioSections() {
         <DeTimelinePreview />
       </CvSection>
 
+      <CvSection id="workshops" title="Workshop">
+        <WorkshopListSection layout="grid-2" />
+      </CvSection>
+
       <CvSection id="playground" title="Interactions">
         <ProjectListSection
           projects={playgroundProjects}
           playOnHover
           layout="cards"
         />
-      </CvSection>
-
-      <CvSection id="workshops" title="Workshop">
-        <WorkshopListSection layout="grid-2" />
       </CvSection>
 
       <CvSection id="writing" title="designengineer.ing">

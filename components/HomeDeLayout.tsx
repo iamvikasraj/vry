@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import DeShellScrollRestore from '@/components/DeShellScrollRestore'
 import HomeDeSidebar from '@/components/HomeDeSidebar'
+import MobileSectionHeadingChrome from '@/components/MobileSectionHeadingChrome'
 import PortfolioChat from '@/components/PortfolioChat'
 
 export default function HomeDeLayout({ children }: { children: React.ReactNode }) {
@@ -11,6 +12,7 @@ export default function HomeDeLayout({ children }: { children: React.ReactNode }
   return (
     <div className="home-page home-page--de">
       <DeShellScrollRestore />
+      <MobileSectionHeadingChrome />
       <main className="home-de-main">
         <HomeDeSidebar />
 

@@ -201,11 +201,10 @@ export default function NdaExperienceCard({ project, isHero = false }: NdaExperi
             aria-label={`${project.title} — under NDA, enter password to view`}
           />
         )}
-
-        <span className="home-de-media-caption">
-          <span className="home-de-media-caption__title">{project.title}</span>
-        </span>
       </div>
+      <span className="home-de-media-caption home-de-media-caption--below">
+        <span className="home-de-media-caption__title">{project.title}</span>
+      </span>
     </div>
   )
 }

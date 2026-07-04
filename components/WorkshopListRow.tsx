@@ -98,10 +98,10 @@ export default function WorkshopListRow({ workshop }: WorkshopListRowProps) {
         ) : (
           <MediaPlaceholder className="home-de-workshop-list__placeholder" label="" />
         )}
-        <span className="home-de-media-caption">
-          <span className="home-de-media-caption__title">{workshop.title}</span>
-        </span>
       </div>
+      <span className="home-de-media-caption home-de-media-caption--below">
+        <span className="home-de-media-caption__title">{workshop.title}</span>
+      </span>
       <span className="home-de-workshop-list__text">
         <span className="home-de-workshop-list__title">{workshop.title}</span>
       </span>
