@@ -48,7 +48,7 @@ export default function ProjectDetailMedia({ project }: { project: Project }) {
   }
 
   if (videoAvailable) {
-    return <ProjectVideo src={project.video} poster={thumbSrc} />
+    return <ProjectVideo src={project.video} poster={thumbSrc} priority />
   }
 
   return (

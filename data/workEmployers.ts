@@ -10,7 +10,7 @@ export interface WorkEmployer {
 
 const employerLogoFiles: Record<string, string> = {
   paytm: 'paytm.svg',
-  'et-money': 'et-money.svg',
+  'et-money': 'et-money.png',
   'loop-health': 'loop-health.png',
   'time-bridge': 'time-bridge.png',
   grappus: 'grappus.png',

@@ -1,22 +1,61 @@
-Business Insider's app has a dense information architecture — articles, markets, video, newsletters — all competing for attention. I prototyped a SwiftUI version to explore how native iOS capabilities could improve the reading experience.
+## The problem
 
-## Why SwiftUI
+Business Insider’s mobile experience carries a dense information architecture — articles, markets, video, newsletters — all competing for attention. Publisher apps often feel like responsive websites in a native shell: scroll stutters, gestures fight the platform, and reading hierarchy gets lost in chrome.
 
-Web-based news apps have a ceiling — scroll performance, gesture handling, and system integration all hit limits. SwiftUI gives you native scroll physics, haptics, and system-level features like Dynamic Type and VoiceOver for free. The question was: what does a news app feel like when it's truly native?
+At Times Bridge, the question wasn’t *can we redesign BI India?* It was *what does this product feel like when it’s truly native?* — before the org committed to a direction.
+
+## What I owned
+
+As Lead Product Designer, I built a high-fidelity **SwiftUI prototype** — feed, reading view, gestures, and transitions — to pressure-test IA and editorial hierarchy with real affordances, not slides.
 
 ## What I built
 
-**Article feed** — a `LazyVStack` with custom card components. Each card has a parallax image header that responds to scroll position, and text that scales dynamically with the user's accessibility settings. No manual calculations — SwiftUI handles the layout.
+### Article feed
 
-**Reading view** — the article transition uses `matchedGeometryEffect` to smoothly expand the card into a full reading view. The image grows to full-width, the headline repositions, and the body text fades in. One fluid motion instead of a push navigation.
+A `LazyVStack` with custom card components. Each card has a parallax image header that responds to scroll position, and text that scales with the user’s accessibility settings. No manual layout hacks — SwiftUI handles the structure.
 
-**Pull interactions** — pull down to refresh with haptic feedback, pull from the left edge to go back with a preview of the previous screen. These are native behaviors but customized with SwiftUI's gesture system.
+### Reading view
+
+The article transition uses `matchedGeometryEffect` to expand the card into a full reading view. The image grows to full-width, the headline repositions, and the body text fades in — one fluid motion instead of a push navigation.
+
+### Pull interactions
+
+Pull down to refresh with haptic feedback. Pull from the left edge to go back with a preview of the previous screen. Native behaviors customized through SwiftUI’s gesture system.
+
+## Design engineering
+
+### Prototype as argument
+
+Editorial apps break when product navigation competes with content hierarchy. The prototype let stakeholders argue with scroll, back, save, and density on a phone — not with static comps.
+
+### Native affordances first
+
+When scroll performance is guaranteed and gestures feel right automatically, you spend less time fighting the platform and more time on the reading experience itself.
+
+### Performance as design input
+
+I used Instruments to profile scroll on device. Jank in the feed wasn’t an engineering ticket later — it changed card structure and image loading early.
+
+## Results
+
+The SwiftUI build became the reference for **native IA and motion** in BI India discussions — a concrete direction for feed density, reading transitions, and system integration before production commitment.
 
 ## What I learned
 
-Native frameworks change what you design. When scroll performance is guaranteed and gestures feel right automatically, you spend less time fighting the platform and more time on the actual experience.
+### Native frameworks change what you design
+
+Guaranteed scroll and gestures free you for hierarchy — you stop fighting the platform and start designing the reading experience.
+
+### Editorial hierarchy is navigation
+
+The job is often what to withhold, not what to add — chrome that competes with content kills publisher apps.
+
+### matchedGeometryEffect is a product decision
+
+Shared-element transitions are continuity, not polish — they define how readers move from feed to article.
 
 ## Tools
 
-**SwiftUI** — layout, navigation, gestures, accessibility
-**Xcode** — Instruments for scroll performance profiling
+<ProjectTools>
+  <ProjectTool logo="/assets/tools/swiftui.png" name="SwiftUI" description="layout, navigation, gestures, accessibility" />
+</ProjectTools>

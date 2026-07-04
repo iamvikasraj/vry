@@ -18,3 +18,18 @@
   to = "/.netlify/functions/nda-unlock"
   status = 200
   force = true
+
+[[headers]]
+  for = "/assets/video/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/projects/*/poster.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/projects/*/poster.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

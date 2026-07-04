@@ -1,18 +1,82 @@
-Loop’s general-query AI assistant helps members get fast answers without leaving the app — while keeping trust, clarity, and safe escalation to human care.
-
 ## The problem
 
-Members had quick health questions but no lightweight way to get reliable answers inside Loop. Support and doctor flows were too heavy for “what does this mean?” moments.
+Members had quick, low-stakes health questions — *what does this term mean?*, *is this normal?*, *what should I do next?* — but no lightweight place to ask them inside Loop. Doctor on Demand and support were the right paths for high-intent care. They were the wrong default for curiosity and clarification.
 
-## Approach
+The risk wasn’t only drop-off. In healthcare, a bad AI moment isn’t a quirky typo — it’s a trust failure. Members need to know what the system is doing, where an answer comes from, and when to talk to a human instead.
 
-I designed the assistant around **progressive depth** — short answers first, optional detail, and clear paths to book a doctor or talk to support when the query needs a human.
+## What I owned
 
-**Conversation states** — loading, partial results, cited answers, and error recovery each have distinct treatment so members always know what the system is doing.
+As Staff Product Designer & Technologist, I led interaction design for the member-facing assistant — conversation structure, state treatment, escalation to care, and SwiftUI prototypes used in review with engineering and clinical stakeholders.
 
-**SwiftUI prototyping** — built interactive prototypes on device to test timing, keyboard behavior, and handoff to care flows with engineering early.
+I worked in Figma for flow mapping and specs. On device for timing, keyboard behavior, and handoff patterns that had to feel native before we committed to build.
+
+## The system
+
+### Progressive depth
+
+A short, useful answer first. Detail on demand. A clear next step when the query needs a person — not one chat template for everything.
+
+### Query intent
+
+I mapped high-intent question types and failure modes early: vague symptoms, medication confusion, benefits coverage, *what does my report say?* Each type needed a different depth of answer and a different escalation path.
+
+### Conversation states
+
+Loading, partial results, cited answers, empty or low-confidence responses, and error recovery each get distinct treatment. Members should never wonder if the app froze or if the AI is guessing. When we can show sources, we do. When we can’t answer safely, the UI says so plainly.
+
+### Escalation as a first-class outcome
+
+Booking a doctor, opening support, or continuing with a human care path are designed as clearly as the answer itself — not buried behind a generic contact link.
+
+### Trust boundaries
+
+Tone, citation patterns, and what the product refuses to claim were part of the design, not copy added at the end. Clinical and ops review shaped what *helpful* could mean inside an employer-sponsored benefits app.
+
+## Design engineering
+
+### SwiftUI on device
+
+I built interactive prototypes to test what static frames couldn’t: keyboard overlap, scroll with long answers, transition into Doctor on Demand, and how fast the UI had to respond so the experience felt like Loop — not a web view stapled onto the app.
+
+### Patterns, not one-offs
+
+Loading skeletons, citation rows, action chips, and error banners were defined as reusable patterns aligned with the Loop design system so engineering could ship consistently instead of reinventing each state in code review.
+
+### Prototype-driven handoff
+
+When a state felt wrong on a real phone, we changed the spec before it became a production edge case. The SwiftUI build was the argument in review.
+
+## How we worked
+
+Cross-functional from the start: product for scope and query types, engineering for feasibility and latency, clinical and ops for what we could responsibly answer and when to force escalation. The flow maps and prototypes became the shared artifact — fewer meetings debating abstract “AI UX,” more decisions on specific screens and states.
+
+## Results
+
+The assistant is **design-engineered with the team and in active testing** on the Loop app — general health queries with safe paths into human care when the question outgrows self-serve.
+
+Early focus was getting the **first mile right**: members understand what the assistant is for, see honest loading and sourcing behavior, and can reach a doctor or support without starting over. Deeper outcome metrics will follow as rollout broadens. The design goal for v1 was trust at speed, not chat for its own sake.
+
+## What I’d do next
+
+Tighten the bridge between answered questions and booked care — so a good AI reply naturally becomes a booked consult when symptoms warrant it. Continue voice and multimodal experiments in parallel, but keep the text experience ruthlessly clear; in health, clarity beats novelty.
+
+## What I learned
+
+### The assistant is a front door, not a product island
+
+Escalation to Doctor on Demand or support can't feel like starting over — handoffs matter as much as the chat UI.
+
+### States are trust in healthcare AI
+
+Low-confidence, loading, and partial answers need explicit design — ambiguity reads as guessing with your health data.
+
+### Clinical review shapes the interface
+
+What we could claim, cite, and refuse changed components, empty states, and escalation defaults — not a legal footnote at the end.
 
 ## Tools
 
-**SwiftUI** — native prototyping and production patterns  
-**Figma** — flow mapping and conversation UI specs
+<ProjectTools>
+  <ProjectTool logo="/assets/tools/swiftui.png" name="SwiftUI" description="native prototyping, conversation states, escalation handoffs" />
+  <ProjectTool logo="/assets/tools/figma.svg" name="Figma" description="flow mapping, conversation UI specs, design-system alignment" />
+</ProjectTools>

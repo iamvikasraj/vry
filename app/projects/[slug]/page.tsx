@@ -3,18 +3,24 @@ import ClientScripts from '@/components/ClientScripts'
 import ProjectSiteHeader from '@/components/ProjectSiteHeader'
 import ProjectViewTracker from '@/components/ProjectViewTracker'
 import ProjectSectionTracker from '@/components/ProjectSectionTracker'
-import ProjectDetailMedia from '@/components/ProjectDetailMedia'
+import ProjectDetailHeader from '@/components/ProjectDetailHeader'
+import ProjectDetailLead from '@/components/ProjectDetailLead'
 import ProjectGallery from '@/components/ProjectGallery'
 import NdaGate from '@/components/NdaGate'
 import ProjectArticleFooter from '@/components/ProjectArticleFooter'
 import ProjectMoreProjects from '@/components/ProjectMoreProjects'
 import { projects, getProjectBySlug } from '@/data/projects'
+import { getProjectThumbMedia } from '@/lib/projectMedia.server'
+import { mediaAssetPath } from '@/lib/mediaAssetPath'
 
 async function loadMDX(slug: string) {
   try {
     const mod = await import(`@/content/projects/${slug}.mdx`)
     return mod.default
-  } catch {
+  } catch (error) {
+    if (process.env.NODE_ENV === 'development') {
+      console.error(`[MDX] Failed to load content/projects/${slug}.mdx — showing fallback.`, error)
+    }
     return null
   }
 }
@@ -34,31 +40,30 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
   }
 
   const MDXContent = await loadMDX(slug)
+  const { thumbSrc, videoAvailable } = getProjectThumbMedia(project)
+  const preloadHero =
+    !project.nda && !project.detailMediaInContent && videoAvailable && Boolean(project.video)
+  const heroCaption = !project.detailMediaInContent ? project.heroCaption : undefined
 
   return (
+    <>
+      {preloadHero && thumbSrc ? (
+        <link rel="preload" as="image" href={thumbSrc} />
+      ) : null}
+      {preloadHero ? (
+        <link rel="preload" as="video" href={mediaAssetPath(project.video)} type="video/mp4" />
+      ) : null}
     <div className="home-page home-page--de home-page--de-detail">
       <ProjectViewTracker projectTitle={project.title} projectSlug={project.slug} />
       <ProjectSectionTracker projectTitle={project.title} projectSlug={project.slug} />
       <main className="project-de-main">
         <ProjectSiteHeader />
         <section className="project-detail">
-          <header className="project-detail-header">
-            <div className="project-detail-hero">
-              <h1 className="project-title">{project.title}</h1>
-              {(project.client || project.year || project.role) && (
-                <p className="project-detail-byline">
-                  {[project.client, project.year, project.role].filter(Boolean).join(' · ')}
-                </p>
-              )}
-              {project.tools && project.tools.length > 0 && (
-                <p className="project-detail-tools">{project.tools.join(', ')}</p>
-              )}
-            </div>
-          </header>
+          <ProjectDetailHeader project={project} />
 
-          <div className="project-detail-media">
-            <ProjectDetailMedia project={project} />
-          </div>
+          {!project.detailMediaInContent ? (
+            <ProjectDetailLead project={project} heroCaption={heroCaption} />
+          ) : null}
 
         {project.nda ? (
           <NdaGate slug={project.slug} />
@@ -118,5 +123,6 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
       </main>
       <ClientScripts />
     </div>
+    </>
   )
 }

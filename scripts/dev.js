@@ -25,8 +25,30 @@ function getLanIPv4() {
 }
 
 const host = process.env.HOSTNAME || getArgValue("--host") || "0.0.0.0";
-// Default 3010 — Floema/webgl often occupies 3000 on this machine.
-const port = process.env.PORT || getArgValue("--port") || "3010";
+// Default 3000 — matches preview/smoke-test scripts.
+const port = process.env.PORT || getArgValue("--port") || "3000";
+
+function stopExistingListenerOnPort(portNumber) {
+  if (process.platform === "win32") return;
+  try {
+    const { execSync } = require("node:child_process");
+    const pids = execSync(`lsof -ti :${portNumber}`, { encoding: "utf8" }).trim();
+    if (!pids) return;
+    for (const pid of pids.split("\n")) {
+      if (!pid) continue;
+      try {
+        process.kill(Number(pid), "SIGTERM");
+      } catch {
+        /* already exited */
+      }
+    }
+    console.log(`[dev] Stopped previous process on port ${portNumber}`);
+  } catch {
+    /* nothing listening */
+  }
+}
+
+stopExistingListenerOnPort(port);
 const openUrl = process.env.OPEN_URL !== "0";
 const lanIp = getLanIPv4();
 if (lanIp) console.log(`  - Network:      http://${lanIp}:${port}`);

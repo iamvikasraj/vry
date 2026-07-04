@@ -1,21 +1,80 @@
-Healthcare products are inherently multi-step — referrals, tests, follow-ups, prescriptions. Care Journey makes that complexity legible for members who just want to know what happens next.
-
 ## The problem
 
-Members would complete one step in their care plan and lose track of what came after. Support tickets and drop-off both pointed to the same issue: the app showed tasks, not a journey.
+Loop had the three pieces that matter for continuous care: protection when you need it, visibility into what’s happening in your body, and access to doctors around the clock. But they lived in silos.
 
-## Approach
+Your consultation happened. Your prescription got generated. Your lab results arrived. All separate. All disconnected.
 
-Care Journey reframes care as a **pathway with visible progress** — where you are, what's done, what's next, and who to contact if something stalls.
+Healthcare in India has consultation apps, pharmacy apps, diagnostic apps — but no infrastructure for **continuity**. Members couldn’t answer basic questions about their own history when it mattered. A dentist asks which teeth were already treated; the paper card is lost; you’re guessing from memory.
 
-**Progressive disclosure** — the full pathway exists, but the default view shows only the current and upcoming steps. Past steps collapse into a timeline you can expand when needed.
+## What I owned
 
-**SwiftUI prototyping** — I prototyped state transitions and scroll behavior in SwiftUI to get the hierarchy right before handoff. Healthcare UI needs to feel calm; getting spacing and motion right on device was faster than debating in static mocks.
+As Staff Product Designer & Technologist, I designed **Care Tab end to end** — the health timeline, dependent records, consultation context for doctors, and the flows that tie prescriptions, labs, and follow-ups back into one chronological view.
 
-**Cross-functional alignment** — clinical ops, support, and engineering each had different mental models of a "journey." The design became the shared artifact that reconciled them.
+This was a pain to ship. The launch post was going live while I was still pulling context from clinical ops, support, and engineering — designing the system and learning what *continuity* meant in edge cases at the same time. No clean brief; lots of parallel discovery and iteration.
+
+<ProjectFigure
+  src="/assets/projects/loop-care-journey/figma-care-journey-v1.png"
+  alt="Care Journey V1 Figma file — consult, prescription, and timeline flows"
+  caption="Care Journey V1 in Figma — post-consult flows, prescriptions, timeline views, and onboarding mapped for developer handoff"
+  variant="wide"
+/>
+
+## The system
+
+### One health timeline
+
+Every consultation with Loop doctors, every prescription, every lab result. Your spouse’s records. Your parents’ medications. Your kid’s vaccination history. Organized chronologically, accessible when you need care.
+
+### Context before the call
+
+When you book a consultation, the doctor sees your health profile before the call starts: conditions, medications, recent labs. No more repeating your history from scratch.
+
+### Closed-loop follow-through
+
+Doctor recommends a follow-up? Book in one tap. Orders tests? Results flow back into the timeline automatically. Treatment works or doesn’t? The system tracks that too.
+
+### Progressive disclosure
+
+The full history exists, but the default view keeps the current thread legible — where you are, what’s done, what’s next — without dumping a lifetime of records on one screen.
+
+## Design engineering
+
+### SwiftUI on device
+
+A timeline with dependents, labs, and consult handoffs doesn’t survive static mocks. I prototyped scroll, sectioning, and state transitions in SwiftUI so hierarchy and density felt calm on a real phone.
+
+### Designing while shipping
+
+Launch pressure meant prototypes were the fastest way to align product, clinical, and eng on what *connected care* looked like in UI — not slides about a future state.
+
+### Patterns for scale
+
+Timeline rows, record types, empty states, and consult-prep surfaces as reusable components so iOS could ship consistently as the data model grew.
+
+## Results
+
+Care Tab launched on Loop for **nearly a million members** — the first time insurance, diagnostics, and care delivery show up as one integrated experience in the app.
+
+Loop is one of the few platforms in India with all three pieces in place. Care Tab is what makes that stack legible to members — not three apps, one timeline.
+
+## What I learned
+
+### Continuity is a data problem dressed as UI
+
+Incomplete, duplicated, or siloed records — progressive disclosure only works if the backend story is honest.
+
+### Launch pressure can be a design method
+
+Designing while the launch post was being written forced fast alignment with clinical ops and eng. Prototypes beat decks when everyone is learning the product at the same time.
+
+### Dependents change the whole IA
+
+A timeline that works for one member breaks when spouses, parents, and kids need separate contexts without feeling like four apps in one.
 
 ## Tools
 
-**SwiftUI** — interaction prototyping
-**Figma** — journey mapping and component design
-**Loop Health design system** — consistent patterns across surfaces
+<ProjectTools>
+  <ProjectTool logo="/assets/tools/swiftui.png" name="SwiftUI" description="timeline prototyping, state transitions, production interaction patterns" />
+  <ProjectTool logo="/assets/tools/figma.svg" name="Figma" description="journey mapping, timeline IA, and cross-functional alignment" />
+  <ProjectTool logo="/assets/tools/cursor.svg" name="Cursor" description="AI-assisted coding — faster iteration while context was still landing" />
+</ProjectTools>

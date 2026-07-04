@@ -248,7 +248,7 @@ export const employerChapters: Record<string, EmployerChapterContent> = {
       },
       {
         id: 'care-journey',
-        title: 'Care Journey',
+        title: 'Care Tab',
         blocks: [
           {
             type: 'prose',

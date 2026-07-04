@@ -1,19 +1,105 @@
-Doctor on Demand is one of the highest-intent flows in the Loop Health app — members need care quickly, and the product has to earn trust in seconds.
-
 ## The problem
 
-Booking a doctor shouldn't feel like navigating a hospital admin system. Members were dropping off between discovery and confirmation because the flow felt opaque: unclear availability, vague wait times, and too many steps before they knew what would happen next.
+We kept seeing the same pattern: members had Loop access and still couldn’t get to a doctor on their own. A stressed employee opens the app — sick child, something’s been off for days — and lands on a screen full of doctors to evaluate, slots to compare, and decisions to make before they can talk to anyone.
 
-## Approach
+Most first-time users don’t push through. They close the app, or message a medical advisor to book it for them. **Having access to a doctor and actually getting to one aren’t the same thing.**
 
-I redesigned the flow around **progressive commitment** — each screen answers one question before asking for the next input. Search and specialty selection come first, then availability, then confirmation. Nothing asks for payment or personal details until the member knows what they're getting.
+What we heard repeatedly in research: people wanted to know, quickly, whether we could get them a doctor. If we could show that upfront, we believed we could convert them. That hypothesis is what led to the experiment.
 
-**SwiftUI prototyping** — I built interactive prototypes in SwiftUI to test timing, loading states, and handoff to the consultation screen with engineering early. Real device feel mattered more than polished Figma frames.
+<ProjectFigure
+  src="/assets/video/loop-doctor-on-demand-before.mp4"
+  alt="Doctor on Demand before redesign"
+  caption="Before — browse, compare, and decide before you can reach a doctor"
+  video
+/>
 
-**Status clarity** — wait time, doctor assignment, and consultation-ready states each have distinct visual treatment so members never wonder if the app is stuck.
+## The experiment
+
+We launched **Doctor on Demand** as an experimental feature for **General Physician** — a scoped bet to answer one question: if we ship a faster path to a doctor, will members actually use it?
+
+We were right to test it first. The experiment drove a **30% increase in conversion** — enough signal to justify building it properly and rolling it out wider.
+
+## What I owned
+
+As Staff Product Designer & Technologist, I owned interaction design and native prototyping end to end — intent capture, doctor assignment, wait states, and handoff into consultation.
+
+I started in **Figma** — flow maps and a small clickable prototype to align product and clinical ops on scope. But I have a habit of prototyping in code. The first thing I did was spin up a small SwiftUI environment for myself: I cloned the homepage and a few L2 screens from the app so I could scale prototypes faster without rebuilding navigation every time.
+
+That setup let me iterate on real device feel from day one — not after handoff.
+
+<ProjectFigure
+  src="/assets/projects/loop-doctor-on-demand/figma-doctor-on-demand-v1.png"
+  alt="Doctor on Demand Figma file — user flow from home to consultation"
+  caption="Doctor on Demand V1 in Figma — user flow from home through booking, consult, and post-onboarding states"
+  variant="wide"
+/>
+
+## A decision that changed the flow
+
+The PRD called for an **introduction screen** — explain the feature before members commit.
+
+I lived with the prototype. Used it five to ten times. Slept on it.
+
+The intro felt like friction when someone just wants to know: *can I get a doctor right now?* I changed the opening — **show a doctor available upfront**, so intent is clear before anyone reads a paragraph about what Doctor on Demand is.
+
+That wasn’t in the original spec. It came from using the thing I built.
+
+## Design engineering
+
+### SwiftUI as the source of truth
+
+Keyboard overlap, scroll with long forms, push transitions into the consult screen, how long loading could last before trust broke. Those only show up on a real phone, in code.
+
+<ProjectFigure
+  src="/assets/projects/loop-doctor-on-demand/swiftui-prototype-xcode.mp4"
+  alt="Doctor on Demand SwiftUI prototype in Xcode"
+  caption="SwiftUI prototype in Xcode — booking flow, transitions, and timing on device"
+  video
+/>
+
+### States before pixels
+
+I mapped the booking state machine early: intent → matching → wait → assigned → in session → handoff. Engineering and clinical ops reviewed transitions in the prototype before we polished visual design.
+
+### Patterns, not one-offs
+
+Loading skeletons, wait-time treatment, doctor-assigned cards, and error recovery as reusable components in the Loop design system — so iOS could ship consistently, not reinvent each state in code review.
+
+### Prototype-driven handoff
+
+When a transition felt wrong on device, we changed the spec before it became a production edge case. The SwiftUI build was the argument in review.
+
+## Results
+
+The experiment validated the bet: **30% higher conversion** on the GP path.
+
+After launch, **over 60% more first-time users** completed their first consultation — members who used to drop off at browse-and-compare were getting through on the first try.
+
+<ProjectFigure
+  src="/assets/video/loop-doctor-on-demand-after.mp4"
+  alt="Doctor on Demand after redesign"
+  caption="After — doctor available upfront, then matched in minutes"
+  video
+/>
+
+## What I learned
+
+### Run the bet before the build
+
+GP scope and a conversion metric first — 30% signal before we committed to the full vision.
+
+### The PRD isn’t the prototype
+
+Five uses in SwiftUI killed the intro screen. Members needed a doctor visible, not a feature explanation.
+
+### Prototype on device, design the states
+
+Cloning real app screens and getting pending → matched → in session right in code — before pixel polish — is what made this shippable.
 
 ## Tools
 
-**SwiftUI** — native prototyping and production patterns
-**Figma** — flow mapping and component specs
-**Loop Health design system** — shared tokens and components across iOS and web
+<ProjectTools>
+  <ProjectTool logo="/assets/tools/swiftui.png" name="SwiftUI" description="prototype environment, state-driven flows, production interaction patterns" />
+  <ProjectTool logo="/assets/tools/figma.svg" name="Figma" description="early flow mapping and alignment prototypes" />
+  <ProjectTool logo="/assets/tools/cursor.svg" name="Cursor" description="AI-assisted coding — faster SwiftUI prototyping and scaling the clone environment" />
+</ProjectTools>

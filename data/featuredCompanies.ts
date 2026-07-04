@@ -38,16 +38,19 @@ export const featuredCompanies: FeaturedCompany[] = [
       {
         slug: 'loop-doctor-on-demand',
         title: 'Doctor on Demand',
-        videos: [
-          '/assets/video/loop-doctor-on-demand-after.mp4',
-          '/assets/video/loop-doctor-on-demand-before.mp4',
-        ],
+        hero: true,
+        video: '/assets/video/loop-doctor-on-demand-after.mp4',
+      },
+      {
+        slug: 'loop-care-journey',
+        title: 'Care Tab',
+        video: '/assets/video/loop-care-journey-launch.mp4',
+        hidden: true,
       },
       {
         slug: 'loop-ai-assistant',
         title: 'Loop AI Assistant (General queries)',
         video: '/assets/video/Loop AI Assistant (LinkedIn Export).mp4',
-        hero: true,
       },
     ],
   },
@@ -58,9 +61,9 @@ export const featuredCompanies: FeaturedCompany[] = [
       'Principal Product Designer leading UX for India’s personal finance platform — high-compliance flows, design system work, and product craft across investing and money management.',
     projects: [
       {
-        slug: 'et-money-1',
+        slug: 'etmoney-rive',
         title: 'ET Money — Onboarding',
-        video: '/assets/video/et-money-onboarding.mp4',
+        video: '/assets/video/et-money-onboarding-tumb.mp4',
       },
       { slug: 'et-money-2', title: 'Project 2', hidden: true },
     ],
@@ -95,9 +98,15 @@ export const featuredCompanies: FeaturedCompany[] = [
     summary:
       'Built Paytm’s foundational design system and scaled Postpaid to 1M+ users in six months. Led redesigns for India’s largest private B2C train booking platform.',
     projects: [
-      { slug: 'paytm-postpaid', title: 'Paytm Postpaid', nda: true, ndaPreview: false },
-      { slug: 'paytm-travel-trains', title: 'Paytm Travel', nda: true },
-      { slug: 'paytm-design-system-v1', title: 'Paytm Design System', nda: true },
+      {
+        slug: 'paytm-postpaid',
+        title: 'Paytm Postpaid',
+        nda: true,
+        ndaPreview: false,
+        hidden: true,
+      },
+      { slug: 'paytm-travel-trains', title: 'Paytm Travel', nda: true, hidden: true },
+      { slug: 'paytm-design-system-v1', title: 'Paytm Design System', nda: true, hidden: true },
     ],
   },
 ]

@@ -1,10 +1,25 @@
-ET Money's onboarding had a drop-off problem — static screens that felt transactional, not inviting. In parallel, core actions like invest and goal-lock needed motion that communicated trust. I redesigned onboarding and a set of in-app microinteractions with Rive, integrated through SwiftUI.
+## The problem
+
+ET Money’s onboarding had a drop-off problem — static screens that felt transactional, not inviting. In fintech, first-run isn’t branding fluff. It’s the moment members decide whether this app understands money or just wants their PAN.
+
+Parallel to onboarding, core actions like invest and goal-lock needed motion that communicated trust — not decoration beside a form.
+
+## What I owned
+
+As Lead Product Designer, I led Rive-driven onboarding and microinteraction work — from first-run education through feedback across core investment surfaces. Motion had to teach and respond to input, not autoplay beside it.
 
 ## Onboarding
 
-Instead of decorative illustrations, I used Rive so each step responds to input. When you enter your name, the greeting animates. When you set a goal, the visual reflects it. Every animation is input-driven, not auto-playing — motion feels like a response, not a video beside the form.
+Instead of decorative illustrations, I used Rive so each step responds to input. When you enter your name, the greeting animates. When you set a goal, the visual reflects it. Every animation is input-driven — motion feels like a response, not a video beside the form.
 
-**SwiftUI integration** — Rive's iOS runtime bound state machine inputs to `@State`, so animation and forms shared one source of truth. Onboarding completion went up 47%; time-to-value dropped as the flow felt guided rather than administrative.
+**SwiftUI integration** — Rive’s iOS runtime bound state machine inputs to `@State`, so animation and forms shared one source of truth.
+
+<ProjectFigure
+  src="/assets/video/et-money-onboarding-rive.mp4"
+  alt="ET Money onboarding — Rive state machine in the editor"
+  caption="Rive state machine for onboarding — inputs bound to form steps before SwiftUI integration"
+  video
+/>
 
 ## Microinteractions
 
@@ -16,8 +31,49 @@ In fintech, the transition communicates reliability. Each interaction is a self-
 
 **Pull-to-refresh** — the indicator ties into Rive listeners so animation speed matches gesture velocity.
 
+## Design engineering
+
+### One source of truth
+
+If a state machine in Rive didn’t map to SwiftUI, we fixed it in the tool — not in a handoff doc. Engineering pairs mattered from week one.
+
+<ProjectFigure
+  src="/assets/video/et-money-onboarding-xcode preview.mp4"
+  alt="ET Money onboarding SwiftUI prototype in Xcode"
+  caption="SwiftUI prototype in Xcode — Rive runtime bound to form state on device"
+  video
+/>
+
+### Motion as hierarchy
+
+Every beat had to answer *what should I do next?* before it asked for trust or data. I cut loops that looked polished in review but didn’t move completion.
+
+### Components, not one-offs
+
+Onboarding steps and gesture-driven feedback shipped as reusable Rive assets integrated through SwiftUI — so squads could adopt patterns without reinventing motion per screen.
+
+## Results
+
+Onboarding completion went up **47%**. Time-to-value dropped as the flow felt guided rather than administrative — members moved through KYC and goal-setting with clearer momentum.
+
+## What I learned
+
+### Input-driven beats auto-play
+
+Motion should respond to what members typed, not loop beside the form — input-driven Rive tied to SwiftUI state made onboarding feel guided.
+
+### Time-to-value vs. brand delight
+
+Cut polished loops that didn’t move completion — every beat had to answer what to do next before it asked for trust or data.
+
+### Rive and SwiftUI need shared state
+
+Misaligned state machines become day-one bugs — we fixed mapping in the tool with engineering pairs from week one.
+
 ## Tools
 
-**Rive** — state machines for onboarding steps and gesture-driven feedback  
-**SwiftUI** — native forms, navigation, state management  
-**Figma** — wireframes, specs, and component documentation
+<ProjectTools>
+  <ProjectTool name="Rive" description="state machines for onboarding steps and gesture-driven feedback" />
+  <ProjectTool logo="/assets/tools/swiftui.png" name="SwiftUI" description="native forms, navigation, state management" />
+  <ProjectTool logo="/assets/tools/figma.svg" name="Figma" description="wireframes, specs, and component documentation" />
+</ProjectTools>

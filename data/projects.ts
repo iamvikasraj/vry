@@ -6,12 +6,18 @@ export interface Project {
   video: string
   /** Hero / grid thumbnail when set (e.g. converted from camera RAW) */
   coverImage?: string
+  /** Still frame shown while hero video buffers (falls back to poster.jpg in project folder). */
+  videoPoster?: string
   /** Additional images shown in the case study gallery */
   images?: string[]
   description: string
   tags: string[]
   category: ProjectCategory
   hidden?: boolean
+  /** Omit from the “More projects” footer on other case studies (page remains reachable). */
+  excludeFromMoreProjects?: boolean
+  /** Only list in “More projects” when the current case study shares this client. */
+  onlyInMoreProjectsForClient?: string
   /** Under-NDA company card — no media, renders a locked hero + NDA-safe write-up. */
   nda?: boolean
   featured?: boolean
@@ -26,26 +32,60 @@ export interface Project {
   results?: string
   /** Design / craft tools shown in project meta (optional) */
   tools?: string[]
+  /** Hero video is omitted on the detail page — clips live in MDX instead */
+  detailMediaInContent?: boolean
+  /** Below hero media — narrative with optional bold value highlights */
+  heroCaption?: {
+    outcome?: string
+    outcomeParts?: { text: string; bold?: boolean }[]
+    link?: { label: string; href: string }
+    /** @deprecated use outcome */
+    text?: string
+  }
 }
 
 export const projects: Project[] = [
   {
     slug: 'loop-doctor-on-demand',
     title: 'Loop Health — Doctor on Demand',
-    video: '/assets/video/loop-doctor-on-demand.mp4',
-    description: 'Telehealth experience for booking and connecting with doctors on demand within the Loop Health app.',
-    tags: ['Live Projects', 'Healthcare'],
+    video: '/assets/video/loop-doctor-on-demand-launch.mp4',
+    description:
+      'Telehealth booking flow for Loop Health — product design and SwiftUI design engineering from prototype to launch.',
+    tags: ['Live Projects', 'Healthcare', 'SwiftUI', 'Design Engineering'],
     category: 'Work',
     year: '2025',
     client: 'Loop Health',
     role: 'Staff Product Designer & Technologist',
-    context: 'Designed the end-to-end Doctor on Demand flow — from discovery and booking to consultation handoff — for Loop Health members and their employers.',
+    context:
+      'Started Doctor on Demand as a GP experiment to test whether showing a doctor quickly would convert members — then design-engineered the iOS flow from SwiftUI prototype to launch.',
     process: [
-      'Mapped member and employer journeys for on-demand care',
-      'Prototyped key flows in SwiftUI for rapid iteration with engineering',
-      'Refined booking, wait-time, and consultation states with the product team',
-      'Shipped production-ready patterns across iOS and web surfaces'
-    ]
+      'Ran GP experiment to validate fast-doctor-access hypothesis — 30% conversion lift',
+      'Built SwiftUI prototype environment by cloning homepage and L2 app screens',
+      'Iterated past PRD intro screen to show doctor availability upfront',
+      'Shipped production iOS patterns as part of Live on Loop: Member Edition',
+    ],
+    results:
+      '30% conversion lift in experiment; over 60% more first-time users completing first consultation after launch.',
+    tools: ['SwiftUI', 'Figma', 'Cursor'],
+    heroCaption: {
+      outcomeParts: [
+        {
+          text: 'Doctor on Demand started as an experiment — and shipped as the first release in ',
+        },
+        { text: 'Live on Loop: Member Edition', bold: true },
+        { text: ', ' },
+        { text: 'five features in five days', bold: true },
+        {
+          text: '. I led the product design and design-engineered the iOS flow from that first bet through launch. The GP experiment drove a ',
+        },
+        { text: '30% conversion lift', bold: true },
+        { text: '.' },
+      ],
+      link: {
+        label: 'Monal Yadav walks through the shipped flow on LinkedIn',
+        href: 'https://www.linkedin.com/posts/monal-yadav_another-cool-thing-to-have-worked-upon-ugcPost-7440963115065798656-Jv6a/',
+      },
+    },
   },
   {
     slug: 'loop-ai-assistant',
@@ -67,24 +107,56 @@ export const projects: Project[] = [
       'Shipped production patterns with engineering and clinical review',
     ],
     tools: ['SwiftUI', 'Figma'],
+    heroCaption: {
+      outcomeParts: [
+        {
+          text: 'I led interaction design for Loop’s member-facing AI assistant — conversation structure, escalation to care, and SwiftUI prototypes with engineering and clinical stakeholders. ',
+        },
+        { text: 'In active testing', bold: true },
+        { text: ' on the Loop app — built for ' },
+        { text: 'trust at speed', bold: true },
+        { text: ', not chat for its own sake.' },
+      ],
+    },
   },
   {
     slug: 'loop-care-journey',
-    title: 'Loop Health — Care Journey',
-    video: '/assets/video/loop-care-journey.mp4',
-    description: 'Care pathway experience that guides members through their health journey with clear status and next steps.',
-    tags: ['Live Projects', 'Healthcare', 'SwiftUI'],
+    title: 'Loop Health — Care Tab',
+    video: '/assets/video/loop-care-journey-launch.mp4',
+    onlyInMoreProjectsForClient: 'Loop Health',
+    description:
+      'Care Tab on Loop — unified health timeline connecting insurance, diagnostics, and primary care for nearly a million members.',
+    tags: ['Live Projects', 'Healthcare', 'SwiftUI', 'Design Engineering'],
     category: 'Work',
     year: '2025',
     client: 'Loop Health',
     role: 'Staff Product Designer & Technologist',
-    context: 'Built the Care Journey feature to help members understand where they are in their care plan and what to do next — reducing confusion in a complex healthcare product.',
+    context:
+      'Designed Care Tab end to end — health timeline, dependent records, consult context, and closed-loop follow-ups across prescriptions and labs.',
     process: [
-      'Synthesized care pathway requirements with clinical and ops stakeholders',
-      'Designed progressive disclosure for multi-step care flows',
-      'Prototyped interactions in SwiftUI to validate timing and hierarchy',
-      'Aligned design system components with engineering for scale'
-    ]
+      'Synthesized continuity requirements across clinical ops, support, and engineering under launch pressure',
+      'Designed timeline IA and progressive disclosure for multi-member health records',
+      'Prototyped scroll, density, and handoffs in SwiftUI on device',
+      'Shipped reusable timeline and consult-prep patterns for iOS launch',
+    ],
+    results:
+      'Launched Care Tab for nearly a million Loop members — insurance, diagnostics, and care in one integrated timeline.',
+    tools: ['SwiftUI', 'Figma', 'Cursor'],
+    heroCaption: {
+      outcomeParts: [
+        {
+          text: 'I designed Care Tab end to end — insurance, diagnostics, and primary care in ',
+        },
+        { text: 'one health timeline', bold: true },
+        { text: '. Launched for ' },
+        { text: 'nearly a million members', bold: true },
+        { text: ' — the first time those three pieces show up as one integrated experience in Loop.' },
+      ],
+      link: {
+        label: 'Loop Health launch post on LinkedIn',
+        href: 'https://www.linkedin.com/posts/loop-health_today-were-launching-care-tab-on-loop-activity-7403772920956981250-zeEY/',
+      },
+    },
   },
   {
     slug: 'loop-dependent-invite',
@@ -125,6 +197,18 @@ export const projects: Project[] = [
       'Prototyped key reading and discovery flows',
       'Refined interactions and transitions for handoff',
     ],
+    tools: ['SwiftUI'],
+    heroCaption: {
+      outcomeParts: [
+        {
+          text: 'I built a high-fidelity SwiftUI prototype for BI India — feed, reading view, and gestures to pressure-test ',
+        },
+        { text: 'editorial IA before production commitment', bold: true },
+        { text: '. Became the reference for ' },
+        { text: 'native motion and hierarchy', bold: true },
+        { text: ' in Times Bridge discussions.' },
+      ],
+    },
   },
   {
     slug: 'interactive-balloons',
@@ -148,7 +232,7 @@ export const projects: Project[] = [
   {
     slug: 'etmoney-rive',
     title: 'ET Money — New App Onboarding with Rive & SwiftUI',
-    video: '/assets/video/Et money onboarding with Rive & SwiftUI.mp4',
+    video: '/assets/video/et-money-onboarding-tumb.mp4',
     description:
       'New app onboarding for ET Money — a motion-led first-run experience built in Rive and shipped with SwiftUI.',
     tags: ['Live Projects', 'Rive', 'SwiftUI'],
@@ -166,6 +250,16 @@ export const projects: Project[] = [
       'Integrated motion with SwiftUI for production rollout',
     ],
     results: 'Improved onboarding completion rate by 47% and reduced time-to-value for new users.',
+    tools: ['Rive', 'SwiftUI', 'Figma'],
+    heroCaption: {
+      outcomeParts: [
+        {
+          text: 'I led Rive-driven onboarding for ET Money — input-driven motion bound to SwiftUI, not autoplay beside a form. Onboarding completion up ',
+        },
+        { text: '47%', bold: true },
+        { text: ' — members moved through KYC and goal-setting with clearer momentum.' },
+      ],
+    },
   },
   {
     slug: 'gabit-early-stage',
@@ -204,6 +298,15 @@ export const projects: Project[] = [
     client: 'Paytm',
     role: 'Lead Product Designer',
     tools: ['Pen & Paper', 'Sketch', 'Illustrator', 'After Effects'],
+    heroCaption: {
+      outcomeParts: [
+        {
+          text: 'I led Paytm Postpaid from concept through scale — checkout, repayment, and a limit dashboard members could actually read. Scaled to ',
+        },
+        { text: '1M+ users in six months', bold: true },
+        { text: '.' },
+      ],
+    },
     context:
       'Led design for Paytm Postpaid — scaling BNPL to 1M+ users in six months and embedding lending as a default payment path across the super app.',
     process: [
@@ -226,6 +329,15 @@ export const projects: Project[] = [
     year: '2019–2020',
     client: 'Paytm',
     role: 'Lead Product Designer',
+    heroCaption: {
+      outcomeParts: [
+        {
+          text: 'I led Paytm Travel and Trains — flights, hotels, and IRCTC booking at super-app scale. ',
+        },
+        { text: 'Status is the product', bold: true },
+        { text: ' when waitlist, PNR, and refunds need explicit design.' },
+      ],
+    },
     context:
       'Led design for Paytm Travel and Trains — high-volume booking verticals with complex itineraries, IRCTC constraints, and clear status from search through post-purchase.',
     process: [
@@ -248,6 +360,15 @@ export const projects: Project[] = [
     year: '2018–2021',
     client: 'Paytm',
     role: 'Lead Product Designer',
+    heroCaption: {
+      outcomeParts: [
+        { text: 'I built ' },
+        { text: 'Paytm Design System V1.0', bold: true },
+        {
+          text: ' — components, patterns, and governance so dozens of squads could ship without reinventing UI in every review.',
+        },
+      ],
+    },
     context: 'Built Paytm Design System V1.0 to unify dozens of product squads — foundational components, interaction patterns, and governance as the app scaled.',
     process: [
       'Audited inconsistent UI patterns across Paytm verticals',
@@ -263,6 +384,7 @@ export const projects: Project[] = [
     description: 'Onboarding and investing flows for ET Money — high-compliance journeys with clear hierarchy.',
     tags: ['Live Projects', 'FinTech'],
     category: 'Work',
+    hidden: true,
     year: '2020–2022',
     client: 'ET Money',
     role: 'Principal Product Designer',
@@ -625,5 +747,14 @@ export function getProjectListHref(project: Project): string {
 export function getRelatedProjects(project: Project, limit = 2): Project[] {
   const list =
     project.category === 'Design Engineering' ? getPlaygroundProjects() : getLiveProjects()
-  return list.filter((p) => p.slug !== project.slug).slice(0, limit)
+  return list
+    .filter((p) => {
+      if (p.slug === project.slug) return false
+      if (p.excludeFromMoreProjects) return false
+      if (p.onlyInMoreProjectsForClient) {
+        return project.client === p.onlyInMoreProjectsForClient
+      }
+      return true
+    })
+    .slice(0, limit)
 }

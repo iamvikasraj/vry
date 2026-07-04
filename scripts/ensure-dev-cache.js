@@ -13,6 +13,29 @@ const path = require('path')
 const root = path.join(__dirname, '..')
 const nextDir = path.join(root, '.next')
 const outDir = path.join(root, 'out')
+const devPort = process.env.PORT || '3000'
+
+function stopExistingListenerOnPort(portNumber) {
+  if (process.platform === 'win32') return
+  try {
+    const { execSync } = require('node:child_process')
+    const pids = execSync(`lsof -ti :${portNumber}`, { encoding: 'utf8' }).trim()
+    if (!pids) return
+    for (const pid of pids.split('\n')) {
+      if (!pid) continue
+      try {
+        process.kill(Number(pid), 'SIGTERM')
+      } catch {
+        /* already exited */
+      }
+    }
+    console.log(`[dev] Stopped previous process on port ${portNumber}`)
+  } catch {
+    /* nothing listening */
+  }
+}
+
+stopExistingListenerOnPort(devPort)
 
 const OUT_DEV_ARTIFACTS = [
   'server',

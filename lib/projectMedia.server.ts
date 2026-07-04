@@ -3,6 +3,16 @@ import type { ProjectPreviewMedia, ProjectThumbMedia } from '@/lib/projectMedia'
 import { hasPublicAsset } from '@/lib/projectAssets'
 
 function resolveThumbSrc(project: Project): string | undefined {
+  if (project.videoPoster && hasPublicAsset(project.videoPoster)) {
+    return project.videoPoster
+  }
+
+  const posterJpg = `/assets/projects/${project.slug}/poster.jpg`
+  if (hasPublicAsset(posterJpg)) return posterJpg
+
+  const posterPng = `/assets/projects/${project.slug}/poster.png`
+  if (hasPublicAsset(posterPng)) return posterPng
+
   if (project.coverImage && hasPublicAsset(project.coverImage)) {
     return project.coverImage
   }

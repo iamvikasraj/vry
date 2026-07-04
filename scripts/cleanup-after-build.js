@@ -9,5 +9,7 @@ const nextDir = path.join(__dirname, '..', '.next')
 
 if (fs.existsSync(nextDir)) {
   fs.rmSync(nextDir, { recursive: true, force: true })
-  console.log('[build] Removed .next — use `npm run dev` for local development.')
+  console.log(
+    '[build] Removed .next — if `npm run dev` is already running, restart it (otherwise you may get 404s on localhost).'
+  )
 }
