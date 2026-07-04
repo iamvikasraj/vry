@@ -609,7 +609,8 @@ body {
 .home-de-main-content {
   flex: 1;
   min-width: 0;
-  padding: calc(var(--de-gutter) + 0.5rem) var(--de-gutter) var(--sp-48);
+  padding: calc(var(--de-gutter) + 0.5rem) var(--de-gutter)
+    calc(var(--sp-80) + var(--sp-48));
   overflow-x: clip;
 }
 
