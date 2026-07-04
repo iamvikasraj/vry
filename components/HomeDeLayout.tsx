@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import DeShellScrollRestore from '@/components/DeShellScrollRestore'
+import HomeDeMainContent from '@/components/HomeDeMainContent'
 import HomeDeSidebar from '@/components/HomeDeSidebar'
 import MobileSectionHeadingChrome from '@/components/MobileSectionHeadingChrome'
 import PortfolioChat from '@/components/PortfolioChat'
@@ -16,9 +17,7 @@ export default function HomeDeLayout({ children }: { children: React.ReactNode }
       <main className="home-de-main">
         <HomeDeSidebar />
 
-        <div className="home-de-main-content">
-          {children}
-        </div>
+        <HomeDeMainContent>{children}</HomeDeMainContent>
 
         <div className={`home-de-chat-panel${showChat ? ' home-de-chat-panel--open' : ''}`}>
           <div className="home-de-chat-panel-inner">

@@ -617,8 +617,13 @@ body {
 @media (max-width: 768px) {
   .home-de-main-content {
     padding: var(--sp-24) var(--de-gutter-mobile)
-      calc(var(--sp-24) + var(--sp-32) + env(safe-area-inset-bottom, 0px));
+      calc(var(--sp-24) + var(--sp-48) + env(safe-area-inset-bottom, 0px));
     overflow: visible;
+  }
+
+  /* About is last — bottom section chrome hides; drop the extra scroll clearance. */
+  .home-de-main-content.home-de-main-content--at-section-end {
+    padding-bottom: calc(var(--sp-24) + env(safe-area-inset-bottom, 0px));
   }
 
   .home-de-portfolio-section + .home-de-portfolio-section {
