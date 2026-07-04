@@ -2,9 +2,16 @@
 export const PORTFOLIO_PROFILE = {
   hook: 'A design leader who builds with engineers’ materials.',
   role: 'Staff Product Designer',
-  company: 'Loop Health',
+  company: {
+    name: 'Loop Health',
+    linkedIn: 'https://www.linkedin.com/company/loophealth/',
+  },
   experience: '10+ years across fintech, health, and mobility',
-  previous: ['Paytm', 'HDFC Bank', 'ET Money'],
+  previous: [
+    { name: 'Paytm', linkedIn: 'https://www.linkedin.com/company/paytm/' },
+    { name: 'HDFC Bank', linkedIn: 'https://www.linkedin.com/company/hdfc-bank/' },
+    { name: 'ET Money', linkedIn: 'https://www.linkedin.com/company/et_money/' },
+  ],
   ambassador: 'Rive & Play ambassador',
   location: 'Bengaluru',
   /** IANA zone — the clock shows Vikas’ local time to any visitor. */

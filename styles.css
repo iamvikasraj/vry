@@ -572,6 +572,24 @@ body {
   white-space: nowrap;
 }
 
+.home-de-sidebar-company-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 0, 0, 0.22);
+  text-underline-offset: 0.14em;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.home-de-sidebar-company-link:hover {
+  text-decoration-color: rgba(0, 0, 0, 0.55);
+}
+
+.home-de-sidebar-company-link:focus-visible {
+  outline: 2px solid rgba(0, 0, 0, 0.35);
+  outline-offset: var(--sp-2);
+  border-radius: 2px;
+}
+
 .home-de-sidebar-clock__sep {
   animation: de-clock-blink 1s step-end infinite;
 }
@@ -1042,8 +1060,8 @@ body {
   color: var(--de-black);
   background-image: linear-gradient(0deg, var(--de-highlight), var(--de-highlight));
   background-repeat: no-repeat;
-  background-size: 100% 0.62em;
-  background-position: 0 92%;
+  background-size: 100% 100%;
+  background-position: 0 0;
   padding-inline: 0.08em;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
