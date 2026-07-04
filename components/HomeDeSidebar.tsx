@@ -1,8 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { Fragment, useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
+import LocalTime from '@/components/LocalTime'
 import { PORTFOLIO_PROFILE } from '@/data/portfolioProfile'
 import { DE_ROUTES } from '@/lib/deRoutes'
 import type { DeNavId } from '@/lib/deNav'
@@ -42,6 +43,34 @@ function isSinglePagePortfolio(pathname: string | null) {
 
 function navHref(sectionId: NavLink['sectionId']) {
   return DE_SECTION_HREF[sectionId]
+}
+
+/** ['Paytm', 'HDFC Bank', 'ET Money'] → 'Paytm, HDFC Bank and ET Money'. */
+function formatPrevious(companies: readonly string[]) {
+  if (companies.length <= 1) return companies.join('')
+  return `${companies.slice(0, -1).join(', ')} and ${companies[companies.length - 1]}`
+}
+
+function SocialLinks({ className }: { className?: string }) {
+  return (
+    <nav
+      className={`home-de-sidebar-social${className ? ` ${className}` : ''}`}
+      aria-label="Social links"
+    >
+      {SOCIAL_LINKS.map(({ href, label, icon }) => (
+        <a
+          key={href}
+          href={href}
+          className="home-de-sidebar-social-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={label}
+        >
+          <i className={icon} aria-hidden="true" />
+        </a>
+      ))}
+    </nav>
+  )
 }
 
 export default function HomeDeSidebar() {
@@ -100,20 +129,27 @@ export default function HomeDeSidebar() {
 
   return (
     <aside className="home-de-sidebar" aria-label="Site">
-      <Link href={DE_ROUTES.home} className="home-de-sidebar-logo">
-        Vikas Raj Yadav
-      </Link>
-      <p className="home-de-sidebar-role">
-        <span className="home-de-sidebar-role__desktop">{PORTFOLIO_PROFILE.bio}</span>
-        <span className="home-de-sidebar-role__mobile">
-          {PORTFOLIO_PROFILE.bioLines.map((line, index) => (
-            <Fragment key={line}>
-              {index > 0 ? <br /> : null}
-              {line}
-            </Fragment>
-          ))}
-        </span>
-      </p>
+      <div className="home-de-sidebar-topline">
+        <Link href={DE_ROUTES.home} className="home-de-sidebar-logo">
+          Vikas Raj Yadav
+        </Link>
+        <SocialLinks className="home-de-sidebar-social--top" />
+      </div>
+      <div className="home-de-sidebar-intro">
+        <p className="home-de-sidebar-role home-de-sidebar-hook">{PORTFOLIO_PROFILE.hook}</p>
+        <p className="home-de-sidebar-role">
+          Currently {PORTFOLIO_PROFILE.role} at {PORTFOLIO_PROFILE.company}, with{' '}
+          {PORTFOLIO_PROFILE.experience} — previously{' '}
+          {formatPrevious(PORTFOLIO_PROFILE.previous)}, and a {PORTFOLIO_PROFILE.ambassador}. Based
+          in {PORTFOLIO_PROFILE.location},{' '}
+          <LocalTime
+            className="home-de-sidebar-clock"
+            timeZone={PORTFOLIO_PROFILE.timeZone}
+            label={PORTFOLIO_PROFILE.timeZoneLabel}
+          />
+          .
+        </p>
+      </div>
 
       <div className="home-de-sidebar-footer">
         <nav className="home-de-sidebar-nav" aria-label="Primary">
@@ -148,20 +184,7 @@ export default function HomeDeSidebar() {
           })}
         </nav>
 
-        <nav className="home-de-sidebar-social" aria-label="Social links">
-          {SOCIAL_LINKS.map(({ href, label, icon }) => (
-            <a
-              key={href}
-              href={href}
-              className="home-de-sidebar-social-link"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={label}
-            >
-              <i className={icon} aria-hidden="true" />
-            </a>
-          ))}
-        </nav>
+        <SocialLinks className="home-de-sidebar-social--footer" />
       </div>
     </aside>
   )

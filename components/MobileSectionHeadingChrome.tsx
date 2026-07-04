@@ -122,10 +122,12 @@ export default function MobileSectionHeadingChrome() {
 
   const sections = PORTFOLIO_SECTION_NAV.map((section, index) => ({ ...section, index }))
   const topSections = sections.slice(0, hi + 1).reverse()
-  const bottomSections = sections.slice(lo + 1)
+  // The first section (Experiences) only ever lives in the top bar — the bottom
+  // teaser starts at Workshop and only appears once Experiences has pinned up top.
+  const bottomSections = sections.slice(Math.max(lo + 1, 1))
 
   const topVisible = pinnedIndex >= 0
-  const bottomVisible = bottomSections.length > 0
+  const bottomVisible = pinnedIndex >= 0 && bottomSections.length > 0
 
   return (
     <>

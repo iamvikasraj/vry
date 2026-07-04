@@ -1,25 +1,52 @@
-/** Short copy for the sidebar bio. */
+/** Short copy for the sidebar intro. */
 export const PORTFOLIO_PROFILE = {
-  bio: 'Staff product designer in love with design engineering. Rive ambassador · Play ambassador (RIP). Designing since 2016.',
-  bioLines: [
-    'Staff product designer in love with design engineering.',
-    'Rive ambassador · Play ambassador (RIP).',
-    'Designing since 2016.',
-  ],
+  hook: 'A design leader who builds with engineers’ materials.',
+  role: 'Staff Product Designer',
+  company: 'Loop Health',
+  experience: '10+ years across fintech, health, and mobility',
+  previous: ['Paytm', 'HDFC Bank', 'ET Money'],
+  ambassador: 'Rive & Play ambassador',
+  location: 'Bengaluru',
+  /** IANA zone — the clock shows Vikas’ local time to any visitor. */
+  timeZone: 'Asia/Kolkata',
+  timeZoneLabel: 'IST',
 } as const
 
-/** Home About section — visible copy aligned with site metadata and Person schema. */
+/** One run of About copy — a plain string, or an emphasized (bold) fragment. */
+export type AboutSegment = string | { emphasis: string }
+
+/** Plain-text flattening of rich About copy, for schema.org / meta description. */
+export function flattenAboutSegments(segments: AboutSegment[]): string {
+  return segments.map((seg) => (typeof seg === 'string' ? seg : seg.emphasis)).join('')
+}
+
+/** Home About section — minimal copy, impact metrics carried in the emphasis. */
 export const PORTFOLIO_ABOUT = {
   photo: '/assets/images/vikas-about.png',
   photoAlt: 'Vikas Raj Yadav speaking at a design workshop',
-  lede:
-    'Staff Product Designer and design technologist in Bengaluru, building native-first health products at Loop Health (YC20). His work sits at the intersection of product design, design engineering, and business — shipping iOS experiences, motion-led interactions, and scalable design-engineering workflows.',
+  /** Rendered after the name as “is a …”. */
+  lede: [
+    { emphasis: 'Staff Product Designer & Technologist' },
+    ' at ',
+    { emphasis: 'Loop Health' },
+    '. A decade across fintech, health, and mobility — Rive, SwiftUI, and code aren’t side projects; they’re how he designs.',
+  ] as AboutSegment[],
   paragraphs: [
-    'Previously he led product and UX design at ETMoney, HDFC Bank, and Paytm across fintech, banking, and consumer apps — owning flows that reached millions of users, from onboarding and payments to investing and everyday money management. Those years shaped a bias for clarity under constraint: shipping experiences that stay simple even as the product, the compliance surface, and the user base grow.',
-    'His work sits where design meets engineering. He builds production-ready interactions in SwiftUI, prototypes motion systems in Rive, and treats animation as a first-class part of the interface rather than a decorative afterthought. That means designing the transitions, the micro-states, and the timing curves with the same rigor most teams reserve for static screens — so the finished product feels considered in the moments between taps, not just on the surface.',
-    'As a Rive and Play ambassador in India, he shares that craft through hands-on workshops, teardowns, and open prototypes — helping designers and engineers close the gap between a Figma file and a shipped, interactive build. He has run sessions at IIT Delhi and with the Design Originals Club, and hosts community meetups for motion designers and developers across Bengaluru.',
-    'Designing since 2016, he cares most about the intersection of product thinking, interaction craft, and business impact — the rare space where a well-timed animation, a clear information hierarchy, and a measurable outcome all point in the same direction.',
-  ],
+    [
+      'Before Loop, he led design at ',
+      { emphasis: 'Paytm' },
+      ', ',
+      { emphasis: 'HDFC Bank' },
+      ', and ',
+      { emphasis: 'ET Money' },
+      ' — building design systems and shipping fintech products at scale.',
+    ],
+    [
+      'Now a ',
+      { emphasis: 'Rive & Play Ambassador' },
+      ', he closes the gap between design and engineering through workshops and open prototypes.',
+    ],
+  ] as AboutSegment[][],
   contact:
-    'Open to staff product design roles, design engineering opportunities, workshops, and collaborations in Bengaluru and remote.',
+    'Open to staff design and design-engineering roles, workshops, and collaborations — Bengaluru & remote.',
 } as const
