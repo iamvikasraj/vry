@@ -257,7 +257,7 @@ body {
   }
 
   .home-de-sidebar-topline {
-    margin-bottom: var(--sp-24);
+    margin-bottom: var(--sp-32);
   }
 }
 
@@ -615,13 +615,19 @@ body {
 @media (max-width: 768px) {
   .home-de-sidebar-intro {
     margin: 0 0 var(--sp-16);
+    gap: var(--sp-32);
+  }
+
+  .home-de-sidebar-intro > .home-de-sidebar-role:not(.home-de-sidebar-hook) {
+    font-size: var(--txt-16);
   }
 
   .home-de-sidebar-hook {
-    font-size: 1.875rem;
+    margin-block: var(--sp-8);
+    font-size: clamp(var(--txt-40), 13vw, var(--txt-60));
     font-weight: 600;
-    line-height: 1.18;
-    letter-spacing: -0.01em;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
     color: var(--de-black);
   }
 

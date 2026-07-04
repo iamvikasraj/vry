@@ -170,7 +170,7 @@ export default function HomeDeSidebar() {
             name={PORTFOLIO_PROFILE.company.name}
             href={PORTFOLIO_PROFILE.company.linkedIn}
           />
-          , with {PORTFOLIO_PROFILE.experience} — previously{' '}
+          , with {PORTFOLIO_PROFILE.experience}, previously{' '}
           {formatPreviousLinks(PORTFOLIO_PROFILE.previous)}, and a {PORTFOLIO_PROFILE.ambassador}.
           Based in {PORTFOLIO_PROFILE.location},{' '}
           <LocalTime
