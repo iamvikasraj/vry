@@ -6,7 +6,7 @@ export const PORTFOLIO_SECTION_NAV: { id: DePortfolioSectionId; label: string }[
   { id: 'timeline', label: 'Experiences' },
   { id: 'workshops', label: 'Workshop' },
   { id: 'playground', label: 'Interactions' },
-  { id: 'writing', label: 'Design Engineering' },
+  { id: 'writing', label: 'designengineer.ing' },
   { id: 'about', label: 'About' },
 ]
 
