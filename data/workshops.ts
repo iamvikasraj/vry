@@ -34,7 +34,7 @@ export const workshops: Workshop[] = [
     description: 'In-person workshop on interaction design and motion principles using Rive and Play.',
     video: '/assets/video/Think Interaction Workshop.mp4',
     portfolio: true,
-    portfolioOrder: 1,
+    portfolioOrder: 2,
     includes: ['Rive', 'Figma', 'State machines'],
   },
   {
@@ -45,7 +45,7 @@ export const workshops: Workshop[] = [
     description: 'Free design engineering workshop at IIT Delhi, hosted by Voxago.',
     thumbnail: '/assets/workshops/iit-delhi-1.png',
     portfolio: true,
-    portfolioOrder: 2,
+    portfolioOrder: 3,
     includes: ['Rive', 'SwiftUI', 'Prototyping'],
   },
   {
@@ -57,7 +57,7 @@ export const workshops: Workshop[] = [
     youtubeId: 'fTUbis6k8w8',
     externalUrl: 'https://youtu.be/fTUbis6k8w8?si=JZVXY2R1qDC3AadG',
     portfolio: true,
-    portfolioOrder: 3,
+    portfolioOrder: 4,
     includes: ['Rive', 'Design systems', 'Motion'],
   },
   {
@@ -76,9 +76,9 @@ export const workshops: Workshop[] = [
     venue: 'Rive x Bengaluru',
     description:
       'Community event for Rive users, motion designers, and developers — hosted by Vikas Raj Yadav with the local Rive community in Bengaluru.',
-    thumbnail: '/assets/workshops/rive-happy-hour-bengaluru-2026.png',
+    thumbnail: '/assets/workshops/rive-ambassador-happy-hour-bengaluru-2026.jpg',
     portfolio: true,
-    portfolioOrder: 4,
+    portfolioOrder: 1,
     eventDate: '2026-02-12',
     eventTime: '7pm–9pm',
     includes: ['Rive', 'Community', 'Motion design'],
