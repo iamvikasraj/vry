@@ -9,6 +9,7 @@ import ProjectGallery from '@/components/ProjectGallery'
 import NdaGate from '@/components/NdaGate'
 import ProjectArticleFooter from '@/components/ProjectArticleFooter'
 import ProjectMoreProjects from '@/components/ProjectMoreProjects'
+import ProjectAskTiWidget from '@/components/ProjectAskTiWidget'
 import { projects, getProjectBySlug } from '@/data/projects'
 import { getProjectThumbMedia } from '@/lib/projectMedia.server'
 import { mediaAssetPath } from '@/lib/mediaAssetPath'
@@ -26,7 +27,11 @@ async function loadMDX(slug: string) {
 }
 
 export async function generateStaticParams() {
-  return projects.filter((p) => !p.hidden).map((project) => ({
+  // Export a static page for EVERY project, including `hidden` ones. `hidden`
+  // only controls grid visibility — hidden Design Engineering projects are still
+  // linked from the Interactions section, so their detail routes must exist in
+  // the static export or client navigation/prefetch 404s.
+  return projects.map((project) => ({
     slug: project.slug,
   }))
 }
@@ -122,6 +127,9 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
         </section>
       </main>
       <ClientScripts />
+      {slug === 'loop-doctor-on-demand' && (
+        <ProjectAskTiWidget projectSlug={slug} projectTitle={project.title} />
+      )}
     </div>
     </>
   )

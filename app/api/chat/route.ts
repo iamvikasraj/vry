@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     })
   }
 
-  let body: { messages?: unknown }
+  let body: { messages?: unknown; projectSlug?: unknown }
   try {
     body = await req.json()
   } catch {
@@ -31,11 +31,16 @@ export async function POST(req: Request) {
     })
   }
 
+  const projectSlug =
+    typeof body.projectSlug === 'string' && body.projectSlug.trim()
+      ? body.projectSlug.trim()
+      : undefined
+
   const encoder = new TextEncoder()
   const readable = new ReadableStream({
     async start(controller) {
       try {
-        for await (const text of streamAssistantDeltas(messages)) {
+        for await (const text of streamAssistantDeltas(messages, { projectSlug })) {
           controller.enqueue(encoder.encode(text))
         }
       } catch (e) {

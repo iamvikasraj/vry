@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { DM_Mono, Inter, Work_Sans } from 'next/font/google'
 import GA4PageView from '@/components/GA4PageView'
+import OutboundLinkTracker from '@/components/OutboundLinkTracker'
+import { GA_MEASUREMENT_ID } from '@/lib/ga'
 import '../styles/design-engineering-tokens.css'
 import '../styles.css'
 
@@ -235,20 +237,21 @@ export default function RootLayout({
       </head>
       <body>
         {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-SYDGLK4LKX"></script>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-SYDGLK4LKX', {
-                send_page_view: true
+              gtag('config', '${GA_MEASUREMENT_ID}', {
+                send_page_view: false
               });
             `,
           }}
         />
         <GA4PageView />
+        <OutboundLinkTracker />
         {children}
       </body>
     </html>

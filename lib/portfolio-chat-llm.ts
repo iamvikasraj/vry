@@ -1,5 +1,6 @@
 import OpenAI from 'openai'
-import { buildPortfolioContextForLlm } from '../data/portfolioLlmContext'
+import { buildPortfolioContextForLlm, buildProjectContextForLlm } from '../data/portfolioLlmContext'
+import { getProjectBySlug } from '../data/projects'
 
 const XAI_BASE_URL = 'https://api.x.ai/v1'
 
@@ -58,7 +59,8 @@ export function getChatModel(useGrok: boolean): string {
 
 /** Stream assistant token deltas (OpenAI-compatible chat completions). */
 export async function* streamAssistantDeltas(
-  messages: ChatMessage[]
+  messages: ChatMessage[],
+  opts?: { projectSlug?: string }
 ): AsyncGenerator<string, void, undefined> {
   const keyInfo = getChatApiKey()
   if (!keyInfo) {
@@ -66,7 +68,14 @@ export async function* streamAssistantDeltas(
   }
 
   const { apiKey, useGrok } = keyInfo
-  const portfolioContext = buildPortfolioContextForLlm()
+  const projectSlug = opts?.projectSlug?.trim()
+  const project = projectSlug ? getProjectBySlug(projectSlug) : undefined
+  const portfolioContext = projectSlug
+    ? buildProjectContextForLlm(projectSlug)
+    : buildPortfolioContextForLlm()
+  const projectScopeNote = project
+    ? `\n\nYou are answering specifically about the case study "${project.title}". Prefer details from this project; you may draw on the wider portfolio only for fit/background.`
+    : ''
   const client = new OpenAI({
     apiKey,
     ...(useGrok ? { baseURL: XAI_BASE_URL, timeout: 120_000 } : {}),
@@ -79,7 +88,7 @@ export async function* streamAssistantDeltas(
     messages: [
       {
         role: 'system',
-        content: `${SYSTEM_PROMPT}\n\n---\n${portfolioContext}`,
+        content: `${SYSTEM_PROMPT}${projectScopeNote}\n\n---\n${portfolioContext}`,
       },
       ...messages,
     ],

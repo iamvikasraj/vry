@@ -1,5 +1,7 @@
 // Simple GA4 Event Tracking
 
+import { GA_MEASUREMENT_ID, GA_DEBUG } from '@/lib/ga'
+
 declare global {
   interface Window {
     gtag: (command: string, targetId: string | object, config?: object) => void
@@ -22,9 +24,9 @@ export const trackEvent = (eventName: string, eventParams?: Record<string, any>)
     if (typeof window.gtag === 'function') {
       try {
         window.gtag('event', eventName, params)
-        console.log('✅ GA4 Event sent:', eventName, params)
+        if (GA_DEBUG) console.log('✅ GA4 Event sent:', eventName, params)
       } catch (error) {
-        console.error('❌ GA4 Event error:', error)
+        if (GA_DEBUG) console.error('❌ GA4 Event error:', error)
       }
     } else {
       // Push to dataLayer - gtag will process when ready
@@ -32,7 +34,7 @@ export const trackEvent = (eventName: string, eventParams?: Record<string, any>)
         event: eventName,
         ...params
       })
-      console.log('📤 GA4 Event queued:', eventName, params)
+      if (GA_DEBUG) console.log('📤 GA4 Event queued:', eventName, params)
     }
   }
   
@@ -54,7 +56,7 @@ export const trackEvent = (eventName: string, eventParams?: Record<string, any>)
           event: eventName,
           ...params
         })
-        console.warn('⚠️ GA4 gtag not loaded after 5s, queued to dataLayer:', eventName)
+        if (GA_DEBUG) console.warn('⚠️ GA4 gtag not loaded after 5s, queued to dataLayer:', eventName)
       }
     }, 500)
   }
@@ -101,6 +103,23 @@ export const analytics = {
               : 'long',
     })
   },
+  /** Ti chat opened. surface: 'global' (site chat) or 'project' (case-study widget) */
+  trackChatOpen: (surface: 'global' | 'project', projectSlug?: string) => {
+    trackEvent('portfolio_chat_open', { chat_surface: surface, project_slug: projectSlug })
+  },
+  /** Outbound click to an external site. Fired site-wide by OutboundLinkTracker. */
+  trackOutboundClick: (params: { url: string; domain: string; category: string; link_text?: string }) => {
+    trackEvent('outbound_click', {
+      link_url: params.url,
+      link_domain: params.domain,
+      link_category: params.category,
+      link_text: params.link_text,
+    })
+  },
+  /** Email / contact intent (mailto). location = where it was clicked. */
+  trackEmailClick: (location: string) => {
+    trackEvent('email_click', { link_location: location })
+  },
 
   // Test all events - available in browser console
   testAll: () => {
@@ -115,6 +134,9 @@ export const analytics = {
     analytics.trackVideoPlay('Test Video', '/test.mp4')
     analytics.trackVideoHover('Test Video')
     analytics.trackChatMessageSent(42)
+    analytics.trackChatOpen('project', 'test-project')
+    analytics.trackOutboundClick({ url: 'https://example.com', domain: 'example.com', category: 'other', link_text: 'Example' })
+    analytics.trackEmailClick('test')
     console.log('✅ All test events sent! Check GA4 Realtime reports.')
   },
 }
@@ -130,14 +152,14 @@ if (typeof window !== 'undefined') {
       gtag: typeof (window as any).gtag === 'function',
       dataLayer: Array.isArray((window as any).dataLayer),
       dataLayerLength: (window as any).dataLayer?.length || 0,
-      propertyId: 'G-SYDGLK4LKX'
+      propertyId: GA_MEASUREMENT_ID
     }
     console.table(status)
     return status
   }
   
-  // Only log once to avoid spam
-  if (!(window as any).__ga4Initialized) {
+  // Only log once to avoid spam (dev only)
+  if (GA_DEBUG && !(window as any).__ga4Initialized) {
     (window as any).__ga4Initialized = true
     console.log('💡 GA4 Testing:')
     console.log('   - Run analytics.testAll() to test all events')

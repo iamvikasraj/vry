@@ -3,6 +3,7 @@ import ProjectFigure from '@/components/mdx/ProjectFigure'
 import ProjectFigureGrid from '@/components/mdx/ProjectFigureGrid'
 import ProjectTool from '@/components/mdx/ProjectTool'
 import ProjectTools from '@/components/mdx/ProjectTools'
+import LinkedInEmbed from '@/components/mdx/LinkedInEmbed'
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     wrapper: ({ children }) => <div className="mdx-content">{children}</div>,
@@ -36,6 +37,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ProjectFigureGrid,
     ProjectTool,
     ProjectTools,
+    LinkedInEmbed,
     ...components,
   }
 }

@@ -45,7 +45,7 @@ export const handler: NetlifyHandler = async (event) => {
     }
   }
 
-  let parsed: { messages?: unknown }
+  let parsed: { messages?: unknown; projectSlug?: unknown }
   try {
     parsed = JSON.parse(event.body || '{}')
   } catch {
@@ -65,10 +65,15 @@ export const handler: NetlifyHandler = async (event) => {
     }
   }
 
+  const projectSlug =
+    typeof parsed.projectSlug === 'string' && parsed.projectSlug.trim()
+      ? parsed.projectSlug.trim()
+      : undefined
+
   try {
     console.log('[Ti chat] starting xAI request')
     let body = ''
-    for await (const chunk of streamAssistantDeltas(messages)) {
+    for await (const chunk of streamAssistantDeltas(messages, { projectSlug })) {
       body += chunk
     }
     console.log('[Ti chat] response ok, length:', body.length)
