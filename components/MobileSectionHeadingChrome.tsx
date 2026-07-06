@@ -9,6 +9,7 @@ import {
   getPortfolioSectionIndex,
   PORTFOLIO_SECTION_NAV,
   scrollToDeSection,
+  subscribeDeScroll,
   type DePortfolioSectionId,
 } from '@/lib/deScroll'
 
@@ -70,29 +71,13 @@ export default function MobileSectionHeadingChrome() {
       return
     }
 
-    let raf = 0
-    const sync = () => {
-      cancelAnimationFrame(raf)
-      raf = requestAnimationFrame(() => {
-        setChrome((state) => {
-          const pinnedId = getPinnedPortfolioSection()
-          if (pinnedId === state.pinnedId) return state
-          return { pinnedId, previousPinnedId: state.pinnedId }
-        })
+    return subscribeDeScroll(() => {
+      setChrome((state) => {
+        const pinnedId = getPinnedPortfolioSection()
+        if (pinnedId === state.pinnedId) return state
+        return { pinnedId, previousPinnedId: state.pinnedId }
       })
-    }
-
-    sync()
-    window.addEventListener('scroll', sync, { passive: true })
-    document.addEventListener('scroll', sync, { passive: true, capture: true })
-    window.addEventListener('resize', sync, { passive: true })
-
-    return () => {
-      cancelAnimationFrame(raf)
-      window.removeEventListener('scroll', sync)
-      document.removeEventListener('scroll', sync, { capture: true })
-      window.removeEventListener('resize', sync)
-    }
+    })
   }, [onSinglePagePortfolio, pathname])
 
   useEffect(() => {

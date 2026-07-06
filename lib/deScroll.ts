@@ -10,20 +10,73 @@ export const PORTFOLIO_SECTION_NAV: { id: DePortfolioSectionId; label: string }[
   { id: 'about', label: 'About' },
 ]
 
-/** Last section whose heading has scrolled to/past the top edge (mobile chrome + bottom nav). */
+function getSectionScrollTarget(sectionId: DePortfolioSectionId): HTMLElement | null {
+  return document.getElementById(`${sectionId}-heading`) ?? document.getElementById(sectionId)
+}
+
+/** Scroll container for the DE shell (viewport on mobile, main column on desktop). */
+export function getDeScrollRoot(): HTMLElement | null {
+  const main = document.querySelector<HTMLElement>('.home-de-main-content')
+  if (!main) return null
+  const { overflowY } = getComputedStyle(main)
+  if (overflowY === 'auto' || overflowY === 'scroll') return main
+  return null
+}
+
+/** Last section whose heading has scrolled to/past the scrollport top (section chrome). */
 export function getPinnedPortfolioSection(): DePortfolioSectionId | null {
   let pinned: DePortfolioSectionId | null = null
+  const scrollRoot = getDeScrollRoot()
+  const threshold = scrollRoot ? scrollRoot.getBoundingClientRect().top : 0
 
   for (const id of SECTION_IDS) {
     const heading = document.getElementById(`${id}-heading`)
     if (!heading) continue
 
-    if (heading.getBoundingClientRect().top <= 0) {
+    if (heading.getBoundingClientRect().top <= threshold + 1) {
       pinned = id
     }
   }
 
   return pinned
+}
+
+/** Scroll + resize listener for portfolio section chrome (window on mobile, main column on desktop). */
+export function subscribeDeScroll(sync: () => void): () => void {
+  let raf = 0
+  let scrollRoot: HTMLElement | null = null
+
+  const wrapped = () => {
+    cancelAnimationFrame(raf)
+    raf = requestAnimationFrame(sync)
+  }
+
+  const attachScrollRoot = () => {
+    const next = getDeScrollRoot()
+    if (next === scrollRoot) return
+    scrollRoot?.removeEventListener('scroll', wrapped)
+    scrollRoot = next
+    scrollRoot?.addEventListener('scroll', wrapped, { passive: true })
+  }
+
+  const onResize = () => {
+    attachScrollRoot()
+    wrapped()
+  }
+
+  attachScrollRoot()
+  wrapped()
+  window.addEventListener('scroll', wrapped, { passive: true })
+  document.addEventListener('scroll', wrapped, { passive: true, capture: true })
+  window.addEventListener('resize', onResize, { passive: true })
+
+  return () => {
+    cancelAnimationFrame(raf)
+    window.removeEventListener('scroll', wrapped)
+    document.removeEventListener('scroll', wrapped, { capture: true })
+    window.removeEventListener('resize', onResize)
+    scrollRoot?.removeEventListener('scroll', wrapped)
+  }
 }
 
 export function getPortfolioSectionTitle(id: DePortfolioSectionId): string {
@@ -52,19 +105,6 @@ export const DE_SECTION_HREF: Record<DePortfolioSectionId, string> = {
 
 export function isDePortfolioSectionId(value: string): value is DePortfolioSectionId {
   return SECTION_IDS.includes(value as DePortfolioSectionId)
-}
-
-function getSectionScrollTarget(sectionId: DePortfolioSectionId): HTMLElement | null {
-  return document.getElementById(`${sectionId}-heading`) ?? document.getElementById(sectionId)
-}
-
-/** Scroll container for the DE shell (viewport on mobile, main column on desktop). */
-export function getDeScrollRoot(): HTMLElement | null {
-  const main = document.querySelector<HTMLElement>('.home-de-main-content')
-  if (!main) return null
-  const { overflowY } = getComputedStyle(main)
-  if (overflowY === 'auto' || overflowY === 'scroll') return main
-  return null
 }
 
 export function scrollToDeSection(

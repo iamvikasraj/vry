@@ -77,7 +77,7 @@ export default function NdaGate({ slug }: NdaGateProps) {
         <h2 className="nda-gate__title">Password protected</h2>
         <p className="nda-gate__text">
           This case study is under NDA. Enter the password to view what I can share about the
-          work. Need access? <a href="/contact/">Get in touch</a>.
+          work. Need access? <a href="/#about">Get in touch</a>.
         </p>
         <div className="nda-gate__row">
           <input

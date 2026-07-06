@@ -32,15 +32,10 @@ Then watch **GA4 → Reports → Realtime** to confirm events arrive.
 | Event name | Trigger | Key params |
 |---|---|---|
 | `page_view` | Every route change / initial load | `page_path`, `page_location`, `page_title` |
-| `project_click` | Work grid card click | `project_title`, `project_slug`, `project_tags` |
+| `project_click` | Project card click (when instrumented) | `project_title`, `project_slug`, `project_tags` |
 | `project_view` | Case-study page viewed | `project_title`, `project_slug` |
 | `project_time_spent` | Time on a case study (on leave/hide) | `project_title`, `project_slug`, `time_spent_seconds` |
 | `project_section_click` | Section link within a case study | `project_title`, `project_slug`, `section_name` |
-| `filter_change` | Work filter changed | `filter_name` |
-| `grid_toggle` | Work grid layout toggle | `grid_size` (`1x1`/`2x2`) |
-| `navigation_click` | Header nav / logo click | `page_name`, `link_text` |
-| `video_play` | Work item / case-study video plays | `video_title`, `video_src` |
-| `video_hover` | Work item video hover | `video_title` |
 | `portfolio_chat_message` | User sends a Ti chat message | `message_length_bucket` (no content — privacy) |
 | `portfolio_chat_open` | Ti chat opened | `chat_surface` (`global`/`project`), `project_slug` |
 | `outbound_click` | Any external link click (site-wide) | `link_url`, `link_domain`, `link_category`, `link_text` |
@@ -69,7 +64,6 @@ param you want to slice by:
 |---|---|
 | Project slug | `project_slug` |
 | Section name | `section_name` |
-| Filter name | `filter_name` |
 | Link domain | `link_domain` |
 | Link category | `link_category` |
 | Chat surface | `chat_surface` |

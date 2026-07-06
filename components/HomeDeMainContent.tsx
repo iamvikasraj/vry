@@ -2,7 +2,7 @@
 
 import { useEffect, useState, type ReactNode } from 'react'
 import { usePathname } from 'next/navigation'
-import { getPinnedPortfolioSection } from '@/lib/deScroll'
+import { getPinnedPortfolioSection, subscribeDeScroll } from '@/lib/deScroll'
 
 function isSinglePagePortfolio(pathname: string | null) {
   const path = pathname?.endsWith('/') && pathname.length > 1 ? pathname.slice(0, -1) : pathname ?? ''
@@ -21,25 +21,9 @@ export default function HomeDeMainContent({ children }: { children: ReactNode })
       return
     }
 
-    let raf = 0
-    const sync = () => {
-      cancelAnimationFrame(raf)
-      raf = requestAnimationFrame(() => {
-        setAtSectionEnd(getPinnedPortfolioSection() === 'about')
-      })
-    }
-
-    sync()
-    window.addEventListener('scroll', sync, { passive: true })
-    document.addEventListener('scroll', sync, { passive: true, capture: true })
-    window.addEventListener('resize', sync, { passive: true })
-
-    return () => {
-      cancelAnimationFrame(raf)
-      window.removeEventListener('scroll', sync)
-      document.removeEventListener('scroll', sync, { capture: true })
-      window.removeEventListener('resize', sync)
-    }
+    return subscribeDeScroll(() => {
+      setAtSectionEnd(getPinnedPortfolioSection() === 'about')
+    })
   }, [onPortfolio, pathname])
 
   return (

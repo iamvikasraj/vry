@@ -67,33 +67,6 @@ export default function ClientScripts() {
       })
     }
 
-    // Video hover play for work items
-    const workItems = document.querySelectorAll('.work-item')
-    
-    workItems.forEach((item) => {
-      const video = item.querySelector('video') as HTMLVideoElement
-      if (!video) return
-      
-      let hoverTimeout: NodeJS.Timeout
-      
-      item.addEventListener('mouseenter', () => {
-        clearTimeout(hoverTimeout)
-        hoverTimeout = setTimeout(() => {
-          video.play().catch(() => {
-            // Silently fail if autoplay is blocked
-          })
-        }, 100)
-      }, { passive: true })
-      
-      item.addEventListener('mouseleave', () => {
-        clearTimeout(hoverTimeout)
-        hoverTimeout = setTimeout(() => {
-          video.pause()
-          video.currentTime = 0
-        }, 150)
-      }, { passive: true })
-    })
-
     // Optimized Rive Carousel Animation
     const carousel = document.querySelector('.carousel')
     if (carousel) {
