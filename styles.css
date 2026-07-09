@@ -494,6 +494,15 @@ html:has(.home-page--de) {
     opacity: 0.6;
   }
 
+  .home-de-sidebar-social--top .home-de-sidebar-email-link {
+    width: auto;
+    height: auto;
+    padding: 0;
+    font-size: var(--de-nav-size);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
   .home-de-sidebar-social--top .home-de-sidebar-social-link:hover {
     opacity: 0.9;
   }
@@ -519,6 +528,15 @@ html:has(.home-page--de) {
   opacity: 0.45;
   text-decoration: none;
   transition: opacity 0.2s ease;
+}
+
+.home-de-sidebar-email-link {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  cursor: pointer;
 }
 
 .home-de-sidebar-social-link:hover {

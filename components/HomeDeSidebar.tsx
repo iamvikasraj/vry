@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import HomeDeEmailLink from '@/components/HomeDeEmailLink'
 import { PORTFOLIO_PROFILE } from '@/data/portfolioProfile'
 import { DE_ROUTES } from '@/lib/deRoutes'
 import { SOCIAL_LINKS } from '@/lib/socialLinks'
@@ -34,7 +35,13 @@ export default function HomeDeSidebar() {
         <Link href={DE_ROUTES.home} className="home-de-sidebar-logo">
           Vikas Raj Yadav
         </Link>
-        <SocialLinks className="home-de-sidebar-social--top" />
+        <nav className="home-de-sidebar-social home-de-sidebar-social--top" aria-label="Let's talk">
+          <HomeDeEmailLink
+            className="home-de-sidebar-social-link home-de-sidebar-email-link"
+            label="Let's talk"
+            analyticsLocation="sidebar_top_email"
+          />
+        </nav>
       </div>
       <div className="home-de-sidebar-intro">
         <p className="home-de-sidebar-role home-de-sidebar-hook">{PORTFOLIO_PROFILE.hook}</p>
