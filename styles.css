@@ -714,9 +714,9 @@ body:has(.home-page--de) {
   opacity: 0;
   visibility: hidden;
   transition:
-    transform 0.22s cubic-bezier(0.32, 0.72, 0, 1),
-    opacity 0.16s ease,
-    visibility 0.22s ease;
+    transform 0.22s cubic-bezier(0.33, 1, 0.68, 1),
+    opacity 0.16s cubic-bezier(0.33, 1, 0.68, 1),
+    visibility 0.22s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 .home-de-section-chrome--top {
@@ -785,20 +785,20 @@ body:has(.home-page--de) {
 }
 
 .home-de-section-chrome__title--enter {
-  animation: de-chrome-label-open 0.34s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation: de-chrome-label-open 0.34s cubic-bezier(0.33, 1, 0.68, 1) both;
 }
 
 .home-de-section-chrome__title--exit {
-  animation: de-chrome-label-close 0.34s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation: de-chrome-label-close 0.34s cubic-bezier(0.33, 1, 0.68, 1) both;
   pointer-events: none;
 }
 
 .home-de-section-chrome__title--enter .home-de-section-chrome__title-inner {
-  animation: de-chrome-slide-in 0.34s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation: de-chrome-slide-in 0.34s cubic-bezier(0.33, 1, 0.68, 1) both;
 }
 
 .home-de-section-chrome__title--exit .home-de-section-chrome__title-inner {
-  animation: de-chrome-slide-out 0.34s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation: de-chrome-slide-out 0.34s cubic-bezier(0.33, 1, 0.68, 1) both;
 }
 
 /* Box width animates for the neighbor push; the text slides + fades on top. */

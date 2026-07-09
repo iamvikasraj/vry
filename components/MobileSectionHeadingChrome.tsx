@@ -85,7 +85,7 @@ export default function MobileSectionHeadingChrome() {
 
     const timeout = window.setTimeout(() => {
       setChrome((state) => ({ ...state, previousPinnedId: state.pinnedId }))
-    }, 400)
+    }, 340)
 
     return () => window.clearTimeout(timeout)
   }, [chrome])
