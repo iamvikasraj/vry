@@ -7,6 +7,7 @@ import type { Project } from '@/data/projects'
 import type { ProjectThumbMedia } from '@/lib/projectMedia'
 import { getProjectCardMeta } from '@/lib/projectCardMeta'
 import { useCanHover } from '@/lib/useCanHover'
+import { useViewportVideo } from '@/lib/useViewportVideo'
 import { mediaAssetPath } from '@/lib/mediaAssetPath'
 import { projectHref } from '@/lib/projectHref'
 import MediaPlaceholder from '@/components/MediaPlaceholder'
@@ -31,7 +32,15 @@ export default function ProjectListLink({
 }: ProjectListLinkProps) {
   const canHover = useCanHover()
   const hoverPlay = playOnHover && canHover
-  const videoRef = useRef<HTMLVideoElement>(null)
+  const autoPlay = !hoverPlay
+  const thumbRef = useRef<HTMLDivElement>(null)
+  const videoSrc = mediaAssetPath(project.video)
+  const { videoRef, videoSrc: lazySrc, preload, shouldAutoplay } = useViewportVideo(thumbRef, {
+    src: videoSrc,
+    lazy: autoPlay,
+    autoplayInView: autoPlay,
+    pauseOffscreen: autoPlay,
+  })
   const [hovered, setHovered] = useState(false)
   const [ready, setReady] = useState(false)
   const [videoError, setVideoError] = useState(false)
@@ -83,6 +92,7 @@ export default function ProjectListLink({
       aria-label={`View project: ${project.title}`}
     >
       <div
+        ref={thumbRef}
         className={`home-de-project-list__thumb${hasPoster ? ' home-de-project-list__thumb--has-poster' : ''}${brandCover && showImage ? ' home-de-project-list__thumb--brand' : ''}`}
       >
         {showPlaceholder && (
@@ -100,13 +110,13 @@ export default function ProjectListLink({
           <video
             ref={videoRef}
             className={`home-de-project-list__image${hasPoster && hoverPlay && ready ? ' home-de-project-list__image--over-cover' : ''}${videoReady ? ' home-de-project-list__image--ready' : ''}`}
-            src={mediaAssetPath(project.video)}
+            src={autoPlay ? lazySrc : videoSrc}
             poster={thumbSrc}
             muted
-            autoPlay={!hoverPlay}
+            autoPlay={shouldAutoplay}
             playsInline
             loop
-            preload={hoverPlay && hasPoster ? 'metadata' : 'auto'}
+            preload={hoverPlay && hasPoster ? 'metadata' : preload}
             onLoadedData={() => setReady(true)}
             onLoadedMetadata={() => setReady(true)}
             onCanPlay={() => setReady(true)}

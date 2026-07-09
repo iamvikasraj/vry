@@ -6,6 +6,7 @@ import type { FeaturedCompanyProject } from '@/data/featuredCompanies'
 import { projectHref } from '@/lib/projectHref'
 import { mediaAssetPath } from '@/lib/mediaAssetPath'
 import { useCanHover } from '@/lib/useCanHover'
+import { useViewportVideo } from '@/lib/useViewportVideo'
 
 type NdaExperienceCardProps = {
   project: FeaturedCompanyProject
@@ -39,8 +40,15 @@ export default function NdaExperienceCard({ project, isHero = false }: NdaExperi
   const [status, setStatus] = useState<Status>('idle')
   const [error, setError] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
+  const mediaRef = useRef<HTMLDivElement>(null)
   const videoSources = getVideoSources(project)
   const hasVideo = videoSources.length > 0
+  const { videoRef, videoSrc, preload, shouldAutoplay } = useViewportVideo(mediaRef, {
+    src: videoSources[0] ?? '',
+    lazy: !canHover,
+    autoplayInView: true,
+    pauseOffscreen: !canHover,
+  })
 
   // Reveal on hover (mouse); keep open while typing or after an explicit tap
   // (touch/keyboard) so moving the pointer away mid-entry doesn't wipe it.
@@ -107,18 +115,19 @@ export default function NdaExperienceCard({ project, isHero = false }: NdaExperi
       onMouseEnter={canHover ? () => setHovered(true) : undefined}
       onMouseLeave={canHover ? () => setHovered(false) : undefined}
     >
-      <div className="home-de-timeline-featured__media">
+      <div className="home-de-timeline-featured__media" ref={mediaRef}>
         {hasVideo ? (
           <>
             <video
+              ref={videoRef}
               className="home-de-timeline-featured__nda-video"
-              src={videoSources[0]}
+              src={canHover ? videoSources[0] : videoSrc}
               poster={project.thumbnail}
               muted
               playsInline
               loop
-              autoPlay
-              preload="auto"
+              autoPlay={canHover || shouldAutoplay}
+              preload={canHover ? 'metadata' : preload}
               aria-hidden
             />
             <div className="home-de-timeline-featured__nda-scrim" aria-hidden />

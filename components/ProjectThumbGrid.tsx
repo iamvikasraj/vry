@@ -6,6 +6,7 @@ import { analytics } from '@/lib/analytics'
 import type { Project } from '@/data/projects'
 import type { ProjectThumbMedia } from '@/lib/projectMedia'
 import { getProjectCardMeta } from '@/lib/projectCardMeta'
+import { useViewportVideo } from '@/lib/useViewportVideo'
 import { mediaAssetPath } from '@/lib/mediaAssetPath'
 import { projectHref } from '@/lib/projectHref'
 import MediaPlaceholder from '@/components/MediaPlaceholder'
@@ -21,7 +22,15 @@ type ProjectThumbCardProps = ProjectThumbGridItem & {
 }
 
 export function ProjectThumbCard({ project, media, playOnHover = false }: ProjectThumbCardProps) {
-  const videoRef = useRef<HTMLVideoElement>(null)
+  const mediaRef = useRef<HTMLDivElement>(null)
+  const autoPlay = !playOnHover
+  const videoSrc = mediaAssetPath(project.video)
+  const { videoRef, videoSrc: lazySrc, preload, shouldAutoplay } = useViewportVideo(mediaRef, {
+    src: videoSrc,
+    lazy: autoPlay,
+    autoplayInView: autoPlay,
+    pauseOffscreen: autoPlay,
+  })
   const [hovered, setHovered] = useState(false)
   const [ready, setReady] = useState(false)
   const [videoError, setVideoError] = useState(false)
@@ -70,6 +79,7 @@ export function ProjectThumbCard({ project, media, playOnHover = false }: Projec
         onClick={() => analytics.trackProjectClick(project.title, project.slug, project.tags)}
       >
         <div
+          ref={mediaRef}
           className={`home-de-thumb-media${brandCover ? ' home-de-thumb-media--brand' : ''}`}
         >
           {showPlaceholder && (
@@ -91,13 +101,13 @@ export function ProjectThumbCard({ project, media, playOnHover = false }: Projec
             <video
               ref={videoRef}
               className={`home-de-thumb-video${hasPoster && playOnHover && ready ? ' home-de-thumb-video--ready home-de-thumb-video--over-cover' : ''}${videoReady ? ' home-de-thumb-video--ready' : ''}`}
-              src={mediaAssetPath(project.video)}
+              src={autoPlay ? lazySrc : videoSrc}
               poster={thumbSrc}
               muted
-              autoPlay={!playOnHover}
+              autoPlay={shouldAutoplay}
               playsInline
               loop
-              preload={playOnHover && hasPoster ? 'metadata' : 'auto'}
+              preload={playOnHover && hasPoster ? 'metadata' : preload}
               onLoadedData={() => setReady(true)}
               onLoadedMetadata={() => setReady(true)}
               onCanPlay={() => setReady(true)}

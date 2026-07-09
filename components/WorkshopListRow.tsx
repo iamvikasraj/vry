@@ -73,7 +73,7 @@ export default function WorkshopListRow({ workshop }: WorkshopListRowProps) {
             muted
             playsInline
             loop
-            preload="auto"
+            preload="metadata"
             aria-hidden
           />
         ) : hasThumbnail && thumbnailSrc ? (

@@ -46,7 +46,7 @@ export default function WritingListRow({ writing }: WritingListRowProps) {
             muted
             playsInline
             loop
-            preload="auto"
+            preload="metadata"
             aria-hidden
           />
         ) : writing.thumbnail ? (

@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import { analytics } from '@/lib/analytics'
 import type { FeaturedCompanyProject } from '@/data/featuredCompanies'
 import { useCanHover } from '@/lib/useCanHover'
+import { useViewportVideo } from '@/lib/useViewportVideo'
 import { mediaAssetPath } from '@/lib/mediaAssetPath'
 import { projectHref } from '@/lib/projectHref'
 import NdaExperienceCard from '@/components/NdaExperienceCard'
@@ -32,9 +33,16 @@ type SequenceVideoProps = {
 
 function FeaturedProjectSequenceVideo({ sources, poster, projectTitle }: SequenceVideoProps) {
   const canHover = useCanHover()
+  const containerRef = useRef<HTMLDivElement>(null)
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
   const playingRef = useRef(false)
   const [activeIndex, setActiveIndex] = useState(0)
+  const { shouldLoad, preload, shouldAutoplay } = useViewportVideo(containerRef, {
+    src: sources[0] ?? '',
+    lazy: !canHover,
+    autoplayInView: !canHover,
+    pauseOffscreen: !canHover,
+  })
 
   const pauseAll = () => {
     videoRefs.current.forEach((el) => {
@@ -45,12 +53,12 @@ function FeaturedProjectSequenceVideo({ sources, poster, projectTitle }: Sequenc
   }
 
   useEffect(() => {
-    if (canHover) return
+    if (canHover || !shouldAutoplay || !shouldLoad) return
     const first = videoRefs.current[0]
     if (!first) return
     void first.play()?.then(() => analytics.trackVideoPlay(projectTitle, sources[0]))
     playingRef.current = true
-  }, [canHover, sources, projectTitle])
+  }, [canHover, shouldAutoplay, shouldLoad, sources, projectTitle])
 
   const onEnter = () => {
     if (!canHover) return
@@ -81,6 +89,7 @@ function FeaturedProjectSequenceVideo({ sources, poster, projectTitle }: Sequenc
 
   return (
     <div
+      ref={containerRef}
       className="home-de-timeline-featured__sequence"
       onPointerEnter={canHover ? onEnter : undefined}
       onPointerLeave={canHover ? onLeave : undefined}
@@ -94,13 +103,12 @@ function FeaturedProjectSequenceVideo({ sources, poster, projectTitle }: Sequenc
           className={`home-de-timeline-featured__video${
             activeIndex === index ? ' home-de-timeline-featured__video--active' : ''
           }`}
-          src={source}
+          src={shouldLoad || canHover ? source : undefined}
           poster={index === 0 ? poster : undefined}
           muted
           playsInline
           loop={!canHover && sources.length === 1}
-          autoPlay={!canHover && index === 0}
-          preload="auto"
+          preload={canHover ? 'metadata' : preload}
           onEnded={() => onClipEnded(index)}
           aria-hidden
         />
@@ -117,12 +125,18 @@ type SingleVideoProps = {
 
 function FeaturedProjectSingleVideo({ src, poster, projectTitle }: SingleVideoProps) {
   const canHover = useCanHover()
-  const videoRef = useRef<HTMLVideoElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const { videoRef, videoSrc, preload, shouldAutoplay, shouldLoad } = useViewportVideo(containerRef, {
+    src,
+    lazy: !canHover,
+    autoplayInView: !canHover,
+    pauseOffscreen: !canHover,
+  })
 
   useEffect(() => {
-    if (canHover) return
+    if (canHover || !shouldAutoplay || !shouldLoad) return
     void videoRef.current?.play()?.then(() => analytics.trackVideoPlay(projectTitle, src))
-  }, [canHover, src, projectTitle])
+  }, [canHover, shouldAutoplay, shouldLoad, src, projectTitle, videoRef])
 
   const onEnter = () => {
     if (!canHover) return
@@ -140,6 +154,7 @@ function FeaturedProjectSingleVideo({ src, poster, projectTitle }: SingleVideoPr
 
   return (
     <div
+      ref={containerRef}
       className="home-de-timeline-featured__sequence"
       onPointerEnter={canHover ? onEnter : undefined}
       onPointerLeave={canHover ? onLeave : undefined}
@@ -147,13 +162,12 @@ function FeaturedProjectSingleVideo({ src, poster, projectTitle }: SingleVideoPr
       <video
         ref={videoRef}
         className="home-de-timeline-featured__video home-de-timeline-featured__video--active"
-        src={src}
+        src={canHover ? src : videoSrc}
         poster={poster}
         muted
         playsInline
         loop
-        autoPlay={!canHover}
-        preload="auto"
+        preload={canHover ? 'metadata' : preload}
         aria-hidden
       />
     </div>
