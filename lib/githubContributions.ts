@@ -150,7 +150,7 @@ async function fetchGitHubContributionsUncached(
 
 /** Last year of public contributions. Server-only — set GITHUB_TOKEN at build/dev time. */
 export async function getGitHubContributions(): Promise<GitHubContributionsPayload | null> {
-  const login = (process.env.GITHUB_CONTRIBUTIONS_LOGIN || 'vraj247').trim()
+  const login = (process.env.GITHUB_CONTRIBUTIONS_LOGIN || 'iamvikasraj').trim()
   const showcaseRepoName = (process.env.GITHUB_SHOWCASE_REPO ?? 'swiftuibuttons').trim() || 'swiftuibuttons'
   if (!login) return null
 
