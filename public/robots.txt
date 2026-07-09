@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://vikasrajyadav.in/sitemap.xml
+Sitemap: https://vry.works/sitemap.xml
 
 # Disallow admin or private areas (if any)
 Disallow: /for/

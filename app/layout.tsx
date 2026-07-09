@@ -4,6 +4,7 @@ import GA4PageView from '@/components/GA4PageView'
 import NavigationLinkTracker from '@/components/NavigationLinkTracker'
 import OutboundLinkTracker from '@/components/OutboundLinkTracker'
 import { GA_MEASUREMENT_ID } from '@/lib/ga'
+import { SITE_OG_IMAGE, SITE_URL } from '@/lib/siteUrl'
 import '../styles/design-engineering-tokens.css'
 import '../styles.css'
 
@@ -27,16 +28,24 @@ const workSans = Work_Sans({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: 'Vikas Raj Yadav | Staff Product Designer & Technologist | UI/UX Designer | Motion Design Expert | Bengaluru',
   description: 'A staff product designer with over a decade of experience who builds with engineers’ materials, and a Rive & Play ambassador.',
   keywords: 'Vikas Raj Yadav, Product Designer, UI/UX Designer, Motion Design, Interaction Design, FinTech Design, Design Engineer in India, Design Technologist in India, Staff Design Technologist in India, Design Engineer, Design Technologist, Staff Design Technologist, Design Engineer Bengaluru, Design Technologist Bengaluru, Staff Design Technologist Bengaluru, Product Designer Bengaluru, UI/UX Designer Bengaluru',
   authors: [{ name: 'Vikas Raj Yadav' }],
   openGraph: {
-    type: 'profile',
-    url: 'https://vikasrajyadav.in/',
+    type: 'website',
+    url: '/',
     title: 'Vikas Raj Yadav | Staff Product Designer & Technologist | UI/UX Designer | Motion Design Expert',
     description: 'A staff product designer with over a decade of experience who builds with engineers’ materials, and a Rive & Play ambassador.',
-    images: ['https://vikasrajyadav.in/assets/images/vry.jpg'],
+    images: [
+      {
+        url: SITE_OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: 'Vikas Raj Yadav — Staff Product Designer & Technologist',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
@@ -44,7 +53,7 @@ export const metadata: Metadata = {
     creator: '@vraj247',
     title: 'Vikas Raj Yadav | Staff Product Designer & Technologist | UI/UX Designer | Motion Design Expert',
     description: 'A staff product designer with over a decade of experience who builds with engineers’ materials, and a Rive & Play ambassador.',
-    images: ['https://vikasrajyadav.in/assets/images/vry.jpg'],
+    images: [SITE_OG_IMAGE],
   },
 }
 
@@ -64,7 +73,7 @@ export default function RootLayout({
         <link rel="manifest" href="/assets/favicon/site.webmanifest" />
         <link rel="robots" href="/robots.txt" />
         <meta name="theme-color" content="#BFC3C8" />
-        <link rel="canonical" href="https://vikasrajyadav.in/" />
+        <link rel="canonical" href={`${SITE_URL}/`} />
         
         {/* Additional Meta for AI Search Engines */}
         <meta name="author" content="Vikas Raj Yadav" />
@@ -99,8 +108,8 @@ export default function RootLayout({
               "alternateName": "vry",
               "jobTitle": "Staff Product Designer & Technologist",
               "description": "Staff Product Designer & Technologist @ Loop Health (YC 20) with 10+ years of experience. Rive & Play Ambassador. Previously at Paytm, HDFC Bank, Times, Grappus. Specializes in UI/UX design, motion design, interaction design, and design engineering.",
-              "url": "https://vikasrajyadav.in",
-              "image": "https://vikasrajyadav.in/assets/images/vry.jpg",
+              "url": SITE_URL,
+              "image": `${SITE_URL}${SITE_OG_IMAGE}`,
               "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "Bengaluru",
@@ -190,7 +199,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebSite",
               "name": "Vikas Raj Yadav - Portfolio",
-              "url": "https://vikasrajyadav.in",
+              "url": SITE_URL,
               "description": "Portfolio of Vikas Raj Yadav - Staff Product Designer & Technologist at Loop Health. 10+ years of experience in UI/UX design, motion design, and design engineering. Rive & Play Ambassador.",
               "author": {
                 "@type": "Person",

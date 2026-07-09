@@ -3,7 +3,9 @@ import path from 'path'
 import { getProjectBySlug, projects, type Project } from './projects'
 import { tiCorrections } from './tiCorrections'
 
-const SITE = 'https://vikasrajyadav.in'
+import { SITE_URL } from '@/lib/siteUrl'
+
+const SITE = SITE_URL
 
 const SLIM_BIO = `Vikas is a **Staff Product Designer & Technologist** based in Bengaluru, at **Loop Health** (YC S20). He's been in product design for **10+ years**, with serious time in fintech and regulated spaces—think **ETMoney, HDFC Bank, Paytm**, and other teams listed on his work page. He's also a **Rive and Play ambassador** in India; motion, interaction craft, prototyping (including SwiftUI), and design systems are real strengths, not buzzwords here.`
 
