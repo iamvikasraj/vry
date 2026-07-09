@@ -4,7 +4,7 @@ import GA4PageView from '@/components/GA4PageView'
 import NavigationLinkTracker from '@/components/NavigationLinkTracker'
 import OutboundLinkTracker from '@/components/OutboundLinkTracker'
 import { GA_MEASUREMENT_ID } from '@/lib/ga'
-import { SITE_OG_IMAGE, SITE_URL } from '@/lib/siteUrl'
+import { SITE_OG_IMAGE, SITE_OG_IMAGE_ALT, SITE_URL } from '@/lib/siteUrl'
 import '../styles/design-engineering-tokens.css'
 import '../styles.css'
 
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
         url: SITE_OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: 'Vikas Raj Yadav — Staff Product Designer & Technologist',
+        alt: SITE_OG_IMAGE_ALT,
       },
     ],
   },
