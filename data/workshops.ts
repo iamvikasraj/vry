@@ -33,6 +33,7 @@ export const workshops: Workshop[] = [
     venue: 'Rive x Play · Gurugram (in person)',
     description: 'In-person workshop on interaction design and motion principles using Rive and Play.',
     video: '/assets/video/Think Interaction Workshop.mp4',
+    thumbnail: '/assets/workshops/think-interaction-rive-play-2025.jpg',
     portfolio: true,
     portfolioOrder: 2,
     includes: ['Rive', 'Figma', 'State machines'],

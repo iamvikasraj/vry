@@ -2103,6 +2103,16 @@ a.home-de-workshop-list__link:focus-visible {
   background: var(--de-media-surface);
 }
 
+.home-de-workshop-list__thumb--has-poster .home-de-workshop-list__image:not(.home-de-workshop-list__image--ready) {
+  opacity: 0;
+}
+
+.home-de-workshop-list__thumb--has-poster .home-de-workshop-list__image--ready {
+  opacity: 1;
+  position: absolute;
+  inset: 0;
+}
+
 .home-de-workshop-list__thumb .media-placeholder {
   position: relative;
   inset: auto;

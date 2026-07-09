@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { useRef, useState } from 'react'
 import MediaPlaceholder from '@/components/MediaPlaceholder'
 import type { Workshop } from '@/data/workshops'
+import { useCanHover } from '@/lib/useCanHover'
+import { useViewportVideo } from '@/lib/useViewportVideo'
 import { mediaAssetPath } from '@/lib/mediaAssetPath'
 import { workshopHref } from '@/lib/workshopHref'
 
@@ -30,29 +32,46 @@ function youtubeThumbnailSrc(videoId: string): string {
 }
 
 export default function WorkshopListRow({ workshop }: WorkshopListRowProps) {
-  const videoRef = useRef<HTMLVideoElement>(null)
+  const canHover = useCanHover()
+  const thumbRef = useRef<HTMLDivElement>(null)
   const [youtubeHover, setYoutubeHover] = useState(false)
   const [youtubeReady, setYoutubeReady] = useState(false)
+  const [videoReady, setVideoReady] = useState(false)
+  const [hovering, setHovering] = useState(false)
+
   const hasVideo = Boolean(workshop.video)
+  const videoSrc = workshop.video ? mediaAssetPath(workshop.video) : ''
   const youtubeId = workshop.youtubeId
   const thumbnailSrc =
     workshop.thumbnail ?? (youtubeId ? youtubeThumbnailSrc(youtubeId) : undefined)
   const hasThumbnail = Boolean(thumbnailSrc)
 
+  const { videoRef, videoSrc: lazySrc, preload, shouldAutoplay } = useViewportVideo(thumbRef, {
+    src: videoSrc,
+    lazy: hasVideo && !canHover,
+    autoplayInView: hasVideo && !canHover,
+    pauseOffscreen: hasVideo && !canHover,
+  })
+
   const outboundUrl = workshop.registrationUrl ?? workshop.externalUrl
   const detailHref = workshop.slug ? workshopHref(workshop.slug) : null
+  const showVideoLayer = hasVideo && videoReady && (shouldAutoplay || hovering)
 
   const onThumbEnter = () => {
-    if (hasVideo) videoRef.current?.play()
-    if (youtubeId) setYoutubeHover(true)
+    if (canHover && hasVideo) {
+      setHovering(true)
+      void videoRef.current?.play()
+    }
+    if (canHover && youtubeId) setYoutubeHover(true)
   }
 
   const onThumbLeave = () => {
-    if (hasVideo && videoRef.current) {
+    if (canHover && hasVideo && videoRef.current) {
+      setHovering(false)
       videoRef.current.pause()
       videoRef.current.currentTime = 0
     }
-    if (youtubeId) {
+    if (canHover && youtubeId) {
       setYoutubeHover(false)
       setYoutubeReady(false)
     }
@@ -61,21 +80,35 @@ export default function WorkshopListRow({ workshop }: WorkshopListRowProps) {
   const inner = (
     <>
       <div
-        className="home-de-workshop-list__thumb"
+        ref={thumbRef}
+        className={`home-de-workshop-list__thumb${hasVideo && hasThumbnail ? ' home-de-workshop-list__thumb--has-poster' : ''}`}
         onMouseEnter={hasVideo || youtubeId ? onThumbEnter : undefined}
         onMouseLeave={hasVideo || youtubeId ? onThumbLeave : undefined}
       >
         {hasVideo && workshop.video ? (
-          <video
-            ref={videoRef}
-            className="home-de-workshop-list__image home-de-workshop-list__image--ready"
-            src={mediaAssetPath(workshop.video)}
-            muted
-            playsInline
-            loop
-            preload="metadata"
-            aria-hidden
-          />
+          <>
+            {hasThumbnail && thumbnailSrc && !showVideoLayer ? (
+              <img
+                className="home-de-workshop-list__image"
+                src={thumbnailSrc}
+                alt=""
+                aria-hidden
+              />
+            ) : null}
+            <video
+              ref={videoRef}
+              className={`home-de-workshop-list__image${showVideoLayer ? ' home-de-workshop-list__image--ready' : ''}`}
+              src={canHover ? videoSrc : lazySrc}
+              poster={thumbnailSrc}
+              muted
+              playsInline
+              loop
+              preload={canHover ? 'metadata' : preload}
+              onLoadedData={() => setVideoReady(true)}
+              onCanPlay={() => setVideoReady(true)}
+              aria-hidden
+            />
+          </>
         ) : hasThumbnail && thumbnailSrc ? (
           <>
             <img

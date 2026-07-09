@@ -1,8 +1,10 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import MediaPlaceholder from '@/components/MediaPlaceholder'
 import type { Writing } from '@/data/writings'
+import { useCanHover } from '@/lib/useCanHover'
+import { useViewportVideo } from '@/lib/useViewportVideo'
 import { mediaAssetPath } from '@/lib/mediaAssetPath'
 
 type WritingListRowProps = {
@@ -10,16 +12,34 @@ type WritingListRowProps = {
 }
 
 export default function WritingListRow({ writing }: WritingListRowProps) {
-  const videoRef = useRef<HTMLVideoElement>(null)
+  const canHover = useCanHover()
+  const thumbRef = useRef<HTMLDivElement>(null)
+  const [videoReady, setVideoReady] = useState(false)
+  const [hovering, setHovering] = useState(false)
+
   const hasVideo = Boolean(writing.video)
+  const videoSrc = writing.video ? mediaAssetPath(writing.video) : ''
   const cardTitle = writing.cardTitle ?? writing.title
+  const posterSrc = writing.thumbnail
+
+  const { videoRef, videoSrc: lazySrc, preload, shouldAutoplay } = useViewportVideo(thumbRef, {
+    src: videoSrc,
+    lazy: hasVideo && !canHover,
+    autoplayInView: hasVideo && !canHover,
+    pauseOffscreen: hasVideo && !canHover,
+  })
+
+  const showVideoLayer = hasVideo && videoReady && (shouldAutoplay || hovering)
 
   const onVideoEnter = () => {
-    videoRef.current?.play()
+    if (!canHover || !hasVideo) return
+    setHovering(true)
+    void videoRef.current?.play()
   }
 
   const onVideoLeave = () => {
-    if (!videoRef.current) return
+    if (!canHover || !videoRef.current) return
+    setHovering(false)
     videoRef.current.pause()
     videoRef.current.currentTime = 0
   }
@@ -33,22 +53,35 @@ export default function WritingListRow({ writing }: WritingListRowProps) {
       aria-label={`${writing.title} (opens on designengineer.ing)`}
     >
       <div
-        className="home-de-workshop-list__thumb"
+        ref={thumbRef}
+        className={`home-de-workshop-list__thumb${hasVideo && posterSrc ? ' home-de-workshop-list__thumb--has-poster' : ''}`}
         onMouseEnter={hasVideo ? onVideoEnter : undefined}
         onMouseLeave={hasVideo ? onVideoLeave : undefined}
       >
         {hasVideo && writing.video ? (
-          <video
-            ref={videoRef}
-            className="home-de-workshop-list__image home-de-workshop-list__image--ready"
-            src={mediaAssetPath(writing.video)}
-            poster={writing.thumbnail}
-            muted
-            playsInline
-            loop
-            preload="metadata"
-            aria-hidden
-          />
+          <>
+            {posterSrc && !showVideoLayer ? (
+              <img
+                className="home-de-workshop-list__image"
+                src={posterSrc}
+                alt=""
+                aria-hidden
+              />
+            ) : null}
+            <video
+              ref={videoRef}
+              className={`home-de-workshop-list__image${showVideoLayer ? ' home-de-workshop-list__image--ready' : ''}`}
+              src={canHover ? videoSrc : lazySrc}
+              poster={posterSrc}
+              muted
+              playsInline
+              loop
+              preload={canHover ? 'metadata' : preload}
+              onLoadedData={() => setVideoReady(true)}
+              onCanPlay={() => setVideoReady(true)}
+              aria-hidden
+            />
+          </>
         ) : writing.thumbnail ? (
           <img
             className="home-de-workshop-list__image"
