@@ -1,4 +1,5 @@
 import { getProjectBySlug, type Project } from '@/data/projects'
+import { getProjectThumbMedia } from '@/lib/projectMedia.server'
 
 export type FeaturedCompanyProject = {
   slug: string
@@ -51,6 +52,7 @@ export const featuredCompanies: FeaturedCompany[] = [
         slug: 'loop-ai-assistant',
         title: 'Loop AI Assistant (General queries)',
         video: '/assets/video/Loop AI Assistant (LinkedIn Export).mp4',
+        thumbnail: '/assets/video/loop-ai-assistant-poster.jpg',
       },
     ],
   },
@@ -64,6 +66,7 @@ export const featuredCompanies: FeaturedCompany[] = [
         slug: 'etmoney-rive',
         title: 'ET Money — Onboarding',
         video: '/assets/video/et-money-onboarding-tumb.mp4',
+        thumbnail: '/assets/video/et-money-onboarding-poster.jpg',
       },
       { slug: 'et-money-2', title: 'Project 2', hidden: true },
     ],
@@ -78,6 +81,7 @@ export const featuredCompanies: FeaturedCompany[] = [
         slug: 'business-insider',
         title: 'Business Insider India',
         video: '/assets/video/bi-india.mp4',
+        thumbnail: '/assets/video/bi-india-poster.jpg',
       },
       { slug: 'times-bridge-2', title: 'Project 2', hidden: true },
     ],
@@ -143,6 +147,7 @@ export function getAllExperienceProjects(): FeaturedCompanyProject[] {
       seen.add(project.slug)
 
       const fromData = getProjectBySlug(project.slug)
+      const thumbSrc = fromData ? getProjectThumbMedia(fromData).thumbSrc : undefined
       const ndaPreview = project.nda ? project.ndaPreview !== false : true
       const video = ndaPreview
         ? project.videos
@@ -161,7 +166,7 @@ export function getAllExperienceProjects(): FeaturedCompanyProject[] {
           ? ndaPreview
             ? project.thumbnail ?? getNdaCardPoster(fromData)
             : undefined
-          : project.thumbnail ?? fromData?.coverImage,
+          : project.thumbnail ?? thumbSrc,
         hero: project.hero,
         nda: project.nda,
         ndaPreview: project.ndaPreview,

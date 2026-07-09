@@ -37,12 +37,21 @@ function FeaturedProjectSequenceVideo({ sources, poster, projectTitle }: Sequenc
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
   const playingRef = useRef(false)
   const [activeIndex, setActiveIndex] = useState(0)
+  const [mediaReady, setMediaReady] = useState(false)
+  const [hovering, setHovering] = useState(false)
+  const hasPoster = Boolean(poster)
   const { shouldLoad, preload, shouldAutoplay } = useViewportVideo(containerRef, {
     src: sources[0] ?? '',
     lazy: !canHover,
     autoplayInView: !canHover,
     pauseOffscreen: !canHover,
   })
+
+  const showVideoLayer = hasPoster
+    ? canHover
+      ? hovering && mediaReady
+      : mediaReady && shouldAutoplay
+    : mediaReady
 
   const pauseAll = () => {
     videoRefs.current.forEach((el) => {
@@ -64,6 +73,7 @@ function FeaturedProjectSequenceVideo({ sources, poster, projectTitle }: Sequenc
     if (!canHover) return
     analytics.trackVideoHover(projectTitle)
     playingRef.current = true
+    setHovering(true)
     pauseAll()
     setActiveIndex(0)
     void videoRefs.current[0]?.play()?.then(() => analytics.trackVideoPlay(projectTitle, sources[0]))
@@ -72,6 +82,7 @@ function FeaturedProjectSequenceVideo({ sources, poster, projectTitle }: Sequenc
   const onLeave = () => {
     if (!canHover) return
     playingRef.current = false
+    setHovering(false)
     pauseAll()
     setActiveIndex(0)
   }
@@ -87,6 +98,8 @@ function FeaturedProjectSequenceVideo({ sources, poster, projectTitle }: Sequenc
     void nextEl.play()
   }
 
+  const markReady = () => setMediaReady(true)
+
   return (
     <div
       ref={containerRef}
@@ -94,6 +107,9 @@ function FeaturedProjectSequenceVideo({ sources, poster, projectTitle }: Sequenc
       onPointerEnter={canHover ? onEnter : undefined}
       onPointerLeave={canHover ? onLeave : undefined}
     >
+      {hasPoster && poster && !showVideoLayer ? (
+        <img className="home-de-timeline-featured__poster" src={poster} alt="" aria-hidden />
+      ) : null}
       {sources.map((source, index) => (
         <video
           key={source}
@@ -102,13 +118,20 @@ function FeaturedProjectSequenceVideo({ sources, poster, projectTitle }: Sequenc
           }}
           className={`home-de-timeline-featured__video${
             activeIndex === index ? ' home-de-timeline-featured__video--active' : ''
+          }${
+            activeIndex === index && (showVideoLayer || index > 0 || !hasPoster)
+              ? ' home-de-timeline-featured__video--ready'
+              : ''
           }`}
           src={shouldLoad || canHover ? source : undefined}
           poster={index === 0 ? poster : undefined}
           muted
           playsInline
           loop={!canHover && sources.length === 1}
-          preload={canHover ? 'metadata' : preload}
+          preload={canHover ? (hasPoster ? 'metadata' : 'auto') : preload}
+          onLoadedData={markReady}
+          onLoadedMetadata={markReady}
+          onCanPlay={markReady}
           onEnded={() => onClipEnded(index)}
           aria-hidden
         />
@@ -126,12 +149,21 @@ type SingleVideoProps = {
 function FeaturedProjectSingleVideo({ src, poster, projectTitle }: SingleVideoProps) {
   const canHover = useCanHover()
   const containerRef = useRef<HTMLDivElement>(null)
+  const [mediaReady, setMediaReady] = useState(false)
+  const [hovering, setHovering] = useState(false)
+  const hasPoster = Boolean(poster)
   const { videoRef, videoSrc, preload, shouldAutoplay, shouldLoad } = useViewportVideo(containerRef, {
     src,
     lazy: !canHover,
     autoplayInView: !canHover,
     pauseOffscreen: !canHover,
   })
+
+  const showVideoLayer = hasPoster
+    ? canHover
+      ? hovering && mediaReady
+      : mediaReady && shouldAutoplay
+    : mediaReady
 
   useEffect(() => {
     if (canHover || !shouldAutoplay || !shouldLoad) return
@@ -141,16 +173,20 @@ function FeaturedProjectSingleVideo({ src, poster, projectTitle }: SingleVideoPr
   const onEnter = () => {
     if (!canHover) return
     analytics.trackVideoHover(projectTitle)
+    setHovering(true)
     void videoRef.current?.play()?.then(() => analytics.trackVideoPlay(projectTitle, src))
   }
 
   const onLeave = () => {
     if (!canHover) return
+    setHovering(false)
     const el = videoRef.current
     if (!el) return
     el.pause()
     el.currentTime = 0
   }
+
+  const markReady = () => setMediaReady(true)
 
   return (
     <div
@@ -159,15 +195,23 @@ function FeaturedProjectSingleVideo({ src, poster, projectTitle }: SingleVideoPr
       onPointerEnter={canHover ? onEnter : undefined}
       onPointerLeave={canHover ? onLeave : undefined}
     >
+      {hasPoster && poster && !showVideoLayer ? (
+        <img className="home-de-timeline-featured__poster" src={poster} alt="" aria-hidden />
+      ) : null}
       <video
         ref={videoRef}
-        className="home-de-timeline-featured__video home-de-timeline-featured__video--active"
+        className={`home-de-timeline-featured__video home-de-timeline-featured__video--active${
+          showVideoLayer ? ' home-de-timeline-featured__video--ready' : ''
+        }`}
         src={canHover ? src : videoSrc}
         poster={poster}
         muted
         playsInline
         loop
-        preload={canHover ? 'metadata' : preload}
+        preload={canHover ? (hasPoster ? 'metadata' : 'auto') : preload}
+        onLoadedData={markReady}
+        onLoadedMetadata={markReady}
+        onCanPlay={markReady}
         aria-hidden
       />
     </div>
@@ -215,7 +259,13 @@ export default function FeaturedProjectCard({
       onClick={() => analytics.trackProjectClick(project.title, project.slug)}
       aria-label={`View project: ${project.title}`}
     >
-      <div className="home-de-timeline-featured__media">{media}</div>
+      <div
+        className={`home-de-timeline-featured__media${
+          poster ? ' home-de-timeline-featured__media--has-poster' : ''
+        }`}
+      >
+        {media}
+      </div>
       <span className="home-de-media-caption home-de-media-caption--below">
         <span className="home-de-media-caption__title">{project.title}</span>
       </span>

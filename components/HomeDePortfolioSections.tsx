@@ -27,7 +27,7 @@ export default function HomeDePortfolioSections() {
         />
       </CvSection>
 
-      <CvSection id="writing" title="designengineer.ing">
+      <CvSection id="writing" title="Side Quests">
         <WritingListSection />
       </CvSection>
 

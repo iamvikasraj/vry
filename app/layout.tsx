@@ -27,17 +27,20 @@ const workSans = Work_Sans({
   display: 'swap',
 })
 
+const SITE_DESCRIPTION =
+  'Staff product designer & design engineer, Rive & Play ambassador — open to staff design and design-engineering roles, workshops, and collaborations. Bengaluru & remote.'
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: 'Vikas Raj Yadav | Staff Product Designer & Technologist | UI/UX Designer | Motion Design Expert | Bengaluru',
-  description: 'A staff product designer with over a decade of experience who builds with engineers’ materials, and a Rive & Play ambassador.',
+  description: SITE_DESCRIPTION,
   keywords: 'Vikas Raj Yadav, Product Designer, UI/UX Designer, Motion Design, Interaction Design, FinTech Design, Design Engineer in India, Design Technologist in India, Staff Design Technologist in India, Design Engineer, Design Technologist, Staff Design Technologist, Design Engineer Bengaluru, Design Technologist Bengaluru, Staff Design Technologist Bengaluru, Product Designer Bengaluru, UI/UX Designer Bengaluru',
   authors: [{ name: 'Vikas Raj Yadav' }],
   openGraph: {
     type: 'website',
     url: '/',
     title: 'Vikas Raj Yadav | Staff Product Designer & Technologist | UI/UX Designer | Motion Design Expert',
-    description: 'A staff product designer with over a decade of experience who builds with engineers’ materials, and a Rive & Play ambassador.',
+    description: SITE_DESCRIPTION,
     images: [
       {
         url: SITE_OG_IMAGE,
@@ -52,7 +55,7 @@ export const metadata: Metadata = {
     site: '@vraj247',
     creator: '@vraj247',
     title: 'Vikas Raj Yadav | Staff Product Designer & Technologist | UI/UX Designer | Motion Design Expert',
-    description: 'A staff product designer with over a decade of experience who builds with engineers’ materials, and a Rive & Play ambassador.',
+    description: SITE_DESCRIPTION,
     images: [SITE_OG_IMAGE],
   },
 }

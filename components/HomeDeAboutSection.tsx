@@ -1,7 +1,5 @@
 import { Fragment } from 'react'
-import AboutGitHubContributions from '@/components/AboutGitHubContributions'
 import CvSection from '@/components/CvSection'
-import HomeDeEmailLink from '@/components/HomeDeEmailLink'
 import {
   PORTFOLIO_ABOUT,
   flattenAboutSegments,
@@ -12,27 +10,49 @@ import {
 function AboutRichText({ segments }: { segments: AboutSegment[] }) {
   return (
     <>
-      {segments.map((segment, index) =>
-        typeof segment === 'string' ? (
-          <Fragment key={index}>{segment}</Fragment>
-        ) : segment.emphasis === 'Vikas Raj Yadav' ? (
-          <span key={index} className="home-de-about__name" tabIndex={0}>
-            <span itemProp="name">{segment.emphasis}</span>
-            <span className="home-de-about__name-photo" aria-hidden="true">
-              <img
-                src={PORTFOLIO_ABOUT.photo}
-                alt=""
-                width={160}
-                height={200}
-                loading="lazy"
-                decoding="async"
-              />
+      {segments.map((segment, index) => {
+        if (typeof segment === 'string') {
+          return <Fragment key={index}>{segment}</Fragment>
+        }
+
+        if (segment.emphasis === 'Vikas Raj Yadav') {
+          return (
+            <span key={index} className="home-de-about__name" tabIndex={0}>
+              <span itemProp="name">{segment.emphasis}</span>
+              <span className="home-de-about__name-photo" aria-hidden="true">
+                <img
+                  src={PORTFOLIO_ABOUT.photo}
+                  alt=""
+                  width={160}
+                  height={200}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </span>
             </span>
-          </span>
-        ) : (
-          <Fragment key={index}>{segment.emphasis}</Fragment>
+          )
+        }
+
+        if (segment.href) {
+          return (
+            <a
+              key={index}
+              className="home-de-about__link"
+              href={segment.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {segment.emphasis}
+            </a>
+          )
+        }
+
+        return (
+          <strong key={index} className="home-de-about__emph">
+            {segment.emphasis}
+          </strong>
         )
-      )}
+      })}
     </>
   )
 }
@@ -71,24 +91,18 @@ export default function HomeDeAboutSection() {
                 <ul className="home-de-about__list home-de-about__work-list">
                   {(workItems as AboutWorkItem[]).map((item) => (
                     <li key={`${item.company}-${item.role}-${item.years}`}>
-                      <span className="home-de-about__work-left">
+                      <span className="home-de-about__work-head">
                         <span className="home-de-about__work-company">{item.company}</span>
-                        <span className="home-de-about__work-role">{item.role}</span>
+                        <span className="home-de-about__work-leader" aria-hidden="true" />
+                        <span className="home-de-about__work-years">{item.years}</span>
                       </span>
-                      <span className="home-de-about__work-years">{item.years}</span>
                     </li>
                   ))}
                 </ul>
               </div>
             ) : null}
-
-            <AboutGitHubContributions />
           </aside>
         </div>
-
-        <p className="home-de-about__availability">
-          {PORTFOLIO_ABOUT.contact} <HomeDeEmailLink className="home-de-about__email-link" />
-        </p>
       </div>
     </CvSection>
   )

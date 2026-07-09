@@ -19,8 +19,8 @@ export const PORTFOLIO_PROFILE = {
   timeZoneLabel: 'IST',
 } as const
 
-/** One run of About copy — a plain string, or an emphasized (bold) fragment. */
-export type AboutSegment = string | { emphasis: string }
+/** One run of About copy — a plain string, or an emphasized fragment (optionally linked). */
+export type AboutSegment = string | { emphasis: string; href?: string }
 
 export type AboutWorkItem = {
   company: string
@@ -41,39 +41,43 @@ export const PORTFOLIO_ABOUT = {
   lede: [
     'Hi, I’m ',
     { emphasis: 'Vikas Raj Yadav' },
-    ' — a design leader and builder who works at the intersection of design and engineering. I’m currently based in Bengaluru, where I’m a Staff Product Designer at ',
-    { emphasis: 'Loop Health' },
-    ', creating healthcare fintech solutions that make a real impact.',
+    ', a design leader and builder working where design meets engineering. I’m a Staff Product Designer at ',
+    { emphasis: 'Loop Health', href: 'https://www.loophealth.com' },
+    ' in Bengaluru.',
   ] as AboutSegment[],
   paragraphs: [
     [
-      'Right now, I’m focused on leading design systems and integrating motion-driven interactions using tools like ',
-      { emphasis: 'Rive' },
+      'Right now I lead design experiments and interaction with ',
+      { emphasis: 'Rive', href: 'https://rive.app' },
       ' and ',
-      { emphasis: 'SwiftUI' },
-      '. These aren’t just side projects for me — they’re core to how I design and bring products to life. I’m also proud to be a ',
+      { emphasis: 'SwiftUI', href: 'https://developer.apple.com/xcode/swiftui/' },
+      ' — central to how I ship. I’m also a ',
       { emphasis: 'Rive & Play Ambassador' },
-      ', helping close the gap between design and engineering.',
+      '.',
     ],
     [
-      'Before Loop Health, I worked at ',
-      { emphasis: 'ET Money' },
-      ', driving a redesign that boosted investment completions and mentoring a team to improve delivery timelines. Prior to that, I helped build ',
-      { emphasis: 'Paytm' },
-      '’s first comprehensive design system, improving consistency for over 350 million users across multiple products.',
+      'Before Loop Health, I redesigned investing at ',
+      { emphasis: 'ET Money', href: 'https://www.etmoney.com' },
+      ' and mentored the team to ship faster. In between, I consulted at ',
+      { emphasis: 'Times Bridge', href: 'https://timesbridge.com' },
+      ' and led UX at ',
+      { emphasis: 'HDFC Bank', href: 'https://www.hdfcbank.com' },
+      '. Earlier, I built ',
+      { emphasis: 'Paytm', href: 'https://paytm.com' },
+      '’s first design system, unifying the experience for 350M+ users.',
     ],
     [
-      'I thrive when working at the intersection of creativity and technology — building scalable design systems, refining user experiences, and mentoring diverse teams. I’m passionate about motion design, prototyping, and pushing the boundaries where design meets code.',
-    ],
-    [
-      'In my free time, you’ll find me exploring new tech, experimenting with SwiftUI and Three.js, or enjoying outdoor adventures. I’m always excited to connect with fellow creators and innovators who believe in craft and collaboration.',
+      'Off the clock, you’ll find me tinkering with ',
+      { emphasis: 'Three.js', href: 'https://threejs.org' },
+      ' or outdoors.',
     ],
   ] as AboutSegment[][],
   work: [
     { company: 'Loop Health', role: 'Staff Product Designer', years: '2025–Present' },
     { company: 'ET Money', role: 'Principal Product Designer', years: '2024–2025' },
-    { company: 'Paytm', role: 'Lead Product Designer', years: '2018–2021' },
+    { company: 'Times Bridge', role: 'Product Design Consultant', years: '2022–2024' },
     { company: 'HDFC Bank', role: 'UX Design Manager', years: '2021–2022' },
+    { company: 'Paytm', role: 'Lead Product Designer', years: '2018–2021' },
     { company: 'Grappus Studio', role: 'UI/UX Designer', years: '2017–2018' },
   ] satisfies AboutWorkItem[],
   contact:

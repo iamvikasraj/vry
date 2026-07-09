@@ -6,7 +6,7 @@ export const PORTFOLIO_SECTION_NAV: { id: DePortfolioSectionId; label: string }[
   { id: 'timeline', label: 'Experiences' },
   { id: 'workshops', label: 'Workshop' },
   { id: 'playground', label: 'Interactions' },
-  { id: 'writing', label: 'designengineer.ing' },
+  { id: 'writing', label: 'Side Quests' },
   { id: 'about', label: 'About' },
 ]
 
@@ -23,17 +23,27 @@ export function getDeScrollRoot(): HTMLElement | null {
   return null
 }
 
-/** Last section whose heading has scrolled to/past the scrollport top (section chrome). */
+/**
+ * How far *into* the scrollport a heading may still be and count as active,
+ * as a fraction of the scrollport height. 0 = must reach the very top;
+ * higher = activates sooner (0.025 ≈ a tiny head-start just above the top edge).
+ */
+const SECTION_ACTIVATE_RATIO = 0.025
+
+/** Last section whose heading has scrolled to/past the activation line (section chrome). */
 export function getPinnedPortfolioSection(): DePortfolioSectionId | null {
   let pinned: DePortfolioSectionId | null = null
   const scrollRoot = getDeScrollRoot()
-  const threshold = scrollRoot ? scrollRoot.getBoundingClientRect().top : 0
+  const rootRect = scrollRoot?.getBoundingClientRect()
+  const portTop = rootRect ? rootRect.top : 0
+  const portHeight = rootRect ? rootRect.height : window.innerHeight
+  const activateLine = portTop + portHeight * SECTION_ACTIVATE_RATIO
 
   for (const id of SECTION_IDS) {
     const heading = document.getElementById(`${id}-heading`)
     if (!heading) continue
 
-    if (heading.getBoundingClientRect().top <= threshold + 1) {
+    if (heading.getBoundingClientRect().top <= activateLine) {
       pinned = id
     }
   }
