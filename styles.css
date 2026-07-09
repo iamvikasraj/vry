@@ -137,9 +137,10 @@ body {
   overflow-x: clip;
 }
 
-/* DE uses in-column scroll on desktop — drop the reserved gutter strip. */
+/* DE canvas — match Safari status bar / overscroll to page top */
 html:has(.home-page--de) {
   scrollbar-gutter: auto;
+  background-color: var(--de-bg-top);
 }
 
 /* Hairline / hidden scrollbars on DE scroll surfaces (wheel & trackpad still work). */
@@ -199,7 +200,7 @@ html:has(.home-page--de) {
   }
 
   body:has(.home-page--de) {
-    background-color: var(--de-bg-bottom);
+    background-color: var(--de-bg-top);
   }
 }
 
@@ -836,6 +837,7 @@ html:has(.home-page--de) {
 
   .home-de-section-chrome--top {
     padding-top: calc(var(--sp-12) + env(safe-area-inset-top, 0px));
+    background-color: var(--de-bg-top);
   }
 
   .home-de-section-chrome--bottom {
