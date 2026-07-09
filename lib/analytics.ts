@@ -75,6 +75,21 @@ export const analytics = {
   trackProjectSectionClick: (title: string, slug: string, section: string) => {
     trackEvent('project_section_click', { project_title: title, project_slug: slug, section_name: section })
   },
+  trackFilterChange: (filter: string) => {
+    trackEvent('filter_change', { filter_name: filter })
+  },
+  trackGridToggle: (size: '1x1' | '2x2') => {
+    trackEvent('grid_toggle', { grid_size: size })
+  },
+  trackNavigationClick: (page: string, link: string) => {
+    trackEvent('navigation_click', { page_name: page, link_text: link })
+  },
+  trackVideoPlay: (title: string, src: string) => {
+    trackEvent('video_play', { video_title: title, video_src: src })
+  },
+  trackVideoHover: (title: string) => {
+    trackEvent('video_hover', { video_title: title })
+  },
   /** Portfolio LLM chat: user sent a message (no message content — privacy) */
   trackChatMessageSent: (charLength?: number) => {
     trackEvent('portfolio_chat_message', {
@@ -113,6 +128,11 @@ export const analytics = {
     analytics.trackProjectView('Test Project', 'test-project')
     analytics.trackProjectTimeSpent('Test Project', 'test-project', 45)
     analytics.trackProjectSectionClick('Test Project', 'test-project', 'Context')
+    analytics.trackFilterChange('All')
+    analytics.trackGridToggle('1x1')
+    analytics.trackNavigationClick('timeline', 'Experiences')
+    analytics.trackVideoPlay('Test Video', '/test.mp4')
+    analytics.trackVideoHover('Test Video')
     analytics.trackChatMessageSent(42)
     analytics.trackChatOpen('project', 'test-project')
     analytics.trackOutboundClick({ url: 'https://example.com', domain: 'example.com', category: 'other', link_text: 'Example' })

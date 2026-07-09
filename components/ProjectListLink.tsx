@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react'
 import Link from 'next/link'
+import { analytics } from '@/lib/analytics'
 import type { Project } from '@/data/projects'
 import type { ProjectThumbMedia } from '@/lib/projectMedia'
 import { getProjectCardMeta } from '@/lib/projectCardMeta'
@@ -54,7 +55,10 @@ export default function ProjectListLink({
 
   const onEnter = () => {
     if (!hoverPlay || !showVideo) return
-    videoRef.current?.play()
+    analytics.trackVideoHover(project.title)
+    void videoRef.current?.play()?.then(() => {
+      if (project.video) analytics.trackVideoPlay(project.title, mediaAssetPath(project.video))
+    })
     setHovered(true)
   }
 
@@ -75,6 +79,7 @@ export default function ProjectListLink({
       }`}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
+      onClick={() => analytics.trackProjectClick(project.title, project.slug, project.tags)}
       aria-label={`View project: ${project.title}`}
     >
       <div

@@ -40,24 +40,25 @@ export default function ProjectSectionTracker({ projectTitle, projectSlug }: Pro
       sectionObserver.observe(section)
     })
 
+    const clickHandlers = new Map<Element, () => void>()
+
     // Also track clicks on section titles
     sections.forEach((section) => {
       const title = section.querySelector('.project-section-title')
       if (title) {
-        title.addEventListener('click', () => {
+        const handler = () => {
           const sectionTitle = title.textContent || 'Unknown'
           analytics.trackProjectSectionClick(projectTitle, projectSlug, sectionTitle)
-        })
+        }
+        clickHandlers.set(title, handler)
+        title.addEventListener('click', handler)
       }
     })
 
     return () => {
       sectionObserver.disconnect()
-      sections.forEach((section) => {
-        const title = section.querySelector('.project-section-title')
-        if (title) {
-          title.removeEventListener('click', () => {})
-        }
+      clickHandlers.forEach((handler, title) => {
+        title.removeEventListener('click', handler)
       })
     }
   }, [projectTitle, projectSlug])

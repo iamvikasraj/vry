@@ -21,7 +21,7 @@ export function getActiveDeNavId(pathname: string | null): DeNavId | null {
   const path = normalizePath(pathname ?? '')
 
   if (path === '/playground') return 'playground'
-  if (path === '/workshops') return 'workshops'
+  if (path === '/workshops' || path.startsWith('/workshops/')) return 'workshops'
   if (path.startsWith('/live-projects')) return null
   if (path === '' || path === '/') return 'timeline'
 

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import PortfolioChat from '@/components/PortfolioChat'
+import ChatPageTracker from '@/components/ChatPageTracker'
 
 export const metadata = {
   title: 'Chat with Ti — Vikas Raj Yadav',
@@ -9,6 +10,7 @@ export const metadata = {
 export default function ChatPage() {
   return (
     <div className="chat-page">
+      <ChatPageTracker />
       <header className="chat-page-header">
         <Link href="/" className="chat-page-back">← Back</Link>
         <span className="chat-page-title">Ti — ask me anything about Vikas</span>

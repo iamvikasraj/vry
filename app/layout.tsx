@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { DM_Mono, Inter, Work_Sans } from 'next/font/google'
 import GA4PageView from '@/components/GA4PageView'
+import NavigationLinkTracker from '@/components/NavigationLinkTracker'
 import OutboundLinkTracker from '@/components/OutboundLinkTracker'
 import { GA_MEASUREMENT_ID } from '@/lib/ga'
 import '../styles/design-engineering-tokens.css'
@@ -27,14 +28,14 @@ const workSans = Work_Sans({
 
 export const metadata: Metadata = {
   title: 'Vikas Raj Yadav | Staff Product Designer & Technologist | UI/UX Designer | Motion Design Expert | Bengaluru',
-  description: 'Staff Product Designer & Technologist @ Loop Health (YC 20) ✦ 10+ years of experience ✦ Rive & Play Ambassador ✦ Previously at Paytm, HDFC, Times, Grappus',
+  description: 'A staff product designer with over a decade of experience who builds with engineers’ materials, and a Rive & Play ambassador.',
   keywords: 'Vikas Raj Yadav, Product Designer, UI/UX Designer, Motion Design, Interaction Design, FinTech Design, Design Engineer in India, Design Technologist in India, Staff Design Technologist in India, Design Engineer, Design Technologist, Staff Design Technologist, Design Engineer Bengaluru, Design Technologist Bengaluru, Staff Design Technologist Bengaluru, Product Designer Bengaluru, UI/UX Designer Bengaluru',
   authors: [{ name: 'Vikas Raj Yadav' }],
   openGraph: {
     type: 'profile',
     url: 'https://vikasrajyadav.in/',
     title: 'Vikas Raj Yadav | Staff Product Designer & Technologist | UI/UX Designer | Motion Design Expert',
-    description: 'Staff Product Designer & Technologist @ Loop Health (YC 20) ✦ 10+ years of experience ✦ Rive & Play Ambassador ✦ Previously at Paytm, HDFC, Times, Grappus',
+    description: 'A staff product designer with over a decade of experience who builds with engineers’ materials, and a Rive & Play ambassador.',
     images: ['https://vikasrajyadav.in/assets/images/vry.jpg'],
   },
   twitter: {
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
     site: '@vraj247',
     creator: '@vraj247',
     title: 'Vikas Raj Yadav | Staff Product Designer & Technologist | UI/UX Designer | Motion Design Expert',
-    description: 'Staff Product Designer & Technologist @ Loop Health (YC 20) ✦ 10+ years of experience ✦ Rive & Play Ambassador ✦ Previously at Paytm, HDFC, Times, Grappus',
+    description: 'A staff product designer with over a decade of experience who builds with engineers’ materials, and a Rive & Play ambassador.',
     images: ['https://vikasrajyadav.in/assets/images/vry.jpg'],
   },
 }
@@ -251,6 +252,7 @@ export default function RootLayout({
           }}
         />
         <GA4PageView />
+        <NavigationLinkTracker />
         <OutboundLinkTracker />
         {children}
       </body>

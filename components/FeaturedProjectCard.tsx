@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
+import { analytics } from '@/lib/analytics'
 import type { FeaturedCompanyProject } from '@/data/featuredCompanies'
 import { useCanHover } from '@/lib/useCanHover'
 import { mediaAssetPath } from '@/lib/mediaAssetPath'
@@ -26,9 +27,10 @@ function getVideoSources(project: FeaturedCompanyProject): string[] {
 type SequenceVideoProps = {
   sources: string[]
   poster?: string
+  projectTitle: string
 }
 
-function FeaturedProjectSequenceVideo({ sources, poster }: SequenceVideoProps) {
+function FeaturedProjectSequenceVideo({ sources, poster, projectTitle }: SequenceVideoProps) {
   const canHover = useCanHover()
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
   const playingRef = useRef(false)
@@ -46,16 +48,17 @@ function FeaturedProjectSequenceVideo({ sources, poster }: SequenceVideoProps) {
     if (canHover) return
     const first = videoRefs.current[0]
     if (!first) return
-    void first.play()
+    void first.play()?.then(() => analytics.trackVideoPlay(projectTitle, sources[0]))
     playingRef.current = true
-  }, [canHover, sources])
+  }, [canHover, sources, projectTitle])
 
   const onEnter = () => {
     if (!canHover) return
+    analytics.trackVideoHover(projectTitle)
     playingRef.current = true
     pauseAll()
     setActiveIndex(0)
-    void videoRefs.current[0]?.play()
+    void videoRefs.current[0]?.play()?.then(() => analytics.trackVideoPlay(projectTitle, sources[0]))
   }
 
   const onLeave = () => {
@@ -109,20 +112,22 @@ function FeaturedProjectSequenceVideo({ sources, poster }: SequenceVideoProps) {
 type SingleVideoProps = {
   src: string
   poster?: string
+  projectTitle: string
 }
 
-function FeaturedProjectSingleVideo({ src, poster }: SingleVideoProps) {
+function FeaturedProjectSingleVideo({ src, poster, projectTitle }: SingleVideoProps) {
   const canHover = useCanHover()
   const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
     if (canHover) return
-    void videoRef.current?.play()
-  }, [canHover, src])
+    void videoRef.current?.play()?.then(() => analytics.trackVideoPlay(projectTitle, src))
+  }, [canHover, src, projectTitle])
 
   const onEnter = () => {
     if (!canHover) return
-    void videoRef.current?.play()
+    analytics.trackVideoHover(projectTitle)
+    void videoRef.current?.play()?.then(() => analytics.trackVideoPlay(projectTitle, src))
   }
 
   const onLeave = () => {
@@ -172,9 +177,9 @@ export default function FeaturedProjectCard({
 
   const media = hasVideo ? (
     isSequence ? (
-      <FeaturedProjectSequenceVideo sources={sources} poster={poster} />
+      <FeaturedProjectSequenceVideo sources={sources} poster={poster} projectTitle={project.title} />
     ) : (
-      <FeaturedProjectSingleVideo src={sources[0]} poster={poster} />
+      <FeaturedProjectSingleVideo src={sources[0]} poster={poster} projectTitle={project.title} />
     )
   ) : project.thumbnail ? (
     <img
@@ -193,6 +198,7 @@ export default function FeaturedProjectCard({
       className={`home-de-timeline-featured__placeholder home-de-timeline-featured__placeholder--link home-de-media-card${
         isHero ? ' home-de-timeline-featured--hero' : ''
       }`}
+      onClick={() => analytics.trackProjectClick(project.title, project.slug)}
       aria-label={`View project: ${project.title}`}
     >
       <div className="home-de-timeline-featured__media">{media}</div>

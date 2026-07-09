@@ -36,12 +36,21 @@ Then watch **GA4 → Reports → Realtime** to confirm events arrive.
 | `project_view` | Case-study page viewed | `project_title`, `project_slug` |
 | `project_time_spent` | Time on a case study (on leave/hide) | `project_title`, `project_slug`, `time_spent_seconds` |
 | `project_section_click` | Section link within a case study | `project_title`, `project_slug`, `section_name` |
+| `filter_change` | Work/timeline filter selected | `filter_name` |
+| `grid_toggle` | Work grid density toggle | `grid_size` (`1x1` / `2x2`) |
+| `navigation_click` | Internal nav / section jump | `page_name`, `link_text` |
+| `video_play` | Project thumb video starts | `video_title`, `video_src` |
+| `video_hover` | Pointer enters a hover-play thumb | `video_title` |
 | `portfolio_chat_message` | User sends a Ti chat message | `message_length_bucket` (no content — privacy) |
 | `portfolio_chat_open` | Ti chat opened | `chat_surface` (`global`/`project`), `project_slug` |
 | `outbound_click` | Any external link click (site-wide) | `link_url`, `link_domain`, `link_category`, `link_text` |
 | `email_click` | mailto / "Email me" click | `link_location` |
 
 **Coverage notes**
+- `project_click` fires from `ProjectListLink`, `FeaturedProjectCard`, and `ProjectThumbGrid`.
+- `navigation_click` is emitted by [NavigationLinkTracker.tsx](../components/NavigationLinkTracker.tsx) — hash section links (`/#timeline`, …), home, playground, workshops, and chat routes.
+- `video_hover` / `video_play` fire from hover-play thumbs in `ProjectListLink`, `ProjectThumbGrid`, and `FeaturedProjectCard` (plus autoplay on touch for featured cards).
+- `filter_change` and `grid_toggle` helpers remain in [lib/analytics.ts](../lib/analytics.ts) for GA4 parity with the legacy work page; there is no active filter/grid UI in the current home shell — wire them again if those controls return.
 - `outbound_click` is emitted by a single delegated listener in
   [OutboundLinkTracker.tsx](../components/OutboundLinkTracker.tsx) — it catches every
   external anchor and `mailto:`, so new links are tracked automatically without
@@ -68,6 +77,10 @@ param you want to slice by:
 | Link category | `link_category` |
 | Chat surface | `chat_surface` |
 | Message length | `message_length_bucket` |
+| Filter name | `filter_name` |
+| Grid size | `grid_size` |
+| Page name | `page_name` |
+| Video title | `video_title` |
 
 For a numeric metric (avg time on a case study), also create a **custom metric**
 for `time_spent_seconds`.
