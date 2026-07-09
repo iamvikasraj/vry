@@ -142,7 +142,7 @@ export default function RootLayout({
               ],
               "sameAs": [
                 "https://x.com/vraj247",
-                "https://linkedin.com/in/vraj247",
+                "https://www.linkedin.com/in/vraj247",
                 "https://github.com/iamvikasraj",
                 "https://dribbble.com/iamvikasraj",
                 "https://www.behance.net/Vraj247"
