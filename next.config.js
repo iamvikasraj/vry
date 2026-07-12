@@ -9,6 +9,8 @@ const isNextDev = process.env.NODE_ENV === 'development'
 const nextConfig = {
   distDir: '.next',
   ...(!isNextDev ? { output: 'export' } : {}),
+  // Allow opening the dev server via LAN IP (phone / other devices on Wi‑Fi).
+  allowedDevOrigins: ['192.168.1.18'],
   images: {
     unoptimized: true,
   },

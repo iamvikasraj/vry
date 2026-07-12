@@ -21,6 +21,11 @@ type ChromeState = {
 
 const INITIAL_STATE: ChromeState = { pinnedId: null, previousPinnedId: null }
 
+/** Scroll-down migration length — keep in sync with CSS animation duration. */
+const MIGRATION_MS_DOWN = 340
+/** Slightly snappier on scroll-up so the mirrored exit/enter feels less laggy. */
+const MIGRATION_MS_UP = 240
+
 function normalizePath(path: string) {
   if (path.length > 1 && path.endsWith('/')) return path.slice(0, -1)
   return path
@@ -80,20 +85,28 @@ export default function MobileSectionHeadingChrome() {
     })
   }, [onSinglePagePortfolio, pathname])
 
+  const pinnedIndex = getPortfolioSectionIndex(chrome.pinnedId)
+  const previousIndex = getPortfolioSectionIndex(chrome.previousPinnedId)
+  const scrollingUp = pinnedIndex < previousIndex
+  const migrationMs =
+    chrome.previousPinnedId === chrome.pinnedId
+      ? MIGRATION_MS_DOWN
+      : scrollingUp
+        ? MIGRATION_MS_UP
+        : MIGRATION_MS_DOWN
+
   useEffect(() => {
     if (chrome.previousPinnedId === chrome.pinnedId) return
 
     const timeout = window.setTimeout(() => {
       setChrome((state) => ({ ...state, previousPinnedId: state.pinnedId }))
-    }, 340)
+    }, migrationMs)
 
     return () => window.clearTimeout(timeout)
-  }, [chrome])
+  }, [chrome, migrationMs])
 
   if (!onSinglePagePortfolio) return null
 
-  const pinnedIndex = getPortfolioSectionIndex(chrome.pinnedId)
-  const previousIndex = getPortfolioSectionIndex(chrome.previousPinnedId)
   const lo = Math.min(pinnedIndex, previousIndex)
   const hi = Math.max(pinnedIndex, previousIndex)
 
@@ -117,7 +130,7 @@ export default function MobileSectionHeadingChrome() {
   return (
     <>
       <nav
-        className={`home-de-section-chrome home-de-section-chrome--top${topVisible ? ' home-de-section-chrome--visible' : ''}`}
+        className={`home-de-section-chrome home-de-section-chrome--top${topVisible ? ' home-de-section-chrome--visible' : ''}${scrollingUp ? ' home-de-section-chrome--scroll-up' : ''}`}
         aria-hidden={!topVisible}
         aria-label="Sections above"
       >
@@ -134,7 +147,7 @@ export default function MobileSectionHeadingChrome() {
         </div>
       </nav>
       <nav
-        className={`home-de-section-chrome home-de-section-chrome--bottom${bottomVisible ? ' home-de-section-chrome--visible' : ''}`}
+        className={`home-de-section-chrome home-de-section-chrome--bottom${bottomVisible ? ' home-de-section-chrome--visible' : ''}${scrollingUp ? ' home-de-section-chrome--scroll-up' : ''}`}
         aria-hidden={!bottomVisible}
         aria-label="Upcoming sections"
       >
