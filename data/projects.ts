@@ -32,6 +32,8 @@ export interface Project {
   results?: string
   /** Design / craft tools shown in project meta (optional) */
   tools?: string[]
+  /** Open in a new tab instead of the local case study (e.g. Figma Community). */
+  externalUrl?: string
   /** Hero video is omitted on the detail page — clips live in MDX instead */
   detailMediaInContent?: boolean
   /** Below hero media — narrative with optional bold value highlights */
@@ -355,6 +357,7 @@ export const projects: Project[] = [
     slug: 'paytm-design-system-v1',
     title: 'Paytm Design System',
     video: '/assets/video/paytm-design-system-v1.mp4',
+    videoPoster: '/assets/projects/paytm-design-system-v1/cover.png',
     coverImage: '/assets/employers/paytm.svg',
     description: 'First-generation Paytm design system — components, patterns, and documentation for product teams at scale.',
     tags: ['Live Projects', 'NDA', 'Design Systems'],
@@ -364,6 +367,8 @@ export const projects: Project[] = [
     year: '2018–2021',
     client: 'Paytm',
     role: 'Lead Product Designer',
+    externalUrl: 'https://thehardcopy.co/under-paytms-design-hood/',
+    excludeFromMoreProjects: true,
     heroCaption: {
       outcomeParts: [
         { text: 'I built ' },
@@ -379,6 +384,28 @@ export const projects: Project[] = [
       'Defined core components, typography, and spacing for iOS and Android',
       'Documented usage guidelines and partnered with engineering on adoption',
       'Evolved the system as new verticals — travel, trains, postpaid — shipped',
+    ],
+  },
+  {
+    slug: 'gabit-design-system',
+    title: 'Gabit Design System',
+    video: '',
+    coverImage: '/assets/projects/gabit-early-stage/cover.svg',
+    description:
+      'Early-stage brand and product design system for Gabit — palette, type, components, and PDP patterns for D2C skincare commerce.',
+    tags: ['Design Systems', 'Branding', 'E-commerce'],
+    category: 'Work',
+    metaLabel: 'Design System',
+    year: '2022',
+    client: 'Gabit',
+    role: 'Lead Product Designer',
+    context:
+      'Built Gabit’s foundational visual and product system — brand identity through reusable commerce patterns for product detail and conversion flows.',
+    process: [
+      'Defined logo, color, and typography as the system foundation',
+      'Documented application guidelines across photography and UI',
+      'Structured PDP hierarchy for ingredients, benefits, and social proof',
+      'Applied shared CTAs and layout patterns across early product surfaces',
     ],
   },
   {
@@ -405,7 +432,7 @@ export const projects: Project[] = [
     title: 'ET Money — Design system',
     video: '',
     description: 'Design system and component library work for ET Money’s personal finance platform.',
-    tags: ['Live Projects', 'FinTech', 'Design Systems'],
+    tags: ['Live Projects', 'FinTech'],
     category: 'Work',
     year: '2020–2022',
     client: 'ET Money',
@@ -417,6 +444,102 @@ export const projects: Project[] = [
       'Documented usage for design and engineering',
       'Rolled out adoption across high-traffic flows',
     ],
+  },
+  {
+    slug: 'open-source-youtube',
+    title: 'YouTube — SwiftUI Clone',
+    video: '/assets/video/Youtube Splash Animation with Lottie and SwiftUI.mp4',
+    description:
+      'Open-sourced SwiftUI clone of YouTube — started with the Lottie splash, then built out the app to learn by rebuilding.',
+    tags: ['Open Source', 'SwiftUI', 'Clone'],
+    category: 'Design Engineering',
+    metaLabel: 'GitHub',
+    year: '2024',
+    role: 'Design Engineering',
+    tools: ['SwiftUI', 'Lottie'],
+    externalUrl: 'https://github.com/iamvikasraj/Youtube',
+    excludeFromMoreProjects: true,
+    context:
+      'Learned SwiftUI by cloning YouTube — from splash animation through core app surfaces — then open-sourced the code.',
+  },
+  {
+    slug: 'open-source-pinterest',
+    title: 'Pinterest — SwiftUI Clone',
+    video: '',
+    description:
+      'Open-sourced Figma-to-SwiftUI Pinterest playground — masonry layout and product UI rebuilt to learn by shipping.',
+    tags: ['Open Source', 'SwiftUI', 'Clone'],
+    category: 'Design Engineering',
+    metaLabel: 'GitHub',
+    year: '2025',
+    role: 'Design Engineering',
+    tools: ['SwiftUI', 'Figma'],
+    externalUrl: 'https://github.com/iamvikasraj/pinterest',
+    excludeFromMoreProjects: true,
+    context:
+      'Design engineering exercise: rebuilt Pinterest in SwiftUI from Figma to understand layout, feed craft, and production code.',
+  },
+  {
+    slug: 'open-source-cred',
+    title: 'CRED — SwiftUI & Rive Clone',
+    video: '/assets/video/CRED Bottom Navigation recreation with SwiftUI and Rive.mp4',
+    description:
+      'Open-sourced CRED bottom navigation recreation in SwiftUI and Rive — five pages and custom tab bar craft.',
+    tags: ['Open Source', 'SwiftUI', 'Rive', 'Clone'],
+    category: 'Design Engineering',
+    metaLabel: 'GitHub',
+    year: '2024',
+    role: 'Design Engineering',
+    tools: ['SwiftUI', 'Rive'],
+    externalUrl: 'https://github.com/iamvikasraj/cred',
+    excludeFromMoreProjects: true,
+    context:
+      'Recreated CRED’s bottom navigation end-to-end in SwiftUI with Rive, then open-sourced the implementation.',
+  },
+  {
+    slug: 'open-source-netflix',
+    title: 'Netflix — SwiftUI Clone',
+    video: '',
+    description: 'Open-sourced Netflix clone in SwiftUI — another app rebuild used to practice design engineering fundamentals.',
+    tags: ['Open Source', 'SwiftUI', 'Clone'],
+    category: 'Design Engineering',
+    metaLabel: 'GitHub',
+    role: 'Design Engineering',
+    tools: ['SwiftUI'],
+    externalUrl: 'https://github.com/iamvikasraj/Netflix',
+    excludeFromMoreProjects: true,
+    context: 'Cloned Netflix in SwiftUI as a learning exercise, then published the source for others to study and build on.',
+  },
+  {
+    slug: 'open-source-groww',
+    title: 'Groww — SwiftUI Clone',
+    video: '',
+    description: 'Open-sourced Groww SwiftUI clone — fintech UI patterns rebuilt as a design engineering practice project.',
+    tags: ['Open Source', 'SwiftUI', 'Clone'],
+    category: 'Design Engineering',
+    metaLabel: 'GitHub',
+    role: 'Design Engineering',
+    tools: ['SwiftUI'],
+    externalUrl: 'https://github.com/iamvikasraj/groww',
+    excludeFromMoreProjects: true,
+    context: 'Rebuilt Groww in SwiftUI to practice fintech product surfaces, then open-sourced the codebase.',
+  },
+  {
+    slug: 'open-source-business-insider',
+    title: 'Business Insider — SwiftUI Clone',
+    video: '/assets/video/Business Insider Prototype with SwiftUI.mp4',
+    description:
+      'Open-sourced Business Insider SwiftUI prototype — editorial feed, reading view, and native motion as a learning clone.',
+    tags: ['Open Source', 'SwiftUI', 'Clone'],
+    category: 'Design Engineering',
+    metaLabel: 'GitHub',
+    year: '2024',
+    role: 'Design Engineering',
+    tools: ['SwiftUI'],
+    externalUrl: 'https://github.com/iamvikasraj/BusinessInsider',
+    excludeFromMoreProjects: true,
+    context:
+      'Built a high-fidelity SwiftUI BI India prototype while learning native editorial IA — source open on GitHub.',
   },
   {
     slug: 'times-bridge-1',
@@ -695,6 +818,18 @@ export function getLiveProjects(): Project[] {
   return [...featured, ...rest]
 }
 
+/** Design system case studies for the home portfolio section. */
+export function getDesignSystemProjects(): Project[] {
+  return projects.filter((p) => !p.hidden && p.tags.includes('Design Systems'))
+}
+
+/** Open-sourced design-engineering clone exercises (GitHub) — only entries with video. */
+export function getOpenSourceProjects(): Project[] {
+  return projects.filter(
+    (p) => !p.hidden && p.tags.includes('Open Source') && Boolean(p.video)
+  )
+}
+
 /** First calendar year on a project — used for chronological ordering. */
 export function projectStartYear(project: Project): number | undefined {
   const match = project.year?.match(/\d{4}/)
@@ -703,7 +838,9 @@ export function projectStartYear(project: Project): number | undefined {
 
 /** Design Engineering projects, oldest first. Project 1 is the oldest. */
 export function getPlaygroundProjectsChronological(): Project[] {
-  const list = projects.filter((p) => p.category === 'Design Engineering')
+  const list = projects.filter(
+    (p) => p.category === 'Design Engineering' && !p.tags.includes('Open Source')
+  )
   return [...list].sort((a, b) => {
     const ay = projectStartYear(a) ?? 9999
     const by = projectStartYear(b) ?? 9999
@@ -722,7 +859,9 @@ export function getPlaygroundProjectsForYear(year: number): Project[] {
 }
 
 export function getPlaygroundProjects(): Project[] {
-  const list = projects.filter(p => p.category === 'Design Engineering')
+  const list = projects.filter(
+    (p) => p.category === 'Design Engineering' && !p.tags.includes('Open Source')
+  )
   const isMobileExperiment = (project: Project) => {
     const tags = project.tags || []
     return (
@@ -744,7 +883,9 @@ export function getPlaygroundProjects(): Project[] {
 }
 
 export function getProjectListHref(project: Project): string {
+  if (project.tags.includes('Open Source')) return '/#open-source'
   if (project.category === 'Design Engineering') return '/#playground'
+  if (project.tags.includes('Design Systems')) return '/#design-systems'
   return '/live-projects/'
 }
 

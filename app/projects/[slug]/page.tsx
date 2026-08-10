@@ -31,16 +31,19 @@ export async function generateStaticParams() {
   // only controls grid visibility — hidden Design Engineering projects are still
   // linked from the Interactions section, so their detail routes must exist in
   // the static export or client navigation/prefetch 404s.
-  return projects.map((project) => ({
-    slug: project.slug,
-  }))
+  // Skip external-only cards (e.g. Figma Community) — they link out from the grid.
+  return projects
+    .filter((project) => !project.externalUrl)
+    .map((project) => ({
+      slug: project.slug,
+    }))
 }
 
 export default async function ProjectDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const project = getProjectBySlug(slug)
 
-  if (!project) {
+  if (!project || project.externalUrl) {
     notFound()
   }
 
