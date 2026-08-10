@@ -885,7 +885,6 @@ export function getPlaygroundProjects(): Project[] {
 export function getProjectListHref(project: Project): string {
   if (project.tags.includes('Open Source')) return '/#open-source'
   if (project.category === 'Design Engineering') return '/#playground'
-  if (project.tags.includes('Design Systems')) return '/#design-systems'
   return '/live-projects/'
 }
 

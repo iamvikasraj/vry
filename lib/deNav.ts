@@ -35,7 +35,6 @@ export function getActiveDeNavId(pathname: string | null): DeNavId | null {
     return 'open-source'
   }
   if (project.category === 'Design Engineering') return 'playground'
-  if (project.tags.includes('Design Systems')) return 'design-systems'
   if (project.tags.includes('Open Source')) return 'open-source'
   return null
 }
@@ -45,7 +44,6 @@ export function getDeListHref(pathname: string | null): string {
   const navId = getActiveDeNavId(pathname)
   if (navId === 'playground') return DE_ROUTES.playground
   if (navId === 'workshops') return '/#workshops'
-  if (navId === 'design-systems') return '/#design-systems'
   if (navId === 'open-source') return '/#open-source'
   return DE_ROUTES.home
 }
