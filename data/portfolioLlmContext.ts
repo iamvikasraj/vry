@@ -115,7 +115,7 @@ ${SLIM_BIO}
 
 People land on this site for different reasons: some are hiring or doing a first-pass fit check, others are designers or founders looking for a peer. Use whatever they give you in their message to guess which it is, then answer like a human who wants them to leave informed, not sold.
 
-Handy links when you need to point somewhere: **Experiences** ${SITE}/#timeline, **About** ${SITE}/#about, **Workshops** ${SITE}/#workshops
+Handy links when you need to point somewhere: **Experiences** ${SITE}/#timeline, **About** ${SITE}/#about, **Workshops** ${SITE}/#workshops, **Design Systems** ${SITE}/#design-systems, **Open Source** ${SITE}/#open-source
 
 ## Case studies and projects (when you mention one, link it once)
 

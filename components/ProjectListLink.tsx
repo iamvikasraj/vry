@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, type ReactNode } from 'react'
 import Link from 'next/link'
 import { analytics } from '@/lib/analytics'
 import type { Project } from '@/data/projects'
@@ -61,6 +61,7 @@ export default function ProjectListLink({
   const showPlaceholder = (!showImage && !showVideo) || (showVideo && videoError && !hasPoster)
   /** Video-only thumbs (Playground) stay visible like grid cards; hide only while loading over a poster. */
   const videoReady = !hasPoster || ready
+  const externalUrl = project.externalUrl
 
   const onEnter = () => {
     if (!hoverPlay || !showVideo) return
@@ -80,20 +81,19 @@ export default function ProjectListLink({
     setHovered(false)
   }
 
-  return (
-    <Link
-      href={projectHref(project.slug)}
-      className={`home-de-project-list__link home-de-media-card${hovered ? ' home-de-project-list__link--hover' : ''}${
-        featured ? ' home-de-project-list__link--featured' : ''
-      }`}
-      onMouseEnter={onEnter}
-      onMouseLeave={onLeave}
-      onClick={() => analytics.trackProjectClick(project.title, project.slug, project.tags)}
-      aria-label={`View project: ${project.title}`}
-    >
+  const onClick = () => analytics.trackProjectClick(project.title, project.slug, project.tags)
+
+  const className = `home-de-project-list__link home-de-media-card${hovered ? ' home-de-project-list__link--hover' : ''}${
+    featured ? ' home-de-project-list__link--featured' : ''
+  }`
+
+  const inner: ReactNode = (
+    <>
       <div
         ref={thumbRef}
         className={`home-de-project-list__thumb${hasPoster ? ' home-de-project-list__thumb--has-poster' : ''}${brandCover && showImage ? ' home-de-project-list__thumb--brand' : ''}`}
+        onMouseEnter={onEnter}
+        onMouseLeave={onLeave}
       >
         {showPlaceholder && (
           <MediaPlaceholder className="home-de-project-list__placeholder" label="" />
@@ -144,8 +144,34 @@ export default function ProjectListLink({
         )}
       </span>
       <span className="home-de-project-list__cta" aria-hidden="true">
-        →
+        {externalUrl ? '↗' : '→'}
       </span>
+    </>
+  )
+
+  if (externalUrl) {
+    return (
+      <a
+        href={externalUrl}
+        className={className}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={onClick}
+        aria-label={`${project.title} (opens in new tab)`}
+      >
+        {inner}
+      </a>
+    )
+  }
+
+  return (
+    <Link
+      href={projectHref(project.slug)}
+      className={className}
+      onClick={onClick}
+      aria-label={`View project: ${project.title}`}
+    >
+      {inner}
     </Link>
   )
 }

@@ -2,7 +2,7 @@
 name: de-section-chrome
 description: >-
   Maintains the DE portfolio section chrome (pinned Experiences / Workshop /
-  Interactions titles in fixed top and bottom bars). Use when editing section
+  Interactions / Design Engineering / Design Systems / Open Source titles in fixed top and bottom bars). Use when editing section
   chrome motion, MobileSectionHeadingChrome, deScroll pin logic, home-de-section-chrome
   CSS, scroll-up/down title enter/exit, or Experiences pinning behavior.
 ---
@@ -58,7 +58,7 @@ When changing this interaction:
 - [ ] If changing duration, update **both** CSS `--de-chrome-migrate` and JS `MIGRATION_MS_*`
 - [ ] Keep Experiences out of `bottomSections`
 - [ ] Respect `prefers-reduced-motion` rules already in `styles.css`
-- [ ] Smoke-test scroll **down** and **up** across at least Experiences ↔ Workshop
+- [ ] Smoke-test scroll **down** and **up** across at least Experiences ↔ Workshop ↔ Design Systems
 
 ## Out of scope
 
