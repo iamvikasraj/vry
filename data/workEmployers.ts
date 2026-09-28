@@ -75,7 +75,7 @@ export const workEmployers: WorkEmployer[] = [
     slug: 'time-bridge',
     company: 'Times Bridge',
     position: 'Lead Product Designer',
-    period: '2022–2024',
+    period: '2023–2024',
     logo: employerLogoPath('time-bridge'),
   },
   {

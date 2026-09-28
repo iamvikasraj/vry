@@ -75,7 +75,7 @@ export const PORTFOLIO_ABOUT = {
   work: [
     { company: 'Loop Health', role: 'Staff Product Designer', years: '2025–Present' },
     { company: 'ET Money', role: 'Principal Product Designer', years: '2024–2025' },
-    { company: 'Times Bridge', role: 'Product Design Consultant', years: '2022–2024' },
+    { company: 'Times Bridge', role: 'Product Design Consultant', years: '2023–2024' },
     { company: 'HDFC Bank', role: 'UX Design Manager', years: '2021–2022' },
     { company: 'Paytm', role: 'Lead Product Designer', years: '2018–2021' },
     { company: 'Grappus Studio', role: 'UI/UX Designer', years: '2017–2018' },

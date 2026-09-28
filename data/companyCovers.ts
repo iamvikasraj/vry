@@ -104,7 +104,7 @@ export const companyCovers: CompanyCover[] = [
         id: 'times-bridge',
         title: 'Times Bridge',
         role: 'Product Design Consultant',
-        period: '2022–2024',
+        period: '2023–2024',
         collapsible: true,
         paragraphs: [
           'Consulting across media brands entering India — Smule, Business Insider, and others. Token-based design systems, localized product strategy, and a lot of “will this work for Indian users?” before anyone committed to build.',
