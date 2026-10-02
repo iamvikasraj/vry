@@ -818,11 +818,6 @@ export function getLiveProjects(): Project[] {
   return [...featured, ...rest]
 }
 
-/** Design system case studies for the home portfolio section. */
-export function getDesignSystemProjects(): Project[] {
-  return projects.filter((p) => !p.hidden && p.tags.includes('Design Systems'))
-}
-
 /** Open-sourced design-engineering clone exercises (GitHub) — only entries with video. */
 export function getOpenSourceProjects(): Project[] {
   return projects.filter(
@@ -885,7 +880,6 @@ export function getPlaygroundProjects(): Project[] {
 export function getProjectListHref(project: Project): string {
   if (project.tags.includes('Open Source')) return '/#open-source'
   if (project.category === 'Design Engineering') return '/#playground'
-  if (project.tags.includes('Design Systems')) return '/#design-systems'
   return '/live-projects/'
 }
 

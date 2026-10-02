@@ -4,7 +4,6 @@ export const DE_ROUTES = {
   liveProjects: '/live-projects/',
   playground: '/#playground',
   workshops: '/#workshops',
-  designSystems: '/#design-systems',
   openSource: '/#open-source',
 } as const
 
