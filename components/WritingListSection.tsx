@@ -12,14 +12,6 @@ export default function WritingListSection() {
       <div className="home-de-workshop-list home-de-media-grid">
         {lead ? <WritingListRow writing={lead} /> : null}
         <div className="home-de-platform">
-          <p className="home-de-platform__lede">
-            Design engineering is designing an interface and building it in code yourself, so
-            nothing gets lost between the design and the app people use.
-          </p>
-          <p className="home-de-platform__body">
-            I write about it on designengineer.ing: breakdowns of how each piece was designed and
-            built in SwiftUI and Rive, open-source apps, and a guide to getting started.
-          </p>
           <a
             className="home-de-platform__link"
             href={PLATFORM_URL}
@@ -31,6 +23,10 @@ export default function WritingListSection() {
               ↗
             </span>
           </a>
+          <p className="home-de-platform__body">
+            Where I break down how each interface is designed and built in SwiftUI and Rive, with
+            open-source apps and a guide to getting started.
+          </p>
         </div>
       </div>
     </div>

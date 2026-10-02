@@ -1584,8 +1584,7 @@ body:has(.home-page--de) {
 .home-de-platform {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-12);
-  max-width: 28rem;
+  max-width: 24rem;
   font-family: var(--de-font);
   font-size: var(--txt-14);
   line-height: 1.6;
@@ -1594,10 +1593,6 @@ body:has(.home-page--de) {
 
 .home-de-platform p {
   margin: 0;
-}
-
-.home-de-platform__lede {
-  color: var(--de-black);
 }
 
 .home-de-platform__link {
