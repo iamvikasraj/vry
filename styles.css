@@ -1580,9 +1580,15 @@ body:has(.home-page--de) {
   }
 }
 
-/* Design Engineering — open-source list beside the lead video */
+/* Design Engineering — open-source list beside the lead video.
+   Same column width as the 16:9 video, so three thumbs + two gaps = the video's height. */
 .home-de-platform {
   min-width: 0;
+  container-type: inline-size;
+}
+
+.home-de-platform .home-de-link-list__thumb {
+  height: calc((100cqw * 9 / 16 - 2 * var(--sp-16)) / 3);
 }
 
 /* Text-only section list — Open Source */
