@@ -818,16 +818,14 @@ export function getLiveProjects(): Project[] {
   return [...featured, ...rest]
 }
 
+/** Repos shown in the home Open Source list, in display order. */
 const OPEN_SOURCE_LINES: Record<string, string> = {
-  'open-source-business-insider': 'Editorial feed, reading view, and native motion in SwiftUI.',
   'open-source-youtube': 'From the Lottie splash to the full app, rebuilt in SwiftUI.',
-  'open-source-cred': 'Bottom navigation and five pages, recreated in SwiftUI and Rive.',
-  'open-source-pinterest': 'Figma-to-SwiftUI rebuild with a masonry feed.',
   'open-source-netflix': 'SwiftUI rebuild with dynamic cover data.',
-  'open-source-groww': 'Fintech UI patterns rebuilt in SwiftUI.',
+  'open-source-pinterest': 'Figma-to-SwiftUI rebuild with a masonry feed.',
 }
 
-/** Open-source repos for the home text list — every public repo, not just ones with video. */
+/** Open-source repos for the home list — only the ones picked in OPEN_SOURCE_LINES. */
 export function getOpenSourceRepos(): {
   key: string
   title: string
@@ -835,12 +833,10 @@ export function getOpenSourceRepos(): {
   line?: string
   video?: string
 }[] {
+  const order = Object.keys(OPEN_SOURCE_LINES)
   return projects
-    .filter((p) => !p.hidden && p.tags.includes('Open Source') && Boolean(p.externalUrl))
-    .sort(
-      (a, b) =>
-        Object.keys(OPEN_SOURCE_LINES).indexOf(a.slug) - Object.keys(OPEN_SOURCE_LINES).indexOf(b.slug)
-    )
+    .filter((p) => order.includes(p.slug) && Boolean(p.externalUrl))
+    .sort((a, b) => order.indexOf(a.slug) - order.indexOf(b.slug))
     .map((p) => ({
       key: p.slug,
       title: p.title.replace(/ — .*$/, ''),
