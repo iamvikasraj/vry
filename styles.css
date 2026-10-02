@@ -1598,8 +1598,8 @@ body:has(.home-page--de) {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Two text lines tall (list line-height 1.6), 16:9 wide. */
-  height: 3.2em;
+  /* Title + two description lines tall (3 × line-height 1.6), 16:9 wide. */
+  height: 4.8em;
   aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 4px;
@@ -1644,6 +1644,12 @@ body:has(.home-page--de) {
 .home-de-link-list__line {
   margin: 0;
   color: var(--de-gray-muted);
+  /* Two lines max so the text never outgrows the thumb. */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
 }
 
 .home-de-more {

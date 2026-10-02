@@ -820,7 +820,7 @@ export function getLiveProjects(): Project[] {
 
 /** Repos shown in the home Open Source list, in display order. */
 const OPEN_SOURCE_LINES: Record<string, string> = {
-  'open-source-youtube': 'From the Lottie splash to the full app, rebuilt in SwiftUI.',
+  'open-source-youtube': 'Lottie splash to full app, rebuilt in SwiftUI.',
   'open-source-netflix': 'SwiftUI rebuild with dynamic cover data.',
   'open-source-pinterest': 'Figma-to-SwiftUI rebuild with a masonry feed.',
 }
