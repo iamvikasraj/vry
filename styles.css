@@ -524,7 +524,8 @@ body:has(.home-page--de) {
   display: flex;
   flex-direction: column;
   gap: var(--sp-4);
-  margin-top: var(--sp-16);
+  /* Sidebar is a full-height column: intro sits at the top, the card at the bottom. */
+  margin-top: auto;
   color: inherit;
   text-decoration: none;
 }
