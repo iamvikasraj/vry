@@ -18,7 +18,8 @@
     "test:build": "npm run build && node scripts/smoke-test.js",
     "test:dev": "node scripts/smoke-dev.js",
     "start": "node scripts/serve-out.js",
-    "preview": "node scripts/serve-out.js"
+    "preview": "node scripts/serve-out.js",
+    "experiment:sync": "node scripts/sync-experiment.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
