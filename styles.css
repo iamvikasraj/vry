@@ -1580,40 +1580,9 @@ body:has(.home-page--de) {
   }
 }
 
-/* Design Engineering — text panel beside the lead video */
+/* Design Engineering — open-source list beside the lead video */
 .home-de-platform {
-  display: flex;
-  flex-direction: column;
-  max-width: 24rem;
-  font-family: var(--de-font);
-  font-size: var(--txt-14);
-  line-height: 1.6;
-  color: var(--de-gray-muted);
-}
-
-.home-de-platform p {
-  margin: 0;
-}
-
-.home-de-platform .home-de-link-list {
-  margin-top: var(--sp-24);
-}
-
-.home-de-platform__link {
-  font-weight: 500;
-  color: var(--de-black);
-  text-decoration: none;
-}
-
-.home-de-platform__link:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.12em;
-}
-
-.home-de-platform__link:focus-visible {
-  outline: 2px solid rgba(0, 0, 0, 0.35);
-  outline-offset: var(--sp-2);
-  border-radius: var(--sp-2);
+  min-width: 0;
 }
 
 /* Text-only section list — Open Source */
