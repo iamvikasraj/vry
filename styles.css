@@ -1598,7 +1598,8 @@ body:has(.home-page--de) {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 96px;
+  /* Two text lines tall (list line-height 1.6), 16:9 wide. */
+  height: 3.2em;
   aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 4px;
