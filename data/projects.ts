@@ -828,7 +828,13 @@ const OPEN_SOURCE_LINES: Record<string, string> = {
 }
 
 /** Open-source repos for the home text list — every public repo, not just ones with video. */
-export function getOpenSourceRepos(): { key: string; title: string; href: string; line?: string }[] {
+export function getOpenSourceRepos(): {
+  key: string
+  title: string
+  href: string
+  line?: string
+  video?: string
+}[] {
   return projects
     .filter((p) => !p.hidden && p.tags.includes('Open Source') && Boolean(p.externalUrl))
     .sort(
@@ -840,6 +846,7 @@ export function getOpenSourceRepos(): { key: string; title: string; href: string
       title: p.title.replace(/ — .*$/, ''),
       href: p.externalUrl as string,
       line: OPEN_SOURCE_LINES[p.slug] ?? p.description,
+      video: p.video || undefined,
     }))
 }
 

@@ -1576,6 +1576,37 @@ body:has(.home-page--de) {
   line-height: 1.6;
 }
 
+.home-de-link-list__item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-16);
+}
+
+.home-de-link-list__thumb {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--de-gray-muted);
+  font-size: var(--txt-14);
+}
+
+.home-de-link-list__thumb video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-de-link-list__text {
+  min-width: 0;
+}
+
 .home-de-link-list__title {
   font-weight: 500;
   color: var(--de-black);
