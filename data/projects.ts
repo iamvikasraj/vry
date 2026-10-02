@@ -818,11 +818,29 @@ export function getLiveProjects(): Project[] {
   return [...featured, ...rest]
 }
 
-/** Open-sourced design-engineering clone exercises (GitHub) — only entries with video. */
-export function getOpenSourceProjects(): Project[] {
-  return projects.filter(
-    (p) => !p.hidden && p.tags.includes('Open Source') && Boolean(p.video)
-  )
+const OPEN_SOURCE_LINES: Record<string, string> = {
+  'open-source-business-insider': 'Editorial feed, reading view, and native motion in SwiftUI.',
+  'open-source-youtube': 'From the Lottie splash to the full app, rebuilt in SwiftUI.',
+  'open-source-cred': 'Bottom navigation and five pages, recreated in SwiftUI and Rive.',
+  'open-source-pinterest': 'Figma-to-SwiftUI rebuild with a masonry feed.',
+  'open-source-netflix': 'SwiftUI rebuild with dynamic cover data.',
+  'open-source-groww': 'Fintech UI patterns rebuilt in SwiftUI.',
+}
+
+/** Open-source repos for the home text list — every public repo, not just ones with video. */
+export function getOpenSourceRepos(): { key: string; title: string; href: string; line?: string }[] {
+  return projects
+    .filter((p) => !p.hidden && p.tags.includes('Open Source') && Boolean(p.externalUrl))
+    .sort(
+      (a, b) =>
+        Object.keys(OPEN_SOURCE_LINES).indexOf(a.slug) - Object.keys(OPEN_SOURCE_LINES).indexOf(b.slug)
+    )
+    .map((p) => ({
+      key: p.slug,
+      title: p.title.replace(/ — .*$/, ''),
+      href: p.externalUrl as string,
+      line: OPEN_SOURCE_LINES[p.slug] ?? p.description,
+    }))
 }
 
 /** First calendar year on a project — used for chronological ordering. */

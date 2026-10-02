@@ -1562,6 +1562,47 @@ body:has(.home-page--de) {
   }
 }
 
+/* Text-only section list — Open Source */
+.home-de-link-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-16);
+  max-width: 40rem;
+  font-family: var(--de-font);
+  font-size: var(--txt-14);
+  line-height: 1.6;
+}
+
+.home-de-link-list__title {
+  font-weight: 500;
+  color: var(--de-black);
+  text-decoration: none;
+}
+
+.home-de-link-list__title:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.home-de-link-list__title:focus-visible {
+  outline: 2px solid rgba(0, 0, 0, 0.35);
+  outline-offset: var(--sp-2);
+  border-radius: var(--sp-2);
+}
+
+.home-de-link-list__arrow {
+  margin-left: 0.25em;
+  color: var(--de-gray-muted);
+}
+
+.home-de-link-list__line {
+  margin: 0;
+  color: var(--de-gray-muted);
+}
+
 .home-de-more {
   display: flex;
   justify-content: center;
