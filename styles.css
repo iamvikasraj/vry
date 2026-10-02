@@ -1565,6 +1565,15 @@ body:has(.home-page--de) {
   #playground .home-de-media-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+
+  /* Workshop — 1 full-width lead, then 3 across */
+  #workshops .home-de-media-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #workshops .home-de-media-grid > :first-child {
+    grid-column: 1 / -1;
+  }
 }
 
 /* Text-only section list — Open Source */
