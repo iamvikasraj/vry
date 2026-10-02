@@ -2,7 +2,6 @@ export type DePortfolioSectionId =
   | 'timeline'
   | 'playground'
   | 'workshops'
-  | 'open-source'
   | 'writing'
   | 'about'
 
@@ -11,7 +10,6 @@ const SECTION_IDS: DePortfolioSectionId[] = [
   'workshops',
   'playground',
   'writing',
-  'open-source',
   'about',
 ]
 
@@ -20,7 +18,6 @@ export const PORTFOLIO_SECTION_NAV: { id: DePortfolioSectionId; label: string }[
   { id: 'workshops', label: 'Workshop' },
   { id: 'playground', label: 'Interactions' },
   { id: 'writing', label: 'Design Engineering' },
-  { id: 'open-source', label: 'Open Source' },
   { id: 'about', label: 'About' },
 ]
 
@@ -123,7 +120,6 @@ export const DE_SECTION_HREF: Record<DePortfolioSectionId, string> = {
   timeline: '/#timeline',
   playground: '/#playground',
   workshops: '/#workshops',
-  'open-source': '/#open-source',
   writing: '/#writing',
   about: '/#about',
 }

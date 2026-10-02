@@ -1595,6 +1595,10 @@ body:has(.home-page--de) {
   margin: 0;
 }
 
+.home-de-platform .home-de-link-list {
+  margin-top: var(--sp-24);
+}
+
 .home-de-platform__link {
   font-weight: 500;
   color: var(--de-black);

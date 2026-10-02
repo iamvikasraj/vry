@@ -1,9 +1,11 @@
+import HomeDeLinkList from '@/components/HomeDeLinkList'
 import WritingListRow from '@/components/WritingListRow'
+import { getOpenSourceRepos } from '@/data/projects'
 import { getPortfolioWritings } from '@/data/writings'
 
 const PLATFORM_URL = 'https://designengineer.ing'
 
-/** One breakdown video, then a short note on designengineer.ing where the rest live. */
+/** One breakdown video; beside it, designengineer.ing and the open-source apps. */
 export default function WritingListSection() {
   const [lead] = getPortfolioWritings()
 
@@ -27,6 +29,9 @@ export default function WritingListSection() {
             Where I break down how each interface is designed and built in SwiftUI and Rive, with
             open-source apps and a guide to getting started.
           </p>
+          {/* Keeps old /#open-source links landing here. */}
+          <span id="open-source" className="home-de-platform__anchor" aria-hidden="true" />
+          <HomeDeLinkList items={getOpenSourceRepos()} />
         </div>
       </div>
     </div>
