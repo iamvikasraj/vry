@@ -217,22 +217,6 @@ export const projects: Project[] = [
     },
   },
   {
-    slug: 'cute-boat-pool',
-    title: 'Little Boat, Big Pool — three.js from Blender',
-    video: '',
-    description:
-      'A tiny boat you can drive around a pool: ripple-sim water, bobbing floaties and live-synthesized sound, built in Blender and three.js.',
-    tags: ['three.js', 'WebGL', 'Blender'],
-    category: 'Design Engineering',
-    metaLabel: 'Play it',
-    year: '2026',
-    client: 'Personal Project',
-    role: 'Designer & Developer',
-    tools: ['Blender', 'three.js', 'Web Audio'],
-    externalUrl: '/cute-boat-pool/',
-    excludeFromMoreProjects: true,
-  },
-  {
     slug: 'interactive-balloons',
     title: 'Interactive Balloons with Rive and SwiftUI for the Contra Challenge',
     video: '/assets/video/Interactive Balloons with Rive and Swiftui for the Contra challenge.mp4',
