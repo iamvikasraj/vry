@@ -8,7 +8,8 @@ import HomeDeLinkList from '@/components/HomeDeLinkList'
 import { getOpenSourceRepos, getPlaygroundProjects } from '@/data/projects'
 
 export default function HomeDePortfolioSections() {
-  const playgroundProjects = getPlaygroundProjects()
+  // 3×3 grid on desktop.
+  const playgroundProjects = getPlaygroundProjects().slice(0, 9)
 
   return (
     <>

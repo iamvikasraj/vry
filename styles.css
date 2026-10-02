@@ -1560,6 +1560,11 @@ body:has(.home-page--de) {
   .home-de-project-list.home-de-project-list--cards.home-de-media-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  /* Interactions — 3 across */
+  #playground .home-de-media-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 /* Text-only section list — Open Source */
