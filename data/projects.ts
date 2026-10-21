@@ -818,16 +818,32 @@ export function getLiveProjects(): Project[] {
   return [...featured, ...rest]
 }
 
-/** Design system case studies for the home portfolio section. */
-export function getDesignSystemProjects(): Project[] {
-  return projects.filter((p) => !p.hidden && p.tags.includes('Design Systems'))
+/** Repos shown in the home Open Source list, in display order. */
+const OPEN_SOURCE_LINES: Record<string, string> = {
+  'open-source-youtube': 'Lottie splash to full app, rebuilt in SwiftUI.',
+  'open-source-netflix': 'SwiftUI rebuild with dynamic cover data.',
+  'open-source-pinterest': 'Figma-to-SwiftUI rebuild with a masonry feed.',
 }
 
-/** Open-sourced design-engineering clone exercises (GitHub) — only entries with video. */
-export function getOpenSourceProjects(): Project[] {
-  return projects.filter(
-    (p) => !p.hidden && p.tags.includes('Open Source') && Boolean(p.video)
-  )
+/** Open-source repos for the home list — only the ones picked in OPEN_SOURCE_LINES. */
+export function getOpenSourceRepos(): {
+  key: string
+  title: string
+  href: string
+  line?: string
+  video?: string
+}[] {
+  const order = Object.keys(OPEN_SOURCE_LINES)
+  return projects
+    .filter((p) => order.includes(p.slug) && Boolean(p.externalUrl))
+    .sort((a, b) => order.indexOf(a.slug) - order.indexOf(b.slug))
+    .map((p) => ({
+      key: p.slug,
+      title: p.title.replace(/ — .*$/, ''),
+      href: p.externalUrl as string,
+      line: OPEN_SOURCE_LINES[p.slug] ?? p.description,
+      video: p.video || undefined,
+    }))
 }
 
 /** First calendar year on a project — used for chronological ordering. */
@@ -883,9 +899,8 @@ export function getPlaygroundProjects(): Project[] {
 }
 
 export function getProjectListHref(project: Project): string {
-  if (project.tags.includes('Open Source')) return '/#open-source'
+  if (project.tags.includes('Open Source')) return '/#writing'
   if (project.category === 'Design Engineering') return '/#playground'
-  if (project.tags.includes('Design Systems')) return '/#design-systems'
   return '/live-projects/'
 }
 

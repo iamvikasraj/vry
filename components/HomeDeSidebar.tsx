@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import HomeDeEmailLink from '@/components/HomeDeEmailLink'
 import { PORTFOLIO_PROFILE } from '@/data/portfolioProfile'
+import { analytics } from '@/lib/analytics'
 import { DE_ROUTES } from '@/lib/deRoutes'
 import { SOCIAL_LINKS } from '@/lib/socialLinks'
 
@@ -47,6 +48,25 @@ export default function HomeDeSidebar() {
         <p className="home-de-sidebar-role home-de-sidebar-hook">{PORTFOLIO_PROFILE.hook}</p>
         <SocialLinks className="home-de-sidebar-social--footer" />
       </div>
+      <a
+        href="/cute-boat-pool/"
+        className="home-de-sidebar-play"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Little Boat, Big Pool, a three.js toy (opens in new tab)"
+        onClick={() => analytics.trackProjectClick('Little Boat, Big Pool', 'cute-boat-pool', ['three.js'])}
+      >
+        <img
+          className="home-de-sidebar-play__thumb"
+          src="/assets/projects/cute-boat-pool/poster.jpg"
+          alt=""
+          width={1200}
+          height={675}
+          loading="lazy"
+        />
+        <span className="home-de-sidebar-play__title">Little Boat, Big Pool ↗</span>
+        <span className="home-de-sidebar-play__meta">Drive it around · three.js</span>
+      </a>
     </aside>
   )
 }

@@ -4,16 +4,11 @@ import HomeDeAboutSection from '@/components/HomeDeAboutSection'
 import ProjectListSection from '@/components/ProjectListSection'
 import WritingListSection from '@/components/WritingListSection'
 import WorkshopListSection from '@/components/WorkshopListSection'
-import {
-  getDesignSystemProjects,
-  getOpenSourceProjects,
-  getPlaygroundProjects,
-} from '@/data/projects'
+import { getPlaygroundProjects } from '@/data/projects'
 
 export default function HomeDePortfolioSections() {
-  const playgroundProjects = getPlaygroundProjects()
-  const designSystemProjects = getDesignSystemProjects()
-  const openSourceProjects = getOpenSourceProjects()
+  // 3 · 1 · 3 · 1 on desktop.
+  const playgroundProjects = getPlaygroundProjects().slice(0, 8)
 
   return (
     <>
@@ -35,22 +30,6 @@ export default function HomeDePortfolioSections() {
 
       <CvSection id="writing" title="Design Engineering">
         <WritingListSection />
-      </CvSection>
-
-      <CvSection id="design-systems" title="Design Systems">
-        <ProjectListSection
-          projects={designSystemProjects}
-          playOnHover
-          layout="cards"
-        />
-      </CvSection>
-
-      <CvSection id="open-source" title="Open Source">
-        <ProjectListSection
-          projects={openSourceProjects}
-          playOnHover
-          layout="cards"
-        />
       </CvSection>
 
       <HomeDeAboutSection />

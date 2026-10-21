@@ -41,7 +41,7 @@ export const PORTFOLIO_ABOUT = {
   lede: [
     'Hi, I’m ',
     { emphasis: 'Vikas Raj Yadav' },
-    ', a design leader and builder working where design meets engineering. I’m a Staff Product Designer at ',
+    ', a designer and builder working where design meets engineering. I’m a Staff Product Designer at ',
     { emphasis: 'Loop Health', href: 'https://www.loophealth.com' },
     ' in Bengaluru.',
   ] as AboutSegment[],

@@ -6,6 +6,16 @@ const createMDX = require('@next/mdx')
 // Static export → `out/`. postbuild removes `.next` so `npm run dev` never loads export chunks.
 const isNextDev = process.env.NODE_ENV === 'development'
 
+// Static experiments built by `npm run experiment:sync` into public/{slug}/index.html.
+// Netlify serves /{slug}/ from the export as-is; `next dev` needs a rewrite to find index.html.
+const fs = require('fs')
+const path = require('path')
+const publicDir = path.join(__dirname, 'public')
+const EXPERIMENT_SLUGS = fs
+  .readdirSync(publicDir, { withFileTypes: true })
+  .filter((entry) => entry.isDirectory() && fs.existsSync(path.join(publicDir, entry.name, 'index.html')))
+  .map((entry) => entry.name)
+
 const nextConfig = {
   distDir: '.next',
   ...(!isNextDev ? { output: 'export' } : {}),
@@ -16,6 +26,16 @@ const nextConfig = {
   },
   trailingSlash: true,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+  ...(isNextDev
+    ? {
+        async rewrites() {
+          return EXPERIMENT_SLUGS.map((slug) => ({
+            source: `/${slug}/`,
+            destination: `/${slug}/index.html`,
+          }))
+        },
+      }
+    : {}),
 }
 
 const withMDX = createMDX({})

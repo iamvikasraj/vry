@@ -4,8 +4,7 @@ export const DE_ROUTES = {
   liveProjects: '/live-projects/',
   playground: '/#playground',
   workshops: '/#workshops',
-  designSystems: '/#design-systems',
-  openSource: '/#open-source',
+  openSource: '/#writing',
 } as const
 
 export type DeRouteKey = keyof typeof DE_ROUTES
